@@ -1,0 +1,20 @@
+{
+  "id": "1936-revolt",
+  "type": "event",
+  "title": {
+    "he": "מרד לדוגמה"
+  },
+  "description": {
+    "he": "אירוע שנתי ראשון."
+  },
+  "dates": {
+    "start": "1936"
+  },
+  "importance": 80,
+  "categoryIds": [
+    "wars"
+  ],
+  "regionIds": [
+    "israel"
+  ]
+}

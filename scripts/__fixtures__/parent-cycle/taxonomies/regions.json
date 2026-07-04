@@ -1,0 +1,18 @@
+[
+  {
+    "id": "region-a",
+    "name": {
+      "he": "אזור א"
+    },
+    "kind": "region",
+    "parentId": "region-b"
+  },
+  {
+    "id": "region-b",
+    "name": {
+      "he": "אזור ב"
+    },
+    "kind": "region",
+    "parentId": "region-a"
+  }
+]

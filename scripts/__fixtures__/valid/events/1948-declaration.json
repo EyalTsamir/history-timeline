@@ -1,0 +1,17 @@
+{
+  "id": "1948-declaration",
+  "type": "event",
+  "title": {
+    "he": "הכרזה לדוגמה"
+  },
+  "description": {
+    "he": "אירוע נקודתי ברמת דיוק של יום."
+  },
+  "dates": {
+    "start": "1948-05-14"
+  },
+  "importance": 100,
+  "regionIds": [
+    "israel"
+  ]
+}

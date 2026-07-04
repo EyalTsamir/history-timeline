@@ -1,0 +1,13 @@
+{
+  "id": "moshe-dayan",
+  "type": "person",
+  "name": { "he": "משה דיין" },
+  "bio": { "he": "הרמטכ״ל הרביעי של צה״ל, שפיקד על הצבא במבצע קדש. כיהן כשר הביטחון במלחמת ששת הימים ובמלחמת יום הכיפורים, וכשר החוץ בממשלת בגין היה שותף למשא ומתן על הסכם השלום עם מצרים." },
+  "lifespan": { "start": "1915-05-20", "end": "1981-10-16" },
+  "categoryIds": ["military", "leaders"],
+  "importance": 78,
+  "regionIds": ["israel"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/משה_דיין" }
+  ]
+}

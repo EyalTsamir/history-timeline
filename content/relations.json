@@ -1,0 +1,26 @@
+[
+  {
+    "from": "david-ben-gurion",
+    "to": "declaration-of-independence",
+    "type": "led",
+    "note": { "he": "הקריא את מגילת העצמאות בתל אביב" }
+  },
+  {
+    "from": "golda-meir",
+    "to": "declaration-of-independence",
+    "type": "participated-in",
+    "note": { "he": "ממנהיגי היישוב וחותמת מגילת העצמאות" }
+  },
+  {
+    "from": "moshe-dayan",
+    "to": "sinai-campaign-1956",
+    "type": "led",
+    "note": { "he": "הרמטכ\"ל בעת מבצע קדש" }
+  },
+  {
+    "from": "yitzhak-rabin",
+    "to": "six-day-war",
+    "type": "led",
+    "note": { "he": "הרמטכ\"ל במלחמת ששת הימים" }
+  }
+]

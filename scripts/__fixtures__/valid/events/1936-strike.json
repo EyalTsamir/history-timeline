@@ -1,0 +1,20 @@
+{
+  "id": "1936-strike",
+  "type": "event",
+  "title": {
+    "he": "שביתה לדוגמה"
+  },
+  "description": {
+    "he": "אירוע שנתי שני, חשיבות נמוכה יותר."
+  },
+  "dates": {
+    "start": "1936"
+  },
+  "importance": 30,
+  "categoryIds": [
+    "wars"
+  ],
+  "regionIds": [
+    "israel"
+  ]
+}

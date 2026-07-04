@@ -1,0 +1,109 @@
+/*
+ * Design tokens — the single styling vocabulary (docs/02, decision D8).
+ * Category tokens (--cat-*) are the runtime targets of the taxonomy `color`
+ * keys (content/taxonomies/*.json) and TimelineItem.styleToken; adding a
+ * taxonomy color is a one-line addition here.
+ */
+:root {
+  color-scheme: light;
+
+  /* System stack with Hebrew coverage on every platform; no external fonts. */
+  --font-body: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', 'Arial Hebrew', Arial,
+    sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-pill: 999px;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+
+  /* Z-index layers */
+  --z-header: 10;
+  --z-backdrop: 100;
+  --z-sheet: 110;
+
+  /* Surfaces & ink — warm paper, dark ink, editorial */
+  --surface-page: #faf7f2;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f1ece3;
+  --text-primary: #262219;
+  --text-secondary: #5f594d;
+  /* Faint but still WCAG AA (≥4.5:1) on page/raised/sunken surfaces — docs/08. */
+  --text-faint: #6f695a;
+  --border: #e2dbce;
+  --border-strong: #c9c0af;
+  --accent: #3a5570;
+  --accent-contrast: #ffffff;
+  --danger: #a03c2e;
+
+  /* Category colors — muted archival hues, one per taxonomy color token.
+     Person categories */
+  --cat-leaders: #37507d;
+  --cat-military: #6d7a4f;
+  --cat-writers: #8c4a5e;
+  --cat-artists: #7b5e8a;
+  --cat-pioneers: #a06b3c;
+  /* Event categories */
+  --cat-war-security: #a34a3a;
+  --cat-state-politics: #598196;
+  --cat-immigration-settlement: #3f7d6f;
+  --cat-culture-society: #a8842f;
+  /* Work types */
+  --cat-biography: #7d6248;
+  --cat-autobiography: #9a6b4f;
+  --cat-historical-novel: #a86678;
+  /* Kind fallbacks (DEFAULT_STYLE_TOKENS in domain/normalize.ts) */
+  --cat-event: #857c6b;
+  --cat-person: #6c7583;
+  --cat-work: #8a7a8f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --surface-page: #201d18;
+    --surface-raised: #2a261f;
+    --surface-sunken: #191713;
+    --text-primary: #ece7dc;
+    --text-secondary: #b3ab9c;
+    --text-faint: #9a9384;
+    --border: #3d382e;
+    --border-strong: #55503f;
+    --accent: #9db8d2;
+    --accent-contrast: #1a2530;
+    --danger: #d07a63;
+
+    --cat-leaders: #7d9cc9;
+    --cat-military: #a3b076;
+    --cat-writers: #c98599;
+    --cat-artists: #ad8fc0;
+    --cat-pioneers: #cd9a63;
+    --cat-war-security: #d0806c;
+    --cat-state-politics: #85aec6;
+    --cat-immigration-settlement: #74af9f;
+    --cat-culture-society: #cfae57;
+    --cat-biography: #b09577;
+    --cat-autobiography: #c69a78;
+    --cat-historical-novel: #cf93a6;
+    --cat-event: #a89f8d;
+    --cat-person: #98a2b1;
+    --cat-work: #ab9bb0;
+  }
+}

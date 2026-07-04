@@ -1,0 +1,32 @@
+[
+  {
+    "id": "leaders",
+    "name": { "he": "מנהיגים ומדינאים" },
+    "color": "leaders",
+    "description": { "he": "ראשי ממשלה, נשיאים, שרים ומנהיגי היישוב והמדינה" }
+  },
+  {
+    "id": "military",
+    "name": { "he": "אנשי צבא וביטחון" },
+    "color": "military",
+    "description": { "he": "מפקדים, לוחמים ואנשי מערכת הביטחון" }
+  },
+  {
+    "id": "writers",
+    "name": { "he": "סופרים ומשוררים" },
+    "color": "writers",
+    "description": { "he": "יוצרי ספרות ושירה עברית" }
+  },
+  {
+    "id": "artists",
+    "name": { "he": "אמנים ומוזיקאים" },
+    "color": "artists",
+    "description": { "he": "מלחינים, מבצעים ואמנים" }
+  },
+  {
+    "id": "pioneers",
+    "name": { "he": "חלוצים ואנשי התיישבות" },
+    "color": "pioneers",
+    "description": { "he": "מקימי יישובים ופעילי תנועות ההתיישבות" }
+  }
+]

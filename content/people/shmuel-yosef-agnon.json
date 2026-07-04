@@ -1,0 +1,13 @@
+{
+  "id": "shmuel-yosef-agnon",
+  "type": "person",
+  "name": { "he": "ש״י עגנון" },
+  "bio": { "he": "סופר עברי, חתן פרס נובל לספרות לשנת 1966 והזוכה הישראלי הראשון בפרס. יליד בוצ'אץ' שבגליציה, חי את רוב שנותיו בירושלים; בין יצירותיו 'תמול שלשום', 'הכנסת כלה' ו'אורח נטה ללון'." },
+  "lifespan": { "start": "1887-08-08", "end": "1970-02-17", "approx": true },
+  "categoryIds": ["writers"],
+  "importance": 75,
+  "regionIds": ["jerusalem", "israel"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/שמואל_יוסף_עגנון" }
+  ]
+}

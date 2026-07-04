@@ -1,0 +1,18 @@
+{
+  "id": "dup",
+  "type": "person",
+  "name": {
+    "he": "אישיות"
+  },
+  "bio": {
+    "he": "זהה במזהה לאירוע."
+  },
+  "lifespan": {
+    "start": "1900",
+    "end": "1980"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 50
+}

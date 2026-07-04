@@ -1,0 +1,16 @@
+{
+  "id": "hannah-szenes-diary",
+  "type": "work",
+  "workType": "autobiography",
+  "title": { "he": "יומנה של חנה סנש" },
+  "description": { "he": "יומנה האישי של חנה סנש, שניהלה מגיל 13 בבודפשט ועד שנת מותה ב-1944, ובו תיעדה את נעוריה בהונגריה, את עלייתה ארצה ואת חייה בקיבוץ שדות ים. היומן ראה אור לראשונה בעברית ב-1946 בספר \"חנה סנש: חייה, שליחותה ומותה\" בהוצאת הקיבוץ המאוחד, והיה לאחד הטקסטים המכוננים של זיכרון השואה והגבורה בישראל." },
+  "authorPersonIds": ["hannah-szenes"],
+  "subjectPersonIds": ["hannah-szenes"],
+  "publicationDate": "1946",
+  "coveredPeriod": { "start": "1934", "end": "1944" },
+  "importance": 45,
+  "regionIds": ["israel", "hungary", "europe"],
+  "links": [
+    { "label": { "he": "הערך על חנה סנש בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/חנה_סנש" }
+  ]
+}

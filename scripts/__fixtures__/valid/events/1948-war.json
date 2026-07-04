@@ -1,0 +1,30 @@
+{
+  "_comment": "underscore keys are authoring comments — the loader strips them",
+  "id": "1948-war",
+  "type": "event",
+  "title": {
+    "he": "מלחמה לדוגמה"
+  },
+  "description": {
+    "he": "אירוע-על עם תת-אירוע."
+  },
+  "dates": {
+    "start": "1947-11-30",
+    "end": "1949-07-20"
+  },
+  "importance": 90,
+  "categoryIds": [
+    "wars"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "מקור"
+      },
+      "url": "https://example.org/war"
+    }
+  ]
+}

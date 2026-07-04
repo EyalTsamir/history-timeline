@@ -1,0 +1,18 @@
+{
+  "id": "right-name",
+  "type": "person",
+  "name": {
+    "he": "אישיות"
+  },
+  "bio": {
+    "he": "שם הקובץ שונה מהמזהה."
+  },
+  "lifespan": {
+    "start": "1920",
+    "end": "1990"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 50
+}

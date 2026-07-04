@@ -1,0 +1,23 @@
+{
+  "_comment": "Event template — copy into content/events/<id>.json — the file name equals the entity id (validator warns on mismatch). Keys starting with _ are authoring comments; the validator strips them. Run npm run content:validate before opening a PR.",
+  "_id": "kebab-case ascii slug, unique across ALL entity types, e.g. \"war-of-independence\". Include a year in the id only to disambiguate (e.g. \"arab-revolt-1936\"); hierarchy is expressed by parentId, never by filename.",
+  "id": "1936-example-event",
+  "type": "event",
+  "_title": "Short Hebrew title, fits on a timeline card.",
+  "title": { "he": "אירוע לדוגמה" },
+  "_description": "1-3 Hebrew sentences for the detail panel.",
+  "description": { "he": "תיאור קצר של האירוע, משפט אחד עד שלושה." },
+  "_dates": "start/end use \"YYYY\" | \"YYYY-MM\" | \"YYYY-MM-DD\" (Gregorian). Omit end for a point-in-time event. \"approx\": true marks a circa date. Never invent precision you don't have — a year-only date is displayed as a year.",
+  "dates": { "start": "1936-04-19", "end": "1939" },
+  "_parentId": "Optional: id of the parent event when this is a sub-event (e.g. a battle inside a war). Add the key only when needed.",
+  "_importance": "Integer 1-100 per the docs/05 rubric: 90-100 era-defining (visible fully zoomed out); 70-89 major national events; 40-69 notable events and sub-events; 20-39 contextual detail (year-level zoom); 1-19 fine detail (month-level zoom). A sub-event must score LOWER than its parent (validator warns otherwise).",
+  "importance": 75,
+  "_categoryIds": "ids from content/taxonomies/event-categories.json.",
+  "categoryIds": ["war-security"],
+  "_regionIds": "ids from content/taxonomies/regions.json; filtering by a parent region includes all its descendants.",
+  "regionIds": ["israel"],
+  "_tags": "Optional free-form strings (not validated against a taxonomy). Add a \"tags\": [] key only when needed.",
+  "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
+  "_links": "Sources; label is the Hebrew display text.",
+  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/..." }]
+}

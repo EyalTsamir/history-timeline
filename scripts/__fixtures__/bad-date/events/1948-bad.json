@@ -1,0 +1,14 @@
+{
+  "id": "1948-bad",
+  "type": "event",
+  "title": {
+    "he": "אירוע"
+  },
+  "description": {
+    "he": "חודש 13 אינו קיים."
+  },
+  "dates": {
+    "start": "1948-13"
+  },
+  "importance": 50
+}

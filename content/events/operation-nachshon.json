@@ -1,0 +1,14 @@
+{
+  "id": "operation-nachshon",
+  "type": "event",
+  "title": { "he": "מבצע נחשון" },
+  "description": { "he": "מבצע של ההגנה במסגרת מלחמת העצמאות לפריצת הדרך הנצורה לירושלים, שנערך בין 5 ל־16 באפריל 1948. היה המבצע הרחב הראשון במסגרת תוכנית ד׳, ובמהלכו נכבשו משלטים לאורך הדרך לירושלים והועברו לעיר שיירות אספקה." },
+  "dates": { "start": "1948-04-05", "end": "1948-04-16" },
+  "parentId": "war-of-independence",
+  "importance": 45,
+  "categoryIds": ["war-security"],
+  "regionIds": ["jerusalem", "israel"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מבצע_נחשון" }
+  ]
+}

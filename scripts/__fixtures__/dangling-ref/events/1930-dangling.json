@@ -1,0 +1,17 @@
+{
+  "id": "1930-dangling",
+  "type": "event",
+  "title": {
+    "he": "אירוע"
+  },
+  "description": {
+    "he": "מפנה לאזור שאינו קיים."
+  },
+  "dates": {
+    "start": "1930"
+  },
+  "importance": 50,
+  "regionIds": [
+    "atlantis"
+  ]
+}

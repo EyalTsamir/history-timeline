@@ -1,0 +1,21 @@
+{
+  "id": "example-writer",
+  "type": "person",
+  "name": {
+    "he": "סופר לדוגמה"
+  },
+  "bio": {
+    "he": "עודנו בחיים — טווח פתוח."
+  },
+  "lifespan": {
+    "start": "1939",
+    "end": null
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 55,
+  "regionIds": [
+    "jerusalem"
+  ]
+}

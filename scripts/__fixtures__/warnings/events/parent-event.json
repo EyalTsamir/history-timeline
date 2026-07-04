@@ -1,0 +1,15 @@
+{
+  "id": "parent-event",
+  "type": "event",
+  "title": {
+    "he": "אירוע אב"
+  },
+  "description": {
+    "he": "אירוע אב."
+  },
+  "dates": {
+    "start": "1960",
+    "end": "1962"
+  },
+  "importance": 40
+}

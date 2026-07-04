@@ -1,0 +1,10 @@
+[
+  {
+    "from": "example-leader",
+    "to": "1948-declaration",
+    "type": "participated-in",
+    "note": {
+      "he": "השתתף בהכרזה"
+    }
+  }
+]

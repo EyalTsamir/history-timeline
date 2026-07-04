@@ -1,0 +1,13 @@
+{
+  "id": "naomi-shemer",
+  "type": "person",
+  "name": { "he": "נעמי שמר" },
+  "bio": { "he": "מלחינה ופזמונאית, מן היוצרות המרכזיות של הזמר העברי. כתבה והלחינה מאות שירים, ובהם 'ירושלים של זהב' (1967), וזכתה בפרס ישראל לזמר העברי בשנת 1983." },
+  "lifespan": { "start": "1930-07-13", "end": "2004-06-26" },
+  "categoryIds": ["artists"],
+  "importance": 65,
+  "regionIds": ["israel"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/נעמי_שמר" }
+  ]
+}

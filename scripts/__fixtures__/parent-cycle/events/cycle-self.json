@@ -1,0 +1,15 @@
+{
+  "id": "cycle-self",
+  "type": "event",
+  "title": {
+    "he": "אירוע ג"
+  },
+  "description": {
+    "he": "מצביע על עצמו."
+  },
+  "dates": {
+    "start": "1952"
+  },
+  "parentId": "cycle-self",
+  "importance": 30
+}

@@ -1,0 +1,20 @@
+{
+  "_comment": "Person template — copy into content/people/<person-slug>.json. The file name should equal the id (validator warns on mismatch). Keys starting with _ are authoring comments; the validator strips them.",
+  "_id": "kebab-case ascii slug, unique across ALL entity types, e.g. \"david-ben-gurion\".",
+  "id": "example-person",
+  "type": "person",
+  "name": { "he": "אישיות לדוגמה" },
+  "_bio": "Short Hebrew biography, 1-3 sentences for the detail panel.",
+  "bio": { "he": "ביוגרפיה קצרה של האישיות, משפט אחד עד שלושה." },
+  "_lifespan": "Dates use \"YYYY\" | \"YYYY-MM\" | \"YYYY-MM-DD\". \"end\": null means still alive — rendered as an open-ended lifespan. Use only the precision you actually know.",
+  "lifespan": { "start": "1898-05-03", "end": "1978-12-08" },
+  "_categoryIds": "At least one id from content/taxonomies/person-categories.json — the first category drives the item color.",
+  "categoryIds": ["leaders"],
+  "_importance": "Integer 1-100 per the docs/05 rubric: 90-100 era-defining figures; 70-89 major national figures; 40-69 central figures in their field; 20-39 cultural/contextual figures (year-level zoom); 1-19 fine detail (month-level zoom).",
+  "importance": 80,
+  "_regionIds": "ids from content/taxonomies/regions.json the person is associated with.",
+  "regionIds": ["israel"],
+  "_image": "Optional portrait: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
+  "_links": "Sources; label is the Hebrew display text.",
+  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/..." }]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "1948-battle",
+  "type": "event",
+  "title": {
+    "he": "קרב לדוגמה"
+  },
+  "description": {
+    "he": "תת-אירוע של המלחמה."
+  },
+  "dates": {
+    "start": "1948-05",
+    "approx": true
+  },
+  "parentId": "1948-war",
+  "importance": 40,
+  "categoryIds": [
+    "wars"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "yemei-tziklag",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": { "he": "ימי צקלג" },
+  "description": { "he": "רומן מאת ס. יזהר על שבעה ימי קרב של לוחמים צעירים על גבעה בנגב במלחמת העצמאות, בעקבות קרבות חרבת מחאז של חטיבת יפתח (ספטמבר–אוקטובר 1948). הספר ראה אור בהוצאת עם עובד ב-1958, עורר פולמוס ספרותי ממושך, זיכה את מחברו בפרס ישראל ונחשב מיצירות המופת של הספרות העברית." },
+  "authorName": { "he": "ס. יזהר" },
+  "subjectEventIds": ["war-of-independence"],
+  "publicationDate": "1958",
+  "coveredPeriod": { "start": "1948-09", "end": "1948-10", "approx": true },
+  "importance": 62,
+  "regionIds": ["negev"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/ימי_צקלג" }
+  ]
+}

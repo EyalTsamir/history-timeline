@@ -1,0 +1,13 @@
+{
+  "id": "golda-meir",
+  "type": "person",
+  "name": { "he": "גולדה מאיר" },
+  "bio": { "he": "ראש הממשלה הרביעית של ישראל והאישה הראשונה בתפקיד, כיהנה בשנים 1969–1974. קודם לכן שימשה שרת העבודה ושרת החוץ, וכהונתה כראש ממשלה נחתמה בצל מלחמת יום הכיפורים." },
+  "lifespan": { "start": "1898-05-03", "end": "1978-12-08" },
+  "categoryIds": ["leaders"],
+  "importance": 85,
+  "regionIds": ["israel", "jerusalem"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/גולדה_מאיר" }
+  ]
+}

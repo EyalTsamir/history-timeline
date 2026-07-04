@@ -1,0 +1,26 @@
+{
+  "id": "leader-bio",
+  "type": "work",
+  "workType": "biography",
+  "title": {
+    "he": "ביוגרפיה לדוגמה"
+  },
+  "description": {
+    "he": "ספר על המנהיג."
+  },
+  "authorName": {
+    "he": "מחבר חיצוני"
+  },
+  "subjectPersonIds": [
+    "example-leader"
+  ],
+  "publicationDate": "1987",
+  "coveredPeriod": {
+    "start": "1886",
+    "end": "1973"
+  },
+  "importance": 50,
+  "regionIds": [
+    "israel"
+  ]
+}

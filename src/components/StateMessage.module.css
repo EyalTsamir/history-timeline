@@ -1,0 +1,17 @@
+/* Shared by ErrorState and EmptyState — centered editorial notice. */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  max-inline-size: 28rem;
+}
+
+.title {
+  font-size: var(--text-lg);
+}
+
+.message {
+  color: var(--text-secondary);
+}

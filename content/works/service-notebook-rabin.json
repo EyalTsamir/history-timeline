@@ -1,0 +1,16 @@
+{
+  "id": "service-notebook-rabin",
+  "type": "work",
+  "workType": "autobiography",
+  "title": { "he": "פנקס שירות" },
+  "description": { "he": "אוטוביוגרפיה של יצחק רבין, שנכתבה עם העיתונאי דב גולדשטיין וראתה אור בשני כרכים בהוצאת מעריב בספטמבר 1979. הספר סוקר את חייו מלידתו ב-1922, דרך שירותו בפלמ\"ח ובצה\"ל וכהונתו כרמטכ\"ל במלחמת ששת הימים, ועד תום כהונתו הראשונה כראש הממשלה, ועורר סערה ציבורית בשל התבטאויותיו החריפות על יריביו הפוליטיים." },
+  "authorPersonIds": ["yitzhak-rabin"],
+  "subjectPersonIds": ["yitzhak-rabin"],
+  "publicationDate": "1979",
+  "coveredPeriod": { "start": "1922", "end": "1977" },
+  "importance": 50,
+  "regionIds": ["israel"],
+  "links": [
+    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/פנקס_שירות" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "dup",
+  "type": "event",
+  "title": {
+    "he": "אירוע"
+  },
+  "description": {
+    "he": "זהה במזהה לאישיות."
+  },
+  "dates": {
+    "start": "1950"
+  },
+  "importance": 50
+}

@@ -1,0 +1,11 @@
+[
+  { "id": "israel", "name": { "he": "ארץ ישראל וישראל" }, "kind": "country" },
+  { "id": "jerusalem", "name": { "he": "ירושלים" }, "kind": "city", "parentId": "israel" },
+  { "id": "tel-aviv", "name": { "he": "תל אביב" }, "kind": "city", "parentId": "israel" },
+  { "id": "haifa", "name": { "he": "חיפה" }, "kind": "city", "parentId": "israel" },
+  { "id": "galilee", "name": { "he": "הגליל" }, "kind": "region", "parentId": "israel" },
+  { "id": "negev", "name": { "he": "הנגב" }, "kind": "region", "parentId": "israel" },
+  { "id": "sinai", "name": { "he": "חצי האי סיני" }, "kind": "area" },
+  { "id": "europe", "name": { "he": "אירופה" }, "kind": "continent" },
+  { "id": "hungary", "name": { "he": "הונגריה" }, "kind": "country", "parentId": "europe" }
+]

@@ -1,0 +1,59 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+ציר הזמן ההיסטורי — an interactive, zoomable historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. Phase 1 (foundation) is done; the interactive timeline visualization (`src/timeline/`) is the next stage.
+
+All product/technical decisions are recorded in `docs/` (01–12), including a decision log in [docs/02-architecture.md](docs/02-architecture.md). Check the relevant doc before changing direction on anything architectural, and update the docs when a decision changes.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Builds dataset from `content/`, then Vite dev server (localhost:5173) |
+| `npm run build` | content build → `tsc --noEmit` → `vite build` |
+| `npm test` | Full Vitest suite |
+| `npx vitest run src/domain/dates.test.ts` | Run a single test file |
+| `npm run typecheck` | TypeScript strict check |
+| `npm run content:validate` | Validate all of `content/` — schemas, refs, cycles, dates |
+| `npm run content:build` | Validate + compile `public/data/dataset.json` + meta |
+| `npm run content:clean` | Delete compiled `public/data/` (regenerated on next dev/build) |
+
+CI (`.github/workflows/ci.yml`): validate → typecheck → test → build; pushes to `main` deploy to GitHub Pages.
+
+## Architecture
+
+Strict layering (top may import from below, never the reverse):
+
+```
+app/ + components/   React shell & UI; ALL Hebrew strings live in src/app/strings.he.ts
+state/               Zustand stores (filterStore; viewport/selection to come) — no React imports
+timeline/            (next stage) pure logic: time scale, semantic zoom, lane layout
+data/                DataSource interface + StaticJsonDataSource (fetches compiled dataset)
+domain/              Zod entity schemas, date model, normalize → TimelineItem, filter predicates
+```
+
+- `domain/` and `timeline/` are **pure TypeScript** — no React, no DOM, no fetch.
+- All data enters through the `DataSource` interface (`loadDataset(): Promise<Dataset>`); UI never knows the source.
+- Components never compute layout/visibility; they render the output of the `timeline/` pipeline.
+
+### Content pipeline
+
+`content/*.json` (source of truth, one file per entity) → `scripts/build-content.ts` validates against the Zod schemas in [src/domain/entities.ts](src/domain/entities.ts), resolves every reference, precomputes reverse indexes, and emits `public/data/dataset.json` plus a content-addressed `dataset.<hash>.json` (injected into production builds via the `__DATASET_URL__` Vite define; dev uses the stable name). The compiled artifact is gitignored and rebuilt on every dev/build.
+
+### Key domain rules
+
+- **Dates**: authored as `"1948"`, `"1948-05"`, or `"1948-05-14"`; compiled to decimal years by `domain/dates.ts`. All layout/zoom math uses decimal years; nothing downstream parses date strings. Precision is preserved for display (a year-only date never renders a fabricated day).
+- **Works** are positioned by `coveredPeriod`, not `publicationDate` (decision D7).
+- **Person lifespan** requires an explicit `end` (death date or `null` = still alive) — an omitted end is invalid.
+- `importance` is numeric 1–100 per the rubric in [docs/05-semantic-zoom.md](docs/05-semantic-zoom.md); semantic zoom filters on it.
+- Category `color` values must be existing `--cat-*` tokens in `src/styles/tokens.css` (validated at build).
+
+## Conventions
+
+- **Hebrew/RTL**: components hold no Hebrew literals — every user-facing string goes in `src/app/strings.he.ts`. Styling uses CSS Modules with **CSS logical properties** (`margin-inline-start`, `inset-inline-end`…), never left/right. The time axis itself flows RTL (past on the right), controlled by a `timeDirection` config consumed only by the scale function.
+- **Content authoring**: copy a template from `content/_templates/`; filename must equal the entity `id` (kebab-case slug, globally unique). `_`-prefixed keys are template comments, stripped by the loader. Run `npm run content:validate` after edits.
+- **Tests** live next to their subjects (`src/**/*.test.ts(x)`, `scripts/*.test.ts`). Vitest `globals` is **off** — import `describe`/`it`/`expect`, and every component test file calls `afterEach(cleanup)` itself. Content-validator tests run against fixture trees in `scripts/__fixtures__/` — add a new fixture tree when adding a validator rule.
+- tsconfig is maximally strict (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `verbatimModuleSyntax`) — expect index accesses to be `| undefined` and use `import type` for types.

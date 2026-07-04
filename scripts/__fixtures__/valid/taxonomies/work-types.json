@@ -1,0 +1,16 @@
+[
+  {
+    "id": "biography",
+    "name": {
+      "he": "ביוגרפיה"
+    },
+    "color": "biography"
+  },
+  {
+    "id": "historical-novel",
+    "name": {
+      "he": "רומן היסטורי"
+    },
+    "color": "historical-novel"
+  }
+]

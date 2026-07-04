@@ -1,0 +1,15 @@
+{
+  "id": "child-event",
+  "type": "event",
+  "title": {
+    "he": "תת-אירוע"
+  },
+  "description": {
+    "he": "תת-אירוע חשוב מדי."
+  },
+  "dates": {
+    "start": "1961"
+  },
+  "parentId": "parent-event",
+  "importance": 60
+}

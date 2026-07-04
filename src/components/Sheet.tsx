@@ -1,0 +1,132 @@
+/**
+ * Accessible modal drawer (mobile filter surface, docs/08-interaction.md).
+ * Focus moves in on open and is contained while open: Escape/Tab are handled
+ * at document level (so they keep working when focus lands on non-interactive
+ * content), a focusin listener recaptures focus that escapes the panel, and
+ * page scroll is locked. On close, focus returns to the opener — or to a
+ * fallback (`fallbackFocusRef`) when the opener is gone or hidden.
+ */
+import { useEffect, useId, useRef } from 'react';
+import type { MouseEvent, ReactNode, RefObject } from 'react';
+import { Button } from './Button';
+import styles from './Sheet.module.css';
+
+const FOCUSABLE_SELECTOR =
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+interface SheetProps {
+  open: boolean;
+  title: string;
+  closeLabel: string;
+  onClose: () => void;
+  /** Focused on close when the opener is unmounted or display:none. */
+  fallbackFocusRef?: RefObject<HTMLElement | null>;
+  children: ReactNode;
+}
+
+export function Sheet({ open, title, closeLabel, onClose, fallbackFocusRef, children }: SheetProps) {
+  const titleId = useId();
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (!open) return;
+    const opener = document.activeElement;
+    closeRef.current?.focus();
+
+    const focusables = (): HTMLElement[] => {
+      const panel = panelRef.current;
+      if (!panel) return [];
+      return Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (el) => !el.hasAttribute('disabled'),
+      );
+    };
+
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseRef.current();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const els = focusables();
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (!first || !last) {
+        e.preventDefault();
+        panelRef.current?.focus();
+        return;
+      }
+      const active = document.activeElement;
+      // Wrap at the edges; if focus is on the panel itself, body, or anything
+      // outside the panel (click on non-interactive content), pull it back in.
+      const inside = active instanceof HTMLElement && els.includes(active);
+      if (!inside) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    // Belt-and-braces: any focus landing outside the panel comes back in.
+    const onFocusIn = (e: globalThis.FocusEvent) => {
+      const panel = panelRef.current;
+      if (!panel || !(e.target instanceof Node) || panel.contains(e.target)) return;
+      (focusables()[0] ?? panel).focus();
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('focusin', onFocusIn);
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('focusin', onFocusIn);
+      document.documentElement.style.overflow = prevOverflow;
+      if (opener instanceof HTMLElement) opener.focus();
+      // A hidden/unmounted opener silently refuses focus — verify it landed.
+      if (document.activeElement !== opener) fallbackFocusRef?.current?.focus();
+    };
+  }, [open, fallbackFocusRef]);
+
+  if (!open) return null;
+
+  const onBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) onClose();
+  };
+
+  return (
+    <div className={styles.overlay} onClick={onBackdropClick}>
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        className={styles.panel}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+      >
+        <div className={styles.panelHeader}>
+          <h2 id={titleId} className={styles.panelTitle}>
+            {title}
+          </h2>
+          <Button
+            ref={closeRef}
+            aria-label={closeLabel}
+            className={styles.closeButton}
+            onClick={onClose}
+          >
+            <span aria-hidden="true">✕</span>
+          </Button>
+        </div>
+        <div className={styles.panelBody}>{children}</div>
+      </div>
+    </div>
+  );
+}

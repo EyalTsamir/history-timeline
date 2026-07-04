@@ -1,0 +1,38 @@
+{
+  "name": "history-timeline",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "ציר הזמן ההיסטורי — interactive Hebrew RTL historical timeline (Israel 1930–2000 first scope)",
+  "scripts": {
+    "dev": "npm run content:build && vite",
+    "build": "npm run content:build && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "content:validate": "tsx scripts/validate-content.ts",
+    "content:build": "tsx scripts/build-content.ts",
+    "content:clean": "node -e \"require('fs').rmSync('public/data',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.25.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "jsdom": "^26.1.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}

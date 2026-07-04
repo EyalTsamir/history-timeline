@@ -1,0 +1,15 @@
+{
+  "id": "cycle-b",
+  "type": "event",
+  "title": {
+    "he": "אירוע ב"
+  },
+  "description": {
+    "he": "מצביע על א."
+  },
+  "dates": {
+    "start": "1951"
+  },
+  "parentId": "cycle-a",
+  "importance": 40
+}

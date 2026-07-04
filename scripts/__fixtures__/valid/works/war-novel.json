@@ -1,0 +1,26 @@
+{
+  "id": "war-novel",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "רומן לדוגמה"
+  },
+  "description": {
+    "he": "רומן על המלחמה, ממוקם לפי התקופה המתוארת."
+  },
+  "authorPersonIds": [
+    "example-writer"
+  ],
+  "subjectEventIds": [
+    "1948-war"
+  ],
+  "publicationDate": "2010",
+  "coveredPeriod": {
+    "start": "1947-11",
+    "end": "1949"
+  },
+  "importance": 45,
+  "regionIds": [
+    "israel"
+  ]
+}

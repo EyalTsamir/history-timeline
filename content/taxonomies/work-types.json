@@ -1,0 +1,20 @@
+[
+  {
+    "id": "biography",
+    "name": { "he": "ביוגרפיה" },
+    "color": "biography",
+    "description": { "he": "ספר על חייו של אדם, שנכתב בידי אחר" }
+  },
+  {
+    "id": "autobiography",
+    "name": { "he": "אוטוביוגרפיה" },
+    "color": "autobiography",
+    "description": { "he": "ספר זיכרונות או יומן שכתב אדם על חייו שלו" }
+  },
+  {
+    "id": "historical-novel",
+    "name": { "he": "רומן היסטורי" },
+    "color": "historical-novel",
+    "description": { "he": "סיפורת שעלילתה מעוגנת בתקופה היסטורית" }
+  }
+]

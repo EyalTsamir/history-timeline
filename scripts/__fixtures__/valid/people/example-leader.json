@@ -1,0 +1,21 @@
+{
+  "id": "example-leader",
+  "type": "person",
+  "name": {
+    "he": "מנהיג לדוגמה"
+  },
+  "bio": {
+    "he": "ביוגרפיה קצרה."
+  },
+  "lifespan": {
+    "start": "1886-10-16",
+    "end": "1973-12-01"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 95,
+  "regionIds": [
+    "israel"
+  ]
+}

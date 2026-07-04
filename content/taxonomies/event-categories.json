@@ -1,0 +1,26 @@
+[
+  {
+    "id": "war-security",
+    "name": { "he": "מלחמות וביטחון" },
+    "color": "war-security",
+    "description": { "he": "מלחמות, מבצעים צבאיים ואירועי ביטחון" }
+  },
+  {
+    "id": "state-politics",
+    "name": { "he": "מדינה ופוליטיקה" },
+    "color": "state-politics",
+    "description": { "he": "אירועים מדיניים, פוליטיים ומשפטיים" }
+  },
+  {
+    "id": "immigration-settlement",
+    "name": { "he": "עלייה והתיישבות" },
+    "color": "immigration-settlement",
+    "description": { "he": "גלי עלייה, קליטה והקמת יישובים" }
+  },
+  {
+    "id": "culture-society",
+    "name": { "he": "תרבות וחברה" },
+    "color": "culture-society",
+    "description": { "he": "אירועי תרבות, חברה וכלכלה" }
+  }
+]
