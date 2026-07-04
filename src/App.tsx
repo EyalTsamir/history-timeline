@@ -13,6 +13,7 @@ import type { Dataset } from './domain/dataset';
 import { normalizeDataset } from './domain/normalize';
 import type { TimelineItem } from './domain/timelineItem';
 import { STRINGS } from './app/strings.he';
+import { initTimelineStateFromUrl } from './app/urlState';
 import { useFilterStore } from './state/filterStore';
 import { Button } from './components/Button';
 import { EmptyState } from './components/EmptyState';
@@ -57,7 +58,13 @@ export default function App({ dataSource }: AppProps) {
     setState({ phase: 'loading' });
     source.loadDataset().then(
       (dataset) => {
-        if (!cancelled) setState({ phase: 'ready', dataset, items: normalizeDataset(dataset) });
+        if (!cancelled) {
+          const items = normalizeDataset(dataset);
+          // Seed viewport bounds + apply any shared-link state BEFORE the
+          // timeline first renders, so there is no default-view flash.
+          initTimelineStateFromUrl(items, dataset);
+          setState({ phase: 'ready', dataset, items });
+        }
       },
       (error: unknown) => {
         if (!cancelled) {

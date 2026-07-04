@@ -34,14 +34,14 @@ There is no database and no migration step: the "schema" is the Zod model in [sr
 3. Fill in Hebrew text; remove nothing structural — schemas are strict, but `_`-prefixed keys (template comments) are stripped by the loader.
 4. Assign `importance` per the rubric in [docs/05](05-semantic-zoom.md#importance-rubric); reference only ids that exist in `content/taxonomies/`.
 5. `npm run content:validate` — fix every error (dangling refs, bad dates, duplicate ids are all caught here).
-6. `npm run dev` and confirm the item appears in the workspace preview list.
+6. `npm run dev` and confirm the item appears on the timeline — zoom in far enough for its importance score ([docs/05](05-semantic-zoom.md)); the "מוצגים … מתוך …" counter includes it regardless of zoom.
 
 ## Testing
 
 - Unit/component tests live next to their subjects (`src/**/*.test.ts(x)`, `scripts/*.test.ts`).
 - Content-pipeline tests run against fixture trees in `scripts/__fixtures__/` — add a new fixture tree when adding a validator rule.
 - Component tests: vitest globals are off; every component test file calls `afterEach(cleanup)` itself.
-- E2E (Playwright) arrives with the timeline stage per [docs/09](09-testing.md).
+- E2E (Playwright) arrives with the content-scale/polish stage (roadmap item 9) per [docs/09](09-testing.md); the timeline stage shipped with unit + component coverage.
 
 ## Deployment (GitHub Pages)
 

@@ -136,6 +136,17 @@ export function spanOf(range: DateRange): TimeSpan {
   return { start, end: toDecimalYear(range.end as HistDate, 'end') };
 }
 
+/**
+ * "Now" as a decimal year — the visual clamp for open-ended spans (a living
+ * person's line runs to today). Injectable clock for tests.
+ */
+export function currentDecimalYear(now: Date = new Date()): number {
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return toDecimalYear(`${y}-${m}-${d}`, 'start');
+}
+
 // ---------------------------------------------------------------------------
 // Hebrew display formatting
 // ---------------------------------------------------------------------------
@@ -144,6 +155,30 @@ const HEBREW_MONTHS = [
   'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
   'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר',
 ] as const;
+
+/** Hebrew month name, 1-based. Shared with the timeline ruler labels. */
+export function hebrewMonthName(month: number): string {
+  const name = HEBREW_MONTHS[month - 1];
+  if (name === undefined) throw new Error(`month out of range: ${month}`);
+  return name;
+}
+
+/**
+ * Inverse of toDecimalYear at month granularity: which calendar (year, month)
+ * does a decimal-year instant fall in? Exact against real month lengths —
+ * used by the ruler, so tick labels never drift off their gridline.
+ */
+export function decimalYearToYearMonth(t: number): { year: number; month: number } {
+  const year = Math.floor(t);
+  const dayIndex = (t - year) * daysInYear(year); // 0-based day-of-year, fractional
+  let remaining = dayIndex;
+  for (let month = 1; month <= 12; month++) {
+    const len = daysInMonth(year, month);
+    if (remaining < len) return { year, month };
+    remaining -= len;
+  }
+  return { year, month: 12 }; // t at the very edge of the year
+}
 
 /** "1948" | "מאי 1948" | "14 במאי 1948" — precision-aware, never fabricates detail. */
 export function formatHistDate(value: HistDate): string {

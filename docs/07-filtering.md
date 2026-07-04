@@ -11,7 +11,7 @@ interface FilterState {
 }
 ```
 
-Held in `filterStore` (Zustand), mirrored into the URL hash for shareable links, rendered by `FilterBar` as chip groups in Hebrew (אזור · קטגוריית אישים · סוג תוכן · חשיבות).
+Held in `filterStore` (Zustand), mirrored into the URL hash for shareable links (`r`/`pc`/`ct`/`imp` params — `src/app/urlState.ts`, restored via the store's `replaceAll` action), rendered by `FilterBar` as chip groups in Hebrew (אזור · קטגוריית אישים · סוג תוכן · חשיבות).
 
 ## Combination semantics
 
@@ -41,5 +41,5 @@ The "unaffected" rule for person-category deserves emphasis because it's the one
 
 - `passes()` is a pure predicate in `domain/filters.ts`, unit-tested over a combinatorial table ([09](09-testing.md)).
 - Filtering runs over the normalized, time-sorted `TimelineItem[]` via a memoized selector keyed on `FilterState`; at MVP scale this is a sub-millisecond array pass. The scaling path (bitmask precomputation, worker offload, server-side filtering) is in [10](10-performance.md).
-- Filter changes animate items in/out with the same fade used by zoom thresholds — one visual language for "the visible set changed".
-- An active-filter summary line shows result count ("מוצגים 34 פריטים") with a one-tap "נקה הכול".
+- Filter changes feed the timeline through the same pipeline as zoom (a new visible set → relayout) and **never touch the viewport** — the user's period and zoom are preserved. Items currently appear/disappear instantly on filter change; the zoom fade ramp applies to the threshold dimension only (accepted MVP limitation — an enter/exit transition is a polish item).
+- An active-filter summary line shows the result count ("מוצגים 34 מתוך 120 פריטים") with a one-tap "נקה הכול".

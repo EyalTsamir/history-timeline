@@ -6,23 +6,27 @@ Everything the timeline shows is produced by a chain of pure functions (all in `
 
 ```
 Dataset (validated entities)
-  │ normalize()            — once at load
+  │ normalizeDataset()                    — once at load (domain/normalize.ts)
   ▼
-TimelineItem[]             — the single presentation format, sorted by start
-  │ applyFilters(filterState)          docs/07
+TimelineItem[]                            — the single presentation format, sorted by start
+  │ applyFilters(filterState)             docs/07 (domain/filters.ts)
   ▼
-  │ applyVisibility(viewport)          threshold + density cap, docs/05
+  │ applySemanticVisibility(floor, fade)  threshold + fade band + parent chain (timeline/visibility.ts)
   ▼
-  │ cullToViewport(viewport, buffer)   virtualization: items intersecting view ±1 screen
+  │ cullToWindow(window, buffer)          virtualization: items intersecting view ±1 screen
   ▼
-  │ layoutLanes()                      assign vertical positions
+  │ layoutTimeline(scale, openEndYear)    bands, rows, containers, density cap (timeline/laneLayout.ts)
   ▼
-PositionedItem[] { item, x, width, laneY, opacity, clusterOf? }
+TimelineLayout — per band: PositionedItem[] { item, opacity, x, width, spanX,
+  spanWidth, markerX?, labelX, labelWidth, row, heightRows, isContainer,
+  labelPlacement, openEnded } + PositionedCluster[] { ids, x, width, row, start, end }
   │
-  ▼ React renders absolutely-positioned elements (decision D6)
+  ▼ React renders absolutely-positioned <button>s (decision D6, components/Timeline.tsx)
 ```
 
-React components never compute geometry; they draw `PositionedItem`s. This keeps the door open to a Canvas/WebGL renderer later ([10](10-performance.md)) — only the last step changes.
+React components never compute geometry; they draw `PositionedItem`s (vertical position = `row ×` a CSS row height; every horizontal value is a pixel from the layout). This keeps the door open to a Canvas/WebGL renderer later ([10](10-performance.md)) — only the last step changes.
+
+The viewport model behind `scale`: a **TimeWindow** `{ start, end }` in decimal years lives in `state/viewportStore.ts` (with clamped `setWindow` as the single mutation path); the component measures its pixel width and builds a `Scale { window, widthPx, dir }` for the pure functions in `timeline/scale.ts` (`xOf`/`tOf`/`rectOf`, pan/zoom/clamp ops). During a pan gesture the item and ruler layers move by `translateX` only (`panOffsetPx`); layout recomputes when the gesture settles (~120ms), the pan crosses the one-screen cull buffer, or the zoom changes (rAF-throttled) — the transform-only rule from [10](10-performance.md).
 
 ## TimelineItem — the consistent presentation format
 
@@ -58,25 +62,27 @@ Normalization rules of note:
 
 ## Lanes and vertical layout
 
-The timeline is horizontally scrollable and vertically organized into fixed **bands** (top to bottom): **אירועים** (events), **אנשים** (people), **ספרים** (works). Within each band, `layoutLanes()` packs items into rows greedily:
+The timeline is horizontally pannable and vertically organized into fixed **bands** (top to bottom): **אירועים** (events), **אנשים** (people), **ספרים** (works). Within each band, `layoutTimeline()` packs units into rows greedily, first-fit, **in pixel space** — collision boxes include a deterministic Hebrew label-width estimate (`chars × 7px + 18`, clamped 40–200), so what cannot collide on screen cannot collide in layout:
 
 ```
-sort items by start; for each item, place in the first row of its band whose
-last item ends before item.start − minGapYears(scale); else open a new row
-(up to the band's row budget — then the density cap from docs/05 has already
-bounded the count, so overflow cannot occur unboundedly)
+build unit boxes (span rect + label allowance; containers = header + packed children);
+apply the density cap (docs/05) by importance;
+sort by (box.x, start, id) — deterministic in both axis directions;
+place each unit in the lowest row range that is free over its box (+8px gap),
+up to the band's row budget; row overflow → cluster chips (docs/05)
 ```
 
-Interval packing is O(n log n) per relayout and runs only when the *visible set* changes (zoom/filter), not per animation frame — panning translates the already-positioned layer with a CSS transform.
+Packing runs only when the *visible set* changes (zoom settle / filter change), not per animation frame — panning translates the already-positioned layer with a CSS transform. Label placement is chosen per item: `inside` a wide bar/chip, `aside` a narrow bar or point marker, `above` a lifespan line; `inside`/`above` labels anchor to the span∩viewport box (decision D14). Open-ended lifespans use "today" as a **visual** endpoint only (`openEnded` flag → fade-out edge); the item's `end` stays `null` everywhere.
 
-Bands make scanning predictable (books never interleave with battles) and give each kind its own visual grammar: events = bars/points on the axis, people = thin lifespan lines with a name, works = compact "book chip" spans.
+Bands make scanning predictable (books never interleave with battles) and give each kind its own visual grammar — a shape signal, never color alone (docs/08): events = filled bars with a strong start edge, points = diamond markers; people = thin lifespan lines with the name above; works = outlined "book chips" with a double-line spine.
 
 ## Event hierarchy
 
 - A **parent event** whose sub-events are below the current threshold renders as a single item.
-- As the user zooms in past the sub-events' importance, the parent transitions to a **container band** (a tinted background span labeled at its edge) with its visible sub-events laid out inside it.
-- A sub-event is visible only if `importance ≥ threshold` **and** its parent is visible — parents govern narrative context. The validator's "child less important than parent" warning ([05](05-semantic-zoom.md)) makes this unfold naturally.
+- As the user zooms in past the sub-events' importance, the parent transitions to a **container** (a tinted background block with a bold header bar) with its visible sub-events packed into up to `maxContainerChildRows` rows inside it; child overflow merges into one in-container cluster chip.
+- A sub-event is visible only if `importance ≥ floor` **and** its whole parent chain survived filtering + threshold (`applySemanticVisibility` enforces this) — parents govern narrative context, so a filtered-out or below-threshold parent hides its descendants regardless of their own scores. The validator's "child less important than parent" warning ([05](05-semantic-zoom.md)) makes this unfold naturally.
 - The model allows arbitrary depth; MVP content uses ≤2 levels, and rendering nests one container level (deeper levels flatten into their topmost visible ancestor's container until a product need arises).
+- A container that cannot fit its rows in the band degrades gracefully to a plain single-row bar before falling into a cluster chip.
 
 ## <a name="rtl-time-axis"></a>RTL time axis
 
@@ -92,5 +98,6 @@ Every other module works in time coordinates. Flipping `timeDirection: 'ltr'` in
 
 ## Axis & labels
 
-- A time ruler renders adaptive gradations (decades → years → months) chosen from the same `yearsPer1000px` scale, with Hebrew labels ("שנות ה-50", "1948", "מאי 1948").
-- Item labels truncate with ellipsis at narrow widths; point items place labels alternating above/below to reduce collisions.
+- The time ruler (`timeline/ticks.ts`) renders adaptive gradations chosen so labeled ticks keep ≥72px spacing (≥96px for month labels): a year-step ladder (1000…1) that switches to calendar-aligned month steps (6/3/1) when a single year is wide enough. Year ticks are labeled "1948" (decades emphasized as majors); month ticks "מאי 1948" (January major). Gridlines extend up through the bands.
+- A **visible-range readout** next to the zoom controls always states the current window ("1947–1952", or "מרץ 1948 – יולי 1948" under 3 years) — the "where am I" answer required by [08](08-interaction.md).
+- Item labels truncate with ellipsis; point items render a diamond at the **center of the date's precision range** (a year-precision event marks mid-year; the displayed date stays "1948" — precision is never fabricated) with the label beside it, and lane packing reserves the label's estimated width so side labels can't collide.

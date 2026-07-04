@@ -6,6 +6,34 @@
  */
 import type { Dataset } from '../domain/dataset';
 import { SCHEMA_VERSION } from '../domain/dataset';
+import type { TimelineItem } from '../domain/timelineItem';
+
+/**
+ * Minimal TimelineItem for pure timeline-pipeline tests (visibility, layout).
+ * Defaults: a closed-span event of importance 50.
+ */
+export function makeTimelineItem(
+  id: string,
+  start: number,
+  end: number | null,
+  overrides: Partial<TimelineItem> = {},
+): TimelineItem {
+  return {
+    id,
+    kind: 'event',
+    contentType: 'event',
+    title: `פריט ${id}`,
+    start,
+    end,
+    isPoint: false,
+    importance: 50,
+    regionIds: [],
+    categoryIds: [],
+    styleToken: 'event',
+    detail: { description: '', displayDate: '', links: [] },
+    ...overrides,
+  };
+}
 
 export function makeFixtureDataset(): Dataset {
   return {

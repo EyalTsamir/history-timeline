@@ -20,6 +20,8 @@ Not classic tests, but the highest-value gate: `validate-content` in CI guarante
 
 Component tests (React Testing Library) cover the interactive shells: FilterBar state wiring, DetailPanel rendering of each kind, cluster chip expansion.
 
+**Status (timeline stage):** the unit table above is implemented — `timeline/scale` (round-trips in both directions, zoom anchoring, clamping, pan offsets), `timeline/semanticZoom` (curve interpolation/clamping/bias, max() composition, fade ramp), `timeline/ticks`, `timeline/visibility` (fade band, parent chain, culling, open ends), `timeline/laneLayout` (no-collision property, determinism, budgets, containers, clusters, label anchoring, RTL/LTR mirroring), stores, and `app/urlState` (round-trip, validation, sync). Component tests cover keyboard pan/zoom/reset, wheel paths, selection + `aria-current`, cluster expansion, the desktop panel's focus lifecycle, the mobile bottom sheet, URL mirroring, and filter changes preserving the viewport. One class of bug jsdom cannot catch — real pointer-capture/click interplay — was found by manual browser testing and is exactly what the e2e suite below exists for.
+
 ## 3. E2E (Playwright) — few, high-value flows
 
 Run against the built static site (`vite preview`), desktop viewport + a mobile emulation project (touch, 390px). RTL rendering is inherently covered since the real app is RTL.

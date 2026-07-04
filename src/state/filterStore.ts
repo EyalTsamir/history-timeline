@@ -16,6 +16,8 @@ export interface FilterActions {
   toggleContentType(ct: ContentType): void;
   setMinImportance(n: number): void;
   clearAll(): void;
+  /** Bulk restore (URL-hash state, docs/07) — replaces every dimension at once. */
+  replaceAll(next: FilterState): void;
 }
 
 export type FilterStore = FilterState & FilterActions;
@@ -34,6 +36,13 @@ export const useFilterStore = create<FilterStore>()((set) => ({
   toggleContentType: (ct) => set((s) => ({ contentTypes: toggled(s.contentTypes, ct) })),
   setMinImportance: (n) => set({ minImportance: n }),
   clearAll: () => set({ ...EMPTY_FILTER_STATE }),
+  replaceAll: (next) =>
+    set({
+      regionIds: new Set(next.regionIds),
+      personCategoryIds: new Set(next.personCategoryIds),
+      contentTypes: new Set(next.contentTypes),
+      minImportance: next.minImportance,
+    }),
 }));
 
 /**

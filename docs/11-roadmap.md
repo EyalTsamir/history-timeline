@@ -6,15 +6,15 @@
 Product definition, architecture, domain model, and these docs. Approved decisions recorded in [02-architecture.md](02-architecture.md#decision-log).
 
 ### Phase 1 — MVP build
-1. Project scaffold: Vite + React + TS strict, CSS Modules, RTL root, CI skeleton (typecheck/test/build/deploy to GitHub Pages with a placeholder page — deploy pipeline proven **first**).
-2. Domain layer: entities (Zod), date model, normalization — with unit tests.
-3. Content pipeline: validator + builder + templates; seed ~10 items to develop against.
-4. Timeline core: scale (RTL), viewport store, pan/zoom gestures, ruler.
-5. Semantic zoom + lane layout + virtualization + density cap.
-6. Filters + URL hash state.
-7. Detail panel/sheet, selection, person↔work links.
+1. ✅ Project scaffold: Vite + React + TS strict, CSS Modules, RTL root, CI skeleton (typecheck/test/build/deploy to GitHub Pages with a placeholder page — deploy pipeline proven **first**).
+2. ✅ Domain layer: entities (Zod), date model, normalization — with unit tests.
+3. ✅ Content pipeline: validator + builder + templates; seed content to develop against.
+4. ✅ Timeline core: scale (RTL), viewport store, pan/zoom gestures, ruler. *(timeline stage)*
+5. ✅ Semantic zoom + lane layout + virtualization + density cap. *(timeline stage)*
+6. ✅ Filters + URL hash state. *(timeline stage)*
+7. ✅ Detail panel/sheet, selection, person↔work links. *(timeline stage)*
 8. Full content pass: ~60–100 events, ~40–60 people, ~30–50 works per the rubric.
-9. E2E suite, mobile polish, performance guardrail, a11y pass.
+9. E2E suite (Playwright), mobile polish, performance guardrail, a11y pass.
 
 ### Phase 2 — Content scale & discovery
 - Free-text search (client-side index; Hebrew stemming considerations).

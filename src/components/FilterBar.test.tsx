@@ -5,22 +5,25 @@ import App from '../App';
 import { STRINGS } from '../app/strings.he';
 import { InMemoryDataSource } from '../data/InMemoryDataSource';
 import { useFilterStore } from '../state/filterStore';
+import { useSelectionStore } from '../state/selectionStore';
 import { makeFixtureDataset } from '../test/fixtures';
 
 async function renderReadyApp() {
   render(<App dataSource={new InMemoryDataSource(makeFixtureDataset())} />);
-  await screen.findByText('מלחמה לדוגמה');
+  await screen.findByRole('button', { name: /מלחמה לדוגמה/ });
 }
 
 describe('FilterBar', () => {
   beforeEach(() => {
     useFilterStore.getState().clearAll();
+    useSelectionStore.getState().clear();
+    history.replaceState(null, '', window.location.pathname);
   });
 
   // vitest globals are off, so RTL cannot auto-register its cleanup.
   afterEach(cleanup);
 
-  it('toggling the person content-type chip narrows the preview to people', async () => {
+  it('toggling the person content-type chip narrows the timeline to people', async () => {
     const user = userEvent.setup();
     await renderReadyApp();
 
@@ -30,16 +33,13 @@ describe('FilterBar', () => {
     await user.click(chip);
 
     expect(chip).toHaveAttribute('aria-pressed', 'true');
-    const list = screen.getByRole('list', { name: STRINGS.previewListLabel });
-    const rows = within(list).getAllByRole('listitem');
-    expect(rows).toHaveLength(2);
-    expect(screen.getByText('מנהיג לדוגמה')).toBeInTheDocument();
-    expect(screen.getByText('סופר חי לדוגמה')).toBeInTheDocument();
-    expect(screen.queryByText('מלחמה לדוגמה')).not.toBeInTheDocument();
+    // Events vanish from the timeline; the high-importance person remains.
+    expect(screen.queryByRole('button', { name: /מלחמה לדוגמה/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /מנהיג לדוגמה/ })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shownCount(2, 7))).toBeInTheDocument();
   });
 
-  it('clear-all resets chips and restores the full preview', async () => {
+  it('clear-all resets chips and restores the full timeline', async () => {
     const user = userEvent.setup();
     await renderReadyApp();
 
@@ -50,7 +50,7 @@ describe('FilterBar', () => {
     await user.click(screen.getByRole('button', { name: STRINGS.clearAll }));
 
     expect(chip).toHaveAttribute('aria-pressed', 'false');
-    expect(await screen.findByText('מלחמה לדוגמה')).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /מלחמה לדוגמה/ })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shownCount(7, 7))).toBeInTheDocument();
     // Clear-all button disappears once no filter is active.
     expect(screen.queryByRole('button', { name: STRINGS.clearAll })).not.toBeInTheDocument();

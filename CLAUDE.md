@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-ציר הזמן ההיסטורי — an interactive, zoomable historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. Phase 1 (foundation) is done; the interactive timeline visualization (`src/timeline/`) is the next stage.
+ציר הזמן ההיסטורי — an interactive, zoomable historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The interactive timeline (pan/zoom/semantic zoom/lane layout/selection/URL state) is implemented; remaining Phase 1 work is the full content pass, the Playwright e2e suite, and the performance guardrail (docs/11).
 
 All product/technical decisions are recorded in `docs/` (01–12), including a decision log in [docs/02-architecture.md](docs/02-architecture.md). Check the relevant doc before changing direction on anything architectural, and update the docs when a decision changes.
 
@@ -28,16 +28,19 @@ CI (`.github/workflows/ci.yml`): validate → typecheck → test → build; push
 Strict layering (top may import from below, never the reverse):
 
 ```
-app/ + components/   React shell & UI; ALL Hebrew strings live in src/app/strings.he.ts
-state/               Zustand stores (filterStore; viewport/selection to come) — no React imports
-timeline/            (next stage) pure logic: time scale, semantic zoom, lane layout
+app/ + components/   React shell & UI; ALL Hebrew strings live in src/app/strings.he.ts;
+                     app/urlState.ts = shareable #hash (viewport+filters+selection)
+state/               Zustand stores: filterStore, viewportStore, selectionStore — no React imports
+timeline/            pure logic: scale.ts (time↔px; axis direction lives ONLY here),
+                     semanticZoom(+.config), ticks, visibility (fade band, parent chain,
+                     culling), laneLayout (bands/containers/cluster chips), config.ts
 data/                DataSource interface + StaticJsonDataSource (fetches compiled dataset)
 domain/              Zod entity schemas, date model, normalize → TimelineItem, filter predicates
 ```
 
 - `domain/` and `timeline/` are **pure TypeScript** — no React, no DOM, no fetch.
 - All data enters through the `DataSource` interface (`loadDataset(): Promise<Dataset>`); UI never knows the source.
-- Components never compute layout/visibility; they render the output of the `timeline/` pipeline.
+- Components never compute layout/visibility; they render the output of the `timeline/` pipeline. `components/Timeline.tsx` owns gestures/keyboard; horizontal geometry is inline-styled physical px from the layout — deliberate, since those values already encode the axis direction (logical properties cover everything else).
 
 ### Content pipeline
 

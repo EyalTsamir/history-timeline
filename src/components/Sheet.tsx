@@ -21,10 +21,16 @@ interface SheetProps {
   onClose: () => void;
   /** Focused on close when the opener is unmounted or display:none. */
   fallbackFocusRef?: RefObject<HTMLElement | null>;
+  /**
+   * 'end' — slide-over drawer at the inline-end edge (filters, the default);
+   * 'bottom' — bottom sheet (mobile item detail, docs/08). Same focus/scroll
+   * behavior, different geometry.
+   */
+  side?: 'end' | 'bottom';
   children: ReactNode;
 }
 
-export function Sheet({ open, title, closeLabel, onClose, fallbackFocusRef, children }: SheetProps) {
+export function Sheet({ open, title, closeLabel, onClose, fallbackFocusRef, side = 'end', children }: SheetProps) {
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -103,11 +109,14 @@ export function Sheet({ open, title, closeLabel, onClose, fallbackFocusRef, chil
   };
 
   return (
-    <div className={styles.overlay} onClick={onBackdropClick}>
+    <div
+      className={side === 'bottom' ? `${styles.overlay} ${styles.overlayBottom}` : styles.overlay}
+      onClick={onBackdropClick}
+    >
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={styles.panel}
+        className={side === 'bottom' ? `${styles.panel} ${styles.panelBottom}` : styles.panel}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

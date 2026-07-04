@@ -54,11 +54,17 @@ Numeric importance is deterministic, testable, author-controllable, and — crit
 
 ### Complementary mechanism: density cap (not a replacement)
 
-Numeric importance has one real weakness — uneven historical density (1948 vs. 1955). A secondary, purely presentational **per-lane density cap** covers this: after threshold filtering, if a lane holds more than `maxItemsPerLanePer1000px` (config, ~default 8), the lowest-importance overflow collapses into a **cluster chip** ("+5 נוספים") that expands on zoom-in or tap. Importance stays the single source of *ranking*; the cap only decides how many ranked items fit. This is an MVP-included refinement, not a future item, because dense years appear immediately in the first content scope.
+Numeric importance has one real weakness — uneven historical density (1948 vs. 1955). A secondary, purely presentational **density cap** covers this (implemented in `timeline/laneLayout.ts`), with two bounds per band:
+
+1. **Item budget** — after threshold filtering, a band keeps at most `maxItemsPer1000px × width/1000` top-level units (config, default 8), highest importance first.
+2. **Row budget** — packing never opens more than `maxRows` rows (events/people 5, works 4); a container's children get `maxContainerChildRows` (3) inside it.
+
+Everything cut by either bound collapses into **cluster chips** ("+5 נוספים") on a dedicated overflow row, grouped by pixel proximity (overlapping chips merge, so the chip row can never collide with itself). Tapping a chip zooms to fit the span its members cover. Importance stays the single source of *ranking*; the caps only decide how many ranked items fit.
 
 ## Behavior details
 
-- **Hysteresis/fade:** items within ±3 importance points of the moving threshold fade rather than pop, and the threshold applies a small enter/exit hysteresis band so jittery pinch gestures don't strobe items.
+- **Fade band (decision D13):** items within `fadeBand` (3) importance points *below* the current floor render at a proportional opacity instead of popping — a continuous ramp, so jittery pinch gestures cannot strobe items, with no hidden state (visibility stays a pure function of item + viewport).
 - **Filters interact multiplicatively:** effective minimum = `max(zoomThreshold, userImportanceFilter)`; see [07](07-filtering.md).
-- **Sub-events** additionally require their parent chain to be expanded-or-visible; see [06](06-timeline-rendering.md#event-hierarchy).
+- **Sub-events** additionally require their parent chain to be visible; see [06](06-timeline-rendering.md#event-hierarchy).
 - **Works and people** use the same mechanism and curve — one system, no per-type special cases. If books should surface earlier than equally-important events (a product question for later), that becomes a per-type curve offset in config, not new code.
+- Authoritative code: curve + knobs in `src/timeline/semanticZoom.config.ts`, math in `src/timeline/semanticZoom.ts`, application in `src/timeline/visibility.ts` — all unit-tested.

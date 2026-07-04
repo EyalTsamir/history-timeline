@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen, within } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { STRINGS } from './app/strings.he';
@@ -8,6 +8,7 @@ import type { DataSource } from './data/DataSource';
 import { InMemoryDataSource } from './data/InMemoryDataSource';
 import type { Dataset } from './domain/dataset';
 import { useFilterStore } from './state/filterStore';
+import { useSelectionStore } from './state/selectionStore';
 import { makeFixtureDataset } from './test/fixtures';
 
 function makeEmptyDataset(): Dataset {
@@ -38,33 +39,39 @@ class FailingOnceDataSource implements DataSource {
 describe('App', () => {
   beforeEach(() => {
     useFilterStore.getState().clearAll();
+    useSelectionStore.getState().clear();
+    history.replaceState(null, '', window.location.pathname);
   });
 
   // vitest globals are off, so RTL cannot auto-register its cleanup.
   afterEach(cleanup);
 
-  it('renders loading, then the ready layout with fixture rows', async () => {
+  it('renders loading, then the interactive timeline with the visible fixture items', async () => {
     render(<App dataSource={new InMemoryDataSource(makeFixtureDataset())} />);
 
     expect(screen.getByText(STRINGS.loading)).toBeInTheDocument();
 
-    expect(await screen.findByText('מלחמה לדוגמה')).toBeInTheDocument();
+    // Item buttons carry "<type>: <title>, <precision-aware date>" names.
+    expect(
+      await screen.findByRole('button', { name: 'אירוע: מלחמה לדוגמה, 30 בנובמבר 1947 – 20 ביולי 1949' }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: STRINGS.appTitle })).toBeInTheDocument();
-    expect(screen.getByText(STRINGS.placeholderTitle)).toBeInTheDocument();
+    expect(screen.getByRole('application', { name: STRINGS.timelineRegionLabel })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shownCount(7, 7))).toBeInTheDocument();
 
-    const list = screen.getByRole('list', { name: STRINGS.previewListLabel });
-    const rows = within(list).getAllByRole('listitem');
-    expect(rows).toHaveLength(7);
-    // Chronological: the work covering 1886– (start 1886.0) precedes the
-    // person born 1886-10-16 (≈1886.79) — D7 positioning by covered period.
-    expect(rows[0]).toHaveTextContent('אוטוביוגרפיה לדוגמה');
-    expect(rows[1]).toHaveTextContent('מנהיג לדוגמה');
-    // Precision-aware display date from the day-precision fixture event.
-    expect(screen.getByText('14 במאי 1948')).toBeInTheDocument();
-    // Work-type label resolves through the taxonomy name.
-    expect(screen.getByText('רומן היסטורי לדוגמה')).toBeInTheDocument();
-    expect(within(list).getAllByText('רומן היסטורי').length).toBeGreaterThan(0);
+    // Semantic zoom at the full-range view: only top-importance items render
+    // as marks (war 95, declaration 100, leader 98); the rest await zoom-in.
+    expect(
+      screen.getByRole('button', { name: 'אירוע: הכרזה לדוגמה, 14 במאי 1948' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /מנהיג לדוגמה/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /קרב לדוגמה/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /סופר חי לדוגמה/ })).not.toBeInTheDocument();
+
+    // Explicit zoom controls + reset are present (gesture alternatives).
+    expect(screen.getByRole('button', { name: STRINGS.zoomIn })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: STRINGS.zoomOut })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: STRINGS.resetView })).toBeInTheDocument();
   });
 
   it('shows a kind-specific Hebrew message and retry re-invokes the source', async () => {
@@ -100,6 +107,6 @@ describe('App', () => {
     render(<App dataSource={new InMemoryDataSource(makeEmptyDataset())} />);
     expect(await screen.findByText(STRINGS.emptyTitle)).toBeInTheDocument();
     expect(screen.getByText(STRINGS.emptyBody)).toBeInTheDocument();
-    expect(screen.queryByText(STRINGS.placeholderTitle)).not.toBeInTheDocument();
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
 });
