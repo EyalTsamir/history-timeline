@@ -22,5 +22,12 @@
   "importance": 45,
   "regionIds": [
     "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
   ]
 }

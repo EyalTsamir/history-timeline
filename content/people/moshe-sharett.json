@@ -1,0 +1,44 @@
+{
+  "id": "moshe-sharett",
+  "type": "person",
+  "name": {
+    "he": "משה שרת"
+  },
+  "bio": {
+    "he": "ראש הממשלה השני (1954–1955) ושר החוץ הראשון של ישראל; מעצב המדיניות המדינית של היישוב והמדינה בראשית דרכה, ומן החתומים על מגילת העצמאות."
+  },
+  "lifespan": {
+    "start": "1894-10-15",
+    "end": "1965-07-07"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 56,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/משה_שרת"
+    }
+  ]
+}

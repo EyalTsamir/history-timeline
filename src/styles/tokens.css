@@ -59,11 +59,15 @@
   --cat-writers: #8c4a5e;
   --cat-artists: #7b5e8a;
   --cat-pioneers: #a06b3c;
+  --cat-scientists: #2f8290;
+  --cat-religious: #6d5a7a;
   /* Event categories */
   --cat-war-security: #a34a3a;
   --cat-state-politics: #598196;
   --cat-immigration-settlement: #3f7d6f;
   --cat-culture-society: #a8842f;
+  --cat-economy-labor: #3f7c88;
+  --cat-science-tech: #585a9e;
   /* Work types */
   --cat-biography: #7d6248;
   --cat-autobiography: #9a6b4f;
@@ -95,10 +99,14 @@
     --cat-writers: #c98599;
     --cat-artists: #ad8fc0;
     --cat-pioneers: #cd9a63;
+    --cat-scientists: #74bcc7;
+    --cat-religious: #a892b5;
     --cat-war-security: #d0806c;
     --cat-state-politics: #85aec6;
     --cat-immigration-settlement: #74af9f;
     --cat-culture-society: #cfae57;
+    --cat-economy-labor: #7ab3bf;
+    --cat-science-tech: #9a95d6;
     --cat-biography: #b09577;
     --cat-autobiography: #c69a78;
     --cat-historical-novel: #cf93a6;

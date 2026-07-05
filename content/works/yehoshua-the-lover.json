@@ -1,0 +1,58 @@
+{
+  "id": "yehoshua-the-lover",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "המאהב"
+  },
+  "description": {
+    "he": "רומן של א״ב יהושע המתרחש בישראל סביב מלחמת יום הכיפורים, ובוחן דרך משפחה אחת את החברה הישראלית המזועזעת של תחילת שנות השבעים."
+  },
+  "authorPersonIds": [
+    "ab-yehoshua"
+  ],
+  "subjectPersonIds": [],
+  "subjectEventIds": [
+    "yom-kippur-war"
+  ],
+  "publicationDate": "1977",
+  "coveredPeriod": {
+    "start": "1973",
+    "end": "1974",
+    "approx": true
+  },
+  "importance": 36,
+  "regionIds": [
+    "israel",
+    "haifa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת שוקן",
+      "kind": "book"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/המאהב"
+    }
+  ]
+}

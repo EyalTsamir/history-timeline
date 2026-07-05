@@ -1,0 +1,36 @@
+{
+  "id": "shapira-berl",
+  "type": "work",
+  "workType": "biography",
+  "title": {
+    "he": "ברל — ביוגרפיה"
+  },
+  "description": {
+    "he": "ביוגרפיה מקיפה שכתבה ההיסטוריונית אניטה שפירא על ברל כצנלסון, המנהיג הרוחני של תנועת העבודה, ועל עולמו הרעיוני ופועלו בעיצוב החברה הארצישראלית."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "אניטה שפירא"
+  },
+  "subjectPersonIds": [
+    "berl-katznelson"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1980",
+  "coveredPeriod": {
+    "start": "1887",
+    "end": "1944"
+  },
+  "importance": 30,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

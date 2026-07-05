@@ -1,0 +1,37 @@
+{
+  "id": "teveth-ben-gurion",
+  "type": "work",
+  "workType": "biography",
+  "title": {
+    "he": "קנאת דוד — חיי דוד בן-גוריון"
+  },
+  "description": {
+    "he": "ביוגרפיה רבת-כרכים שכתב העיתונאי וההיסטוריון שבתי טבת על דוד בן-גוריון, המתחקה אחר דרכו מן העלייה השנייה ועד הקמת המדינה."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "שבתי טבת"
+  },
+  "subjectPersonIds": [
+    "david-ben-gurion"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1977",
+  "coveredPeriod": {
+    "start": "1886",
+    "end": "1948",
+    "approx": true
+  },
+  "importance": 34,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

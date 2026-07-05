@@ -1,0 +1,45 @@
+{
+  "id": "robert-aumann",
+  "type": "person",
+  "name": {
+    "he": "ישראל אומן"
+  },
+  "bio": {
+    "he": "מתמטיקאי וכלכלן מן האוניברסיטה העברית, מחלוצי תורת המשחקים; זכה בפרס נובל לכלכלה על תרומתו להבנת שיתוף פעולה וסכסוך."
+  },
+  "lifespan": {
+    "start": "1930-06-08",
+    "end": null
+  },
+  "categoryIds": [
+    "scientists"
+  ],
+  "importance": 32,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ישראל_אומן"
+    }
+  ]
+}

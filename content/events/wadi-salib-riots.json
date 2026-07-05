@@ -1,0 +1,36 @@
+{
+  "id": "wadi-salib-riots",
+  "type": "event",
+  "title": {
+    "he": "מהומות ואדי סאליב"
+  },
+  "description": {
+    "he": "התפרצות מחאה של יוצאי צפון אפריקה בשכונת ואדי סאליב בחיפה ביולי 1959 על רקע קיפוח ומצוקה; אירוע מכונן במאבק העדתי ובשיח על אי-שוויון בישראל."
+  },
+  "dates": {
+    "start": "1959-07-09"
+  },
+  "importance": 38,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "haifa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אירועי_ואדי_סאליב"
+    }
+  ]
+}

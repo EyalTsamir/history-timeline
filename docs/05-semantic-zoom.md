@@ -42,6 +42,26 @@ Scores are meaningless unless authors share a scale. Content authoring uses this
 
 Rule of thumb: a sub-event's importance should be lower than its parent's (validator warns otherwise), so hierarchies unfold naturally as the user zooms in.
 
+### Calibration against the curated dataset (stage 4)
+
+The rubric only works if scores form a **pyramid**, not a plateau — semantic zoom reveals detail only when lower tiers are actually populated. After the first full content pass (80 events / 40 people / 28 works) the scores were re-balanced systematically to this shape:
+
+| Band | Meaning | Approx. count |
+|---|---|---|
+| 90–100 | era-defining | ~6 |
+| 70–89 | major national | ~21 |
+| 40–69 | notable | ~66 |
+| 20–39 | contextual (year-level) | ~47 |
+| 1–19 | fine detail (month-level) | ~8 |
+
+Concrete calibration rules applied (and to keep applying):
+
+- **Works default to 20–39** (their own rubric band); only a handful of canonical works (e.g. *ימי צקלג*, *סיפור על אהבה וחושך*) reach 44–50. This keeps books from surfacing at wide zoom and overwhelming events/people — books appear only around decade-level zoom and closer.
+- **Sub-events and secondary affairs** (minor operations, single-issue scandals, institutional milestones) sit at 24–44, well below the era-defining events they hang under.
+- **A thin 1–19 tail** (e.g. *ייבוש החולה*, *פרשת ואנונו*) exists so the deepest zoom still has something to reveal.
+
+The observed reveal gradient on a 1200px desktop is smooth (≈11 items at century view → 14 at 1930–2000 → 30 → 44 → 83 → 145 as you zoom to a single year); on a 390px phone the same spans yield stricter thresholds automatically (≈11 → 18 → 33 → 105), which is the years-per-1000px normalization doing its job. `src/timeline/semanticZoom.calibration.test.ts` guards this shape against future content drift; if a content pass pushes a band far off these bounds, re-balance the content first — do **not** reshape the curve to paper over a content plateau.
+
 ## Why numeric importance (assessment requested by the user)
 
 The main alternatives were considered and **numeric importance is retained** — it's the right call:

@@ -1,0 +1,46 @@
+{
+  "id": "ada-yonath",
+  "type": "person",
+  "name": {
+    "he": "עדה יונת"
+  },
+  "bio": {
+    "he": "כימאית ומדענית ממכון ויצמן, חלוצה בחקר הריבוזום; זכתה בפרס נובל לכימיה — האישה הישראלית הראשונה שזכתה בפרס נובל."
+  },
+  "lifespan": {
+    "start": "1939-06-22",
+    "end": null
+  },
+  "categoryIds": [
+    "scientists"
+  ],
+  "importance": 42,
+  "regionIds": [
+    "israel",
+    "jerusalem",
+    "rehovot"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מכון ויצמן למדע"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/עדה_יונת"
+    }
+  ]
+}

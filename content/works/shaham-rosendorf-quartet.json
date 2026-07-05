@@ -1,0 +1,58 @@
+{
+  "id": "shaham-rosendorf-quartet",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "רביעיית רוזנדורף"
+  },
+  "description": {
+    "he": "רומן של נתן שחם על מוזיקאים יהודים-גרמנים שהקימו רביעיית מיתרים בארץ ישראל בשנות השלושים, בורחים מאירופה של הנאצים; סיפור על גלות, אמנות והשתרשות."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "נתן שחם"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1987",
+  "coveredPeriod": {
+    "start": "1936",
+    "end": "1939",
+    "approx": true
+  },
+  "importance": 30,
+  "regionIds": [
+    "israel",
+    "tel-aviv",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת עם עובד",
+      "kind": "book"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/רביעיית_רוזנדורף"
+    }
+  ]
+}

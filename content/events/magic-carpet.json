@@ -1,0 +1,45 @@
+{
+  "id": "magic-carpet",
+  "type": "event",
+  "title": {
+    "he": "מבצע על כנפי נשרים"
+  },
+  "description": {
+    "he": "מבצע להעלאתם של כמעט כל יהודי תימן (בקירוב 1949–1950), כ-49 אלף איש, ברכבת אווירית לישראל. אחד ממבצעי העלייה הגדולים בשנותיה הראשונות של המדינה."
+  },
+  "dates": {
+    "start": "1949",
+    "end": "1950",
+    "approx": true
+  },
+  "importance": 46,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "yemen"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הסוכנות היהודית לארץ ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מבצע_על_כנפי_נשרים"
+    }
+  ]
+}

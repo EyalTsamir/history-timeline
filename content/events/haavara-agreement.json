@@ -1,0 +1,44 @@
+{
+  "id": "haavara-agreement",
+  "type": "event",
+  "title": {
+    "he": "הסכם ההעברה"
+  },
+  "description": {
+    "he": "הסכם בין הסוכנות היהודית לגרמניה הנאצית (1933) שאִפשר ליהודים גרמנים להעביר חלק מרכושם לארץ ישראל בדרך של יבוא סחורות, ובכך סייע לעליית כ-60 אלף יהודים בשנות השלושים."
+  },
+  "dates": {
+    "start": "1933-08",
+    "approx": true
+  },
+  "importance": 17,
+  "categoryIds": [
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יד ושם"
+      },
+      "kind": "museum"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הסכם_העברה"
+    }
+  ]
+}

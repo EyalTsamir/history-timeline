@@ -1,0 +1,37 @@
+{
+  "id": "oslo-ii",
+  "type": "event",
+  "title": {
+    "he": "הסכם הביניים (אוסלו ב׳)"
+  },
+  "description": {
+    "he": "הסכם שנחתם בספטמבר 1995 והרחיב את האוטונומיה הפלסטינית, חילק את יהודה ושומרון לאזורי שליטה והעביר ערים לרשות הפלסטינית; שלב מרכזי בתהליך אוסלו."
+  },
+  "dates": {
+    "start": "1995-09-28"
+  },
+  "importance": 44,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel",
+    "usa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הסכם_אוסלו_ב'"
+    }
+  ]
+}

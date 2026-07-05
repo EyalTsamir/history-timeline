@@ -1,0 +1,38 @@
+{
+  "id": "operation-solomon",
+  "type": "event",
+  "title": {
+    "he": "מבצע שלמה"
+  },
+  "description": {
+    "he": "רכבת אווירית חשאית וזריזה (מאי 1991) שהעלתה כ-14 אלף יהודים מאתיופיה לישראל בתוך כ-36 שעות; אחד ממבצעי החילוץ הדרמטיים בתולדות העלייה."
+  },
+  "dates": {
+    "start": "1991-05-24",
+    "end": "1991-05-25"
+  },
+  "importance": 48,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "ethiopia"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הסוכנות היהודית לארץ ישראל"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מבצע_שלמה"
+    }
+  ]
+}

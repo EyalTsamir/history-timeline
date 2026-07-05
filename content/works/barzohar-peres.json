@@ -1,0 +1,36 @@
+{
+  "id": "barzohar-peres",
+  "type": "work",
+  "workType": "biography",
+  "title": {
+    "he": "שמעון פרס — הביוגרפיה"
+  },
+  "description": {
+    "he": "ביוגרפיה שכתב מיכאל בר-זוהר על שמעון פרס, המשרטטת שבעה עשורים של פעילות מדינית, ביטחונית וכלכלית מראשית המדינה ועד ימינו."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "מיכאל בר-זוהר"
+  },
+  "subjectPersonIds": [
+    "shimon-peres"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "2006",
+  "coveredPeriod": {
+    "start": "1923",
+    "end": "2006"
+  },
+  "importance": 30,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

@@ -13,8 +13,10 @@ Product definition, architecture, domain model, and these docs. Approved decisio
 5. ✅ Semantic zoom + lane layout + virtualization + density cap. *(timeline stage)*
 6. ✅ Filters + URL hash state. *(timeline stage)*
 7. ✅ Detail panel/sheet, selection, person↔work links. *(timeline stage)*
-8. Full content pass: ~60–100 events, ~40–60 people, ~30–50 works per the rubric.
-9. E2E suite (Playwright), mobile polish, performance guardrail, a11y pass.
+8. ✅ Full curated content pass: 80 events, 40 people, 28 works, 25 relations — sourced, web-verified, calibrated (stage 4; see [13](13-release.md)).
+9. ✅ E2E suite (Playwright desktop+mobile), mobile polish, performance guardrail, a11y pass, adversarial review (stage 4).
+
+**Phase 1 is complete** — the product is a curated, sourced, accessible, tested, deploy-ready first release ([13-release.md](13-release.md)).
 
 ### Phase 2 — Content scale & discovery
 - Free-text search (client-side index; Hebrew stemming considerations).
@@ -39,7 +41,7 @@ Build now only what Phase 1 renders; **model** now whatever is cheap to store an
 
 | Question | Becomes relevant |
 |---|---|
-| Does the RTL time axis (D5) feel right in practice? | First playable prototype |
+| ~~Does the RTL time axis (D5) feel right in practice?~~ **Resolved (stage 4): yes** — past-on-the-right reads naturally in the RTL layout across desktop/mobile. | First playable prototype |
 | Should works surface earlier/later than events at equal importance (per-type curve offset)? | After first full content pass |
 | Purchase/affiliate links on works? | Phase 2 (book-seeker audience) |
 | Custom domain for GitHub Pages? | Before sharing publicly |

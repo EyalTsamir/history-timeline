@@ -1,0 +1,45 @@
+{
+  "id": "henrietta-szold",
+  "type": "person",
+  "name": {
+    "he": "הנרייטה סאלד"
+  },
+  "bio": {
+    "he": "מנהיגה ציונית אמריקאית, מייסדת ארגון הנשים \"הדסה\" ומובילת מפעל \"עליית הנוער\" שהציל אלפי ילדים; מחלוצות הרפואה והרווחה בארץ ישראל."
+  },
+  "lifespan": {
+    "start": "1860-12-21",
+    "end": "1945-02-13"
+  },
+  "categoryIds": [
+    "pioneers"
+  ],
+  "importance": 46,
+  "regionIds": [
+    "israel",
+    "jerusalem",
+    "usa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון הדסה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הנרייטה_סאלד"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "munich-massacre",
+  "type": "event",
+  "title": {
+    "he": "הטבח באולימפיאדת מינכן"
+  },
+  "description": {
+    "he": "בספטמבר 1972 חטף ורצח ארגון \"ספטמבר השחור\" אחד עשר ספורטאים ישראלים באולימפיאדת מינכן; אירוע טרור שזעזע את העולם והוליד את מלחמת ישראל בטרור בינלאומי."
+  },
+  "dates": {
+    "start": "1972-09-05"
+  },
+  "importance": 56,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "europe",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הוועד האולימפי בישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הטבח_באולימפיאדת_מינכן"
+    }
+  ]
+}

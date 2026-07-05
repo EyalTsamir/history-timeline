@@ -1,0 +1,43 @@
+{
+  "id": "weizmann-trial-and-error",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "מסה ומעש"
+  },
+  "description": {
+    "he": "ספר זיכרונותיו של חיים ויצמן, נשיאה הראשון של ישראל, המתאר את דרכו כמדען וכמנהיג ציוני מרוסיה ולונדון ועד הקמת המדינה."
+  },
+  "authorPersonIds": [
+    "chaim-weizmann"
+  ],
+  "subjectPersonIds": [
+    "chaim-weizmann"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1949",
+  "coveredPeriod": {
+    "start": "1874",
+    "end": "1948"
+  },
+  "importance": 34,
+  "regionIds": [
+    "israel",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת שוקן",
+      "kind": "book"
+    }
+  ]
+}

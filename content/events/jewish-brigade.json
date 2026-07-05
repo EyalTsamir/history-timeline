@@ -1,0 +1,43 @@
+{
+  "id": "jewish-brigade",
+  "type": "event",
+  "title": {
+    "he": "הבריגדה היהודית הלוחמת"
+  },
+  "description": {
+    "he": "חטיבה יהודית לוחמת במסגרת הצבא הבריטי שהוקמה ב-1944 ולחמה באיטליה; חייליה סייעו לאחר המלחמה בפעולות ההצלה וההעפלה של שארית הפליטה, ורבים מהם היו למפקדים בצה״ל."
+  },
+  "dates": {
+    "start": "1944-09"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "israel",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הבריגדה_היהודית"
+    }
+  ]
+}

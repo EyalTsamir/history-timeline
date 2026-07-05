@@ -59,6 +59,10 @@ content/**/*.json
    │    • schema validity, date well-formedness (start ≤ end), importance ∈ [1,100]
    │    • referential integrity: every *Id resolves; parentId acyclic
    │    • uniqueness of ids; filename/id mismatch warnings
+   │    • ≥1 source per entity; http(s) non-placeholder source/link URLs
+   │    • no future dates; lifespan ≤ ~120y (warn); sub-event overlaps parent (warn)
+   │    • relations: no self-loops; duplicate edges (warn); no duplicate ids in a ref list (warn)
+   │    • projectability: every entity yields a finite timeline span
    ▼
 scripts/build-content.ts
    │    • verify refs again, then assemble + DatasetSchema-parse the artifact
@@ -73,6 +77,18 @@ public/data/dataset.meta.json     (schemaVersion, counts, content hash, build ti
 ```
 
 Both scripts run in CI on every PR and as a pre-step of `npm run dev` / `npm run build`. Locally: `npm run content:validate` and `npm run content:build` (see [docs/12](12-development.md)).
+
+## Sourcing (decision D15)
+
+The content is **curated, not comprehensive**, and must be traceable. Every entity carries a `sources: Source[]` (see [03](03-domain-model.md#sourcing)), distinct from optional `links` (related reading). Authoring rules:
+
+- **Every entity cites ≥1 source** (build error otherwise). A source is `{ title, publisher?, url?, kind? }`.
+- **Do not invent** dates, biographies, authors, coverage periods, places, or sources. If a fact is uncertain or disputed, use the `approx` date flag, hedge the description, and prefer a stronger source.
+- **Prefer authoritative institutions** — national libraries (the National Library of Israel), archives, universities, museums and memorial institutions (Yad Vashem), established encyclopedias (Britannica), the Knesset/government records, established publishers. Wikipedia may aid discovery but important or disputed facts should lean on stronger sources.
+- **Attach a `url` only when it is a real, stable page** — omit it and cite the institution by name rather than guess a deep link. Placeholder URLs (containing `...`, `example.com`) and non-http(s) URLs are rejected at build.
+- Descriptions stay **concise and discovery-oriented**; the source, not the description, carries the authority. The UI shows a curation disclaimer so users know the set is a representative selection.
+
+Validation cannot prove historical truth — it enforces that a claim is *sourced and structurally sound*, not that it is correct. Accuracy remains a human content-review responsibility.
 
 ## Manual authoring workflow (Phase 1)
 

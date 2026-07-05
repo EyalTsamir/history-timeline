@@ -1,0 +1,45 @@
+{
+  "id": "altalena-affair",
+  "type": "event",
+  "title": {
+    "he": "פרשת אלטלנה"
+  },
+  "description": {
+    "he": "עימות מזוין ביוני 1948 בין צה״ל לאצ״ל סביב ספינת הנשק \"אלטלנה\", שהופגזה מול חוף תל אביב לפי הוראת בן-גוריון. הפרשה סימלה את כפיית הסמכות הממלכתית היחידה על כלל הכוחות."
+  },
+  "dates": {
+    "start": "1948-06-20",
+    "end": "1948-06-22"
+  },
+  "importance": 42,
+  "categoryIds": [
+    "war-security",
+    "state-politics"
+  ],
+  "regionIds": [
+    "tel-aviv"
+  ],
+  "parentId": "war-of-independence",
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אלטלנה"
+    }
+  ]
+}

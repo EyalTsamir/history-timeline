@@ -4,7 +4,7 @@
  * (filtering, semantic zoom, layout, rendering, detail panel) consumes ONLY
  * this shape; entity-specific data survives inside `detail`.
  */
-import type { EntityId, Image, Link } from './entities';
+import type { EntityId, Image, Link, Source } from './entities';
 import type { HistDate } from './dates';
 
 export type TimelineKind = 'event' | 'person' | 'work';
@@ -23,6 +23,8 @@ export interface TimelineItemDetail {
   displayDate: string;
   image?: Image;
   links: Link[];
+  /** Citations backing the facts (docs/04#sourcing) — shown under "מקורות". */
+  sources: Source[];
   /** Works: formatted publication date ("יצא לאור…", decision D7 keeps it off the axis). */
   publicationDate?: string;
   publicationDateRaw?: HistDate;

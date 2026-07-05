@@ -24,7 +24,14 @@
       "label": {
         "he": "מקור"
       },
-      "url": "https://example.org/war"
+      "url": "https://www.nli.org.il/he"
+    }
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
     }
   ]
 }

@@ -58,8 +58,8 @@ export const STRINGS = {
   bandPeople: 'אנשים',
   bandWorks: 'ספרים',
   clusterChip: (n: number) => `+${n} נוספים`,
-  clusterAriaLabel: (n: number) =>
-    n === 1 ? 'פריט נוסף אחד — הגדלה להצגתו' : `${n} פריטים נוספים — הגדלה להצגתם`,
+  /** WCAG 2.5.3: the accessible name must contain the visible "+N נוספים" text. */
+  clusterAriaLabel: (n: number) => `+${n} נוספים — הגדלה להצגתם`,
   emptyViewNotice: 'אין פריטים להצגה בטווח ובסינון הנוכחיים',
   /** Item accessible name: "אירוע: מלחמת העצמאות, 1947–1949". */
   itemAriaLabel: (typeLabel: string, title: string, date: string) => `${typeLabel}: ${title}, ${date}`,
@@ -73,5 +73,8 @@ export const STRINGS = {
   detailWorksAbout: 'ספרים על אישיות זו',
   detailSubjects: 'הספר עוסק ב:',
   detailSubEvents: 'תתי־אירועים',
+  detailSources: 'מקורות',
   detailLinks: 'קישורים',
+  /** Curation disclaimer (docs/01) — the content is selective, not exhaustive. */
+  curationNote: 'תוכן נבחר ומתעדכן — מבחר מייצג, לא רשימה ממצה.',
 } as const;

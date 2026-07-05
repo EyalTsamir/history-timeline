@@ -1,0 +1,38 @@
+{
+  "id": "yehuda-amichai",
+  "type": "person",
+  "name": {
+    "he": "יהודה עמיחי"
+  },
+  "bio": {
+    "he": "מגדולי המשוררים העבריים במאה העשרים, שהכניס לשירה שפה יומיומית ואהבה, ירושלים ומלחמה; שירתו תורגמה לשפות רבות וזכתה להכרה בעולם."
+  },
+  "lifespan": {
+    "start": "1924-05-03",
+    "end": "2000-09-22"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 52,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/יהודה_עמיחי"
+    }
+  ]
+}

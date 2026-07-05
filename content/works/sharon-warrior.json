@@ -1,0 +1,35 @@
+{
+  "id": "sharon-warrior",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "לוחם"
+  },
+  "description": {
+    "he": "אוטוביוגרפיה של אריאל שרון, המספרת את סיפורו כמצביא שנוי במחלוקת ממלחמת העצמאות ועד מלחמת לבנון, ואת דרכו הפוליטית."
+  },
+  "authorPersonIds": [
+    "ariel-sharon"
+  ],
+  "subjectPersonIds": [
+    "ariel-sharon"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1989",
+  "coveredPeriod": {
+    "start": "1928",
+    "end": "1989"
+  },
+  "importance": 30,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

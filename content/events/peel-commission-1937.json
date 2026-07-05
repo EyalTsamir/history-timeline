@@ -1,0 +1,42 @@
+{
+  "id": "peel-commission-1937",
+  "type": "event",
+  "title": {
+    "he": "ועדת פיל"
+  },
+  "description": {
+    "he": "ועדת חקירה בריטית שמינתה לחקור את גורמי המרד הערבי; בדוח שפרסמה ב-1937 הציעה לראשונה לחלק את ארץ ישראל למדינה יהודית ומדינה ערבית — הצעה שהתקבלה בהסתייגות בקרב היישוב ונדחתה בידי הערבים."
+  },
+  "dates": {
+    "start": "1937-07-07"
+  },
+  "importance": 40,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ועדת_פיל"
+    }
+  ]
+}

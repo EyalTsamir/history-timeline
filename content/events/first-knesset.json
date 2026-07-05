@@ -1,0 +1,42 @@
+{
+  "id": "first-knesset",
+  "type": "event",
+  "title": {
+    "he": "כינון הכנסת הראשונה"
+  },
+  "description": {
+    "he": "הכנסת הראשונה, שנבחרה בבחירות הכלליות הראשונות בינואר 1949, התכנסה בפברואר 1949 וכוננה את בית המחוקקים של המדינה, קיבלה את חוק המעבר ובחרה בנשיא הראשון חיים ויצמן."
+  },
+  "dates": {
+    "start": "1949-02-14"
+  },
+  "importance": 50,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הכנסת_הראשונה"
+    }
+  ]
+}

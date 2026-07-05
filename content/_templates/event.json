@@ -18,6 +18,10 @@
   "regionIds": ["israel"],
   "_tags": "Optional free-form strings (not validated against a taxonomy). Add a \"tags\": [] key only when needed.",
   "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Sources; label is the Hebrew display text.",
-  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/..." }]
+  "_links": "Optional related reading (further links). NOT the citation — use \"sources\" for that. label is the Hebrew display text; placeholder URLs (containing \"...\", example.com) are rejected.",
+  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות" }],
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/04#sourcing). Prefer naming an authoritative institution (national library, archive, university, museum, established encyclopedia). Add \"url\" only when it is a real, stable page — omit it rather than guess. \"publisher\" and \"kind\" (archive|library|museum|encyclopedia|reference|academic|government|book|press|website) are optional.",
+  "sources": [
+    { "title": { "he": "הספרייה הלאומית — עיתונות היסטורית" }, "publisher": "הספרייה הלאומית של ישראל", "url": "https://www.nli.org.il/he", "kind": "library" }
+  ]
 }

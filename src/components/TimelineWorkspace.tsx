@@ -54,6 +54,11 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   const isDesktop = useIsDesktop();
   const rootRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLElement | null>(null);
+  /** The timeline surface — focus fallback when a selected item is culled off-screen. */
+  const surfaceRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    surfaceRef.current = rootRef.current?.querySelector<HTMLElement>('[role="application"]') ?? null;
+  });
 
   const filtered = useMemo(
     () => applyFilters(items, filters, dataset.indexes.regionDescendants),
@@ -88,7 +93,15 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   const closeDetail = (): void => {
     const id = selectedId;
     clearSelection();
-    if (id !== null) rootRef.current?.querySelector<HTMLElement>(`[data-item-id="${id}"]`)?.focus();
+    // Desktop side panel has no focus owner of its own, so restore focus here:
+    // to the originating item, or the surface if it was culled off-screen while
+    // the panel was open. On mobile the Sheet owns restoration (opener →
+    // fallbackFocusRef) — running it here too would fight the Sheet.
+    if (isDesktop) {
+      const origin = id !== null ? rootRef.current?.querySelector<HTMLElement>(`[data-item-id="${id}"]`) : null;
+      if (origin) origin.focus();
+      else surfaceRef.current?.focus();
+    }
   };
 
   /** Bring an item into view without changing zoom unless it doesn't fit. */
@@ -128,7 +141,9 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   return (
     <div className={styles.workspace} ref={rootRef}>
       <div className={styles.resultsLine}>
-        <span>{STRINGS.shownCount(filtered.length, items.length)}</span>
+        <span role="status" aria-live="polite">
+          {STRINGS.shownCount(filtered.length, items.length)}
+        </span>
         {isFilterActive(filters) && <Button onClick={clearAll}>{STRINGS.clearAll}</Button>}
       </div>
 
@@ -161,6 +176,7 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
           title={selected?.title ?? ''}
           closeLabel={STRINGS.close}
           onClose={closeDetail}
+          fallbackFocusRef={surfaceRef}
         >
           {detailBody}
         </Sheet>

@@ -1,0 +1,40 @@
+{
+  "id": "suicide-bombings-wave",
+  "type": "event",
+  "title": {
+    "he": "גל פיגועי ההתאבדות"
+  },
+  "description": {
+    "he": "סדרת פיגועי התאבדות קטלניים (בקירוב 1994–1996) של חמאס והג׳יהאד האסלאמי באוטובוסים ובמרכזי ערים; הפיגועים קעקעו את האמון בתהליך אוסלו והשפיעו על הבחירות."
+  },
+  "dates": {
+    "start": "1994",
+    "end": "1996",
+    "approx": true
+  },
+  "importance": 46,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "israel",
+    "jerusalem",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פיגועי_התאבדות_בישראל"
+    }
+  ]
+}

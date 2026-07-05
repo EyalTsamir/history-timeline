@@ -4,7 +4,7 @@ The architecture was shaped for testability: everything hard (zoom math, layout,
 
 ## 1. Content validation (runs first, fails fastest)
 
-Not classic tests, but the highest-value gate: `validate-content` in CI guarantees schema validity, date sanity, referential integrity, id uniqueness, and rubric warnings (child importance ≥ parent) for **every content PR** — the most frequent kind of change this project will see. See [04](04-data-and-content.md#build-pipeline).
+Not classic tests, but the highest-value gate: `validate-content` in CI guarantees schema validity, date sanity, referential integrity, id uniqueness, ≥1 non-placeholder source per entity, relations hygiene, sub-event/lifespan sanity, projectability, and rubric warnings (child importance ≥ parent) for **every content PR** — the most frequent kind of change this project will see. See [04](04-data-and-content.md#build-pipeline). Fixture trees live in `scripts/__fixtures__/`; post-review rules (incl. the Stage-4 additions) are covered by self-contained temp-tree tests in `scripts/validate-content.review.test.ts`.
 
 ## 2. Unit tests (Vitest) — the bulk
 

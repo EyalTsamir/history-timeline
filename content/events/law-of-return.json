@@ -1,0 +1,37 @@
+{
+  "id": "law-of-return",
+  "type": "event",
+  "title": {
+    "he": "חוק השבות"
+  },
+  "description": {
+    "he": "חוק יסוד ערכי שחוקקה הכנסת ביולי 1950 והעניק לכל יהודי את הזכות לעלות לישראל ולקבל אזרחות; אחד מעמודי התווך של המדינה כמדינת העם היהודי."
+  },
+  "dates": {
+    "start": "1950-07-05"
+  },
+  "importance": 65,
+  "categoryIds": [
+    "state-politics",
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חוק_השבות"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "black-panthers",
+  "type": "event",
+  "title": {
+    "he": "מחאת הפנתרים השחורים"
+  },
+  "description": {
+    "he": "תנועת מחאה חברתית של צעירים מזרחים מירושלים שפרצה ב-1971 נגד אפליה ופערים עדתיים; העלתה את שאלת הצדק החברתי והקיפוח לראש סדר היום הציבורי."
+  },
+  "dates": {
+    "start": "1971-03"
+  },
+  "importance": 38,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הפנתרים_השחורים"
+    }
+  ]
+}

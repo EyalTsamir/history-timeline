@@ -1,0 +1,36 @@
+{
+  "id": "eurovision-1978",
+  "type": "event",
+  "title": {
+    "he": "ניצחון \"א-ב-ני-בי\" באירוויזיון"
+  },
+  "description": {
+    "he": "באפריל 1978 זכתה ישראל לראשונה בתחרות האירוויזיון עם השיר \"א-ב-ני-בי\" בביצוע יזהר כהן; ניצחון שהיה למקור גאווה ושמחה לאומית."
+  },
+  "dates": {
+    "start": "1978-04-22"
+  },
+  "importance": 24,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "רשות השידור (ארכיון)"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אבניבי"
+    }
+  ]
+}

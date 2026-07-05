@@ -1,0 +1,42 @@
+{
+  "id": "agnon-nobel",
+  "type": "event",
+  "title": {
+    "he": "פרס נובל לספרות לש״י עגנון"
+  },
+  "description": {
+    "he": "בדצמבר 1966 זכה הסופר ש״י עגנון בפרס נובל לספרות — פרס הנובל הראשון בתחום הספרות שהוענק ליוצר בעברית, ומקור לגאווה תרבותית לאומית."
+  },
+  "dates": {
+    "start": "1966-12-10"
+  },
+  "importance": 50,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "קרן נובל"
+      },
+      "kind": "academic"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ש\"י_עגנון"
+    }
+  ]
+}

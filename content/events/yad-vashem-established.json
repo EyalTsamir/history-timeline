@@ -1,0 +1,42 @@
+{
+  "id": "yad-vashem-established",
+  "type": "event",
+  "title": {
+    "he": "חקיקת חוק יד ושם"
+  },
+  "description": {
+    "he": "ב-1953 חוקקה הכנסת את חוק זיכרון השואה והגבורה — יד ושם, שהקים את הרשות הלאומית להנצחת קורבנות השואה והלוחמים; מוסד מרכזי בזיכרון הלאומי ובחקר השואה."
+  },
+  "dates": {
+    "start": "1953-08-19"
+  },
+  "importance": 42,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יד ושם"
+      },
+      "kind": "museum"
+    },
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חוק_זיכרון_השואה_והגבורה_–_יד_ושם"
+    }
+  ]
+}

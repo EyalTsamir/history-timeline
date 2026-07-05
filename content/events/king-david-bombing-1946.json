@@ -1,0 +1,42 @@
+{
+  "id": "king-david-bombing-1946",
+  "type": "event",
+  "title": {
+    "he": "פיצוץ מלון המלך דוד"
+  },
+  "description": {
+    "he": "פיגוע שביצע האצ״ל ביולי 1946 באגף המלון ששימש מטה השלטון הבריטי בירושלים; בפיצוץ נהרגו 91 בני אדם, והוא היה מן האירועים הקשים במאבק המחתרות בשלטון המנדט."
+  },
+  "dates": {
+    "start": "1946-07-22"
+  },
+  "importance": 46,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יד יצחק בן-צבי"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פיצוץ_מלון_המלך_דוד"
+    }
+  ]
+}

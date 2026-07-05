@@ -1,0 +1,44 @@
+{
+  "id": "abba-eban",
+  "type": "person",
+  "name": {
+    "he": "אבא אבן"
+  },
+  "bio": {
+    "he": "דיפלומט ומדינאי, שגריר ישראל הראשון באו״ם ובארצות הברית ולימים שר החוץ; נודע בכושר הנאום והרהיטות שלו והציג את עמדות ישראל בזירה הבינלאומית."
+  },
+  "lifespan": {
+    "start": "1915-02-02",
+    "end": "2002-11-17"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 48,
+  "regionIds": [
+    "israel",
+    "usa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אבא_אבן"
+    }
+  ]
+}

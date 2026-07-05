@@ -28,5 +28,17 @@
     "name": { "he": "חלוצים ואנשי התיישבות" },
     "color": "pioneers",
     "description": { "he": "מקימי יישובים ופעילי תנועות ההתיישבות" }
+  },
+  {
+    "id": "scientists",
+    "name": { "he": "מדענים וחוקרים" },
+    "color": "scientists",
+    "description": { "he": "אנשי מדע, מחקר, רפואה ואקדמיה" }
+  },
+  {
+    "id": "religious",
+    "name": { "he": "מנהיגים דתיים" },
+    "color": "religious",
+    "description": { "he": "רבנים ומנהיגים רוחניים" }
   }
 ]

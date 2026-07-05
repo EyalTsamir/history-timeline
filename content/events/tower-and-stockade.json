@@ -1,0 +1,39 @@
+{
+  "id": "tower-and-stockade",
+  "type": "event",
+  "title": {
+    "he": "חומה ומגדל"
+  },
+  "description": {
+    "he": "שיטת התיישבות מהירה בשנות המרד הערבי (1936–1939): הקמת יישוב מגודר עם מגדל שמירה בתוך יום אחד, כדי לקבוע עובדות בשטח. בדרך זו הוקמו כחמישים יישובים, בעיקר בגליל ובעמקים."
+  },
+  "dates": {
+    "start": "1936",
+    "end": "1939",
+    "approx": true
+  },
+  "importance": 34,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "galilee"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חומה_ומגדל"
+    }
+  ]
+}

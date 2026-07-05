@@ -1,0 +1,51 @@
+{
+  "id": "kaniuk-adam-son-of-dog",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "אדם בן כלב"
+  },
+  "description": {
+    "he": "רומן של יורם קניוק על ניצול שואה המאושפז במוסד בנגב, המתמודד עם זוועות שעבר; יצירה חלוצית ונועזת על טראומת השואה בישראל."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "יורם קניוק"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1969",
+  "coveredPeriod": {
+    "start": "1943",
+    "end": "1960",
+    "approx": true
+  },
+  "importance": 34,
+  "regionIds": [
+    "israel",
+    "negev",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אדם_בן_כלב"
+    }
+  ]
+}

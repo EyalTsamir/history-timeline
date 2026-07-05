@@ -1,0 +1,38 @@
+{
+  "id": "reparations-agreement",
+  "type": "event",
+  "title": {
+    "he": "הסכם השילומים עם גרמניה"
+  },
+  "description": {
+    "he": "הסכם שנחתם בספטמבר 1952 שבו התחייבה גרמניה המערבית לשלם לישראל פיצויים חומריים על רכוש שנבזז בשואה. ההסכם עורר מחלוקת ציבורית סוערת אך תרם משאבים חיוניים לפיתוח המדינה."
+  },
+  "dates": {
+    "start": "1952-09-10"
+  },
+  "importance": 56,
+  "categoryIds": [
+    "economy-labor",
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הסכם_השילומים"
+    }
+  ]
+}

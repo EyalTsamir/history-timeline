@@ -1,0 +1,39 @@
+{
+  "id": "ab-yehoshua",
+  "type": "person",
+  "name": {
+    "he": "א״ב יהושע"
+  },
+  "bio": {
+    "he": "מבכירי הסופרים הישראלים, מחבר רומנים כ\"המאהב\" ו\"מר מאני\"; מן הקולות הבולטים בספרות העברית ובשיח הזהות הישראלי."
+  },
+  "lifespan": {
+    "start": "1936-12-09",
+    "end": "2022-06-14"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 50,
+  "regionIds": [
+    "israel",
+    "jerusalem",
+    "haifa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אברהם_ב._יהושע"
+    }
+  ]
+}

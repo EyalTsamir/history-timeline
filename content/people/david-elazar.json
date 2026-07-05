@@ -1,0 +1,37 @@
+{
+  "id": "david-elazar",
+  "type": "person",
+  "name": {
+    "he": "דוד אלעזר (דדו)"
+  },
+  "bio": {
+    "he": "הרמטכ״ל התשיעי של צה״ל, שפיקד על הצבא במלחמת יום הכיפורים. ועדת אגרנט הטילה עליו אחריות למחדל והוא סיים את תפקידו זמן קצר לאחר מכן."
+  },
+  "lifespan": {
+    "start": "1925-08-27",
+    "end": "1976-04-15"
+  },
+  "categoryIds": [
+    "military"
+  ],
+  "importance": 38,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/דוד_אלעזר"
+    }
+  ]
+}

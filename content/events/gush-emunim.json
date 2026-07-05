@@ -1,0 +1,37 @@
+{
+  "id": "gush-emunim",
+  "type": "event",
+  "title": {
+    "he": "הקמת גוש אמונים"
+  },
+  "description": {
+    "he": "תנועה ציונית-דתית שקמה ב-1974 והובילה את מפעל ההתנחלות ביהודה ושומרון מתוך אידאולוגיה דתית-לאומית; שחקן מרכזי בעיצוב המחלוקת על השטחים."
+  },
+  "dates": {
+    "start": "1974-02"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "immigration-settlement",
+    "culture-society"
+  ],
+  "regionIds": [
+    "judea-samaria"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/גוש_אמונים"
+    }
+  ]
+}

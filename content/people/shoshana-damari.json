@@ -1,0 +1,38 @@
+{
+  "id": "shoshana-damari",
+  "type": "person",
+  "name": {
+    "he": "שושנה דמארי"
+  },
+  "bio": {
+    "he": "זמרת יוצאת תימן שנודעה כ\"מלכת הזמר העברי\"; קולה העמוק וביצועיה לשירי התקומה ליוו את הדור המייסד ואת מלחמות ישראל."
+  },
+  "lifespan": {
+    "start": "1923",
+    "end": "2006-02-14"
+  },
+  "categoryIds": [
+    "artists"
+  ],
+  "importance": 40,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/שושנה_דמארי"
+    }
+  ]
+}

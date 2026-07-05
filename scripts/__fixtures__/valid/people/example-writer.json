@@ -17,5 +17,12 @@
   "importance": 55,
   "regionIds": [
     "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
   ]
 }

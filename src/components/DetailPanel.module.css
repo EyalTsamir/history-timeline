@@ -80,11 +80,26 @@
 }
 
 .relatedList,
-.linkList {
+.linkList,
+.sourceList {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+}
+
+.sourceList {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.sourceList a {
+  color: var(--accent);
+}
+
+.sourcePublisher {
+  color: var(--text-faint);
 }
 
 .relatedButton {

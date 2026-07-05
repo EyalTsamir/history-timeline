@@ -1,0 +1,39 @@
+{
+  "id": "first-lebanon-war",
+  "type": "event",
+  "title": {
+    "he": "מלחמת לבנון הראשונה"
+  },
+  "description": {
+    "he": "מלחמה שפתחה ישראל ביוני 1982 (\"מבצע שלום הגליל\") נגד ארגוני המחבלים בלבנון; היא נמשכה שנים, גררה מחלוקת ציבורית עמוקה ונסיגה הדרגתית לרצועת ביטחון עד 1985."
+  },
+  "dates": {
+    "start": "1982-06-06",
+    "end": "1985-06",
+    "approx": true
+  },
+  "importance": 78,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "lebanon",
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מלחמת_לבנון_הראשונה"
+    }
+  ]
+}

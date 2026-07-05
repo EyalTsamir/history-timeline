@@ -1,0 +1,37 @@
+{
+  "id": "peace-now-founded",
+  "type": "event",
+  "title": {
+    "he": "הקמת \"שלום עכשיו\""
+  },
+  "description": {
+    "he": "תנועה חוץ-פרלמנטרית שקמה ב-1978 בעקבות מכתב קצינים, וקראה לקדם הסדר שלום ולעצור את ההתנחלות; מן התנועות המרכזיות במחנה השלום הישראלי."
+  },
+  "dates": {
+    "start": "1978-03",
+    "approx": true
+  },
+  "importance": 24,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/שלום_עכשיו"
+    }
+  ]
+}

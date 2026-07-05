@@ -1,0 +1,45 @@
+{
+  "id": "ephraim-katzir",
+  "type": "person",
+  "name": {
+    "he": "אפרים קציר"
+  },
+  "bio": {
+    "he": "ביופיזיקאי חלוץ ומדען בעל שם עולמי, נשיאה הרביעי של ישראל (1973–1978); מראשי המחקר המדעי במכון ויצמן ובביסוס המדע בישראל."
+  },
+  "lifespan": {
+    "start": "1916-05-16",
+    "end": "2009-05-30"
+  },
+  "categoryIds": [
+    "scientists",
+    "leaders"
+  ],
+  "importance": 40,
+  "regionIds": [
+    "israel",
+    "rehovot"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מכון ויצמן למדע"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אפרים_קציר"
+    }
+  ]
+}

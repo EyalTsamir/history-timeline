@@ -1,0 +1,42 @@
+{
+  "id": "weizmann-institute-1949",
+  "type": "event",
+  "title": {
+    "he": "חנוכת מכון ויצמן למדע"
+  },
+  "description": {
+    "he": "מוסד המחקר המדעי ברחובות, שנקרא ב-1949 על שם הנשיא הראשון חיים ויצמן, הפך למרכז מדע וטכנולוגיה מוביל והיה סמל לשאיפה לבנות מדינה מבוססת ידע."
+  },
+  "dates": {
+    "start": "1949-11-02"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "science-tech"
+  ],
+  "regionIds": [
+    "rehovot"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מכון ויצמן למדע"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מכון_ויצמן_למדע"
+    }
+  ]
+}

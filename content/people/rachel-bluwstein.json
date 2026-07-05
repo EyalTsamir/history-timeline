@@ -1,0 +1,39 @@
+{
+  "id": "rachel-bluwstein",
+  "type": "person",
+  "name": {
+    "he": "רחל המשוררת"
+  },
+  "bio": {
+    "he": "משוררת עברייה מן החלוצות, שכתבה שירים ליריים שנקשרו לנוף הכינרת ולחלום ההתיישבות; שיריה, שרבים הולחנו, אהובים עד היום. הלכה לעולמה צעירה ממחלה."
+  },
+  "lifespan": {
+    "start": "1890-09-20",
+    "end": "1931-04-16"
+  },
+  "categoryIds": [
+    "writers",
+    "pioneers"
+  ],
+  "importance": 44,
+  "regionIds": [
+    "israel",
+    "galilee"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/רחל_המשוררת"
+    }
+  ]
+}

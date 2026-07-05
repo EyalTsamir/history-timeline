@@ -1,0 +1,36 @@
+{
+  "id": "agranat-commission",
+  "type": "event",
+  "title": {
+    "he": "ועדת אגרנט"
+  },
+  "description": {
+    "he": "ועדת חקירה ממלכתית (1974) שבחנה את המחדל של מלחמת יום הכיפורים; מסקנותיה הובילו להתפטרות בכירים בצבא ותרמו לזעזוע הציבורי שקדם למהפך 1977."
+  },
+  "dates": {
+    "start": "1973-11"
+  },
+  "importance": 32,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ועדת_אגרנט"
+    }
+  ]
+}

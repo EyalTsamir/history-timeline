@@ -102,6 +102,28 @@ export function DetailPanel({ item, dataset, typeLabels, itemById, onSelectRelat
       {item.kind === 'work' && relatedList(STRINGS.detailSubjects, detail.subjectPersonIds ?? [])}
       {item.kind === 'event' && relatedList(STRINGS.detailSubEvents, detail.childEventIds ?? [])}
 
+      {detail.sources.length > 0 && (
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>{STRINGS.detailSources}</h3>
+          <ul className={styles.sourceList}>
+            {detail.sources.map((source, i) => (
+              <li key={source.url ?? `${source.title.he}-${i}`}>
+                {source.url !== undefined ? (
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">
+                    {source.title.he}
+                  </a>
+                ) : (
+                  <span>{source.title.he}</span>
+                )}
+                {source.publisher !== undefined && (
+                  <span className={styles.sourcePublisher}> — {source.publisher}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {detail.links.length > 0 && (
         <section className={styles.section}>
           <h3 className={styles.sectionHeading}>{STRINGS.detailLinks}</h3>

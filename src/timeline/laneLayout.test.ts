@@ -251,3 +251,46 @@ describe('layoutTimeline — item shapes', () => {
     expect(rtl.spanX).toBeCloseTo(RTL.widthPx - (ltr.spanX + ltr.spanWidth), 6);
   });
 });
+
+describe('layoutTimeline — stage-4 review regressions', () => {
+  // #2: the density cap budget is one screen but `units` spans the ±1-screen
+  // cull buffer; on-screen units must not be clustered in favour of higher-
+  // importance OFF-screen buffer units.
+  it('density cap keeps on-screen units ahead of off-screen buffer units', () => {
+    const cfg = {
+      ...DEFAULT_LAYOUT_CONFIG,
+      bands: { ...DEFAULT_LAYOUT_CONFIG.bands, event: { maxRows: 5, maxItemsPer1000px: 2, maxContainerChildRows: 3 } },
+    };
+    const scale: Scale = { window: { start: 1960, end: 1970 }, widthPx: 1400, dir: 'rtl' }; // capacity=3
+    const items = wrap([
+      makeTimelineItem('vis1', 1962, 1963, { importance: 40 }), // on-screen, low importance
+      makeTimelineItem('vis2', 1965, 1966, { importance: 42 }),
+      makeTimelineItem('off1', 1940, 1941, { importance: 95 }), // off-screen buffer, high importance
+      makeTimelineItem('off2', 1945, 1946, { importance: 93 }),
+      makeTimelineItem('off3', 1948, 1949, { importance: 90 }),
+    ]);
+    const kept = band(layoutTimeline(items, scale, OPEN_END, cfg), 'event').items.map((p) => p.item.id);
+    expect(kept).toContain('vis1');
+    expect(kept).toContain('vis2');
+  });
+
+  // #3: a container that cannot fit degrades to a plain bar; its dropped children
+  // must survive as a cluster chip rather than vanishing without an affordance.
+  it('a degraded container preserves its dropped children as a cluster chip', () => {
+    const cfg = {
+      ...DEFAULT_LAYOUT_CONFIG,
+      bands: { ...DEFAULT_LAYOUT_CONFIG.bands, event: { maxRows: 2, maxItemsPer1000px: 8, maxContainerChildRows: 3 } },
+    };
+    const parent = makeTimelineItem('war', 1947, 1949, { importance: 95, title: 'מלחמה' });
+    // three children on the same instant → 3 rows inside → heightRows 4 > maxRows 2.
+    const kids = ['c1', 'c2', 'c3'].map((id) =>
+      makeTimelineItem(id, 1948.4, 1948.5, { importance: 40, parentId: 'war', title: id }),
+    );
+    const events = band(layoutTimeline(wrap([parent, ...kids]), RTL, OPEN_END, cfg), 'event');
+    expect(events.items.find((p) => p.item.id === 'war')!.isContainer).toBe(false);
+    expect(events.items.map((p) => p.item.id)).not.toContain('c1');
+    const clusterIds = events.clusters.flatMap((c) => c.ids);
+    for (const id of ['c1', 'c2', 'c3']) expect(clusterIds).toContain(id);
+    expectNoRowCollisions(events);
+  });
+});

@@ -56,7 +56,8 @@ interface EventEntity {
   regionIds: EntityId[];
   tags?: string[];
   image?: { src: string; alt: Text; credit?: string };
-  links?: { label: Text; url: string }[];
+  links?: { label: Text; url: string }[];   // related reading (further links)
+  sources?: Source[];                        // citations backing the facts; validator requires ≥1
 }
 
 interface PersonEntity {
@@ -72,6 +73,7 @@ interface PersonEntity {
   regionIds: EntityId[];
   image?: Image;
   links?: Link[];
+  sources?: Source[];            // ≥1 required (validator)
 }
 
 // Work types are an OPEN taxonomy (content/taxonomies/work-types.json):
@@ -94,7 +96,19 @@ interface WorkEntity {
   importance: number;
   regionIds: EntityId[];
   image?: Image;                 // cover
-  links?: Link[];                // source / purchase / catalog
+  links?: Link[];                // related reading / catalog
+  sources?: Source[];            // ≥1 required (validator)
+}
+
+// A citation backing an entity's facts — distinct from `links` (related
+// reading). Prefer naming an authoritative institution; attach `url` only when
+// it is a real, stable page. Placeholder/non-http(s) URLs are rejected at build.
+interface Source {
+  title: Text;                   // the source's name (Hebrew field, may hold a Latin name)
+  publisher?: string;            // institution/publisher, when distinct from title
+  url?: string;                  // real, stable URL — omit rather than guess
+  kind?: 'archive' | 'library' | 'museum' | 'encyclopedia' | 'reference'
+       | 'academic' | 'government' | 'book' | 'press' | 'website';
 }
 
 interface Category {            // one shape for person AND event categories
@@ -122,6 +136,10 @@ interface Relation {
   note?: Text;
 }
 ```
+
+## Sourcing (decision D15)
+
+Every timeline entity carries a `sources: Source[]` — the citations behind its facts, kept **separate from `links`** (which is optional related reading). The validator requires **at least one source per entity**, and `Source.url` (like `Link.url`) must be a real http(s) URL, not an authoring placeholder. Sourcing policy — prefer authoritative institutions, preserve uncertainty, omit a URL rather than fabricate one — lives in [04](04-data-and-content.md#sourcing). Sources render under "מקורות" in the detail panel.
 
 ## Relationship strategy
 

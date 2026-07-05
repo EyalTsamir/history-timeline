@@ -1,0 +1,36 @@
+{
+  "id": "netanyahu-elected-1996",
+  "type": "event",
+  "title": {
+    "he": "הבחירה הישירה ובחירת נתניהו"
+  },
+  "description": {
+    "he": "במאי 1996 נערכה הבחירה הישירה הראשונה לראשות הממשלה, ובנימין נתניהו ניצח בהפרש זעום את שמעון פרס; מפנה פוליטי לאחר רצח רבין וגל הפיגועים."
+  },
+  "dates": {
+    "start": "1996-05-29"
+  },
+  "importance": 46,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הבחירות_לכנסת_הארבע_עשרה_ולראשות_הממשלה"
+    }
+  ]
+}

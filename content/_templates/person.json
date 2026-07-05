@@ -15,6 +15,10 @@
   "_regionIds": "ids from content/taxonomies/regions.json the person is associated with.",
   "regionIds": ["israel"],
   "_image": "Optional portrait: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Sources; label is the Hebrew display text.",
-  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/..." }]
+  "_links": "Optional related reading (further links). NOT the citation — use \"sources\". Placeholder URLs (\"...\", example.com) are rejected.",
+  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/גולדה_מאיר" }],
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/04#sourcing). Prefer an authoritative institution; add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
+  "sources": [
+    { "title": { "he": "אנציקלופדיה בריטניקה" }, "publisher": "Encyclopædia Britannica", "kind": "encyclopedia" }
+  ]
 }

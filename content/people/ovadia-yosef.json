@@ -1,0 +1,38 @@
+{
+  "id": "ovadia-yosef",
+  "type": "person",
+  "name": {
+    "he": "הרב עובדיה יוסף"
+  },
+  "bio": {
+    "he": "מגדולי הפוסקים במאה העשרים, הרב הראשי הספרדי לישראל והמנהיג הרוחני של תנועת ש״ס; פעל לחידוש מעמדה של יהדות המזרח ולהשבת \"עטרה ליושנה\"."
+  },
+  "lifespan": {
+    "start": "1920",
+    "end": "2013-10-07"
+  },
+  "categoryIds": [
+    "religious"
+  ],
+  "importance": 52,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/עובדיה_יוסף"
+    }
+  ]
+}

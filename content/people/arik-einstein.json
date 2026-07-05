@@ -1,0 +1,38 @@
+{
+  "id": "arik-einstein",
+  "type": "person",
+  "name": {
+    "he": "אריק איינשטיין"
+  },
+  "bio": {
+    "he": "זמר, יוצר ושחקן אהוב, מן הדמויות המכוננות של הרוק והפזמון העברי; שיריו ליוו דורות והיו לחלק מן הפסקול הלאומי."
+  },
+  "lifespan": {
+    "start": "1939-01-03",
+    "end": "2013-11-26"
+  },
+  "categoryIds": [
+    "artists"
+  ],
+  "importance": 46,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אריק_איינשטיין"
+    }
+  ]
+}

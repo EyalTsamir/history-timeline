@@ -1,0 +1,52 @@
+{
+  "id": "oz-tale-of-love-darkness",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "סיפור על אהבה וחושך"
+  },
+  "description": {
+    "he": "ספר זיכרונות של עמוס עוז, השזור בסיפור משפחתו בירושלים של שנות השלושים עד החמישים ובסיפורה הטרגי של אמו; מן היצירות הישראליות המתורגמות ביותר."
+  },
+  "authorPersonIds": [
+    "amos-oz"
+  ],
+  "subjectPersonIds": [
+    "amos-oz"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "2002",
+  "coveredPeriod": {
+    "start": "1939",
+    "end": "1952",
+    "approx": true
+  },
+  "importance": 50,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת כתר",
+      "kind": "book"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/סיפור_על_אהבה_וחושך"
+    }
+  ]
+}

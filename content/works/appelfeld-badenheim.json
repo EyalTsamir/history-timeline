@@ -1,0 +1,39 @@
+{
+  "id": "appelfeld-badenheim",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "באדנהיים עיר נופש"
+  },
+  "description": {
+    "he": "נובלה של אהרן אפלפלד המתארת יהודים בעיירת נופש אירופית ערב השואה, שאינם מבחינים באסון המתקרב; מן היצירות המרכזיות בספרות השואה העברית."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "אהרן אפלפלד"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1975",
+  "coveredPeriod": {
+    "start": "1939"
+  },
+  "importance": 34,
+  "regionIds": [
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ]
+}

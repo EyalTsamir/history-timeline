@@ -1,0 +1,39 @@
+{
+  "id": "settlement-in-territories",
+  "type": "event",
+  "title": {
+    "he": "ראשית ההתנחלות בשטחים"
+  },
+  "description": {
+    "he": "לאחר מלחמת ששת הימים החלה (בקירוב 1967–1968) התיישבות יהודית ביהודה, שומרון, רמת הגולן ורצועת עזה — תהליך שנוי במחלוקת שעיצב את המפה המדינית לדורות."
+  },
+  "dates": {
+    "start": "1967",
+    "end": "1968",
+    "approx": true
+  },
+  "importance": 42,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "judea-samaria",
+    "golan"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/התנחלות"
+    }
+  ]
+}

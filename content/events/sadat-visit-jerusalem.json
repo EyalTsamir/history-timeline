@@ -1,0 +1,43 @@
+{
+  "id": "sadat-visit-jerusalem",
+  "type": "event",
+  "title": {
+    "he": "ביקור סאדאת בירושלים"
+  },
+  "description": {
+    "he": "בנובמבר 1977 ביקר נשיא מצרים אנואר סאדאת בירושלים ונאם בכנסת — ביקור היסטורי חסר תקדים של מנהיג ערבי, שפתח את הדרך להסכם השלום עם מצרים."
+  },
+  "dates": {
+    "start": "1977-11-19"
+  },
+  "importance": 70,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "jerusalem",
+    "egypt"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ביקור_נשיא_מצרים_סאדאת_בישראל"
+    }
+  ]
+}

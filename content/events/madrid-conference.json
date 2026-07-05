@@ -1,0 +1,36 @@
+{
+  "id": "madrid-conference",
+  "type": "event",
+  "title": {
+    "he": "ועידת מדריד"
+  },
+  "description": {
+    "he": "ועידת שלום בינלאומית באוקטובר 1991 שכינסה לראשונה את ישראל ומדינות ערב והפלסטינים לשיחות ישירות; פתחה עידן של תהליכים מדיניים בשנות התשעים."
+  },
+  "dates": {
+    "start": "1991-10-30"
+  },
+  "importance": 40,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ועידת_מדריד_(1991)"
+    }
+  ]
+}

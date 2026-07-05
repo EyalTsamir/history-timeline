@@ -11,5 +11,12 @@
     "start": "1961"
   },
   "parentId": "parent-event",
-  "importance": 60
+  "importance": 60,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

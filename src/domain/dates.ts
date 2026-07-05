@@ -174,7 +174,12 @@ export function decimalYearToYearMonth(t: number): { year: number; month: number
   let remaining = dayIndex;
   for (let month = 1; month <= 12; month++) {
     const len = daysInMonth(year, month);
-    if (remaining < len) return { year, month };
+    // EPS guards float round-trip underflow: an exact month-start produced by
+    // toDecimalYear lands microscopically below its integer day-index (e.g.
+    // 30.9999999999 for Feb 1), which without the tolerance returns the PREVIOUS
+    // month. The error is ~1e-13 day; 1e-6 is a safe margin that never
+    // mis-buckets a genuine mid-month instant.
+    if (remaining < len - 1e-6) return { year, month };
     remaining -= len;
   }
   return { year, month: 12 }; // t at the very edge of the year

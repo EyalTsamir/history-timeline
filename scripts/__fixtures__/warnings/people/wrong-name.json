@@ -14,5 +14,12 @@
   "categoryIds": [
     "leaders"
   ],
-  "importance": 50
+  "importance": 50,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

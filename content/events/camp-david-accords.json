@@ -1,0 +1,38 @@
+{
+  "id": "camp-david-accords",
+  "type": "event",
+  "title": {
+    "he": "הסכמי קמפ דייוויד"
+  },
+  "description": {
+    "he": "בספטמבר 1978 חתמו מנחם בגין ואנואר סאדאת, בתיווך הנשיא קרטר, על מסגרת לשלום בין ישראל למצרים ולאוטונומיה לפלסטינים; בסיס להסכם השלום שנחתם ב-1979."
+  },
+  "dates": {
+    "start": "1978-09-17"
+  },
+  "importance": 72,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "usa",
+    "egypt",
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הסכמי_קמפ_דייוויד"
+    }
+  ]
+}

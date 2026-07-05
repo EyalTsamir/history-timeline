@@ -46,6 +46,7 @@ export function eventToTimelineItem(event: EventEntity, ctx: NormalizeContext): 
     description: event.description.he,
     displayDate: formatDateRange(event.dates),
     links: event.links,
+    sources: event.sources,
   };
   if (event.image) detail.image = event.image;
   const children = ctx.indexes.childrenByEvent[event.id];
@@ -75,6 +76,7 @@ export function personToTimelineItem(person: PersonEntity, ctx: NormalizeContext
     description: person.bio.he,
     displayDate: formatDateRange(person.lifespan),
     links: person.links,
+    sources: person.sources,
   };
   if (person.image) detail.image = person.image;
   const works = ctx.indexes.worksByPerson[person.id];
@@ -109,6 +111,7 @@ export function workToTimelineItem(work: WorkEntity, ctx: NormalizeContext): Tim
     description: work.description.he,
     displayDate: formatDateRange(work.coveredPeriod),
     links: work.links,
+    sources: work.sources,
     publicationDate: formatHistDate(work.publicationDate),
     publicationDateRaw: work.publicationDate,
     authorNames,

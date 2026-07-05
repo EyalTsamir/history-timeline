@@ -11,5 +11,12 @@
     "start": "1952"
   },
   "parentId": "cycle-self",
-  "importance": 30
+  "importance": 30,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

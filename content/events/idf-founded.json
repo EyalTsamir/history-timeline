@@ -1,0 +1,43 @@
+{
+  "id": "idf-founded",
+  "type": "event",
+  "title": {
+    "he": "הקמת צה״ל"
+  },
+  "description": {
+    "he": "ב-26 במאי 1948 הורתה הממשלה הזמנית על הקמת צבא הגנה לישראל, איחוד כוחות ההגנה, האצ״ל והלח״י תחת פיקוד ממלכתי אחד — צעד מכריע בביסוס ריבונות המדינה החדשה."
+  },
+  "dates": {
+    "start": "1948-05-26"
+  },
+  "importance": 44,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "parentId": "war-of-independence",
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/צבא_הגנה_לישראל"
+    }
+  ]
+}

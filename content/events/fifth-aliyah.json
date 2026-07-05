@@ -1,0 +1,40 @@
+{
+  "id": "fifth-aliyah",
+  "type": "event",
+  "title": {
+    "he": "העלייה החמישית"
+  },
+  "description": {
+    "he": "גל עלייה גדול (בקירוב 1932–1939) שבמהלכו הגיעו כרבע מיליון יהודים, ובהם רבים מגרמניה ומרכז אירופה שנמלטו מעליית הנאצים; העלייה חיזקה מאוד את הכלכלה, התרבות והערים בארץ."
+  },
+  "dates": {
+    "start": "1932",
+    "end": "1939",
+    "approx": true
+  },
+  "importance": 48,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "europe",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/העלייה_החמישית"
+    }
+  ]
+}

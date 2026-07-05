@@ -1,0 +1,38 @@
+{
+  "id": "youth-aliyah-1933",
+  "type": "event",
+  "title": {
+    "he": "עליית הנוער"
+  },
+  "description": {
+    "he": "מפעל הצלה וקליטה שייסדה הנרייטה סאלד ב-1933 להעלאת ילדים ובני נוער יהודים מאירופה ולחינוכם בקיבוצים ובמוסדות בארץ; המפעל הציל אלפי ילדים ערב השואה ובעקבותיה."
+  },
+  "dates": {
+    "start": "1933"
+  },
+  "importance": 28,
+  "categoryIds": [
+    "immigration-settlement",
+    "science-tech"
+  ],
+  "regionIds": [
+    "israel",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/עליית_הנוער"
+    }
+  ]
+}

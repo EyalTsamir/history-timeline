@@ -137,14 +137,17 @@ export function startTimelineUrlSync(items: readonly TimelineItem[], dataset: Da
   let timer: ReturnType<typeof setTimeout> | undefined;
 
   const write = (): void => {
-    const hash = encodeTimelineHash(
+    const hash = `#${encodeTimelineHash(
       useViewportStore.getState().window,
       useFilterStore.getState(),
       useSelectionStore.getState().selectedId,
-    );
-    if (`#${hash}` === window.location.hash) return;
-    lastWritten = `#${hash}`;
-    history.replaceState(null, '', `#${hash}`);
+    )}`;
+    // Track what the app considers "ours" on EVERY tick — even when the hash
+    // already matches and replaceState is skipped. Otherwise lastWritten goes
+    // stale and a later back/forward/paste to that value is wrongly swallowed.
+    lastWritten = hash;
+    if (hash === window.location.hash) return;
+    history.replaceState(null, '', hash);
   };
   const scheduleWrite = (): void => {
     clearTimeout(timer);

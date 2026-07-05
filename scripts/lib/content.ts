@@ -27,6 +27,7 @@ import type {
   WorkTypeDef,
 } from '../../src/domain/entities';
 import { spanOf } from '../../src/domain/dates';
+import type { DateRange } from '../../src/domain/dates';
 import { DatasetSchema, SCHEMA_VERSION } from '../../src/domain/dataset';
 import type { Dataset } from '../../src/domain/dataset';
 
@@ -362,6 +363,131 @@ export function collectContent(root: string = 'content', options: CollectOptions
       });
     }
   }
+
+  // (e) sourcing (docs/04#sourcing): every timeline entity must cite ≥1 source.
+  for (const { entity, file } of [...eventsSrc.items, ...peopleSrc.items, ...worksSrc.items]) {
+    if (entity.sources.length === 0) {
+      errors.push({
+        file,
+        message: 'no sources — every entity must cite at least one source (docs/04#sourcing)',
+        path: 'sources',
+      });
+    }
+  }
+
+  // (f) date sanity: a concrete date in the future is almost always a typo
+  //     (e.g. 2091 for 1991). Living people carry end:null, not a future date.
+  const buildYear = new Date().getFullYear();
+  const checkNotFuture = (file: string, path: string, hist: string): void => {
+    if (Number(hist.slice(0, 4)) > buildYear) {
+      errors.push({ file, message: `date "${hist}" is in the future (after ${buildYear}) — likely a typo`, path });
+    }
+  };
+  for (const { entity: e, file } of eventsSrc.items) {
+    checkNotFuture(file, 'dates.start', e.dates.start);
+    if (typeof e.dates.end === 'string') checkNotFuture(file, 'dates.end', e.dates.end);
+  }
+  for (const { entity: p, file } of peopleSrc.items) {
+    checkNotFuture(file, 'lifespan.start', p.lifespan.start);
+    if (typeof p.lifespan.end === 'string') checkNotFuture(file, 'lifespan.end', p.lifespan.end);
+  }
+  for (const { entity: w, file } of worksSrc.items) {
+    checkNotFuture(file, 'coveredPeriod.start', w.coveredPeriod.start);
+    if (typeof w.coveredPeriod.end === 'string') checkNotFuture(file, 'coveredPeriod.end', w.coveredPeriod.end);
+    checkNotFuture(file, 'publicationDate', w.publicationDate);
+  }
+
+  // (g) impossible lifespan (WARNING): a closed span beyond ~120 years is
+  //     almost certainly a bad date, not a supercentenarian.
+  const MAX_LIFESPAN_YEARS = 120;
+  for (const { entity: p, file } of peopleSrc.items) {
+    const span = spanOf(p.lifespan);
+    if (span.end !== null && span.end - span.start > MAX_LIFESPAN_YEARS) {
+      warnings.push({
+        file,
+        message: `lifespan spans ~${Math.round(span.end - span.start)} years (> ${MAX_LIFESPAN_YEARS}) — check the dates`,
+        path: 'lifespan',
+      });
+    }
+  }
+
+  // (h) sub-event temporal containment (WARNING): a sub-event whose period does
+  //     not overlap its parent's at all is almost certainly misdated (docs/06).
+  for (const { entity: e, file } of eventsSrc.items) {
+    if (e.parentId === undefined) continue;
+    const parent = eventById.get(e.parentId);
+    if (parent === undefined) continue; // dangling parentId already errored in (b)
+    const child = spanOf(e.dates);
+    const par = spanOf(parent.dates);
+    const childEnd = child.end ?? Infinity;
+    const parEnd = par.end ?? Infinity;
+    const overlaps = child.start < parEnd && par.start < childEnd;
+    if (!overlaps) {
+      warnings.push({
+        file,
+        message: `sub-event period does not overlap parent event "${parent.id}" period — check the dates (docs/06)`,
+        path: 'dates',
+      });
+    }
+  }
+
+  // (i) relations hygiene: reject self-loops; warn on duplicate edges.
+  const seenEdges = new Set<string>();
+  relations.items.forEach((rel, i) => {
+    if (rel.from === rel.to) {
+      errors.push({ file: RELATIONS_FILE, message: `[${i}] relation links "${rel.from}" to itself`, path: `[${i}]` });
+    }
+    const key = `${rel.from} ${rel.to} ${rel.type}`;
+    if (seenEdges.has(key)) {
+      warnings.push({
+        file: RELATIONS_FILE,
+        message: `[${i}] duplicate relation: ${rel.from} —${rel.type}→ ${rel.to}`,
+        path: `[${i}]`,
+      });
+    } else {
+      seenEdges.add(key);
+    }
+  });
+
+  // (j) duplicate ids within a single reference list (WARNING) — a copy-paste slip.
+  const checkDupRefs = (file: string, path: string, ids: readonly EntityId[]): void => {
+    const seen = new Set<EntityId>();
+    for (const id of ids) {
+      if (seen.has(id)) warnings.push({ file, message: `duplicate entry "${id}" in ${path}`, path });
+      else seen.add(id);
+    }
+  };
+  for (const { entity: e, file } of eventsSrc.items) {
+    checkDupRefs(file, 'categoryIds', e.categoryIds);
+    checkDupRefs(file, 'regionIds', e.regionIds);
+  }
+  for (const { entity: p, file } of peopleSrc.items) {
+    checkDupRefs(file, 'categoryIds', p.categoryIds);
+    checkDupRefs(file, 'regionIds', p.regionIds);
+  }
+  for (const { entity: w, file } of worksSrc.items) {
+    checkDupRefs(file, 'authorPersonIds', w.authorPersonIds);
+    checkDupRefs(file, 'subjectPersonIds', w.subjectPersonIds);
+    checkDupRefs(file, 'subjectEventIds', w.subjectEventIds);
+    checkDupRefs(file, 'regionIds', w.regionIds);
+  }
+
+  // (k) projectability: every entity must yield a finite timeline span — the app
+  //     can't place an item it can't project. Holds by construction today (dates
+  //     are validated), so this only fires if a future schema change breaks it.
+  const assertProjectable = (file: string, range: DateRange): void => {
+    try {
+      const s = spanOf(range);
+      if (!Number.isFinite(s.start) || (s.end !== null && !Number.isFinite(s.end))) {
+        errors.push({ file, message: 'entity does not project to a finite timeline span' });
+      }
+    } catch (err) {
+      errors.push({ file, message: `entity cannot be projected onto the timeline: ${(err as Error).message}` });
+    }
+  };
+  for (const { entity: e, file } of eventsSrc.items) assertProjectable(file, e.dates);
+  for (const { entity: p, file } of peopleSrc.items) assertProjectable(file, p.lifespan);
+  for (const { entity: w, file } of worksSrc.items) assertProjectable(file, w.coveredPeriod);
 
   const counts: ContentCounts = {
     events: events.length,

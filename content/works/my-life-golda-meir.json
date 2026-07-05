@@ -2,15 +2,48 @@
   "id": "my-life-golda-meir",
   "type": "work",
   "workType": "autobiography",
-  "title": { "he": "חיי" },
-  "description": { "he": "האוטוביוגרפיה של גולדה מאיר, שנכתבה לאחר התפטרותה מראשות הממשלה בעקבות מלחמת יום הכיפורים וראתה אור בהוצאת מעריב ב-1975. הספר מגולל את קורות חייה מילדותה בקייב ובמילווקי, דרך עלייתה ארצה ופעילותה בתנועת העבודה, ועד כהונתה כראשת הממשלה." },
-  "authorPersonIds": ["golda-meir"],
-  "subjectPersonIds": ["golda-meir"],
+  "title": {
+    "he": "חיי"
+  },
+  "description": {
+    "he": "האוטוביוגרפיה של גולדה מאיר, שנכתבה לאחר התפטרותה מראשות הממשלה בעקבות מלחמת יום הכיפורים וראתה אור בהוצאת מעריב ב-1975. הספר מגולל את קורות חייה מילדותה בקייב ובמילווקי, דרך עלייתה ארצה ופעילותה בתנועת העבודה, ועד כהונתה כראשת הממשלה."
+  },
+  "authorPersonIds": [
+    "golda-meir"
+  ],
+  "subjectPersonIds": [
+    "golda-meir"
+  ],
   "publicationDate": "1975",
-  "coveredPeriod": { "start": "1898", "end": "1974" },
-  "importance": 55,
-  "regionIds": ["israel"],
+  "coveredPeriod": {
+    "start": "1898",
+    "end": "1974"
+  },
+  "importance": 36,
+  "regionIds": [
+    "israel"
+  ],
   "links": [
-    { "label": { "he": "הערך על גולדה מאיר בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/גולדה_מאיר" }
+    {
+      "label": {
+        "he": "הערך על גולדה מאיר בוויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/גולדה_מאיר"
+    }
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/גולדה_מאיר",
+      "kind": "website"
+    }
   ]
 }

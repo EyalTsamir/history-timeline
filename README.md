@@ -6,9 +6,11 @@ Users move continuously through time, zoom between wide and narrow ranges, and e
 
 ## Status
 
-**Phase 1 (foundation) — implemented.** Domain model, content pipeline, data-access layer, seed dataset (15 events, 9 people, 6 works — fact-checked, sourced), and the responsive RTL application shell are built and tested (153 tests). The interactive timeline visualization itself is the next stage.
+**Phase 1 (MVP) — complete.** The interactive timeline (continuous pan/zoom, semantic zoom, lane/collision layout, event hierarchy, selection, URL-shareable state) is built, and the first curated content pass is in: **80 events, 40 people, 28 works, 25 relations** spanning 1930–2000 across politics, military, society, immigration, economy, culture, religion, science and civil-rights history — each entity carrying at least one real source, and every date web-verified. Semantic-zoom importance is calibrated to a pyramid so wide views stay readable and deep zoom rewards exploration.
 
-All product and technical decisions are recorded in [docs/](docs/README.md); developer commands (install / run / test / seed / reset) are in [docs/12-development.md](docs/12-development.md).
+Quality gates: **276 unit/component/real-content tests**, a **Playwright e2e suite** (desktop + mobile flows, keyboard a11y, and a 10k-item performance guardrail), strict TypeScript, ESLint, and content validation — all green in CI. The content is a **curated, representative selection, not an exhaustive record**.
+
+All product and technical decisions are recorded in [docs/](docs/README.md); developer commands (install / run / test / e2e / lint / seed) are in [docs/12-development.md](docs/12-development.md).
 
 ## Stack (decided)
 

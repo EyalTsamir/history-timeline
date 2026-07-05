@@ -1,0 +1,45 @@
+{
+  "id": "ariel-sharon",
+  "type": "person",
+  "name": {
+    "he": "אריאל שרון"
+  },
+  "bio": {
+    "he": "מצביא ומדינאי, מן המפקדים הבולטים במלחמות ישראל וראש הממשלה בשנים 2001–2006. דמות שנויה במחלוקת שהובילה את ההתנתקות מרצועת עזה."
+  },
+  "lifespan": {
+    "start": "1928-02-26",
+    "end": "2014-01-11"
+  },
+  "categoryIds": [
+    "military",
+    "leaders"
+  ],
+  "importance": 76,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אריאל_שרון"
+    }
+  ]
+}

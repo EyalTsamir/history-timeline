@@ -1,0 +1,37 @@
+{
+  "id": "israel-jordan-peace",
+  "type": "event",
+  "title": {
+    "he": "הסכם השלום עם ירדן"
+  },
+  "description": {
+    "he": "באוקטובר 1994 חתמו ישראל וירדן על חוזה שלום בערבה, שכונן יחסים דיפלומטיים מלאים והסדיר גבולות ומים; הסכם השלום השני של ישראל עם מדינה ערבית."
+  },
+  "dates": {
+    "start": "1994-10-26"
+  },
+  "importance": 58,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel",
+    "jordan"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/הסכם_השלום_בין_ישראל_לירדן"
+    }
+  ]
+}

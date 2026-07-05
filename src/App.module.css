@@ -76,6 +76,16 @@
   min-block-size: 50vh;
 }
 
+/* Curation disclaimer (docs/01): the content is a representative selection. */
+.footer {
+  padding-block: var(--space-2);
+  padding-inline: var(--space-5);
+  border-block-start: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
 @media (min-width: 900px) {
   .filterButton {
     display: none;

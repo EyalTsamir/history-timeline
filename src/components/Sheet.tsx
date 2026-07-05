@@ -14,6 +14,24 @@ import styles from './Sheet.module.css';
 const FOCUSABLE_SELECTOR =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
+// Ref-counted page-scroll lock shared across Sheet instances, so overlapping
+// sheets (or an out-of-order close) can never unlock the page while one is still
+// open. The original overflow is captured once, restored only when the last
+// sheet closes.
+let scrollLockCount = 0;
+let scrollLockPrevOverflow = '';
+function acquireScrollLock(): void {
+  if (scrollLockCount === 0) {
+    scrollLockPrevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+  }
+  scrollLockCount += 1;
+}
+function releaseScrollLock(): void {
+  scrollLockCount = Math.max(0, scrollLockCount - 1);
+  if (scrollLockCount === 0) document.documentElement.style.overflow = scrollLockPrevOverflow;
+}
+
 interface SheetProps {
   open: boolean;
   title: string;
@@ -89,15 +107,18 @@ export function Sheet({ open, title, closeLabel, onClose, fallbackFocusRef, side
 
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('focusin', onFocusIn);
-    const prevOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
+    acquireScrollLock();
 
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('focusin', onFocusIn);
-      document.documentElement.style.overflow = prevOverflow;
+      releaseScrollLock();
       if (opener instanceof HTMLElement) opener.focus();
       // A hidden/unmounted opener silently refuses focus — verify it landed.
+      // Reading `.current` at cleanup time is intentional: we want the LIVE
+      // fallback (the timeline surface, which may have re-rendered), not a stale
+      // snapshot from effect setup.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (document.activeElement !== opener) fallbackFocusRef?.current?.focus();
     };
   }, [open, fallbackFocusRef]);

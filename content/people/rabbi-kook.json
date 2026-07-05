@@ -1,0 +1,38 @@
+{
+  "id": "rabbi-kook",
+  "type": "person",
+  "name": {
+    "he": "הרב אברהם יצחק הכהן קוק"
+  },
+  "bio": {
+    "he": "הרב הראשי האשכנזי הראשון של ארץ ישראל, הוגה דעות ופוסק; משנתו חיברה בין תורה, לאומיות ותחייה ארצישראלית והשפיעה עמוקות על הציונות הדתית."
+  },
+  "lifespan": {
+    "start": "1865",
+    "end": "1935-09-01"
+  },
+  "categoryIds": [
+    "religious"
+  ],
+  "importance": 50,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אברהם_יצחק_הכהן_קוק"
+    }
+  ]
+}

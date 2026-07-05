@@ -1,0 +1,45 @@
+{
+  "id": "soviet-aliyah",
+  "type": "event",
+  "title": {
+    "he": "העלייה הגדולה מברית המועצות"
+  },
+  "description": {
+    "he": "גל עלייה עצום (בקירוב 1989–1995) של כמיליון יהודים מברית המועצות לשעבר; העלייה שינתה את הדמוגרפיה, הכלכלה, המדע והתרבות בישראל."
+  },
+  "dates": {
+    "start": "1989",
+    "end": "1995",
+    "approx": true
+  },
+  "importance": 68,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "soviet-union"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הסוכנות היהודית לארץ ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/העלייה_מברית_המועצות_לשעבר_בשנות_ה-90"
+    }
+  ]
+}

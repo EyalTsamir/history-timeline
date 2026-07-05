@@ -1,0 +1,45 @@
+{
+  "id": "ezra-nehemiah",
+  "type": "event",
+  "title": {
+    "he": "מבצע עזרא ונחמיה"
+  },
+  "description": {
+    "he": "מבצע העלאתם של רוב יהודי עיראק (בקירוב 1951–1952), כ-120 אלף איש, ברכבת אווירית; סופה כמעט מוחלט של קהילה יהודית עתיקה בת אלפי שנים."
+  },
+  "dates": {
+    "start": "1951",
+    "end": "1952",
+    "approx": true
+  },
+  "importance": 42,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "iraq"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הסוכנות היהודית לארץ ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מבצע_עזרא_ונחמיה"
+    }
+  ]
+}

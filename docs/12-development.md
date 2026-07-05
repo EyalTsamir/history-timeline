@@ -20,10 +20,14 @@ There is no database and no migration step: the "schema" is the Zod model in [sr
 | `npm run dev` | `content:build` + Vite dev server |
 | `npm run build` | `content:build` → `tsc --noEmit` → `vite build` → `dist/` |
 | `npm run preview` | Serves the production `dist/` on http://localhost:4173 |
-| `npm test` | Full Vitest suite (domain, data, state, scripts, components) |
+| `npm test` | Full Vitest suite (domain, data, state, scripts, components, real-content gates) |
 | `npm run test:watch` | Vitest in watch mode |
+| `npm run e2e` | Playwright e2e (builds + previews, then desktop + mobile projects) |
+| `npm run e2e:report` | Open the last Playwright HTML report |
+| `npm run bench` | Profile the pipeline over a synthetic 10k dataset (docs/10) |
+| `npm run lint` | ESLint (flat config: typescript-eslint + react-hooks) |
 | `npm run typecheck` | TypeScript strict check, no emit |
-| `npm run content:validate` | Validates all of `content/` — schemas, references, cycles, dates; exit 1 on errors |
+| `npm run content:validate` | Validates all of `content/` — schemas, references, cycles, dates, sources; exit 1 on errors |
 | `npm run content:build` | Validate + compile `public/data/dataset.json` + `dataset.meta.json` |
 | `npm run content:clean` | Delete the compiled `public/data/` (reset; next build regenerates) |
 
@@ -32,20 +36,22 @@ There is no database and no migration step: the "schema" is the Zod model in [sr
 1. Copy a template from [content/_templates/](../content/_templates/) into `content/events/`, `content/people/`, or `content/works/`.
 2. Rename the file to `<id>.json` — **the filename must equal the entity `id`** (the validator warns on mismatch).
 3. Fill in Hebrew text; remove nothing structural — schemas are strict, but `_`-prefixed keys (template comments) are stripped by the loader.
-4. Assign `importance` per the rubric in [docs/05](05-semantic-zoom.md#importance-rubric); reference only ids that exist in `content/taxonomies/`.
-5. `npm run content:validate` — fix every error (dangling refs, bad dates, duplicate ids are all caught here).
+4. Assign `importance` per the rubric in [docs/05](05-semantic-zoom.md#importance-rubric); reference only ids that exist in `content/taxonomies/`; cite **at least one real source** ([docs/04#sourcing](04-data-and-content.md#sourcing)) — do not invent facts or URLs.
+5. `npm run content:validate` — fix every error (dangling refs, bad dates, duplicate ids, missing sources, future dates are all caught here).
 6. `npm run dev` and confirm the item appears on the timeline — zoom in far enough for its importance score ([docs/05](05-semantic-zoom.md)); the "מוצגים … מתוך …" counter includes it regardless of zoom.
 
 ## Testing
 
 - Unit/component tests live next to their subjects (`src/**/*.test.ts(x)`, `scripts/*.test.ts`).
-- Content-pipeline tests run against fixture trees in `scripts/__fixtures__/` — add a new fixture tree when adding a validator rule.
+- Content-pipeline tests run against fixture trees in `scripts/__fixtures__/` — add a new fixture tree (or a temp-tree case in `validate-content.review.test.ts`) when adding a validator rule.
 - Component tests: vitest globals are off; every component test file calls `afterEach(cleanup)` itself.
-- E2E (Playwright) arrives with the content-scale/polish stage (roadmap item 9) per [docs/09](09-testing.md); the timeline stage shipped with unit + component coverage.
+- **Real-content gates**: `scripts/production-content.test.ts` validates and projects the actual `content/` tree; `src/timeline/semanticZoom.calibration.test.ts` guards the importance pyramid. A failure there means fix the **content**, not the test.
+- **E2E (Playwright)**: `e2e/` holds the desktop journey, the mobile flows, keyboard a11y, and the 10k perf guardrail. Two projects (`desktop`, `mobile`) selected by `testMatch` in [playwright.config.ts](../playwright.config.ts). Run `npx playwright install chromium` once. Synthetic 10k data is served via route interception — it never enters `content/` or a build.
+- **Lint**: `npm run lint` (flat `eslint.config.js`). tsconfig strictness carries most static safety; ESLint adds the react-hooks rules tsc can't.
 
 ## Deployment (GitHub Pages)
 
-CI is [.github/workflows/ci.yml](../.github/workflows/ci.yml): every PR runs validate → typecheck → test → build; pushes to `main` also deploy `dist/` to GitHub Pages.
+CI is [.github/workflows/ci.yml](../.github/workflows/ci.yml): every PR runs validate → lint → typecheck → test → build → e2e (chromium desktop + mobile); pushes to `main` also deploy `dist/` to GitHub Pages.
 
 One-time setup after creating the GitHub repository:
 1. Push the project to GitHub (`main` branch).

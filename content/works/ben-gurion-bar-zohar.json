@@ -2,15 +2,48 @@
   "id": "ben-gurion-bar-zohar",
   "type": "work",
   "workType": "biography",
-  "title": { "he": "בן-גוריון" },
-  "description": { "he": "הביוגרפיה המוסמכת של דוד בן-גוריון מאת מיכאל בר-זוהר, שראתה אור בהוצאת עם עובד בשלושה כרכים החל מ-1975. הספר מקיף את חייו של בן-גוריון מלידתו בפלונסק ב-1886 ועד מותו ב-1973, ונשען על יומניו וארכיונו הפרטי שהעמיד לרשות המחבר." },
-  "authorName": { "he": "מיכאל בר-זוהר" },
-  "subjectPersonIds": ["david-ben-gurion"],
+  "title": {
+    "he": "בן-גוריון"
+  },
+  "description": {
+    "he": "הביוגרפיה המוסמכת של דוד בן-גוריון מאת מיכאל בר-זוהר, שראתה אור בהוצאת עם עובד בשלושה כרכים החל מ-1975. הספר מקיף את חייו של בן-גוריון מלידתו בפלונסק ב-1886 ועד מותו ב-1973, ונשען על יומניו וארכיונו הפרטי שהעמיד לרשות המחבר."
+  },
+  "authorName": {
+    "he": "מיכאל בר-זוהר"
+  },
+  "subjectPersonIds": [
+    "david-ben-gurion"
+  ],
   "publicationDate": "1975",
-  "coveredPeriod": { "start": "1886", "end": "1973" },
-  "importance": 60,
-  "regionIds": ["israel"],
+  "coveredPeriod": {
+    "start": "1886",
+    "end": "1973"
+  },
+  "importance": 40,
+  "regionIds": [
+    "israel"
+  ],
   "links": [
-    { "label": { "he": "הערך על מיכאל בר-זוהר בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מיכאל_בר-זוהר" }
+    {
+      "label": {
+        "he": "הערך על מיכאל בר-זוהר בוויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מיכאל_בר-זוהר"
+    }
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/מיכאל_בר-זוהר",
+      "kind": "website"
+    }
   ]
 }

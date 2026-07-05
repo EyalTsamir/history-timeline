@@ -11,5 +11,12 @@
     "start": "1950"
   },
   "parentId": "cycle-b",
-  "importance": 50
+  "importance": 50,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

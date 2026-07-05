@@ -1,0 +1,36 @@
+{
+  "id": "economic-stabilization-1985",
+  "type": "event",
+  "title": {
+    "he": "תוכנית הייצוב הכלכלית"
+  },
+  "description": {
+    "he": "ביולי 1985 הנהיגה ממשלת האחדות תוכנית חירום נחושה שבלמה אינפלציה דוהרת של מאות אחוזים בשנה; אחת ההצלחות הכלכליות המכריעות בתולדות המדינה."
+  },
+  "dates": {
+    "start": "1985-07-01"
+  },
+  "importance": 62,
+  "categoryIds": [
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "בנק ישראל"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/תוכנית_הייצוב_הכלכלית_של_1985"
+    }
+  ]
+}

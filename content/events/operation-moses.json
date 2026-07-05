@@ -1,0 +1,45 @@
+{
+  "id": "operation-moses",
+  "type": "event",
+  "title": {
+    "he": "מבצע משה"
+  },
+  "description": {
+    "he": "מבצע חשאי (1984–1985) להעלאתם של אלפי יהודים מאתיופיה דרך סודן; ציון דרך בקיבוץ גלויות של קהילה יהודית עתיקה בשיא מצוקתה."
+  },
+  "dates": {
+    "start": "1984-11",
+    "end": "1985-01",
+    "approx": true
+  },
+  "importance": 48,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "ethiopia"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הסוכנות היהודית לארץ ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מבצע_משה"
+    }
+  ]
+}

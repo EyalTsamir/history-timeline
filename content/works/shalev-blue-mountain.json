@@ -1,0 +1,57 @@
+{
+  "id": "shalev-blue-mountain",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "רומן רוסי"
+  },
+  "description": {
+    "he": "רומן של מאיר שלו על חלוצי העלייה השנייה והשלישית ביישוב בעמק יזרעאל; יצירה עשירה ומיתולוגית על דור המייסדים ועל מורשתו."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "מאיר שלו"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1988",
+  "coveredPeriod": {
+    "start": "1910",
+    "end": "1935",
+    "approx": true
+  },
+  "importance": 38,
+  "regionIds": [
+    "israel",
+    "galilee"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת עם עובד",
+      "kind": "book"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/רומן_רוסי"
+    }
+  ]
+}

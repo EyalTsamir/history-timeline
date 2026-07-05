@@ -5,6 +5,7 @@ import {
   PersonSchema,
   RegionSchema,
   RelationSchema,
+  SourceSchema,
   WorkSchema,
 } from './entities';
 
@@ -56,6 +57,7 @@ describe('EventSchema', () => {
     expect(parsed.categoryIds).toEqual([]);
     expect(parsed.regionIds).toEqual([]);
     expect(parsed.links).toEqual([]);
+    expect(parsed.sources).toEqual([]);
   });
 
   it('rejects a non-slug id at path id', () => {
@@ -177,5 +179,43 @@ describe('RegionSchema', () => {
   it('rejects an unknown geo kind at path kind', () => {
     const result = RegionSchema.safeParse({ id: 'mars', name: { he: 'מאדים' }, kind: 'planet' });
     expect(pathsOf(result)).toContain('kind');
+  });
+});
+
+describe('SourceSchema', () => {
+  it('parses a title-only source (no url required)', () => {
+    const parsed = SourceSchema.parse({ title: { he: 'הספרייה הלאומית' } });
+    expect(parsed.title.he).toBe('הספרייה הלאומית');
+    expect(parsed.url).toBeUndefined();
+  });
+
+  it('parses a full source with publisher, url and kind', () => {
+    const parsed = SourceSchema.parse({
+      title: { he: 'בריטניקה' },
+      publisher: 'Encyclopædia Britannica',
+      url: 'https://www.britannica.com/',
+      kind: 'encyclopedia',
+    });
+    expect(parsed.kind).toBe('encyclopedia');
+  });
+
+  it('rejects a placeholder url at path url', () => {
+    const result = SourceSchema.safeParse({ title: { he: 'מקור' }, url: 'https://he.wikipedia.org/wiki/...' });
+    expect(pathsOf(result)).toContain('url');
+  });
+
+  it('rejects an example.com url as a placeholder', () => {
+    const result = SourceSchema.safeParse({ title: { he: 'מקור' }, url: 'https://example.com/page' });
+    expect(pathsOf(result)).toContain('url');
+  });
+
+  it('rejects a non-http(s) url', () => {
+    const result = SourceSchema.safeParse({ title: { he: 'מקור' }, url: 'ftp://archive.example/x' });
+    expect(pathsOf(result)).toContain('url');
+  });
+
+  it('rejects an empty Hebrew title at path title.he', () => {
+    const result = SourceSchema.safeParse({ title: { he: '' } });
+    expect(pathsOf(result)).toContain('title.he');
   });
 });

@@ -1,0 +1,43 @@
+{
+  "id": "pinchas-sapir",
+  "type": "person",
+  "name": {
+    "he": "פנחס ספיר"
+  },
+  "bio": {
+    "he": "שר האוצר והמסחר והתעשייה בשנות השישים והשבעים, ומן האדריכלים המרכזיים של הכלכלה הישראלית ושל תנופת הפיתוח והתיעוש בעשורים הראשונים."
+  },
+  "lifespan": {
+    "start": "1906",
+    "end": "1975-08-12"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 42,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פנחס_ספיר"
+    }
+  ]
+}

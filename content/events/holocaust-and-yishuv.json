@@ -1,0 +1,40 @@
+{
+  "id": "holocaust-and-yishuv",
+  "type": "event",
+  "title": {
+    "he": "השואה"
+  },
+  "description": {
+    "he": "רצח שיטתי של כשישה מיליון יהודים בידי גרמניה הנאצית ומשתפי פעולתה בשנות מלחמת העולם השנייה. השואה השפיעה השפעה מכרעת על היישוב היהודי בארץ, על תנועת ההעפלה ועל התביעה להקמת מדינה יהודית."
+  },
+  "dates": {
+    "start": "1941",
+    "end": "1945",
+    "approx": true
+  },
+  "importance": 88,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "europe",
+    "poland",
+    "germany"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יד ושם"
+      },
+      "kind": "museum"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/השואה"
+    }
+  ]
+}

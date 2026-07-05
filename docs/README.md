@@ -18,6 +18,7 @@ Docs are written in English (developer-facing); the application UI and all conte
 | 10 | [Performance](10-performance.md) | Budgets now, scaling strategy for 10k–100k+ items |
 | 11 | [Roadmap](11-roadmap.md) | Phases and deferred functionality |
 | 12 | [Development](12-development.md) | Install, run, test, seed, reset — exact commands |
+| 13 | [Stage 4 release](13-release.md) | First curated release: what shipped, gates, limitations, next steps |
 
 ## Fixed decisions (quick reference)
 

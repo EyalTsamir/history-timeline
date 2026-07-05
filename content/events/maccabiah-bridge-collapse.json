@@ -1,0 +1,36 @@
+{
+  "id": "maccabiah-bridge-collapse",
+  "type": "event",
+  "title": {
+    "he": "אסון גשר המכביה"
+  },
+  "description": {
+    "he": "ביולי 1997 קרס גשר זמני מעל נהר הירקון בטקס פתיחת המכביה ה-15; ארבעה ספורטאים אוסטרלים נספו ורבים נפצעו, בין השאר מזיהום המים."
+  },
+  "dates": {
+    "start": "1997-07-14"
+  },
+  "importance": 15,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "regionIds": [
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אסון_המכביה"
+    }
+  ]
+}

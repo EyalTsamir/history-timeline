@@ -11,5 +11,12 @@
     "start": "1960",
     "end": "1962"
   },
-  "importance": 40
+  "importance": 40,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

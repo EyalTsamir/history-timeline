@@ -1,0 +1,35 @@
+{
+  "id": "dayan-milestones",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "אבני דרך"
+  },
+  "description": {
+    "he": "אוטוביוגרפיה של משה דיין, המתארת את חייו כלוחם, רמטכ״ל ומדינאי — מן ההתיישבות בעמק, דרך מלחמות ישראל ועד שר החוץ בדרך להסכם עם מצרים."
+  },
+  "authorPersonIds": [
+    "moshe-dayan"
+  ],
+  "subjectPersonIds": [
+    "moshe-dayan"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1976",
+  "coveredPeriod": {
+    "start": "1915",
+    "end": "1976"
+  },
+  "importance": 36,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

@@ -1,13 +1,47 @@
 {
   "id": "yitzhak-rabin",
   "type": "person",
-  "name": { "he": "יצחק רבין" },
-  "bio": { "he": "ראש הממשלה החמישי של ישראל והרמטכ״ל השביעי של צה״ל, שפיקד על הצבא במלחמת ששת הימים. בכהונתו השנייה חתם על הסכמי אוסלו וזכה בפרס נובל לשלום, ונרצח בעצרת בתל אביב ב-4 בנובמבר 1995." },
-  "lifespan": { "start": "1922-03-01", "end": "1995-11-04" },
-  "categoryIds": ["leaders", "military"],
+  "name": {
+    "he": "יצחק רבין"
+  },
+  "bio": {
+    "he": "ראש הממשלה החמישי של ישראל והרמטכ״ל השביעי של צה״ל, שפיקד על הצבא במלחמת ששת הימים. בכהונתו השנייה חתם על הסכמי אוסלו וזכה בפרס נובל לשלום, ונרצח בעצרת בתל אביב ב-4 בנובמבר 1995."
+  },
+  "lifespan": {
+    "start": "1922-03-01",
+    "end": "1995-11-04"
+  },
+  "categoryIds": [
+    "leaders",
+    "military"
+  ],
   "importance": 90,
-  "regionIds": ["israel", "jerusalem", "tel-aviv"],
+  "regionIds": [
+    "israel",
+    "jerusalem",
+    "tel-aviv"
+  ],
   "links": [
-    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/יצחק_רבין" }
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/יצחק_רבין"
+    }
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מרכז יצחק רבין"
+      },
+      "kind": "museum"
+    },
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/יצחק_רבין",
+      "kind": "website"
+    }
   ]
 }

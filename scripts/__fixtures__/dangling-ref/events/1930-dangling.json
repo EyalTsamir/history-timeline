@@ -13,5 +13,12 @@
   "importance": 50,
   "regionIds": [
     "atlantis"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
   ]
 }

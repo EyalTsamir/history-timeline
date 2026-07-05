@@ -1,0 +1,37 @@
+{
+  "id": "eilat-founded",
+  "type": "event",
+  "title": {
+    "he": "ביסוס העיר אילת"
+  },
+  "description": {
+    "he": "הקמתה וביסוסה של אילת בקצה הדרומי של הנגב בתחילת שנות החמישים כעיר נמל ושער ימי דרומי לישראל; ציון דרך במימוש חזון פיתוח הנגב."
+  },
+  "dates": {
+    "start": "1951",
+    "approx": true
+  },
+  "importance": 15,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "negev"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אילת"
+    }
+  ]
+}

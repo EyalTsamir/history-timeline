@@ -1,0 +1,50 @@
+{
+  "id": "yizhar-khirbet-khizeh",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "חרבת חזעה"
+  },
+  "description": {
+    "he": "נובלה של ס. יזהר משנת 1949 המתארת גירוש תושבי כפר ערבי במלחמת העצמאות מנקודת מבטו של חייל; יצירה נועזת ומכוננת בשיח הישראלי על המלחמה ותוצאותיה."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "ס. יזהר"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [
+    "war-of-independence"
+  ],
+  "publicationDate": "1949",
+  "coveredPeriod": {
+    "start": "1948",
+    "end": "1949"
+  },
+  "importance": 40,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חרבת_חזעה"
+    }
+  ]
+}

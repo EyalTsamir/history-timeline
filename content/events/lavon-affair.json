@@ -1,0 +1,44 @@
+{
+  "id": "lavon-affair",
+  "type": "event",
+  "title": {
+    "he": "הפרשה (עסק הביש)"
+  },
+  "description": {
+    "he": "מבצע חשאי כושל של המודיעין הישראלי במצרים ב-1954, שבו נתפסה רשת יהודית שניסתה לחבל ביחסי מצרים והמערב. הכישלון והוויכוח על האחריות לו טלטלו את הצמרת המדינית במשך שנים."
+  },
+  "dates": {
+    "start": "1954-07"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "war-security",
+    "state-politics"
+  ],
+  "regionIds": [
+    "egypt",
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/העסק_הביש"
+    }
+  ]
+}

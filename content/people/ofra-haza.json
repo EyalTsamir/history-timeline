@@ -1,0 +1,38 @@
+{
+  "id": "ofra-haza",
+  "type": "person",
+  "name": {
+    "he": "עפרה חזה"
+  },
+  "bio": {
+    "he": "זמרת יוצאת שכונת התקווה שכבשה בהצלחה בינלאומית ומיזגה זמר מזרחי ועברי עם פופ עולמי; שגרירה תרבותית של ישראל שנפטרה בטרם עת."
+  },
+  "lifespan": {
+    "start": "1957-11-19",
+    "end": "2000-02-23"
+  },
+  "categoryIds": [
+    "artists"
+  ],
+  "importance": 40,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/עפרה_חזה"
+    }
+  ]
+}

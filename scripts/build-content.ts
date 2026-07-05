@@ -30,7 +30,12 @@ if (result.data === null) {
 
 const dataset = buildDataset(result.data);
 const serialized = JSON.stringify(dataset);
-const hash = createHash('sha256').update(serialized).digest('hex').slice(0, 10);
+// Content-address the artifact: hash the dataset with the build timestamp
+// normalized out, so identical content produces an identical hash (hence
+// filename) across builds — the point of the immutable-caching scheme (docs/10).
+// generatedAt stays in the emitted file for provenance.
+const hashInput = JSON.stringify({ ...dataset, generatedAt: '' });
+const hash = createHash('sha256').update(hashInput).digest('hex').slice(0, 10);
 const hashedFileName = `dataset.${hash}.json`;
 
 const meta = {

@@ -1,0 +1,43 @@
+{
+  "id": "israeli-tv-first-broadcast",
+  "type": "event",
+  "title": {
+    "he": "שידור הטלוויזיה הישראלית הראשון"
+  },
+  "description": {
+    "he": "במאי 1968 עלה לאוויר שידור הטלוויזיה הכללית הראשון בישראל, בשידור מצעד יום העצמאות; פתח עידן חדש בתקשורת ובתרבות הפנאי."
+  },
+  "dates": {
+    "start": "1968-05-02"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "science-tech",
+    "culture-society"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "רשות השידור (ארכיון)"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/טלוויזיה_בישראל"
+    }
+  ]
+}

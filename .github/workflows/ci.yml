@@ -22,9 +22,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run content:validate
+      - run: npm run lint
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: E2E (desktop + mobile, docs/09 §3–4)
+        run: npm run e2e
       - name: Upload Pages artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
@@ -34,6 +39,11 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-test
+    # Serialize Pages deployments so rapid pushes to main don't race; never
+    # cancel an in-flight deploy (a half-published site is worse than a queue).
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write

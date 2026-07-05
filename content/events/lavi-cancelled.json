@@ -1,0 +1,42 @@
+{
+  "id": "lavi-cancelled",
+  "type": "event",
+  "title": {
+    "he": "ביטול מטוס הלביא"
+  },
+  "description": {
+    "he": "באוגוסט 1987 החליטה הממשלה לבטל את פרויקט מטוס הקרב \"לביא\" מתוצרת התעשייה האווירית בשל עלותו; החלטה כלכלית-טכנולוגית שנויה במחלוקת."
+  },
+  "dates": {
+    "start": "1987-08-30"
+  },
+  "importance": 19,
+  "categoryIds": [
+    "science-tech"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "התעשייה האווירית לישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פרויקט_הלביא"
+    }
+  ]
+}

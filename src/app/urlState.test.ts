@@ -144,4 +144,31 @@ describe('startTimelineUrlSync', () => {
     vi.advanceTimersByTime(400);
     expect(window.location.hash).toBe('');
   });
+
+  // Regression (stage-4 review): a no-op write (hash already matches) must still
+  // refresh `lastWritten`, or a later back/forward to the previous value is
+  // wrongly ignored as "our own echo".
+  it('re-applies an external hash after a no-op write (back/forward is not swallowed)', () => {
+    const stop = startTimelineUrlSync(items, dataset);
+    // 1. app writes H1 (viewport + selection fx-war)
+    useViewportStore.getState().setWindow({ start: 1947, end: 1950 });
+    useSelectionStore.getState().select('fx-war');
+    vi.advanceTimersByTime(400);
+    const h1 = window.location.hash;
+    expect(h1).toContain('sel=fx-war');
+
+    // 2. external change to H2 (fx-battle) applies, then the debounced write is a
+    //    no-op because the hash already matches — this is what left lastWritten stale.
+    const h2 = h1.replace('sel=fx-war', 'sel=fx-battle');
+    history.replaceState(null, '', h2);
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    expect(useSelectionStore.getState().selectedId).toBe('fx-battle');
+    vi.advanceTimersByTime(400);
+
+    // 3. navigating BACK to H1 must be applied, not treated as our own echo.
+    history.replaceState(null, '', h1);
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    expect(useSelectionStore.getState().selectedId).toBe('fx-war');
+    stop();
+  });
 });

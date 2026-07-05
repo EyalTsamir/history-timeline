@@ -2,5 +2,10 @@ node_modules/
 dist/
 public/data/
 *.local
+.claude/settings.local.json
 .DS_Store
 coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

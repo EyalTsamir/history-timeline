@@ -1,0 +1,45 @@
+{
+  "id": "shimon-peres",
+  "type": "person",
+  "name": {
+    "he": "שמעון פרס"
+  },
+  "bio": {
+    "he": "מדינאי רב-פעלים ששירת שבעה עשורים, כיהן פעמיים כראש ממשלה וכנשיא המדינה. היה שותף מרכזי לביטחון ולתעשייה הביטחונית, לתהליך אוסלו ולקידום המדע והטכנולוגיה. חתן פרס נובל לשלום."
+  },
+  "lifespan": {
+    "start": "1923-08-02",
+    "end": "2016-09-28"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 80,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/שמעון_פרס"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "first-intifada",
+  "type": "event",
+  "title": {
+    "he": "האינתיפאדה הראשונה"
+  },
+  "description": {
+    "he": "התקוממות עממית פלסטינית שפרצה בדצמבר 1987 ברצועת עזה וביהודה ושומרון ונמשכה שנים; היא שינתה את השיח הישראלי על השטחים והובילה בהמשך לתהליך אוסלו."
+  },
+  "dates": {
+    "start": "1987-12-09",
+    "end": "1993",
+    "approx": true
+  },
+  "importance": 72,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "gaza-strip",
+    "judea-samaria"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/האינתיפאדה_הראשונה"
+    }
+  ]
+}

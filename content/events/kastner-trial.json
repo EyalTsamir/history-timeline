@@ -1,0 +1,39 @@
+{
+  "id": "kastner-trial",
+  "type": "event",
+  "title": {
+    "he": "משפט קסטנר"
+  },
+  "description": {
+    "he": "משפט דיבה סוער (1954–1955) שנסב על התנהלותו של ישראל קסטנר מול הנאצים בהונגריה בזמן השואה; המשפט חשף מחלוקת ציבורית עמוקה על ההתמודדות עם זיכרון השואה."
+  },
+  "dates": {
+    "start": "1954",
+    "end": "1955",
+    "approx": true
+  },
+  "importance": 32,
+  "categoryIds": [
+    "culture-society",
+    "state-politics"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ישראל_קסטנר"
+    }
+  ]
+}

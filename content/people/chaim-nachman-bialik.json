@@ -1,0 +1,45 @@
+{
+  "id": "chaim-nachman-bialik",
+  "type": "person",
+  "name": {
+    "he": "חיים נחמן ביאליק"
+  },
+  "bio": {
+    "he": "המשורר העברי הלאומי, מגדולי מחדשי השירה העברית; יצירתו עיצבה את התרבות העברית המתחדשת, ופעל רבות לביסוס המרכז התרבותי בתל אביב."
+  },
+  "lifespan": {
+    "start": "1873-01-09",
+    "end": "1934-07-04"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 70,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חיים_נחמן_ביאליק"
+    }
+  ]
+}

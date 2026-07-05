@@ -1,0 +1,44 @@
+{
+  "id": "austerity-tzena",
+  "type": "event",
+  "title": {
+    "he": "משטר הצנע"
+  },
+  "description": {
+    "he": "מדיניות קיצוב וחלוקה שוויונית של מזון ומצרכים בשנים שאחרי הקמת המדינה (בקירוב 1949–1959), שנועדה להתמודד עם קליטת העלייה ההמונית ועם המחסור החמור; הותירה חותם עמוק על החברה."
+  },
+  "dates": {
+    "start": "1949",
+    "end": "1959",
+    "approx": true
+  },
+  "importance": 46,
+  "categoryIds": [
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "בנק ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מדיניות_הקיצוב"
+    }
+  ]
+}

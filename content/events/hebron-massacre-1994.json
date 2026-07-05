@@ -1,0 +1,36 @@
+{
+  "id": "hebron-massacre-1994",
+  "type": "event",
+  "title": {
+    "he": "הטבח במערת המכפלה"
+  },
+  "description": {
+    "he": "בפברואר 1994 רצח ברוך גולדשטיין 29 מתפללים מוסלמים במערת המכפלה בחברון; טבח שזעזע את החברה הישראלית ועיב על תהליך השלום."
+  },
+  "dates": {
+    "start": "1994-02-25"
+  },
+  "importance": 40,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "judea-samaria"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/טבח_מערת_המכפלה"
+    }
+  ]
+}

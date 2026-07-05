@@ -1,0 +1,42 @@
+{
+  "id": "political-upheaval-1977",
+  "type": "event",
+  "title": {
+    "he": "המהפך"
+  },
+  "description": {
+    "he": "בבחירות מאי 1977 עלה הליכוד בראשות מנחם בגין לשלטון וסיים כשלושה עשורים של הגמוניית תנועת העבודה; נקודת מפנה בפוליטיקה הישראלית."
+  },
+  "dates": {
+    "start": "1977-05-17"
+  },
+  "importance": 68,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/המהפך"
+    }
+  ]
+}

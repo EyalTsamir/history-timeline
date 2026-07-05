@@ -1,0 +1,38 @@
+{
+  "id": "leah-goldberg",
+  "type": "person",
+  "name": {
+    "he": "לאה גולדברג"
+  },
+  "bio": {
+    "he": "משוררת, סופרת, מתרגמת וחוקרת ספרות; מגדולי היוצרים בשירה העברית ובספרות הילדים, וממקימי החוג לספרות באוניברסיטה העברית."
+  },
+  "lifespan": {
+    "start": "1911-05-29",
+    "end": "1970-01-15"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 52,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/לאה_גולדברג"
+    }
+  ]
+}

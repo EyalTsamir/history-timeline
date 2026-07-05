@@ -1,0 +1,38 @@
+{
+  "id": "nathan-alterman",
+  "type": "person",
+  "name": {
+    "he": "נתן אלתרמן"
+  },
+  "bio": {
+    "he": "משורר, מחזאי ומתרגם, מן הקולות המרכזיים של השירה העברית והפובליציסטיקה; טוריו (\"הטור השביעי\") ליוו את אירועי התקומה והמדינה הצעירה."
+  },
+  "lifespan": {
+    "start": "1910-08-14",
+    "end": "1970-03-28"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 54,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/נתן_אלתרמן"
+    }
+  ]
+}

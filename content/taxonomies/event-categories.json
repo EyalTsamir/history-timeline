@@ -21,6 +21,18 @@
     "id": "culture-society",
     "name": { "he": "תרבות וחברה" },
     "color": "culture-society",
-    "description": { "he": "אירועי תרבות, חברה וכלכלה" }
+    "description": { "he": "אירועי תרבות, חברה, דת וזיכרון" }
+  },
+  {
+    "id": "economy-labor",
+    "name": { "he": "כלכלה ועבודה" },
+    "color": "economy-labor",
+    "description": { "he": "כלכלה, תעסוקה, הסתדרות ומדיניות כלכלית" }
+  },
+  {
+    "id": "science-tech",
+    "name": { "he": "מדע, טכנולוגיה וחינוך" },
+    "color": "science-tech",
+    "description": { "he": "מדע, טכנולוגיה, תשתיות, השכלה גבוהה וחינוך" }
   }
 ]

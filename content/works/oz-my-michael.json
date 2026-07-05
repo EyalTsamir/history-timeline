@@ -1,0 +1,56 @@
+{
+  "id": "oz-my-michael",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "מיכאל שלי"
+  },
+  "description": {
+    "he": "רומן של עמוס עוז המתאר אישה צעירה בירושלים המחולקת של שנות החמישים; מן היצירות המכוננות של הסיפורת הישראלית והצצה אל חיי היום-יום בירושלים של אותם ימים."
+  },
+  "authorPersonIds": [
+    "amos-oz"
+  ],
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1968",
+  "coveredPeriod": {
+    "start": "1950",
+    "end": "1960",
+    "approx": true
+  },
+  "importance": 44,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת עם עובד",
+      "kind": "book"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מיכאל_שלי"
+    }
+  ]
+}

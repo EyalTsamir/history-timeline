@@ -1,0 +1,50 @@
+{
+  "id": "grossman-see-under-love",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "עיין ערך: אהבה"
+  },
+  "description": {
+    "he": "רומן ניסיוני של דויד גרוסמן העוסק בשואה ובזיכרונה דרך עיני ילד בישראל ודרך דמותו של הסופר ברונו שולץ; יצירה מרכזית בספרות הדור השני לשואה."
+  },
+  "authorPersonIds": [
+    "david-grossman"
+  ],
+  "subjectPersonIds": [],
+  "subjectEventIds": [
+    "holocaust-and-yishuv"
+  ],
+  "publicationDate": "1986",
+  "coveredPeriod": {
+    "start": "1942",
+    "end": "1959",
+    "approx": true
+  },
+  "importance": 42,
+  "regionIds": [
+    "israel",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ההוצאה לאור"
+      },
+      "publisher": "הוצאת הקיבוץ המאוחד",
+      "kind": "book"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ]
+}

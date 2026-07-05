@@ -33,6 +33,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       importance: 50,
       categoryIds: ['cat-e'],
       regionIds: ['reg'],
+      sources: [{ title: { he: 'מקור' } }],
     },
     'people/pe.json': {
       id: 'pe',
@@ -43,6 +44,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       categoryIds: ['cat-p'],
       importance: 50,
       regionIds: ['reg'],
+      sources: [{ title: { he: 'מקור' } }],
     },
     'works/wo.json': {
       id: 'wo',
@@ -57,6 +59,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       coveredPeriod: { start: '1900', end: '1980' },
       importance: 40,
       regionIds: ['reg'],
+      sources: [{ title: { he: 'מקור' } }],
     },
     'relations.json': [{ from: 'pe', to: 'wo', type: 'related-to' }],
   };
@@ -144,6 +147,131 @@ describe('relation negative paths', () => {
   });
 });
 
+// --- Stage 4 validator rules ------------------------------------------------
+
+/** Full baseline entities with sources, for per-test mutation. */
+const evBase = (): Record<string, unknown> => ({
+  id: 'ev',
+  type: 'event',
+  title: { he: 'אירוע' },
+  description: { he: 'תיאור.' },
+  dates: { start: '1948' },
+  importance: 50,
+  categoryIds: ['cat-e'],
+  regionIds: ['reg'],
+  sources: [{ title: { he: 'מקור' } }],
+});
+const peBase = (): Record<string, unknown> => ({
+  id: 'pe',
+  type: 'person',
+  name: { he: 'אדם' },
+  bio: { he: 'ביוגרפיה.' },
+  lifespan: { start: '1900', end: '1980' },
+  categoryIds: ['cat-p'],
+  importance: 50,
+  regionIds: ['reg'],
+  sources: [{ title: { he: 'מקור' } }],
+});
+
+describe('sourcing rule', () => {
+  it('requires every entity to cite at least one source', () => {
+    const { sources: _omit, ...noSources } = evBase();
+    const result = collectContent(writeTree({ 'events/ev.json': noSources }));
+    expect(messages(result.errors)).toContain('no sources');
+    expect(result.data).toBeNull();
+  });
+
+  it('rejects a placeholder source URL', () => {
+    const result = collectContent(
+      writeTree({
+        'events/ev.json': { ...evBase(), sources: [{ title: { he: 'מקור' }, url: 'https://example.com/x' }] },
+      }),
+    );
+    expect(messages(result.errors)).toContain('placeholder');
+  });
+
+  it('accepts a source with a real URL and publisher', () => {
+    const result = collectContent(
+      writeTree({
+        'people/pe.json': {
+          ...peBase(),
+          sources: [
+            { title: { he: 'הספרייה הלאומית' }, publisher: 'הספרייה הלאומית', url: 'https://www.nli.org.il/he', kind: 'library' },
+          ],
+        },
+      }),
+    );
+    expect(result.errors).toEqual([]);
+  });
+});
+
+describe('date & lifespan sanity', () => {
+  it('rejects a date in the future as a likely typo', () => {
+    const result = collectContent(writeTree({ 'events/ev.json': { ...evBase(), dates: { start: '2999' } } }));
+    expect(messages(result.errors)).toContain('is in the future');
+  });
+
+  it('warns on a lifespan longer than 120 years', () => {
+    const result = collectContent(
+      writeTree({ 'people/pe.json': { ...peBase(), lifespan: { start: '1700', end: '1980' } } }),
+    );
+    expect(messages(result.warnings)).toContain('lifespan spans');
+    expect(result.data).not.toBeNull(); // warning, not error
+  });
+});
+
+describe('sub-event temporal containment', () => {
+  it('warns when a sub-event does not overlap its parent event', () => {
+    const result = collectContent(
+      writeTree({
+        'events/parent.json': { ...evBase(), id: 'parent', dates: { start: '1948', end: '1949' } },
+        'events/child.json': { ...evBase(), id: 'child', parentId: 'parent', dates: { start: '1970' } },
+      }),
+    );
+    expect(messages(result.warnings)).toContain('does not overlap parent event "parent"');
+    expect(result.data).not.toBeNull();
+  });
+
+  it('does not warn when a sub-event falls within its parent', () => {
+    const result = collectContent(
+      writeTree({
+        'events/parent.json': { ...evBase(), id: 'parent', dates: { start: '1948', end: '1949' } },
+        'events/child.json': { ...evBase(), id: 'child', parentId: 'parent', dates: { start: '1948-06' } },
+      }),
+    );
+    expect(messages(result.warnings)).not.toContain('does not overlap');
+  });
+});
+
+describe('relations hygiene', () => {
+  it('rejects a self-referential relation', () => {
+    const result = collectContent(writeTree({ 'relations.json': [{ from: 'pe', to: 'pe', type: 'related-to' }] }));
+    expect(messages(result.errors)).toContain('links "pe" to itself');
+    expect(result.data).toBeNull();
+  });
+
+  it('warns on a duplicate relation edge', () => {
+    const result = collectContent(
+      writeTree({
+        'relations.json': [
+          { from: 'pe', to: 'ev', type: 'participated-in' },
+          { from: 'pe', to: 'ev', type: 'participated-in' },
+        ],
+      }),
+    );
+    expect(messages(result.warnings)).toContain('duplicate relation');
+  });
+});
+
+describe('intra-list duplicate references', () => {
+  it('warns on a repeated id within a reference list', () => {
+    const result = collectContent(
+      writeTree({ 'events/ev.json': { ...evBase(), regionIds: ['reg', 'reg'] } }),
+    );
+    expect(messages(result.warnings)).toContain('duplicate entry "reg" in regionIds');
+  });
+});
+
 /** The baseline work entity, for per-test mutation. */
 function require_work(): Record<string, unknown> {
   return {
@@ -159,5 +287,6 @@ function require_work(): Record<string, unknown> {
     coveredPeriod: { start: '1900', end: '1980' },
     importance: 40,
     regionIds: ['reg'],
+    sources: [{ title: { he: 'מקור' } }],
   };
 }

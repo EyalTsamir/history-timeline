@@ -1,0 +1,43 @@
+{
+  "id": "deir-yassin",
+  "type": "event",
+  "title": {
+    "he": "פרשת דיר יאסין"
+  },
+  "description": {
+    "he": "כיבוש הכפר הערבי דיר יאסין סמוך לירושלים באפריל 1948 בידי האצ״ל והלח״י, שבמהלכו נהרגו עשרות מתושביו, בהם נשים וילדים. הפרשה שנויה במחלוקת היסטורית קשה, ומספר ההרוגים ונסיבות הקרב עודם נתונים בוויכוח; היא תרמה לבריחת ערבים ממקומות רבים."
+  },
+  "dates": {
+    "start": "1948-04-09"
+  },
+  "importance": 38,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "jerusalem"
+  ],
+  "parentId": "war-of-independence",
+  "sources": [
+    {
+      "title": {
+        "he": "יד יצחק בן-צבי"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פרשת_דיר_יאסין"
+    }
+  ]
+}

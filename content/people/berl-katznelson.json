@@ -1,0 +1,37 @@
+{
+  "id": "berl-katznelson",
+  "type": "person",
+  "name": {
+    "he": "ברל כצנלסון"
+  },
+  "bio": {
+    "he": "מנהיג רוחני של תנועת העבודה ומעצב האידאולוגיה שלה; ממקימי ההסתדרות, \"דבר\" ו\"עם עובד\", והוגה מרכזי של החברה הארצישראלית המתהווה."
+  },
+  "lifespan": {
+    "start": "1887-01-25",
+    "end": "1944-08-12"
+  },
+  "categoryIds": [
+    "pioneers"
+  ],
+  "importance": 44,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ברל_כצנלסון"
+    }
+  ]
+}

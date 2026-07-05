@@ -25,6 +25,10 @@
   "_regionIds": "ids from content/taxonomies/regions.json the work is set in.",
   "regionIds": ["israel"],
   "_image": "Optional cover image: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Source / purchase / catalog links; label is the Hebrew display text.",
-  "links": []
+  "_links": "Optional related reading / catalog links. NOT the citation — use \"sources\". Placeholder URLs (\"...\", example.com) are rejected.",
+  "links": [],
+  "_sources": "REQUIRED — at least one citation (e.g. the publisher, a library catalogue, or a review). Add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
+  "sources": [
+    { "title": { "he": "קטלוג הספרייה הלאומית" }, "publisher": "הספרייה הלאומית של ישראל", "kind": "library" }
+  ]
 }

@@ -62,13 +62,61 @@ export const ImageSchema = z
   .strict();
 export type Image = z.infer<typeof ImageSchema>;
 
+/**
+ * A citable http(s) URL that isn't an authoring placeholder. `z.string().url()`
+ * alone accepts the templates' `https://…/wiki/...` and `example.com` stand-ins;
+ * those must never reach the app as if they were real sources (docs/04 sourcing
+ * policy). Reachability is deliberately NOT checked — that needs the network and
+ * would make validation flaky; broken links are a content-review concern.
+ */
+export const CitationUrlSchema = z
+  .string()
+  .url()
+  .refine((u) => /^https?:\/\//i.test(u), { message: 'url must use http(s)' })
+  .refine((u) => !/\.\.\.|example\.(com|org|net)|your-|placeholder|xxxx|<|>/i.test(u), {
+    message: 'url looks like a placeholder — cite a real source URL, or omit the url',
+  });
+
 export const LinkSchema = z
   .object({
     label: TextSchema,
-    url: z.string().url(),
+    url: CitationUrlSchema,
   })
   .strict();
 export type Link = z.infer<typeof LinkSchema>;
+
+/**
+ * A citation backing an entity's facts (docs/04#sourcing). Distinct from `links`
+ * (related reading): a source answers "how do we know this?". Prefer naming an
+ * authoritative institution (national library, archive, university, museum,
+ * established encyclopedia); attach `url` only when it is a real, stable page.
+ * The validator requires every timeline entity to carry at least one source.
+ */
+export const SOURCE_KINDS = [
+  'archive',
+  'library',
+  'museum',
+  'encyclopedia',
+  'reference',
+  'academic',
+  'government',
+  'book',
+  'press',
+  'website',
+] as const;
+
+export const SourceSchema = z
+  .object({
+    /** Display text — the source's name/title (Hebrew, but may hold a Latin name). */
+    title: TextSchema,
+    /** Institution or publisher behind the source, when distinct from the title. */
+    publisher: z.string().trim().min(1).optional(),
+    /** Real, stable URL — omit rather than guess. */
+    url: CitationUrlSchema.optional(),
+    kind: z.enum(SOURCE_KINDS).optional(),
+  })
+  .strict();
+export type Source = z.infer<typeof SourceSchema>;
 
 /** 1–100; authored per the rubric in docs/05-semantic-zoom.md#importance-rubric. */
 export const ImportanceSchema = z.number().int().min(1).max(100);
@@ -95,6 +143,8 @@ export const EventSchema = z
     tags: z.array(z.string()).optional(),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
+    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
   .strict();
@@ -113,6 +163,8 @@ export const PersonSchema = z
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
+    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
   .strict();
@@ -143,6 +195,8 @@ export const WorkSchema = z
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
+    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
   .strict()

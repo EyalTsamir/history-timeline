@@ -1,0 +1,47 @@
+{
+  "id": "chaim-weizmann",
+  "type": "person",
+  "name": {
+    "he": "חיים ויצמן"
+  },
+  "bio": {
+    "he": "מדען-כימאי ומנהיג ציוני, נשיאה הראשון של מדינת ישראל (1949–1952). פעל שנים בזירה הבינלאומית למען הבית הלאומי היהודי, ומעורבותו סייעה להצהרת בלפור."
+  },
+  "lifespan": {
+    "start": "1874-11-27",
+    "end": "1952-11-09"
+  },
+  "categoryIds": [
+    "leaders",
+    "scientists"
+  ],
+  "importance": 78,
+  "regionIds": [
+    "israel",
+    "rehovot",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/חיים_ויצמן"
+    }
+  ]
+}

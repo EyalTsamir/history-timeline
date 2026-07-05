@@ -1,0 +1,36 @@
+{
+  "id": "eban-autobiography",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "אבא אבן — אוטוביוגרפיה"
+  },
+  "description": {
+    "he": "ספר זיכרונותיו של המדינאי והדיפלומט אבא אבן, המשקף את דרכו ואת מאבקיה המדיניים של ישראל בזירה הבינלאומית מראשית המדינה ועד שנות השבעים."
+  },
+  "authorPersonIds": [
+    "abba-eban"
+  ],
+  "subjectPersonIds": [
+    "abba-eban"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1977",
+  "coveredPeriod": {
+    "start": "1915",
+    "end": "1977"
+  },
+  "importance": 28,
+  "regionIds": [
+    "israel",
+    "usa"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

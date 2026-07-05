@@ -65,11 +65,16 @@ function prefersReducedMotion(): boolean {
   return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/** Live visible-range readout — isolated so per-frame pans re-render only this. */
+/**
+ * Live visible-range readout — isolated so per-frame pans re-render only this.
+ * aria-live announces the range to screen-reader users; for the primary SR
+ * interaction (keyboard arrows/±) each keypress is one discrete change, and
+ * `polite` coalesces the rapid updates of a mouse/touch drag.
+ */
 function RangeReadout() {
   const window = useViewportStore((s) => s.window);
   return (
-    <span className={styles.readout}>
+    <span className={styles.readout} aria-live="polite" aria-atomic="true">
       <span className="visually-hidden">{STRINGS.visibleRangeLabel}: </span>
       {formatWindowRange(window)}
     </span>
@@ -255,6 +260,9 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     if (pointers.current.size === 1) {
       drag.current = { lastX: e.clientX, lastT: e.timeStamp, velocity: 0 };
       movedPx.current = 0;
+      // Fresh gesture: clear any suppress left set by a prior pan/pinch that
+      // never emitted a trailing click, so this tap's click isn't swallowed.
+      suppressClick.current = false;
     } else {
       drag.current = null; // two pointers → pinch, never a click
       suppressClick.current = true;
@@ -511,7 +519,11 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
               </span>
             ))}
           </div>
-          {isEmpty && <p className={styles.emptyNotice}>{STRINGS.emptyViewNotice}</p>}
+          {isEmpty && (
+            <p className={styles.emptyNotice} role="status">
+              {STRINGS.emptyViewNotice}
+            </p>
+          )}
         </div>
 
         <div className={styles.ruler}>

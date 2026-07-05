@@ -10,5 +10,12 @@
   "dates": {
     "start": "1950"
   },
-  "importance": 50
+  "importance": 50,
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
+  ]
 }

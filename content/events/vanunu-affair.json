@@ -1,0 +1,38 @@
+{
+  "id": "vanunu-affair",
+  "type": "event",
+  "title": {
+    "he": "פרשת ואנונו"
+  },
+  "description": {
+    "he": "ב-1986 חשף מרדכי ואנונו לעיתונות מידע על הכור הגרעיני בדימונה, נחטף לישראל ונשפט למאסר ממושך; פרשה ששמה זרקור בינלאומי על \"עמימות\" הגרעין הישראלי."
+  },
+  "dates": {
+    "start": "1986",
+    "approx": true
+  },
+  "importance": 18,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "israel",
+    "dimona"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מרדכי_ואנונו"
+    }
+  ]
+}

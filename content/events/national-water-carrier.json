@@ -1,0 +1,45 @@
+{
+  "id": "national-water-carrier",
+  "type": "event",
+  "title": {
+    "he": "המוביל הארצי"
+  },
+  "description": {
+    "he": "מפעל המים הלאומי שהושלם ב-1964 והוליך מים מן הכינרת שבצפון אל מרכז הארץ והנגב; מיזם הנדסי ענק ששינה את פני החקלאות והפיתוח בישראל."
+  },
+  "dates": {
+    "start": "1964-06-10"
+  },
+  "importance": 50,
+  "categoryIds": [
+    "science-tech",
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel",
+    "galilee",
+    "negev"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "רשות המים"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/המוביל_הארצי"
+    }
+  ]
+}

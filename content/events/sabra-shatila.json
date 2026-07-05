@@ -1,0 +1,38 @@
+{
+  "id": "sabra-shatila",
+  "type": "event",
+  "title": {
+    "he": "טבח סברה ושתילה וּועדת כהאן"
+  },
+  "description": {
+    "he": "בספטמבר 1982 טבחו אנשי המיליציה הנוצרית במחנות הפליטים סברה ושתילה בביירות, בעת ששהה שם צה״ל. ועדת כהאן שחקרה את האירוע קבעה אחריות עקיפה של בכירים ישראלים."
+  },
+  "dates": {
+    "start": "1982-09-16",
+    "end": "1982-09-18"
+  },
+  "importance": 48,
+  "categoryIds": [
+    "war-security"
+  ],
+  "regionIds": [
+    "lebanon"
+  ],
+  "parentId": "first-lebanon-war",
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/טבח_סברה_ושתילה"
+    }
+  ]
+}

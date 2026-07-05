@@ -1,0 +1,44 @@
+{
+  "id": "yitzhak-ben-zvi",
+  "type": "person",
+  "name": {
+    "he": "יצחק בן-צבי"
+  },
+  "bio": {
+    "he": "נשיאה השני של ישראל (1952–1963) וחוקר של קהילות ישראל ושל ארץ ישראל; ממנהיגי תנועת העבודה ומייסדי ההגנה, ומן החתומים על מגילת העצמאות."
+  },
+  "lifespan": {
+    "start": "1884-11-24",
+    "end": "1963-04-23"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 54,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יד יצחק בן-צבי"
+      },
+      "kind": "academic"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%99%D7%A6%D7%97%D7%A7_%D7%91%D7%9F-%D7%A6%D7%91%D7%99"
+    }
+  ]
+}

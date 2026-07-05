@@ -1,0 +1,36 @@
+{
+  "id": "bank-shares-crisis",
+  "type": "event",
+  "title": {
+    "he": "משבר מניות הבנקים"
+  },
+  "description": {
+    "he": "באוקטובר 1983 קרס הסדר \"ויסות מניות הבנקים\" שניפח את שער מניותיהם; המשבר גרם הפסדים כבדים לציבור והוביל להלאמה זמנית של הבנקים הגדולים."
+  },
+  "dates": {
+    "start": "1983-10-06"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "בנק ישראל"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/משבר_מניות_הבנקים"
+    }
+  ]
+}

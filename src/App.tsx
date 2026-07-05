@@ -152,6 +152,7 @@ export default function App({ dataSource }: AppProps) {
         )}
       </header>
       {body}
+      <footer className={styles.footer}>{STRINGS.curationNote}</footer>
       <Sheet
         open={sheetOpen}
         title={STRINGS.filtersHeading}

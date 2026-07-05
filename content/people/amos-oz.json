@@ -1,0 +1,45 @@
+{
+  "id": "amos-oz",
+  "type": "person",
+  "name": {
+    "he": "עמוס עוז"
+  },
+  "bio": {
+    "he": "מן הסופרים הישראלים הידועים בעולם, מחבר \"מיכאל שלי\" ו\"סיפור על אהבה וחושך\"; קול מרכזי בספרות ובשיח הציבורי ובמחנה השלום."
+  },
+  "lifespan": {
+    "start": "1939-05-04",
+    "end": "2018-12-28"
+  },
+  "categoryIds": [
+    "writers"
+  ],
+  "importance": 56,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "אנציקלופדיה בריטניקה"
+      },
+      "publisher": "Encyclopædia Britannica",
+      "kind": "encyclopedia"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/עמוס_עוז"
+    }
+  ]
+}

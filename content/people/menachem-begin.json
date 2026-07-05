@@ -1,13 +1,45 @@
 {
   "id": "menachem-begin",
   "type": "person",
-  "name": { "he": "מנחם בגין" },
-  "bio": { "he": "ראש הממשלה השישי של ישראל, מפקד האצ״ל בתקופת המנדט ומנהיג תנועת החרות. ב-1979 חתם על הסכם השלום עם מצרים, וזכה על כך בפרס נובל לשלום יחד עם אנואר סאדאת." },
-  "lifespan": { "start": "1913-08-16", "end": "1992-03-09" },
-  "categoryIds": ["leaders"],
+  "name": {
+    "he": "מנחם בגין"
+  },
+  "bio": {
+    "he": "ראש הממשלה השישי של ישראל, מפקד האצ״ל בתקופת המנדט ומנהיג תנועת החרות. ב-1979 חתם על הסכם השלום עם מצרים, וזכה על כך בפרס נובל לשלום יחד עם אנואר סאדאת."
+  },
+  "lifespan": {
+    "start": "1913-08-16",
+    "end": "1992-03-09"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
   "importance": 85,
-  "regionIds": ["israel", "jerusalem"],
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
   "links": [
-    { "label": { "he": "ויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מנחם_בגין" }
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מנחם_בגין"
+    }
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מרכז מורשת מנחם בגין"
+      },
+      "kind": "museum"
+    },
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/מנחם_בגין",
+      "kind": "website"
+    }
   ]
 }

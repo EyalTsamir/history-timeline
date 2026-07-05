@@ -1,0 +1,50 @@
+{
+  "id": "shabtai-past-continuous",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "זכרון דברים"
+  },
+  "description": {
+    "he": "רומן פורץ דרך של יעקב שבתאי המתאר תשעה חודשים בחיי בני משפחה בתל אביב של שנות השבעים, ומיטיב ללכוד את שקיעת עולם ערכי העבודה הישן."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "יעקב שבתאי"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1977",
+  "coveredPeriod": {
+    "start": "1970",
+    "end": "1976",
+    "approx": true
+  },
+  "importance": 32,
+  "regionIds": [
+    "israel",
+    "tel-aviv"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/זכרון_דברים_(ספר)"
+    }
+  ]
+}

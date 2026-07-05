@@ -1,0 +1,45 @@
+{
+  "id": "hula-drainage",
+  "type": "event",
+  "title": {
+    "he": "ייבוש ביצות החולה"
+  },
+  "description": {
+    "he": "מיזם לאומי גדול (בקירוב 1951–1958) לייבוש אגם וביצות החולה שבצפון, שנועד להכשיר קרקע חקלאית ולמגר את הקדחת; שנים לאחר מכן הובן גם נזקו האקולוגי וחלקו שוקם."
+  },
+  "dates": {
+    "start": "1951",
+    "end": "1958",
+    "approx": true
+  },
+  "importance": 18,
+  "categoryIds": [
+    "science-tech",
+    "economy-labor"
+  ],
+  "regionIds": [
+    "galilee"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "רשות הטבע והגנים"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ייבוש_החולה"
+    }
+  ]
+}

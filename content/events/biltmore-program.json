@@ -1,0 +1,43 @@
+{
+  "id": "biltmore-program",
+  "type": "event",
+  "title": {
+    "he": "תוכנית בילטמור"
+  },
+  "description": {
+    "he": "החלטה של ועידה ציונית בניו יורק (מאי 1942) שדרשה לראשונה בגלוי הקמת \"קהיליה יהודית\" (מדינה) בארץ ישראל ופתיחת שערי העלייה; ציון דרך בהובלה של דוד בן-גוריון לעבר עצמאות."
+  },
+  "dates": {
+    "start": "1942-05"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "usa",
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/תוכנית_בילטמור"
+    }
+  ]
+}

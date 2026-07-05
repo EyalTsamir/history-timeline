@@ -1,0 +1,45 @@
+{
+  "id": "yigael-yadin",
+  "type": "person",
+  "name": {
+    "he": "יגאל ידין"
+  },
+  "bio": {
+    "he": "הרמטכ״ל השני של צה״ל ואחד הארכאולוגים החשובים בישראל; ניהל חפירות מכוננות (מצדה, חצור) ולימים היה סגן ראש הממשלה."
+  },
+  "lifespan": {
+    "start": "1917-03-20",
+    "end": "1984-06-28"
+  },
+  "categoryIds": [
+    "military",
+    "scientists"
+  ],
+  "importance": 48,
+  "regionIds": [
+    "israel",
+    "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון צה״ל ומערכת הביטחון"
+      },
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/יגאל_ידין"
+    }
+  ]
+}

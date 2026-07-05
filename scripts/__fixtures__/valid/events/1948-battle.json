@@ -18,5 +18,12 @@
   ],
   "regionIds": [
     "jerusalem"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מקור לדוגמה"
+      }
+    }
   ]
 }

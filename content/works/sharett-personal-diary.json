@@ -1,0 +1,35 @@
+{
+  "id": "sharett-personal-diary",
+  "type": "work",
+  "workType": "autobiography",
+  "title": {
+    "he": "יומן אישי"
+  },
+  "description": {
+    "he": "יומנו האישי של משה שרת, שראה אור לאחר מותו, ובו תיעוד מקרוב של הצמרת המדינית והוויכוחים על מדיניות הביטחון והחוץ באמצע שנות החמישים."
+  },
+  "authorPersonIds": [
+    "moshe-sharett"
+  ],
+  "subjectPersonIds": [
+    "moshe-sharett"
+  ],
+  "subjectEventIds": [],
+  "publicationDate": "1978",
+  "coveredPeriod": {
+    "start": "1953",
+    "end": "1957"
+  },
+  "importance": 28,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ]
+}

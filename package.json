@@ -10,6 +10,10 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report",
+    "bench": "tsx scripts/bench-synthetic.ts",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "content:validate": "tsx scripts/validate-content.ts",
     "content:build": "tsx scripts/build-content.ts",
@@ -22,6 +26,7 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.0",
@@ -29,9 +34,13 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^10.6.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.7.0",
     "jsdom": "^26.1.0",
     "tsx": "^4.20.0",
     "typescript": "^5.8.0",
+    "typescript-eslint": "^8.62.1",
     "vite": "^7.0.0",
     "vitest": "^3.2.0"
   }

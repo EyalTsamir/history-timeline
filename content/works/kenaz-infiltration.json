@@ -1,0 +1,48 @@
+{
+  "id": "kenaz-infiltration",
+  "type": "work",
+  "workType": "historical-novel",
+  "title": {
+    "he": "התגנבות יחידים"
+  },
+  "description": {
+    "he": "רומן של יהושע קנז על טירונים בעלי פרופיל רפואי נמוך במחנה אימונים של צה״ל באמצע שנות החמישים; דיוקן חברתי חד של ישראל של דור המדינה."
+  },
+  "authorPersonIds": [],
+  "authorName": {
+    "he": "יהושע קנז"
+  },
+  "subjectPersonIds": [],
+  "subjectEventIds": [],
+  "publicationDate": "1986",
+  "coveredPeriod": {
+    "start": "1955",
+    "approx": true
+  },
+  "importance": 32,
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "קטלוג הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "לקסיקון הספרות העברית החדשה"
+      },
+      "kind": "reference"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/התגנבות_יחידים"
+    }
+  ]
+}

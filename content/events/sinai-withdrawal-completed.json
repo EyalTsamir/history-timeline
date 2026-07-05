@@ -1,0 +1,37 @@
+{
+  "id": "sinai-withdrawal-completed",
+  "type": "event",
+  "title": {
+    "he": "השלמת הנסיגה מסיני"
+  },
+  "description": {
+    "he": "באפריל 1982 השלימה ישראל את הנסיגה מחצי האי סיני במסגרת הסכם השלום עם מצרים, ובכלל זה פינוי העיר ימית והיישובים; מימוש מלא של הסכם השלום."
+  },
+  "dates": {
+    "start": "1982-04-25"
+  },
+  "importance": 40,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "sinai",
+    "egypt"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ארכיון המדינה"
+      },
+      "kind": "archive"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פינוי_חבל_ימית"
+    }
+  ]
+}

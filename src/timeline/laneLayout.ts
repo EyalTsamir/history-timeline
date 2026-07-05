@@ -18,7 +18,7 @@
 import type { EntityId } from '../domain/entities';
 import type { TimelineItem, TimelineKind } from '../domain/timelineItem';
 import type { PxRect, Scale } from './scale';
-import { extendRectTowardLater, rectOf, xOf } from './scale';
+import { extendRectTowardLater, rectOf } from './scale';
 import type { VisibleItem } from './visibility';
 import { layoutEnd } from './visibility';
 
@@ -186,11 +186,17 @@ function layoutBand(
     buildUnit(m, descendantsByTop.get(m.item.id) ?? [], scale, openEndYear, config, band),
   );
 
-  // --- density cap (docs/05): keep the most important units for this width
+  // --- density cap (docs/05): keep the most important units for this width.
+  // Budget is one viewport wide, but `units` spans the ±1-screen cull buffer
+  // (~3 screens). Rank VISIBLE-window units ahead of buffer units so the
+  // on-screen viewport gets its full budget — otherwise an on-screen item can be
+  // clustered while an equally/more-important OFF-screen buffer item keeps a slot.
   const capacity = Math.max(1, Math.ceil((band.maxItemsPer1000px * scale.widthPx) / 1000));
   const overflow: Unit[] = [];
   if (units.length > capacity) {
-    const ranked = [...units].sort(unitByImportance);
+    const { start: winStart, end: winEnd } = scale.window;
+    const offScreen = (u: Unit): number => (u.start < winEnd && winStart < u.end ? 0 : 1);
+    const ranked = [...units].sort((a, b) => offScreen(a) - offScreen(b) || unitByImportance(a, b));
     const keep = new Set(ranked.slice(0, capacity));
     overflow.push(...ranked.slice(capacity));
     units = units.filter((u) => keep.has(u));
@@ -199,11 +205,18 @@ function layoutBand(
   // --- pack into rows (px first-fit; deterministic order)
   const rows: PxRect[][] = [];
   const placed: Unit[] = [];
+  const degradedChildClusters: PositionedCluster[] = [];
   for (const unit of [...units].sort(unitByX)) {
     if (!placeUnit(unit, rows, band.maxRows, config.minGapPx)) {
-      // A container that doesn't fit degrades to a plain bar before clustering.
+      // A container that doesn't fit degrades to a plain bar before clustering —
+      // capture its children first so they collapse into a +N chip rather than
+      // vanishing without a trace.
+      const droppedChildren = unit.heightRows > 1 ? [...unit.children] : [];
+      const droppedCluster = unit.childCluster;
       if (unit.heightRows > 1 && placeUnit(flattenUnit(unit), rows, band.maxRows, config.minGapPx)) {
         placed.push(unit);
+        const chip = clusterOfDroppedChildren(droppedChildren, droppedCluster, config);
+        if (chip) degradedChildClusters.push(chip);
       } else {
         overflow.push(unit);
       }
@@ -220,10 +233,14 @@ function layoutBand(
   let rowsUsed = Math.max(1, rows.length);
   const clusters: PositionedCluster[] = placed.flatMap((u) => (u.childCluster ? [u.childCluster] : []));
 
-  // --- overflow → cluster chips on their own dedicated row
-  if (overflow.length > 0) {
+  // --- overflow (+ any degraded-container children) → chips on a dedicated row
+  if (overflow.length > 0 || degradedChildClusters.length > 0) {
     const chipRow = rowsUsed;
-    clusters.push(...buildClusters(overflow, chipRow, config));
+    const chipRowChips = buildClusters(overflow, chipRow, config);
+    for (const chip of degradedChildClusters) chip.row = chipRow;
+    chipRowChips.push(...degradedChildClusters);
+    // Overflow chips and degraded-child chips share one row — merge any that touch.
+    clusters.push(...mergeOverlappingChips(chipRowChips, config));
     rowsUsed += 1;
   }
 
@@ -486,8 +503,13 @@ function buildClusters(overflow: readonly Unit[], row: number, config: LayoutCon
   }
   if (current.length > 0) groups.push(current);
 
-  let chips = groups.map((group) => chipOf(group, row, config));
-  // Chip rects (fixed width, centered) may still touch — merge until clean.
+  const chips = groups.map((group) => chipOf(group, row, config));
+  return mergeOverlappingChips(chips, config);
+}
+
+/** Fixed-width, centered chips may still touch — merge neighbors until clean. */
+function mergeOverlappingChips(chips: PositionedCluster[], config: LayoutConfig): PositionedCluster[] {
+  chips.sort((a, b) => a.x - b.x);
   for (let merged = true; merged; ) {
     merged = false;
     for (let i = 0; i + 1 < chips.length; i++) {
@@ -501,6 +523,37 @@ function buildClusters(overflow: readonly Unit[], row: number, config: LayoutCon
     }
   }
   return chips;
+}
+
+/**
+ * A +N chip standing in for the children a container had to drop when it was
+ * degraded to a plain bar — so the sub-events keep a discoverable affordance
+ * instead of silently vanishing. Row is assigned by the caller.
+ */
+function clusterOfDroppedChildren(
+  children: readonly PositionedItem[],
+  childCluster: PositionedCluster | undefined,
+  config: LayoutConfig,
+): PositionedCluster | undefined {
+  const ids: EntityId[] = [];
+  let minX = Infinity, maxX = -Infinity, start = Infinity, end = -Infinity;
+  for (const c of children) {
+    ids.push(c.item.id);
+    minX = Math.min(minX, c.x);
+    maxX = Math.max(maxX, c.x + c.width);
+    start = Math.min(start, c.item.start);
+    end = Math.max(end, c.item.end ?? c.item.start);
+  }
+  if (childCluster) {
+    ids.push(...childCluster.ids);
+    minX = Math.min(minX, childCluster.x);
+    maxX = Math.max(maxX, childCluster.x + childCluster.width);
+    start = Math.min(start, childCluster.start);
+    end = Math.max(end, childCluster.end);
+  }
+  if (ids.length === 0) return undefined;
+  const center = (minX + maxX) / 2;
+  return { ids, x: center - config.clusterChipPx / 2, width: config.clusterChipPx, row: 0, start, end };
 }
 
 function chipOf(group: readonly Unit[], row: number, config: LayoutConfig): PositionedCluster {

@@ -1,0 +1,44 @@
+{
+  "id": "recession-mitun",
+  "type": "event",
+  "title": {
+    "he": "המיתון"
+  },
+  "description": {
+    "he": "האטה כלכלית חריפה בשנים 1966–1967 שלוותה באבטלה גבוהה ובירידה בעלייה; המיתון הסתיים עם הצמיחה שבאה לאחר מלחמת ששת הימים."
+  },
+  "dates": {
+    "start": "1966",
+    "end": "1967",
+    "approx": true
+  },
+  "importance": 16,
+  "categoryIds": [
+    "economy-labor"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "בנק ישראל"
+      },
+      "kind": "government"
+    },
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/מיתון_1966_בישראל"
+    }
+  ]
+}

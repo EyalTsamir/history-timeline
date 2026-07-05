@@ -1,0 +1,37 @@
+{
+  "id": "pollard-affair",
+  "type": "event",
+  "title": {
+    "he": "פרשת פולארד"
+  },
+  "description": {
+    "he": "חשיפתו ב-1985 של ג׳ונתן פולארד, אזרח אמריקאי שריגל למען ישראל בארצות הברית; הפרשה גרמה משבר אמון חמור ביחסי שתי המדינות."
+  },
+  "dates": {
+    "start": "1985-11"
+  },
+  "importance": 17,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "usa",
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/פרשת_פולארד"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "exodus-1947",
+  "type": "event",
+  "title": {
+    "he": "פרשת אקסודוס"
+  },
+  "description": {
+    "he": "ספינת מעפילים ובה כ-4,500 ניצולי שואה שנתפסה בידי הבריטים ביולי 1947; נוסעיה הוחזרו בכוח לגרמניה. הפרשה עוררה הד עולמי והמחישה את מצוקת ההעפלה ערב הקמת המדינה."
+  },
+  "dates": {
+    "start": "1947-07",
+    "approx": true
+  },
+  "importance": 44,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "regionIds": [
+    "israel",
+    "europe"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הספרייה הלאומית של ישראל"
+      },
+      "kind": "library"
+    },
+    {
+      "title": {
+        "he": "יד ושם"
+      },
+      "kind": "museum"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/אקסודוס_(אוניית_מעפילים)"
+    }
+  ]
+}

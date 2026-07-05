@@ -1,0 +1,36 @@
+{
+  "id": "national-unity-govt-1984",
+  "type": "event",
+  "title": {
+    "he": "ממשלת האחדות והרוטציה"
+  },
+  "description": {
+    "he": "לאחר בחירות 1984 הוקמה ממשלת אחדות רחבה עם הסכם רוטציה בראשות הממשלה בין שמעון פרס ליצחק שמיר; היא פעלה לבלימת האינפלציה ולנסיגה מלבנון."
+  },
+  "dates": {
+    "start": "1984-09"
+  },
+  "importance": 32,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "regionIds": [
+    "israel"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת — אתר הכנסת"
+      },
+      "kind": "government"
+    }
+  ],
+  "links": [
+    {
+      "label": {
+        "he": "ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/ממשלת_ישראל_העשרים_ואחת"
+    }
+  ]
+}

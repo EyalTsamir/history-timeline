@@ -30,7 +30,7 @@ export function makeTimelineItem(
     regionIds: [],
     categoryIds: [],
     styleToken: 'event',
-    detail: { description: '', displayDate: '', links: [] },
+    detail: { description: '', displayDate: '', links: [], sources: [] },
     ...overrides,
   };
 }
@@ -50,6 +50,7 @@ export function makeFixtureDataset(): Dataset {
         categoryIds: ['war-security'],
         regionIds: ['israel'],
         links: [],
+        sources: [{ title: { he: 'מקור' } }],
       },
       {
         id: 'fx-battle',
@@ -62,6 +63,7 @@ export function makeFixtureDataset(): Dataset {
         categoryIds: ['war-security'],
         regionIds: ['jerusalem'],
         links: [],
+        sources: [{ title: { he: 'מקור' } }],
       },
       {
         id: 'fx-declaration',
@@ -72,7 +74,8 @@ export function makeFixtureDataset(): Dataset {
         importance: 100,
         categoryIds: [],
         regionIds: ['tel-aviv'],
-        links: [{ label: { he: 'מקור' }, url: 'https://example.org/declaration' }],
+        links: [{ label: { he: 'קישור' }, url: 'https://he.wikipedia.org/wiki/הכרזת_העצמאות' }],
+        sources: [{ title: { he: 'מקור' } }],
       },
     ],
     people: [
@@ -86,6 +89,14 @@ export function makeFixtureDataset(): Dataset {
         importance: 98,
         regionIds: ['israel'],
         links: [],
+        sources: [
+          {
+            title: { he: 'אנציקלופדיה בריטניקה' },
+            publisher: 'Encyclopædia Britannica',
+            url: 'https://www.britannica.com/',
+            kind: 'encyclopedia',
+          },
+        ],
       },
       {
         id: 'fx-writer-alive',
@@ -97,6 +108,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 55,
         regionIds: ['jerusalem'],
         links: [],
+        sources: [{ title: { he: 'מקור' } }],
       },
     ],
     works: [
@@ -114,6 +126,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 55,
         regionIds: ['israel'],
         links: [],
+        sources: [{ title: { he: 'מקור' } }],
       },
       {
         id: 'fx-novel',
@@ -130,6 +143,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 45,
         regionIds: ['israel'],
         links: [],
+        sources: [{ title: { he: 'מקור' } }],
       },
     ],
     personCategories: [

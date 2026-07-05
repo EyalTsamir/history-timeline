@@ -50,6 +50,12 @@ describe('person normalization', () => {
     expect(item('fx-leader').detail.workIds).toEqual(['fx-autobio']);
     expect(item('fx-writer-alive').detail.workIds).toBeUndefined();
   });
+
+  it('carries the entity sources through to detail', () => {
+    const sources = item('fx-leader').detail.sources;
+    expect(sources).toHaveLength(1);
+    expect(sources[0]!.publisher).toBe('Encyclopædia Britannica');
+  });
 });
 
 describe('work normalization — D7 regression', () => {
@@ -133,6 +139,7 @@ describe('normalizeDataset ordering', () => {
       categoryIds: [],
       regionIds: [],
       links: [],
+      sources: [{ title: { he: 'מקור' } }],
     });
     dataset.events.push(tie('fx-tie-b', 50), tie('fx-tie-a', 50), tie('fx-tie-c', 80));
     const tied = normalizeDataset(dataset)
