@@ -1,58 +1,59 @@
 /**
- * The interactive timeline surface (docs/06 pipeline, docs/08 interaction).
+ * The event-field canvas (docs/14 §3–4): era washes + weighted event marks +
+ * chapter bands + the always-present dot band, over the adaptive ruler.
  *
- * Rendering: pure pipeline output only — filters (upstream) → semantic zoom →
- * cull → lane layout, memoized on the SETTLED window. During a pan gesture
- * the item/ruler layers move by CSS transform alone; layout recomputes when
- * the gesture settles, crosses the cull buffer, or the zoom changes
+ * Rendering: pure pipeline output only — filters (upstream) → cull →
+ * layoutField, memoized on the SETTLED window. During a pan gesture the
+ * item/ruler layers move by CSS transform alone; layout recomputes when the
+ * gesture settles, crosses the cull buffer, or the window span changes
  * (rAF-throttled) — docs/10's transform-only rule.
  *
- * Input: pointer drag (+ inertia), two-pointer pinch, wheel/trackpad,
- * keyboard (arrows/±/Home), and explicit buttons — every gesture has a
- * non-gesture equivalent. touch-action: pan-y leaves vertical scrolling to
- * the browser so the page never fights the timeline (docs/08).
+ * Zoom is ALTITUDE STEPPING (docs/14 §3): wheel/pinch deltas accumulate to a
+ * threshold and step century↔decade↔year anchored at the pointer; panning
+ * stays continuous. Every gesture keeps a non-gesture equivalent (buttons,
+ * segmented control, keyboard).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, KeyboardEvent, MouseEvent, PointerEvent as ReactPointerEvent } from 'react';
+import type { CSSProperties, KeyboardEvent, MouseEvent, PointerEvent as ReactPointerEvent, UIEvent } from 'react';
 import { APP_CONFIG } from '../app/config';
+import { ERAS, eraAt } from '../app/eras';
 import { STRINGS } from '../app/strings.he';
 import { currentDecimalYear } from '../domain/dates';
-import type { TimelineItem, TimelineKind } from '../domain/timelineItem';
+import type { EntityId } from '../domain/entities';
+import type { TimelineItem } from '../domain/timelineItem';
+import type { Altitude } from '../timeline/altitude';
+import { altitudeOf, canonicalSpan, stepAltitude } from '../timeline/altitude';
 import { TIMELINE_INTERACTION } from '../timeline/config';
-import { layoutTimeline } from '../timeline/laneLayout';
-import type { PositionedCluster } from '../timeline/laneLayout';
+import { FIELD_CONFIGS, layoutField } from '../timeline/fieldLayout';
+import type { FieldChapter } from '../timeline/fieldLayout';
 import {
   panOffsetPx,
   panWindowByPx,
+  rectOf,
   spanYears,
   xOf,
-  yearsPer1000px,
   zoomWindowAtPx,
 } from '../timeline/scale';
 import type { Scale, TimeWindow } from '../timeline/scale';
-import { effectiveMinImportance, zoomThreshold } from '../timeline/semanticZoom';
-import { SEMANTIC_ZOOM } from '../timeline/semanticZoom.config';
 import { formatWindowRange, generateTicks } from '../timeline/ticks';
-import { applySemanticVisibility, cullToWindow } from '../timeline/visibility';
-import { useFilterStore } from '../state/filterStore';
+import { cullToWindow } from '../timeline/visibility';
 import { useSelectionStore } from '../state/selectionStore';
 import { useViewportStore } from '../state/viewportStore';
 import { Button } from './Button';
-import { TimelineItemMark } from './TimelineItemMark';
+import { EventMark } from './EventMark';
 import styles from './Timeline.module.css';
 
-/** Row/band metrics (px) — mirrored by the CSS module's fixed sizes. */
-const ROW_PX = 32;
-const BAND_HEADER_PX = 26;
-const BAND_PAD_PX = 10;
+/** Row metrics (px) per altitude — mirrored by the CSS module's sizes. */
+const ROW_PX: Record<Altitude, number> = { century: 46, decade: 36, year: 34 };
+const FIELD_PAD_TOP_PX = 10;
+const DOT_ROW_PX = 13;
+const DOT_BAND_PAD_PX = 8;
 /** jsdom / first-paint fallback before ResizeObserver reports. */
 const FALLBACK_WIDTH_PX = 960;
-
-const BAND_LABELS: Record<TimelineKind, string> = {
-  event: STRINGS.bandEvents,
-  person: STRINGS.bandPeople,
-  work: STRINGS.bandWorks,
-};
+/** Era washes show their name only when this much of them is on screen. */
+const ERA_LABEL_MIN_PX = 110;
+/** Wheel accumulation resets after this idle gap (a new gesture intent). */
+const WHEEL_IDLE_MS = 400;
 
 interface TimelineProps {
   /** Already user-filtered, time-sorted items (docs/07 flows in above us). */
@@ -66,16 +67,17 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Live visible-range readout — isolated so per-frame pans re-render only this.
- * aria-live announces the range to screen-reader users; for the primary SR
- * interaction (keyboard arrows/±) each keypress is one discrete change, and
- * `polite` coalesces the rapid updates of a mouse/touch drag.
+ * Live "where am I" readout — era name + visible range; isolated so per-frame
+ * pans re-render only this. aria-live announces changes politely.
  */
 function RangeReadout() {
   const window = useViewportStore((s) => s.window);
+  const wholeRange = altitudeOf(spanYears(window)) === 'century';
+  const era = eraAt((window.start + window.end) / 2);
   return (
     <span className={styles.readout} aria-live="polite" aria-atomic="true">
       <span className="visually-hidden">{STRINGS.visibleRangeLabel}: </span>
+      <strong>{wholeRange ? STRINGS.readoutWholeRange : STRINGS.eraNames[era.id]}</strong> ·{' '}
       {formatWindowRange(window)}
     </span>
   );
@@ -93,7 +95,6 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
 
   const setWindow = useViewportStore((s) => s.setWindow);
   const resetView = useViewportStore((s) => s.reset);
-  const minImportance = useFilterStore((s) => s.minImportance);
   const selectedId = useSelectionStore((s) => s.selectedId);
   const select = useSelectionStore((s) => s.select);
   const clearSelection = useSelectionStore((s) => s.clear);
@@ -102,6 +103,9 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
   const [layoutWindow, setLayoutWindow] = useState<TimeWindow>(() => useViewportStore.getState().window);
   const layoutWindowRef = useRef(layoutWindow);
   layoutWindowRef.current = layoutWindow;
+
+  /** Chapters the user opened in place ("עוד N") — never a zoom change. */
+  const [expandedChapters, setExpandedChapters] = useState<ReadonlySet<EntityId>>(new Set());
 
   const openEndYear = useMemo(() => currentDecimalYear(), []);
 
@@ -161,18 +165,14 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     applyTransform(panOffsetPx(layoutWindow, useViewportStore.getState().window, widthPx, dir));
   }, [layoutWindow, widthPx, dir, applyTransform]);
 
-  // --- the pure pipeline (docs/06), memoized on the settled window ------------
+  // --- the pure pipeline (docs/14 §4), memoized on the settled window ---------
+  const altitude = altitudeOf(spanYears(layoutWindow));
   const scale = useMemo<Scale>(() => ({ window: layoutWindow, widthPx, dir }), [layoutWindow, widthPx, dir]);
 
   const layout = useMemo(() => {
-    const floor = effectiveMinImportance(
-      zoomThreshold(yearsPer1000px(layoutWindow, widthPx), SEMANTIC_ZOOM),
-      minImportance,
-    );
-    const visible = applySemanticVisibility(items, floor, SEMANTIC_ZOOM.fadeBand);
-    const culled = cullToWindow(visible, layoutWindow, TIMELINE_INTERACTION.bufferScreens, openEndYear);
-    return layoutTimeline(culled, scale, openEndYear);
-  }, [items, minImportance, layoutWindow, widthPx, scale, openEndYear]);
+    const culled = cullToWindow(items, layoutWindow, TIMELINE_INTERACTION.bufferScreens, openEndYear);
+    return layoutField(culled, scale, altitude, expandedChapters, openEndYear);
+  }, [items, layoutWindow, scale, altitude, expandedChapters, openEndYear]);
 
   const ticks = useMemo(() => {
     const buffer = spanYears(layoutWindow) * TIMELINE_INTERACTION.bufferScreens;
@@ -182,16 +182,83 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     });
   }, [layoutWindow, widthPx]);
 
-  const bandGeometry = useMemo(() => {
-    let top = 0;
-    return layout.bands.map((band) => {
-      const geometry = { band, top, rowsTop: top + BAND_HEADER_PX };
-      top += BAND_HEADER_PX + band.rows * ROW_PX + BAND_PAD_PX;
-      return geometry;
+  /**
+   * Era washes, clipped to the buffered cover range — an unclipped era can
+   * project tens of thousands of px off-screen at the year altitude, and
+   * such overflow displaces the scroll origin of the overflow:hidden
+   * viewport. Labels clamp to the visible part (D14).
+   */
+  const eraWashes = useMemo(() => {
+    const buffer = spanYears(layoutWindow) * TIMELINE_INTERACTION.bufferScreens;
+    const coverStart = layoutWindow.start - buffer;
+    const coverEnd = layoutWindow.end + buffer;
+    return ERAS.flatMap((era) => {
+      const start = Math.max(era.start, coverStart);
+      const end = Math.min(era.end, coverEnd);
+      if (start >= end) return [];
+      const rect = rectOf(scale, start, end);
+      const lo = Math.max(rect.x, 0);
+      const hi = Math.min(rect.x + rect.width, widthPx);
+      return [{ era, rect, labelX: lo, labelWidth: hi - lo }];
     });
-  }, [layout]);
-  const bandsHeightPx = bandGeometry.reduce((h, g) => h + BAND_HEADER_PX + g.band.rows * ROW_PX + BAND_PAD_PX, 0);
-  const isEmpty = layout.bands.every((b) => b.items.length === 0 && b.clusters.length === 0);
+  }, [scale, widthPx, layoutWindow]);
+
+  const rowPx = ROW_PX[altitude];
+  const dotSubRows = FIELD_CONFIGS[altitude].dotSubRows;
+  const rowsPx = Math.max(layout.rowsUsed, 1) * rowPx;
+  const dotBandTop = FIELD_PAD_TOP_PX + rowsPx + DOT_BAND_PAD_PX;
+  const fieldHeightPx = dotBandTop + dotSubRows * DOT_ROW_PX + DOT_BAND_PAD_PX;
+  const isEmpty = layout.marks.length === 0 && layout.chapters.length === 0 && layout.dots.length === 0;
+
+  const rowTop = (row: number): number => FIELD_PAD_TOP_PX + row * rowPx;
+
+  const toggleChapter = (id: EntityId): void => {
+    setExpandedChapters((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  // --- altitude stepping (docs/14 §3) ----------------------------------------
+  const liveWindow = (): TimeWindow => useViewportStore.getState().window;
+  const surfaceX = (clientX: number): number =>
+    clientX - (surfaceRef.current?.getBoundingClientRect().left ?? 0);
+
+  /** One altitude step: +1 dives in, −1 climbs out, anchored at anchorPx. */
+  const stepTo = useCallback(
+    (direction: 1 | -1, anchorPx?: number) => {
+      const live = liveWindow();
+      const span = spanYears(live);
+      const current = altitudeOf(span);
+      const next = stepAltitude(current, direction);
+      if (next === 'century') {
+        resetView();
+        return;
+      }
+      if (next === current && direction === 1) return; // already at year — nowhere deeper
+      const defaultSpan = spanYears(useViewportStore.getState().defaultWindow);
+      const factor = canonicalSpan(next, defaultSpan) / span;
+      setWindow(zoomWindowAtPx(live, widthRef.current, dir, factor, anchorPx ?? widthRef.current / 2));
+    },
+    [dir, setWindow, resetView],
+  );
+
+  /** Jump straight to an altitude (segmented control), centered. */
+  const goToAltitude = useCallback(
+    (target: Altitude) => {
+      if (target === 'century') {
+        resetView();
+        return;
+      }
+      const live = liveWindow();
+      const defaultSpan = spanYears(useViewportStore.getState().defaultWindow);
+      const factor = canonicalSpan(target, defaultSpan) / spanYears(live);
+      setWindow(zoomWindowAtPx(live, widthRef.current, dir, factor, widthRef.current / 2));
+    },
+    [dir, setWindow, resetView],
+  );
 
   // --- gestures ---------------------------------------------------------------
   const pointers = useRef(new Map<number, { x: number; y: number }>());
@@ -199,6 +266,7 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
   const movedPx = useRef(0);
   const suppressClick = useRef(false);
   const inertiaRaf = useRef(0);
+  const pinchRatio = useRef(1);
 
   const stopInertia = useCallback(() => {
     if (inertiaRaf.current !== 0) {
@@ -207,10 +275,6 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     }
   }, []);
   useEffect(() => stopInertia, [stopInertia]);
-
-  const liveWindow = (): TimeWindow => useViewportStore.getState().window;
-  const surfaceX = (clientX: number): number =>
-    clientX - (surfaceRef.current?.getBoundingClientRect().left ?? 0);
 
   const startInertia = useCallback(
     (initialVelocity: number) => {
@@ -265,6 +329,7 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       suppressClick.current = false;
     } else {
       drag.current = null; // two pointers → pinch, never a click
+      pinchRatio.current = 1;
       suppressClick.current = true;
       capturePointers();
     }
@@ -304,10 +369,18 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       const newMidX = (tracked.x + other.x) / 2;
       const newDist = Math.max(1, Math.hypot(tracked.x - other.x, tracked.y - other.y));
 
-      let next = panWindowByPx(liveWindow(), widthRef.current, dir, newMidX - prevMidX);
-      next = zoomWindowAtPx(next, widthRef.current, dir, prevDist / newDist, surfaceX(newMidX));
-      setWindow(next);
-      suppressClick.current = true;
+      // Pan follows the midpoint continuously; the zoom component accumulates
+      // into an altitude step (docs/14 §3) instead of scaling freely.
+      setWindow(panWindowByPx(liveWindow(), widthRef.current, dir, newMidX - prevMidX));
+      pinchRatio.current *= prevDist / newDist;
+      const anchor = surfaceX(newMidX);
+      if (pinchRatio.current >= TIMELINE_INTERACTION.pinchStepRatio) {
+        stepTo(-1, anchor);
+        pinchRatio.current = 1;
+      } else if (pinchRatio.current <= 1 / TIMELINE_INTERACTION.pinchStepRatio) {
+        stepTo(1, anchor);
+        pinchRatio.current = 1;
+      }
     }
   };
 
@@ -333,40 +406,44 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
 
   // Wheel must preventDefault (page scroll/zoom), so it needs a non-passive
   // native listener — React's synthetic wheel handlers can't guarantee that.
+  // Vertical wheel accumulates into altitude steps; horizontal wheel pans.
   useEffect(() => {
     const el = surfaceRef.current;
     if (el === null) return;
+    let accum = 0;
+    let idleTimer: ReturnType<typeof setTimeout> | undefined;
     const onWheel = (e: WheelEvent): void => {
       e.preventDefault();
       stopInertia();
       const unit = e.deltaMode === 1 ? 16 : 1; // line-mode deltas (Firefox)
       const dx = e.deltaX * unit;
       const dy = e.deltaY * unit;
-      const anchor = surfaceX(e.clientX);
-      if (e.ctrlKey || e.metaKey) {
-        // trackpad pinch arrives as ctrl+wheel
-        const factor = Math.exp(dy * TIMELINE_INTERACTION.pinchWheelZoomSensitivity);
-        setWindow(zoomWindowAtPx(liveWindow(), widthRef.current, dir, factor, anchor));
-      } else if (Math.abs(dx) > Math.abs(dy)) {
+      if (Math.abs(dx) > Math.abs(dy)) {
         setWindow(panWindowByPx(liveWindow(), widthRef.current, dir, -dx));
-      } else {
-        const factor = Math.exp(dy * TIMELINE_INTERACTION.wheelZoomSensitivity);
-        setWindow(zoomWindowAtPx(liveWindow(), widthRef.current, dir, factor, anchor));
+        return;
+      }
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        accum = 0;
+      }, WHEEL_IDLE_MS);
+      const threshold =
+        e.ctrlKey || e.metaKey ? TIMELINE_INTERACTION.ctrlWheelStepPx : TIMELINE_INTERACTION.wheelStepPx;
+      accum += dy;
+      const anchor = surfaceX(e.clientX);
+      if (accum <= -threshold) {
+        stepTo(1, anchor); // wheel up / pinch-out → dive
+        accum = 0;
+      } else if (accum >= threshold) {
+        stepTo(-1, anchor); // wheel down / pinch-in → climb
+        accum = 0;
       }
     };
     el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, [dir, setWindow, stopInertia]);
-
-  const zoomStep = useCallback(
-    (factor: number, anchorPx?: number) => {
-      stopInertia();
-      setWindow(
-        zoomWindowAtPx(liveWindow(), widthRef.current, dir, factor, anchorPx ?? widthRef.current / 2),
-      );
-    },
-    [dir, setWindow, stopInertia],
-  );
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+      clearTimeout(idleTimer);
+    };
+  }, [dir, setWindow, stopInertia, stepTo]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
     const width = widthRef.current;
@@ -382,11 +459,13 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
         break;
       case '+':
       case '=':
-        zoomStep(TIMELINE_INTERACTION.stepZoomFactor);
+        stopInertia();
+        stepTo(1);
         break;
       case '-':
       case '_':
-        zoomStep(1 / TIMELINE_INTERACTION.stepZoomFactor);
+        stopInertia();
+        stepTo(-1);
         break;
       case 'Home':
         stopInertia();
@@ -418,19 +497,24 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     select(id);
   };
 
-  const onClusterClick = (e: MouseEvent, cluster: PositionedCluster): void => {
-    e.stopPropagation();
-    if (suppressClick.current) {
-      suppressClick.current = false;
-      return;
-    }
-    // The chip disappears once its contents unfold — park focus on the surface.
-    surfaceRef.current?.focus();
-    const pad = Math.max(cluster.end - cluster.start, 1e-6) * TIMELINE_INTERACTION.clusterZoomPaddingFraction;
-    setWindow({ start: cluster.start - pad, end: cluster.end + pad });
+  /**
+   * Focusing/clicking a partially-clipped item makes browsers auto-scroll an
+   * overflow:hidden container to reveal it, silently displacing every layer
+   * off the ruler. Position is owned by the transform pipeline — pin the
+   * scroll origin.
+   */
+  const pinScroll = (e: UIEvent<HTMLDivElement>): void => {
+    const el = e.currentTarget;
+    if (el.scrollLeft !== 0) el.scrollLeft = 0;
+    if (el.scrollTop !== 0) el.scrollTop = 0;
   };
 
   // --- render -----------------------------------------------------------------
+  const foldButtonStyle = (chapter: FieldChapter): CSSProperties =>
+    dir === 'rtl'
+      ? { left: chapter.x + 4, top: rowTop(chapter.row) + 4 }
+      : { left: chapter.x + chapter.width - 4, top: rowTop(chapter.row) + 4, transform: 'translateX(-100%)' };
+
   return (
     <section className={styles.timeline} aria-label={STRINGS.timelineRegionLabel}>
       <div
@@ -447,9 +531,9 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
         onKeyDown={onKeyDown}
         onClick={onSurfaceClick}
         onDoubleClick={(e) => {
-          // Double-click on empty canvas zooms in; rapid item clicks don't.
+          // Double-click on empty canvas dives one altitude; item clicks don't.
           if (!(e.target instanceof Element && e.target.closest('button'))) {
-            zoomStep(0.5, surfaceX(e.clientX));
+            stepTo(1, surfaceX(e.clientX));
           }
         }}
       >
@@ -457,67 +541,155 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
           {STRINGS.timelineInstructions}
         </p>
 
-        <div className={styles.bandsViewport} style={{ height: bandsHeightPx }}>
+        <div className={styles.bandsViewport} style={{ height: fieldHeightPx }} onScroll={pinScroll}>
           <div ref={bandsLayerRef} className={styles.bandsLayer}>
+            {eraWashes.map(({ era, rect, labelX, labelWidth }) => (
+              <Fragment key={era.id}>
+                <span
+                  className={styles.eraWash}
+                  style={{ left: rect.x, width: rect.width, background: `var(--era-${era.id})` }}
+                  aria-hidden="true"
+                />
+                {labelWidth >= ERA_LABEL_MIN_PX && (
+                  <span
+                    className={styles.eraWashLabel}
+                    style={{ left: labelX, width: labelWidth }}
+                    aria-hidden="true"
+                  >
+                    {STRINGS.eraNames[era.id]}
+                  </span>
+                )}
+              </Fragment>
+            ))}
             {ticks.map((tick) => (
               <span
                 key={`grid-${tick.t}`}
                 className={tick.major ? styles.gridlineMajor : styles.gridline}
-                style={{ left: xOf(scale, tick.t), height: bandsHeightPx }}
+                style={{ left: xOf(scale, tick.t), height: fieldHeightPx }}
                 aria-hidden="true"
               />
             ))}
-            {bandGeometry.map(({ band, rowsTop }) => (
-              <Fragment key={band.kind}>
-                {band.items.map((p) => (
-                  <Fragment key={p.item.id}>
-                    {p.isContainer && (
-                      <span
-                        className={styles.containerTint}
-                        style={
-                          {
-                            left: p.x,
-                            top: rowsTop + p.row * ROW_PX,
-                            width: p.width,
-                            height: p.heightRows * ROW_PX - 4,
-                            '--item-color': `var(--cat-${p.item.styleToken})`,
-                          } as CSSProperties
-                        }
-                        aria-hidden="true"
-                      />
-                    )}
-                    <TimelineItemMark
-                      p={p}
-                      topPx={rowsTop + p.row * ROW_PX}
-                      rowPx={ROW_PX}
-                      dir={dir}
-                      typeLabel={typeLabels.get(p.item.contentType) ?? p.item.contentType}
-                      selected={p.item.id === selectedId}
-                      onSelect={onSelectItem}
-                    />
-                  </Fragment>
+
+            {layout.chapters.map((chapter) => (
+              <Fragment key={chapter.item.id}>
+                <span
+                  className={styles.chapterTint}
+                  style={
+                    {
+                      left: chapter.x - 6,
+                      top: rowTop(chapter.row),
+                      width: chapter.width + 12,
+                      height: chapter.rows * rowPx - 4,
+                      '--item-color': `var(--cat-${chapter.item.styleToken})`,
+                    } as CSSProperties
+                  }
+                  aria-hidden="true"
+                />
+                <button
+                  type="button"
+                  className={
+                    chapter.item.id === selectedId
+                      ? `${styles.chapterHeader} ${styles.selected}`
+                      : styles.chapterHeader
+                  }
+                  style={
+                    {
+                      left: chapter.x,
+                      top: rowTop(chapter.row),
+                      width: chapter.width,
+                      height: rowPx - 6,
+                      '--item-color': `var(--cat-${chapter.item.styleToken})`,
+                    } as CSSProperties
+                  }
+                  data-item-id={chapter.item.id}
+                  aria-label={STRINGS.itemAriaLabel(
+                    typeLabels.get(chapter.item.contentType) ?? chapter.item.contentType,
+                    chapter.item.title,
+                    chapter.item.detail.displayDate,
+                  )}
+                  aria-current={chapter.item.id === selectedId ? 'true' : undefined}
+                  onClick={(e) => onSelectItem(e, chapter.item.id)}
+                >
+                  <span className={styles.labelAnchor} style={{ left: chapter.labelX - chapter.x, width: chapter.labelWidth }}>
+                    <span className={styles.markLabel}>{chapter.item.title}</span>
+                    <span className={styles.chapterBadge}>
+                      {STRINGS.chapterBadge(chapter.children.length + chapter.hiddenCount)}
+                    </span>
+                  </span>
+                </button>
+                {chapter.children.map((child) => (
+                  <EventMark
+                    key={child.item.id}
+                    mark={child}
+                    topPx={rowTop(child.row)}
+                    rowPx={rowPx}
+                    typeLabel={typeLabels.get(child.item.contentType) ?? child.item.contentType}
+                    selected={child.item.id === selectedId}
+                    onSelect={onSelectItem}
+                  />
                 ))}
-                {band.clusters.map((cluster) => (
+                {(chapter.hiddenCount > 0 || chapter.expanded) && (
                   <button
-                    key={`cluster-${cluster.ids[0]}`}
                     type="button"
-                    className={styles.clusterChip}
-                    style={{ left: cluster.x, top: rowsTop + cluster.row * ROW_PX, width: cluster.width }}
-                    aria-label={STRINGS.clusterAriaLabel(cluster.ids.length)}
-                    onClick={(e) => onClusterClick(e, cluster)}
+                    className={styles.chapterFold}
+                    style={foldButtonStyle(chapter)}
+                    aria-label={
+                      chapter.expanded
+                        ? STRINGS.chapterCollapseAria(chapter.item.title)
+                        : STRINGS.chapterMoreAria(chapter.hiddenCount, chapter.item.title)
+                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleChapter(chapter.item.id);
+                    }}
                   >
-                    {STRINGS.clusterChip(cluster.ids.length)}
+                    {chapter.expanded ? STRINGS.chapterCollapse : STRINGS.chapterMore(chapter.hiddenCount)}
                   </button>
-                ))}
+                )}
               </Fragment>
             ))}
-          </div>
-          <div className={styles.bandTitles}>
-            {bandGeometry.map(({ band, top }) => (
-              <span key={band.kind} className={styles.bandTitle} style={{ top }}>
-                {BAND_LABELS[band.kind]}
-              </span>
+
+            {layout.marks.map((mark) => (
+              <EventMark
+                key={mark.item.id}
+                mark={mark}
+                topPx={rowTop(mark.row)}
+                rowPx={rowPx}
+                typeLabel={typeLabels.get(mark.item.contentType) ?? mark.item.contentType}
+                selected={mark.item.id === selectedId}
+                onSelect={onSelectItem}
+              />
             ))}
+
+            {layout.dots.map((dot) => {
+              const baseLabel = STRINGS.itemAriaLabel(
+                typeLabels.get(dot.item.contentType) ?? dot.item.contentType,
+                dot.item.title,
+                dot.item.detail.displayDate,
+              );
+              const label =
+                dot.count > 1 ? baseLabel + STRINGS.dotAggregateSuffix(dot.count - 1) : baseLabel;
+              return (
+                <button
+                  key={dot.item.id}
+                  type="button"
+                  className={dot.item.id === selectedId ? `${styles.dot} ${styles.selected}` : styles.dot}
+                  style={
+                    {
+                      left: dot.x - 8,
+                      top: dotBandTop + dot.subRow * DOT_ROW_PX,
+                      '--item-color': `var(--cat-${dot.item.styleToken})`,
+                    } as CSSProperties
+                  }
+                  data-item-id={dot.item.id}
+                  data-dot-count={dot.count}
+                  title={label}
+                  aria-label={label}
+                  aria-current={dot.item.id === selectedId ? 'true' : undefined}
+                  onClick={(e) => onSelectItem(e, dot.item.id)}
+                />
+              );
+            })}
           </div>
           {isEmpty && (
             <p className={styles.emptyNotice} role="status">
@@ -526,7 +698,7 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
           )}
         </div>
 
-        <div className={styles.ruler}>
+        <div className={styles.ruler} onScroll={pinScroll}>
           <div ref={rulerLayerRef} className={styles.rulerLayer}>
             {ticks.map((tick) => (
               <span
@@ -542,14 +714,26 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       </div>
 
       <div className={styles.controls}>
-        <div className={styles.zoomButtons}>
-          <Button aria-label={STRINGS.zoomIn} onClick={() => zoomStep(TIMELINE_INTERACTION.stepZoomFactor)}>
+        <div className={styles.controlCluster}>
+          <div className={styles.altitudeSeg} role="group" aria-label={STRINGS.altitudeControlLabel}>
+            {(['century', 'decade', 'year'] as const).map((alt) => (
+              <button
+                key={alt}
+                type="button"
+                className={alt === altitude ? `${styles.segButton} ${styles.segActive}` : styles.segButton}
+                aria-pressed={alt === altitude ? 'true' : 'false'}
+                onClick={() => goToAltitude(alt)}
+              >
+                {STRINGS.altitudeNames[alt]}
+              </button>
+            ))}
+          </div>
+          <Button aria-label={STRINGS.zoomIn} onClick={() => stepTo(1)}>
             <span aria-hidden="true">+</span>
           </Button>
-          <Button aria-label={STRINGS.zoomOut} onClick={() => zoomStep(1 / TIMELINE_INTERACTION.stepZoomFactor)}>
+          <Button aria-label={STRINGS.zoomOut} onClick={() => stepTo(-1)}>
             <span aria-hidden="true">−</span>
           </Button>
-          <Button onClick={() => resetView()}>{STRINGS.resetView}</Button>
         </div>
         <RangeReadout />
       </div>

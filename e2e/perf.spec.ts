@@ -18,8 +18,10 @@ test('10k synthetic items: bounded rendering + responsive pan/zoom', async ({ pa
   await expect(page.getByText(/10000/)).toBeVisible();
 
   const items = page.locator('[data-item-id]');
-  // Core invariant: semantic zoom + density cap bound the DOM node count.
-  await expect(async () => expect(await items.count()).toBeLessThanOrEqual(80)).toPass();
+  // Core invariant (docs/14 + docs/10): labeled rows are budgeted and dots
+  // bucket per pixel cell, so the DOM node count is bounded by SCREEN SIZE,
+  // never by dataset size.
+  await expect(async () => expect(await items.count()).toBeLessThanOrEqual(1200)).toPass();
 
   const surface = page.getByRole('application');
   await surface.focus();
@@ -30,5 +32,5 @@ test('10k synthetic items: bounded rendering + responsive pan/zoom', async ({ pa
   const elapsed = Date.now() - t0;
   // 12 zoom/pan operations over 10k items complete quickly and stay bounded.
   expect(elapsed).toBeLessThan(4000);
-  await expect(async () => expect(await items.count()).toBeLessThanOrEqual(80)).toPass();
+  await expect(async () => expect(await items.count()).toBeLessThanOrEqual(1200)).toPass();
 });

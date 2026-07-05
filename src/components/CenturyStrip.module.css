@@ -1,0 +1,115 @@
+/*
+ * Century strip (docs/14 §6). Horizontal geometry (left/right/width) is
+ * injected inline — the component already resolved the axis direction, so
+ * physical properties are correct in both RTL and LTR (same rule as the
+ * timeline canvas). Everything else uses logical properties.
+ */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.strip {
+  position: relative;
+  block-size: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.strip:active {
+  cursor: grabbing;
+}
+
+.compact {
+  block-size: 28px;
+}
+
+.zone {
+  position: absolute;
+  inset-block: 0;
+}
+
+.zoneName {
+  position: absolute;
+  inset-block-start: 3px;
+  inset-inline-start: 50%;
+  transform: translateX(50%);
+  font-style: normal;
+  font-size: 10px;
+  color: var(--text-faint);
+  white-space: nowrap;
+  pointer-events: none;
+  max-inline-size: 96%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flag {
+  position: absolute;
+  inset-block-end: 5px;
+  inline-size: 5px;
+  block-size: 5px;
+  border-radius: 50%;
+  background: var(--seal);
+  transform: translateX(50%);
+  pointer-events: none;
+}
+
+.compact .flag {
+  inset-block-end: 3px;
+  inline-size: 4px;
+  block-size: 4px;
+}
+
+.brush {
+  position: absolute;
+  inset-block: 0;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: 0 0 0 999px color-mix(in srgb, var(--surface-page) 55%, transparent);
+  pointer-events: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.chip {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-family: inherit;
+  padding-block: 2px;
+  padding-inline: var(--space-3);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--border-strong);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.chipActive {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+}

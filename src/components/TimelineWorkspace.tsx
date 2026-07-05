@@ -19,7 +19,10 @@ import { selectFilterState, useFilterStore } from '../state/filterStore';
 import { useSelectionStore } from '../state/selectionStore';
 import { useViewportStore } from '../state/viewportStore';
 import { Button } from './Button';
+import { CenturyStrip } from './CenturyStrip';
+import { Chronicle } from './Chronicle';
 import { DetailPanel } from './DetailPanel';
+import { CastStrip, PeriodShelf } from './PresenceStrips';
 import { Sheet } from './Sheet';
 import { Timeline } from './Timeline';
 import styles from './TimelineWorkspace.module.css';
@@ -118,7 +121,9 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
     const item = itemById.get(id);
     if (item === undefined) return;
     select(id);
-    panIntoView(item);
+    // Only events live on the canvas (docs/14 §5) — people/works open their
+    // detail from the strips, and panning the window at them shows nothing.
+    if (item.kind === 'event') panIntoView(item);
   };
 
   const onPanelKeyDown = (e: KeyboardEvent<HTMLElement>): void => {
@@ -147,8 +152,18 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
         {isFilterActive(filters) && <Button onClick={clearAll}>{STRINGS.clearAll}</Button>}
       </div>
 
+      <CenturyStrip items={filtered} compact={!isDesktop} />
+
       <div className={isDesktop && selected !== undefined ? `${styles.stage} ${styles.stageWithPanel}` : styles.stage}>
-        <Timeline items={filtered} typeLabels={typeLabels} />
+        {isDesktop ? (
+          <div className={styles.canvasColumn}>
+            <Timeline items={filtered} typeLabels={typeLabels} />
+            <CastStrip items={filtered} onSelect={onSelectRelated} />
+            <PeriodShelf items={filtered} onSelect={onSelectRelated} />
+          </div>
+        ) : (
+          <Chronicle items={filtered} typeLabels={typeLabels} />
+        )}
 
         {isDesktop && selected !== undefined && (
           <aside

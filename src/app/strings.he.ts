@@ -46,25 +46,66 @@ export const STRINGS = {
     shown === 1 ? `מוצג פריט אחד מתוך ${total}` : `מוצגים ${shown} מתוך ${total} פריטים`,
   importanceValue: (n: number) => `חשיבות ${n}`,
 
-  // --- timeline surface (docs/06, docs/08) ---
+  // --- timeline surface (docs/14 guided expedition) ---
   timelineRegionLabel: 'ציר הזמן',
   timelineInstructions:
-    'מקשי החיצים מזיזים את התצוגה על פני הזמן; פלוס מגדיל, מינוס מקטין; Home חוזר לטווח המלא. מקש Tab מגיע לפריטים עצמם, ו-Enter פותח את פרטי הפריט.',
-  zoomIn: 'הגדלת התצוגה',
-  zoomOut: 'הקטנת התצוגה',
+    'מקשי החיצים מזיזים את התצוגה על פני הזמן; פלוס צולל לרמת תקריב קרובה, מינוס מרחיק; Home חוזר למבט המאה. מקש Tab מגיע לפריטים עצמם, ו-Enter פותח את פרטי הפריט.',
+  zoomIn: 'התקרבות',
+  zoomOut: 'התרחקות',
   resetView: 'טווח מלא',
   visibleRangeLabel: 'הטווח המוצג',
-  bandEvents: 'אירועים',
-  bandPeople: 'אנשים',
-  bandWorks: 'ספרים',
-  clusterChip: (n: number) => `+${n} נוספים`,
-  /** WCAG 2.5.3: the accessible name must contain the visible "+N נוספים" text. */
-  clusterAriaLabel: (n: number) => `+${n} נוספים — הגדלה להצגתם`,
   emptyViewNotice: 'אין פריטים להצגה בטווח ובסינון הנוכחיים',
   /** Item accessible name: "אירוע: מלחמת העצמאות, 1947–1949". */
   itemAriaLabel: (typeLabel: string, title: string, date: string) => `${typeLabel}: ${title}, ${date}`,
   /** Visual affordance on an open-ended lifespan — never a fabricated end date. */
   ongoingLifespan: 'נמשך עד היום',
+
+  // --- altitudes (docs/14 §3) ---
+  altitudeControlLabel: 'רמת התקריב',
+  altitudeNames: {
+    century: 'מאה',
+    decade: 'עשור',
+    year: 'שנה',
+  } as Record<'century' | 'decade' | 'year', string>,
+
+  // --- eras & century strip (docs/14 §6) ---
+  eraNames: {
+    mandate: 'המנדט הבריטי',
+    independence: 'קוממיות',
+    statebuilding: 'בניין המדינה',
+    wars: 'מלחמות והתפכחות',
+    upheaval: 'המהפך והשלום',
+    oslo: 'שנות אוסלו',
+  } as Record<string, string>,
+  centuryStripLabel: 'מפת המאה',
+  /** Readout era slot at the century altitude — the whole range is in view. */
+  readoutWholeRange: 'כל המאה',
+  /** Accessible label of the brush marking the visible window on the strip. */
+  stripWindowLabel: 'החלון המוצג',
+  eraChipsLabel: 'קפיצה לתקופה',
+  eraChipAria: (name: string, from: number, to: number) => `${name}, ${from}–${to}`,
+
+  // --- event field (docs/14 §4) ---
+  chapterBadge: (n: number) => (n === 1 ? 'פרק אחד' : `${n} פרקים`),
+  chapterMore: (n: number) => `עוד ${n}`,
+  chapterMoreAria: (n: number, title: string) =>
+    n === 1 ? `הצגת פרק נוסף אחד של ${title}` : `הצגת עוד ${n} פרקים של ${title}`,
+  chapterCollapse: 'צמצום',
+  chapterCollapseAria: (title: string) => `צמצום הפרקים של ${title}`,
+
+  /** Aggregated dot (docs/14 §4): the bucket's weightiest item + how many more share it. */
+  dotAggregateSuffix: (n: number) => (n === 1 ? ' ועוד פריט סמוך אחד' : ` ועוד ${n} פריטים סמוכים`),
+
+  // --- cast strip & period shelf (docs/14 §5) ---
+  castTitle: 'מי בתמונה',
+  shelfTitle: 'מדף התקופה',
+  presenceMore: (n: number) => `עוד ${n}`,
+  presenceMoreAria: (n: number) => (n === 1 ? 'הצגת פריט נוסף אחד' : `הצגת עוד ${n} פריטים`),
+  presenceCollapse: 'צמצום',
+
+  // --- mobile chronicle (docs/14 §7) ---
+  chronicleRegionLabel: 'כרוניקת ציר הזמן',
+  chronicleEraYears: (from: number, to: number) => `${from}–${to}`,
 
   // --- detail surface (docs/08#selection--detail) ---
   detailPanelLabel: 'פרטי הפריט',

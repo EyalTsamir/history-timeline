@@ -8,7 +8,6 @@ import { useFilterStore } from '../state/filterStore';
 import { useSelectionStore } from '../state/selectionStore';
 import { useViewportStore } from '../state/viewportStore';
 import { makeFixtureDataset } from '../test/fixtures';
-import { spanYears } from '../timeline/scale';
 import { TimelineWorkspace } from './TimelineWorkspace';
 
 const dataset = makeFixtureDataset();
@@ -70,11 +69,13 @@ describe('TimelineWorkspace — desktop detail panel', () => {
     expect(document.activeElement).toBe(war);
   });
 
-  it('person → work traversal re-selects and pans the viewport to fit the work', async () => {
+  it('person (cast strip) → work traversal re-selects without touching the window', async () => {
     const user = userEvent.setup();
     render(<TimelineWorkspace items={items} dataset={dataset} />);
 
-    await user.click(screen.getByRole('button', { name: /^אישיות: מנהיג לדוגמה/ }));
+    // People live in the cast strip (docs/14 §5), not on the canvas.
+    const cast = screen.getByText(STRINGS.castTitle).parentElement!;
+    await user.click(within(cast).getByRole('button', { name: /מנהיג לדוגמה/ }));
     const panel = await screen.findByRole('complementary', { name: STRINGS.detailPanelLabel });
     expect(within(panel).getByText(STRINGS.detailWorksAbout)).toBeInTheDocument();
 
@@ -87,10 +88,8 @@ describe('TimelineWorkspace — desktop detail panel', () => {
         name: 'אוטוביוגרפיה לדוגמה',
       }),
     ).toBeInTheDocument();
-    // The 88-year covered period doesn't fit the 77-year default window → zoom out to fit.
-    const after = useViewportStore.getState().window;
-    expect(spanYears(after)).toBeGreaterThan(spanYears(before));
-    expect(after.start).toBeLessThan(1886.5);
+    // Works aren't canvas geometry — selecting one never moves the period (docs/14 §5).
+    expect(useViewportStore.getState().window).toEqual(before);
 
     // Works publication metadata is shown but never used for positioning (D7).
     const workPanel = screen.getByRole('complementary', { name: STRINGS.detailPanelLabel });

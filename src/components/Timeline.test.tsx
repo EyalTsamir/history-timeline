@@ -7,6 +7,7 @@ import { useFilterStore } from '../state/filterStore';
 import { useSelectionStore } from '../state/selectionStore';
 import { useViewportStore } from '../state/viewportStore';
 import { makeFixtureDataset, makeTimelineItem } from '../test/fixtures';
+import { ALTITUDE_CONFIG } from '../timeline/altitude';
 import { spanYears } from '../timeline/scale';
 import type { TimeWindow } from '../timeline/scale';
 import { Timeline } from './Timeline';
@@ -19,7 +20,7 @@ const typeLabels = new Map<string, string>([
   ...dataset.workTypes.map((wt) => [wt.id, wt.name.he] as const),
 ]);
 
-const FULL: TimeWindow = { start: 1926.5, end: 2003.5 }; // span 77 → threshold 85 @ 960px
+const FULL: TimeWindow = { start: 1926.5, end: 2003.5 }; // span 77 → century altitude
 
 function initViewport(window: TimeWindow = FULL): void {
   useViewportStore.getState().init({
@@ -40,59 +41,54 @@ describe('Timeline', () => {
 
   afterEach(cleanup);
 
-  it('renders the application region, keyboard instructions, bands and ruler', () => {
+  it('renders the application region, instructions, altitude control and ruler', () => {
     render(<Timeline items={items} typeLabels={typeLabels} />);
     const region = screen.getByRole('application', { name: STRINGS.timelineRegionLabel });
     expect(region).toHaveAttribute('tabindex', '0');
     expect(screen.getByText(STRINGS.timelineInstructions)).toBeInTheDocument();
-    for (const band of [STRINGS.bandEvents, STRINGS.bandPeople, STRINGS.bandWorks]) {
-      expect(screen.getByText(band)).toBeInTheDocument();
-    }
-    // Decade ruler labels at this zoom.
+    // Altitude segmented control, current altitude pressed.
+    const centuryButton = screen.getByRole('button', { name: STRINGS.altitudeNames.century });
+    expect(centuryButton).toHaveAttribute('aria-pressed', 'true');
+    // Decade ruler labels at this zoom, and the live era-aware readout.
     expect(screen.getByText('1950')).toBeInTheDocument();
-    // Live range readout.
-    expect(screen.getByText('1926–2003')).toBeInTheDocument();
+    expect(screen.getByText(/1926–2003/)).toBeInTheDocument();
   });
 
-  it('semantic zoom: the wide view hides secondary items; a narrow window reveals them', () => {
-    const wide = render(<Timeline items={items} typeLabels={typeLabels} />);
-    expect(screen.getByRole('button', { name: /מלחמה לדוגמה/ })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /קרב לדוגמה/ })).not.toBeInTheDocument();
-    wide.unmount();
-
-    initViewport({ start: 1947, end: 1950 }); // ~3y per screen → low threshold
+  it('presence guarantee: every event renders at every altitude (mark or dot)', () => {
     render(<Timeline items={items} typeLabels={typeLabels} />);
+    // Anchors (importance ≥ 80) are labeled marks at century altitude…
+    expect(screen.getByRole('button', { name: /מלחמה לדוגמה/ })).toBeInTheDocument();
+    // …and the importance-40 sub-event is STILL on screen, as a dot.
     expect(screen.getByRole('button', { name: /קרב לדוגמה/ })).toBeInTheDocument();
-    // The parent renders too (container header) — sub-events never orphan.
-    expect(screen.getByRole('button', { name: /מלחמה לדוגמה/ })).toBeInTheDocument();
   });
 
-  it('zooming in via the store transitions items in without a remount', async () => {
+  it('diving to a year window folds sub-events into their parent chapter', async () => {
     render(<Timeline items={items} typeLabels={typeLabels} />);
-    expect(screen.queryByRole('button', { name: /קרב לדוגמה/ })).not.toBeInTheDocument();
-
     act(() => {
       useViewportStore.getState().setWindow({ start: 1947, end: 1950 });
     });
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /קרב לדוגמה/ })).toBeInTheDocument();
+      expect(screen.getByText(STRINGS.chapterBadge(1))).toBeInTheDocument();
     });
-    expect(screen.getByText('1947–1950')).toBeInTheDocument();
+    // Parent header and its bead both present and selectable.
+    expect(screen.getByRole('button', { name: /מלחמה לדוגמה/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /קרב לדוגמה/ })).toBeInTheDocument();
+    expect(screen.getByText(/1947–1950/)).toBeInTheDocument();
   });
 
-  it('keyboard: +/− zoom around the center, arrows pan (RTL: ← = forward in time), Home resets', () => {
+  it('keyboard: + dives to the decade span, − climbs back to the full range', () => {
     render(<Timeline items={items} typeLabels={typeLabels} />);
     const surface = screen.getByRole('application');
     surface.focus();
 
     const before = getWindow();
     fireEvent.keyDown(surface, { key: '+' });
-    const zoomedIn = getWindow();
-    expect(spanYears(zoomedIn)).toBeLessThan(spanYears(before));
-    expect((zoomedIn.start + zoomedIn.end) / 2).toBeCloseTo((before.start + before.end) / 2, 6);
+    const dived = getWindow();
+    expect(spanYears(dived)).toBeCloseTo(ALTITUDE_CONFIG.decadeSpan, 6);
+    expect((dived.start + dived.end) / 2).toBeCloseTo((before.start + before.end) / 2, 6);
 
     fireEvent.keyDown(surface, { key: '-' });
-    expect(spanYears(getWindow())).toBeCloseTo(spanYears(before), 6);
+    expect(getWindow()).toEqual(FULL); // climbing to century = the full default view
 
     const beforePan = getWindow();
     fireEvent.keyDown(surface, { key: 'ArrowLeft' });
@@ -106,15 +102,39 @@ describe('Timeline', () => {
     expect(getWindow()).toEqual(FULL);
   });
 
-  it('wheel: vertical zooms at the cursor, horizontal (trackpad) pans', () => {
+  it('the altitude segmented control jumps straight to a canonical span', async () => {
+    const user = userEvent.setup();
+    render(<Timeline items={items} typeLabels={typeLabels} />);
+    await user.click(screen.getByRole('button', { name: STRINGS.altitudeNames.year }));
+    expect(spanYears(getWindow())).toBeCloseTo(ALTITUDE_CONFIG.yearSpan, 6);
+    await user.click(screen.getByRole('button', { name: STRINGS.altitudeNames.century }));
+    expect(getWindow()).toEqual(FULL);
+  });
+
+  it('wheel accumulates to one altitude step; horizontal wheel pans continuously', () => {
+    initViewport({ start: 1944, end: 1956 }); // decade altitude
     render(<Timeline items={items} typeLabels={typeLabels} />);
     const surface = screen.getByRole('application');
 
-    const before = getWindow();
+    // One strong vertical tick (≥ threshold) → exactly one climb: decade → century.
     act(() => {
       surface.dispatchEvent(new WheelEvent('wheel', { deltaY: 300, bubbles: true, cancelable: true }));
     });
-    expect(spanYears(getWindow())).toBeGreaterThan(spanYears(before));
+    expect(getWindow()).toEqual(FULL);
+
+    // Small deltas accumulate without stepping until the threshold is crossed.
+    act(() => {
+      initViewport({ start: 1944, end: 1956 });
+    });
+    act(() => {
+      surface.dispatchEvent(new WheelEvent('wheel', { deltaY: -40, bubbles: true, cancelable: true }));
+    });
+    expect(spanYears(getWindow())).toBeCloseTo(12, 6);
+    act(() => {
+      surface.dispatchEvent(new WheelEvent('wheel', { deltaY: -40, bubbles: true, cancelable: true }));
+      surface.dispatchEvent(new WheelEvent('wheel', { deltaY: -40, bubbles: true, cancelable: true }));
+    });
+    expect(spanYears(getWindow())).toBeCloseTo(ALTITUDE_CONFIG.yearSpan, 6); // dive fired once
 
     const beforePan = getWindow();
     act(() => {
@@ -127,19 +147,19 @@ describe('Timeline', () => {
     expect(panned.start).not.toBeCloseTo(beforePan.start, 6);
   });
 
-  it('ctrl+wheel (trackpad pinch) zooms', () => {
+  it('ctrl+wheel (trackpad pinch) steps with the lower threshold', () => {
+    initViewport({ start: 1944, end: 1956 });
     render(<Timeline items={items} typeLabels={typeLabels} />);
     const surface = screen.getByRole('application');
-    const before = getWindow();
     act(() => {
       surface.dispatchEvent(
-        new WheelEvent('wheel', { deltaY: -200, ctrlKey: true, bubbles: true, cancelable: true }),
+        new WheelEvent('wheel', { deltaY: -80, ctrlKey: true, bubbles: true, cancelable: true }),
       );
     });
-    expect(spanYears(getWindow())).toBeLessThan(spanYears(before));
+    expect(spanYears(getWindow())).toBeCloseTo(ALTITUDE_CONFIG.yearSpan, 6);
   });
 
-  it('clicking an item selects it; Escape clears the selection', async () => {
+  it('clicking a mark selects it; Escape clears the selection', async () => {
     const user = userEvent.setup();
     render(<Timeline items={items} typeLabels={typeLabels} />);
     const war = screen.getByRole('button', { name: /מלחמה לדוגמה/ });
@@ -152,35 +172,67 @@ describe('Timeline', () => {
     expect(useSelectionStore.getState().selectedId).toBeNull();
   });
 
-  it('items expose type + precision-aware dates to assistive tech, chronologically ordered', () => {
+  it('dots stay selectable too — a click opens the same detail flow', async () => {
+    const user = userEvent.setup();
+    render(<Timeline items={items} typeLabels={typeLabels} />);
+    // At century altitude the importance-40 battle renders as a dot.
+    await user.click(screen.getByRole('button', { name: /קרב לדוגמה/ }));
+    expect(useSelectionStore.getState().selectedId).toBe('fx-battle');
+  });
+
+  it('events expose type + precision-aware dates to AT, chronologically ordered', () => {
     render(<Timeline items={items} typeLabels={typeLabels} />);
     expect(
       screen.getByRole('button', { name: 'אירוע: הכרזה לדוגמה, 14 במאי 1948' }),
     ).toBeInTheDocument();
-    // Person label uses the person kind word and the open-aware date format.
-    expect(screen.getByRole('button', { name: /^אישיות: מנהיג לדוגמה/ })).toBeInTheDocument();
-    // DOM order within the events band is chronological (tab order).
+    // People are NOT on the canvas anymore (docs/14 §5 — they live in the cast strip).
+    expect(screen.queryByRole('button', { name: /^אישיות:/ })).not.toBeInTheDocument();
     const marks = screen.getAllByRole('button', { name: /^אירוע:/ });
-    expect(marks.map((b) => b.getAttribute('data-item-id'))).toEqual(['fx-war', 'fx-declaration']);
+    expect(marks.map((b) => b.getAttribute('data-item-id'))).toEqual([
+      'fx-war',
+      'fx-declaration',
+      'fx-battle',
+    ]);
   });
 
-  it('a dense burst collapses into a cluster chip that zooms to fit on click', async () => {
-    const user = userEvent.setup();
+  it('a dense burst never collapses into chips — overflow degrades to dots', () => {
     const burst = Array.from({ length: 20 }, (_, i) =>
       makeTimelineItem(`burst-${String(i).padStart(2, '0')}`, 1948, 1949.2, { importance: 90 }),
     );
     render(<Timeline items={burst} typeLabels={typeLabels} />);
+    // Rows hold the weightiest marks; the co-located rest merge into dot
+    // buckets whose accessible names still account for every item.
+    const buttons = screen.getAllByRole('button', { name: /^אירוע:/ });
+    const accounted = buttons.reduce(
+      (n, b) => n + Number(b.getAttribute('data-dot-count') ?? 1),
+      0,
+    );
+    expect(accounted).toBe(20);
+    expect(screen.getAllByRole('button', { name: /ועוד \d+ פריטים סמוכים/ }).length).toBeGreaterThan(0);
+    // …and no "+N" cluster affordance exists anywhere.
+    expect(screen.queryByText(/\+\d+/)).not.toBeInTheDocument();
+  });
 
-    // 20 co-located items: the density cap keeps 8, the row budget places 5 —
-    // the remaining 15 collapse into one chip.
-    const chip = screen.getByRole('button', { name: STRINGS.clusterAriaLabel(15) });
-    expect(chip).toHaveTextContent(STRINGS.clusterChip(15));
+  it('chapter fold: "עוד N" expands children in place without changing the window', async () => {
+    const user = userEvent.setup();
+    const family = [
+      makeTimelineItem('parent', 1947.9, 1949.5, { importance: 95 }),
+      ...Array.from({ length: 5 }, (_, i) =>
+        makeTimelineItem(`kid-${i}`, 1948.2, 1948.3, { importance: 40, parentId: 'parent' }),
+      ),
+    ];
+    initViewport({ start: 1947, end: 1950 });
+    render(<Timeline items={family} typeLabels={typeLabels} />);
 
-    await user.click(chip);
-    const window = getWindow();
-    expect(spanYears(window)).toBeLessThan(3);
-    expect(window.start).toBeLessThanOrEqual(1948);
-    expect(window.end).toBeGreaterThanOrEqual(1949.2);
+    // Collapsed: 2 child rows fit → 3 folded.
+    const fold = screen.getByRole('button', { name: STRINGS.chapterMoreAria(3, 'פריט parent') });
+    const windowBefore = getWindow();
+    await user.click(fold);
+    expect(getWindow()).toEqual(windowBefore); // expanding is never a zoom change
+    await waitFor(() => {
+      expect(screen.getAllByRole('button', { name: /^אירוע: פריט kid/ })).toHaveLength(5);
+    });
+    expect(screen.getByRole('button', { name: STRINGS.chapterCollapseAria('פריט parent') })).toBeInTheDocument();
   });
 
   it('shows the empty notice when nothing is in range', () => {

@@ -9,17 +9,18 @@ import { normalizeDataset } from '../src/domain/normalize';
 import { currentDecimalYear } from '../src/domain/dates';
 import { applyFilters } from '../src/domain/filters';
 import type { FilterState } from '../src/domain/filters';
-import { yearsPer1000px } from '../src/timeline/scale';
+import { spanYears } from '../src/timeline/scale';
 import type { Scale, TimeWindow } from '../src/timeline/scale';
-import { effectiveMinImportance, zoomThreshold } from '../src/timeline/semanticZoom';
-import { SEMANTIC_ZOOM } from '../src/timeline/semanticZoom.config';
-import { applySemanticVisibility, cullToWindow } from '../src/timeline/visibility';
-import { layoutTimeline } from '../src/timeline/laneLayout';
+import { altitudeOf } from '../src/timeline/altitude';
+import { layoutField } from '../src/timeline/fieldLayout';
+import { castForWindow, shelfForWindow } from '../src/timeline/presence';
+import { cullToWindow } from '../src/timeline/visibility';
 import { TIMELINE_INTERACTION } from '../src/timeline/config';
 
 const N = Number(process.argv[2] ?? 10000);
 const WIDTH = 1200;
 const openEndYear = currentDecimalYear();
+const NO_EXPANDED = new Set<string>();
 const emptyFilter: FilterState = {
   regionIds: new Set(), personCategoryIds: new Set(), contentTypes: new Set(), minImportance: 0,
 };
@@ -45,25 +46,35 @@ console.log(`normalizeDataset(${items.length}): ${(performance.now() - tN).toFix
 const windows: Array<[string, TimeWindow]> = [
   ['full 100y', { start: 1900, end: 2000 }],
   ['70y', { start: 1930, end: 2000 }],
-  ['decade 10y', { start: 1965, end: 1975 }],
+  ['decade 12y', { start: 1963, end: 1975 }],
   ['5y', { start: 1965, end: 1970 }],
   ['2y', { start: 1967, end: 1969 }],
 ];
 
 for (const [name, window] of windows) {
   const scale: Scale = { window, widthPx: WIDTH, dir: 'rtl' };
-  const floor = effectiveMinImportance(zoomThreshold(yearsPer1000px(window, WIDTH), SEMANTIC_ZOOM), 0);
-  const visible = applySemanticVisibility(items, floor, SEMANTIC_ZOOM.fadeBand);
-  const culled = cullToWindow(visible, window, TIMELINE_INTERACTION.bufferScreens, openEndYear);
-  const layout = layoutTimeline(culled, scale, openEndYear);
-  const rendered = layout.bands.reduce((a, b) => a + b.items.length + b.clusters.length, 0);
-  console.log(`[${name}] floor=${Math.round(floor)}  visible=${visible.length}  culled=${culled.length}  rendered nodes=${rendered}`);
+  const altitude = altitudeOf(spanYears(window));
+  const culled = cullToWindow(items, window, TIMELINE_INTERACTION.bufferScreens, openEndYear);
+  const layout = layoutField(culled, scale, altitude, NO_EXPANDED, openEndYear);
+  const rendered =
+    layout.marks.length +
+    layout.dots.length +
+    layout.chapters.reduce((a, c) => a + 1 + c.children.length, 0);
+  console.log(
+    `[${name}] altitude=${altitude}  culled=${culled.length}  rendered nodes=${rendered} ` +
+      `(marks=${layout.marks.length} chapters=${layout.chapters.length} dots=${layout.dots.length})`,
+  );
   time('applyFilters (empty)', 200, () => applyFilters(items, emptyFilter, dataset.indexes.regionDescendants).length);
-  time('semanticVisibility', 200, () => applySemanticVisibility(items, floor, SEMANTIC_ZOOM.fadeBand).length);
-  time('full recompute (vis+cull+layout)', 200, () => {
-    const v = applySemanticVisibility(items, floor, SEMANTIC_ZOOM.fadeBand);
-    const c = cullToWindow(v, window, TIMELINE_INTERACTION.bufferScreens, openEndYear);
-    return layoutTimeline(c, scale, openEndYear).bands.length;
+  time('cull', 200, () => cullToWindow(items, window, TIMELINE_INTERACTION.bufferScreens, openEndYear).length);
+  time('full recompute (cull+field)', 200, () => {
+    const c = cullToWindow(items, window, TIMELINE_INTERACTION.bufferScreens, openEndYear);
+    return layoutField(c, scale, altitude, NO_EXPANDED, openEndYear).marks.length;
+  });
+  time('presence (cast+shelf)', 200, () => {
+    return (
+      castForWindow(items, window, openEndYear, 8).top.length +
+      shelfForWindow(items, window, openEndYear, 5).top.length
+    );
   });
   console.log('');
 }

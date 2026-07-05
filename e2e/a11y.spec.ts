@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Accessibility-critical interactions (docs/08, docs/09): keyboard operation of
+// Accessibility-critical interactions (docs/08, docs/14): keyboard operation of
 // items and the timeline surface, focus return, and accessible names. (desktop project)
 
 test('keyboard-only: focus an item, Enter opens, Esc closes and returns focus', async ({ page }) => {
@@ -17,18 +17,21 @@ test('keyboard-only: focus an item, Enter opens, Esc closes and returns focus', 
   await expect(item).toBeFocused(); // focus restored to the origin item
 });
 
-test('keyboard on the timeline surface pans and zooms; Home resets', async ({ page }) => {
+test('keyboard on the surface steps altitudes and pans; Home returns to century', async ({ page }) => {
   await page.goto('/');
   const surface = page.getByRole('application');
-  const items = page.locator('[data-item-id]');
+  const pressed = page.locator('[aria-pressed="true"]');
   await surface.focus();
-  const wide = await items.count();
+  await expect(pressed).toHaveText('מאה');
   await surface.press('+');
+  await expect(pressed).toHaveText('עשור');
   await surface.press('+');
-  await surface.press('+');
-  await expect(async () => expect(await items.count()).toBeGreaterThan(wide)).toPass();
-  await surface.press('Home'); // reset to full range
-  await expect(async () => expect(await items.count()).toBeLessThanOrEqual(wide + 2)).toPass();
+  await expect(pressed).toHaveText('שנה');
+  // Arrows pan without changing the altitude.
+  await surface.press('ArrowLeft');
+  await expect(pressed).toHaveText('שנה');
+  await surface.press('Home');
+  await expect(pressed).toHaveText('מאה');
 });
 
 test('every timeline item exposes an accessible name; the surface is described', async ({ page }) => {
@@ -39,7 +42,8 @@ test('every timeline item exposes an accessible name; the surface is described',
   const n = await buttons.count();
   expect(n).toBeGreaterThan(5);
   for (let i = 0; i < n; i++) {
-    const name = await buttons.nth(i).getAttribute('aria-label');
-    expect(name && name.trim().length, `item ${i} aria-label`).toBeTruthy();
+    // Marks/dots carry aria-label; cast & shelf chips are named by content —
+    // both must yield a non-empty accessible name.
+    await expect(buttons.nth(i), `item ${i} accessible name`).toHaveAccessibleName(/\S/);
   }
 });

@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-ציר הזמן ההיסטורי — an interactive, zoomable historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The interactive timeline (pan/zoom/semantic zoom/lane layout/selection/URL state) is implemented; remaining Phase 1 work is the full content pass, the Playwright e2e suite, and the performance guardrail (docs/11).
+ציר הזמן ההיסטורי — an interactive historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The UI follows the **guided-expedition concept** (decision D16, [docs/14-ui-redesign.md](docs/14-ui-redesign.md)): a persistent century strip with named eras, three zoom altitudes (century/decade/year) with importance-tier label budgets, one event field (overflow degrades to always-present dots — never chips), people as a cast strip, works as a period shelf, and a vertical chronicle feed on mobile.
 
-All product/technical decisions are recorded in `docs/` (01–12), including a decision log in [docs/02-architecture.md](docs/02-architecture.md). Check the relevant doc before changing direction on anything architectural, and update the docs when a decision changes.
+All product/technical decisions are recorded in `docs/` (01–14), including a decision log in [docs/02-architecture.md](docs/02-architecture.md). Check the relevant doc before changing direction on anything architectural, and update the docs when a decision changes. docs/14 supersedes the presentation parts of docs/05/06/08.
 
 ## Commands
 
@@ -29,11 +29,12 @@ Strict layering (top may import from below, never the reverse):
 
 ```
 app/ + components/   React shell & UI; ALL Hebrew strings live in src/app/strings.he.ts;
-                     app/urlState.ts = shareable #hash (viewport+filters+selection)
+                     app/eras.ts = named era definitions; app/urlState.ts = shareable #hash
 state/               Zustand stores: filterStore, viewportStore, selectionStore — no React imports
 timeline/            pure logic: scale.ts (time↔px; axis direction lives ONLY here),
-                     semanticZoom(+.config), ticks, visibility (fade band, parent chain,
-                     culling), laneLayout (bands/containers/cluster chips), config.ts
+                     altitude.ts (century/decade/year, importance tiers, label floors),
+                     fieldLayout.ts (event field: marks/chapters/dots), presence.ts
+                     (cast + shelf selectors), ticks, visibility (culling), config.ts
 data/                DataSource interface + StaticJsonDataSource (fetches compiled dataset)
 domain/              Zod entity schemas, date model, normalize → TimelineItem, filter predicates
 ```
@@ -51,7 +52,7 @@ domain/              Zod entity schemas, date model, normalize → TimelineItem,
 - **Dates**: authored as `"1948"`, `"1948-05"`, or `"1948-05-14"`; compiled to decimal years by `domain/dates.ts`. All layout/zoom math uses decimal years; nothing downstream parses date strings. Precision is preserved for display (a year-only date never renders a fabricated day).
 - **Works** are positioned by `coveredPeriod`, not `publicationDate` (decision D7).
 - **Person lifespan** requires an explicit `end` (death date or `null` = still alive) — an omitted end is invalid.
-- `importance` is numeric 1–100 per the rubric in [docs/05-semantic-zoom.md](docs/05-semantic-zoom.md); semantic zoom filters on it.
+- `importance` is numeric 1–100 per the rubric in [docs/05-semantic-zoom.md](docs/05-semantic-zoom.md); the altitude label floors (docs/14) decide *labeled mark vs dot* from it — items below a floor stay visible as dots, they never disappear.
 - Category `color` values must be existing `--cat-*` tokens in `src/styles/tokens.css` (validated at build).
 
 ## Conventions

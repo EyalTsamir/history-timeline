@@ -59,16 +59,21 @@ describe('App', () => {
     expect(screen.getByRole('application', { name: STRINGS.timelineRegionLabel })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shownCount(7, 7))).toBeInTheDocument();
 
-    // Semantic zoom at the full-range view: only top-importance items render
-    // as marks (war 95, declaration 100, leader 98); the rest await zoom-in.
+    // Presence guarantee (docs/14): anchors are labeled marks AND the
+    // low-importance sub-event is still on screen as a selectable dot.
     expect(
       screen.getByRole('button', { name: 'אירוע: הכרזה לדוגמה, 14 במאי 1948' }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /מנהיג לדוגמה/ })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /קרב לדוגמה/ })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /סופר חי לדוגמה/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /קרב לדוגמה/ })).toBeInTheDocument();
+    // People live in the cast strip, works in the period shelf (docs/14 §5).
+    expect(screen.getByText(STRINGS.castTitle)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'מנהיג לדוגמה' })).toBeInTheDocument();
+    expect(screen.getByText(STRINGS.shelfTitle)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /אוטוביוגרפיה לדוגמה/ })).toBeInTheDocument();
 
-    // Explicit zoom controls + reset are present (gesture alternatives).
+    // Explicit navigation controls (gesture alternatives): altitude control,
+    // step buttons, and the full-range era chip.
+    expect(screen.getByRole('group', { name: STRINGS.altitudeControlLabel })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: STRINGS.zoomIn })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: STRINGS.zoomOut })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: STRINGS.resetView })).toBeInTheDocument();
