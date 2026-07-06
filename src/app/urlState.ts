@@ -1,6 +1,6 @@
 /**
  * Shareable view state in the URL hash (docs/spec/architecture.md: single-page, no router —
- * `#t=<center>&s=<span>&r=…&pc=…&ct=…&imp=…&sel=…`).
+ * `#t=<center>&s=<span>&pc=…&ct=…&imp=…&sel=…`).
  *
  * - encode/decode are pure and validated: unknown ids are dropped, numbers
  *   sanity-checked; a garbage hash degrades to the default view.
@@ -32,7 +32,6 @@ export interface TimelineUrlState {
 /** What decode() checks ids against — every dimension validated. */
 export interface UrlVocabulary {
   itemIds: ReadonlySet<EntityId>;
-  regionIds: ReadonlySet<EntityId>;
   personCategoryIds: ReadonlySet<EntityId>;
   contentTypes: ReadonlySet<string>;
 }
@@ -40,7 +39,6 @@ export interface UrlVocabulary {
 export function vocabularyOf(items: readonly TimelineItem[], dataset: Dataset): UrlVocabulary {
   return {
     itemIds: new Set(items.map((i) => i.id)),
-    regionIds: new Set(dataset.regions.map((r) => r.id)),
     personCategoryIds: new Set(dataset.personCategories.map((c) => c.id)),
     contentTypes: new Set(['event', 'person', ...dataset.workTypes.map((w) => w.id)]),
   };
@@ -56,7 +54,6 @@ export function encodeTimelineHash(
   const parts: string[] = [];
   parts.push(`t=${round3((window.start + window.end) / 2)}`, `s=${round3(spanYears(window))}`);
   const csv = (set: ReadonlySet<string>): string => [...set].sort().join(',');
-  if (filters.regionIds.size > 0) parts.push(`r=${csv(filters.regionIds)}`);
   if (filters.personCategoryIds.size > 0) parts.push(`pc=${csv(filters.personCategoryIds)}`);
   if (filters.contentTypes.size > 0) parts.push(`ct=${csv(filters.contentTypes)}`);
   if (filters.minImportance > 0) parts.push(`imp=${filters.minImportance}`);
@@ -90,13 +87,12 @@ export function decodeTimelineHash(hash: string, vocabulary: UrlVocabulary): Tim
     if (raw === undefined || raw === '') return new Set();
     return new Set(raw.split(',').filter((id) => SLUG_RE.test(id) && valid.has(id)));
   };
-  const regionIds = idSet('r', vocabulary.regionIds);
   const personCategoryIds = idSet('pc', vocabulary.personCategoryIds);
   const contentTypes = idSet('ct', vocabulary.contentTypes);
   const impRaw = Number(params.get('imp'));
   const minImportance = Number.isInteger(impRaw) ? Math.min(100, Math.max(0, impRaw)) : 0;
-  if (regionIds.size > 0 || personCategoryIds.size > 0 || contentTypes.size > 0 || minImportance > 0) {
-    state.filters = { regionIds, personCategoryIds, contentTypes, minImportance };
+  if (personCategoryIds.size > 0 || contentTypes.size > 0 || minImportance > 0) {
+    state.filters = { personCategoryIds, contentTypes, minImportance };
   }
 
   const sel = params.get('sel');

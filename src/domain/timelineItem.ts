@@ -51,7 +51,6 @@ export interface TimelineItem {
   /** Point marker vs span rendering. */
   isPoint: boolean;
   importance: number;
-  regionIds: EntityId[];
   /** Person/event category ids (empty for works). */
   categoryIds: EntityId[];
   /** Event hierarchy (docs/spec/rendering.md#event-hierarchy). */

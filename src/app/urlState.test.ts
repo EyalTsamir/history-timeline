@@ -33,20 +33,19 @@ describe('encodeTimelineHash', () => {
       encodeTimelineHash(
         { start: 1940, end: 1960 },
         filters({
-          regionIds: new Set(['jerusalem', 'israel']),
+          personCategoryIds: new Set(['writers', 'leaders']),
           contentTypes: new Set(['event']),
           minImportance: 40,
         }),
         'fx-war',
       ),
-    ).toBe('t=1950&s=20&r=israel,jerusalem&ct=event&imp=40&sel=fx-war');
+    ).toBe('t=1950&s=20&pc=leaders,writers&ct=event&imp=40&sel=fx-war');
   });
 });
 
 describe('decodeTimelineHash', () => {
   it('round-trips what encode produced', () => {
     const f = filters({
-      regionIds: new Set(['israel']),
       personCategoryIds: new Set(['leaders']),
       contentTypes: new Set(['person', 'biography']),
       minImportance: 35,
@@ -61,13 +60,17 @@ describe('decodeTimelineHash', () => {
 
   it('drops unknown ids, bad numbers and malformed pairs', () => {
     const decoded = decodeTimelineHash(
-      '#t=abc&s=-5&r=israel,atlantis&pc=nope&ct=event,podcast&imp=999&sel=missing-item',
+      '#t=abc&s=-5&pc=leaders,nope&ct=event,podcast&imp=999&sel=missing-item',
       vocabulary,
     );
     expect(decoded.window).toBeUndefined();
     expect(decoded.selectedId).toBeUndefined();
     expect(decoded.filters).toEqual(
-      filters({ regionIds: new Set(['israel']), contentTypes: new Set(['event']), minImportance: 100 }),
+      filters({
+        personCategoryIds: new Set(['leaders']),
+        contentTypes: new Set(['event']),
+        minImportance: 100,
+      }),
     );
   });
 
@@ -82,7 +85,7 @@ describe('initTimelineStateFromUrl', () => {
   beforeEach(resetStores);
 
   it('seeds viewport limits from data and applies a valid hash', () => {
-    history.replaceState(null, '', '#t=1948.5&s=3&r=jerusalem&sel=fx-battle');
+    history.replaceState(null, '', '#t=1948.5&s=3&pc=leaders&sel=fx-battle');
     initTimelineStateFromUrl(items, dataset);
 
     const vp = useViewportStore.getState();
@@ -91,7 +94,7 @@ describe('initTimelineStateFromUrl', () => {
     expect(vp.window.end).toBeCloseTo(1950, 2);
     // limits derived from the data: the fixture leader is born 1886
     expect(vp.limits.minTime).toBeLessThan(1886.8);
-    expect(useFilterStore.getState().regionIds).toEqual(new Set(['jerusalem']));
+    expect(useFilterStore.getState().personCategoryIds).toEqual(new Set(['leaders']));
     expect(useSelectionStore.getState().selectedId).toBe('fx-battle');
   });
 

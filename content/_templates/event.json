@@ -14,8 +14,6 @@
   "importance": 75,
   "_categoryIds": "ids from content/taxonomies/event-categories.json.",
   "categoryIds": ["war-security"],
-  "_regionIds": "ids from content/taxonomies/regions.json; filtering by a parent region includes all its descendants.",
-  "regionIds": ["israel"],
   "_tags": "Optional free-form strings (not validated against a taxonomy). Add a \"tags\": [] key only when needed.",
   "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }. Prefer a Wikimedia Commons direct file URL (upload.wikimedia.org/...) — stable and hotlink-safe — with a credit naming the source/license.",
   "_video": "Optional and rare — only when real, good-quality archival footage exists from a reputable channel: { \"provider\": \"youtube\", \"videoId\": \"11-char-id\", \"title\": { \"he\": \"...\" }, \"credit\": \"...\" }. Rendered via a fixed youtube-nocookie.com embed (decision D19) — never a raw URL or embed HTML.",

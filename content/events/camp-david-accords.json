@@ -14,11 +14,6 @@
   "categoryIds": [
     "state-politics"
   ],
-  "regionIds": [
-    "usa",
-    "egypt",
-    "israel"
-  ],
   "image": {
     "src": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Begin%2C_Carter_and_Sadat_at_Camp_David_1978.jpg",
     "alt": {

@@ -48,7 +48,7 @@ domain/              Zod entity schemas, date model, normalize → TimelineItem,
 
 ### Content pipeline
 
-`content/*.json` (source of truth, one file per entity under `events/`, `people/`, `works/`) plus the shared `content/taxonomies/` (person/event categories, work types, regions) and `content/relations.json` (person↔event edges) → `scripts/build-content.ts` (logic in `scripts/lib/content.ts`) validates against the Zod schemas in [src/domain/entities.ts](src/domain/entities.ts), resolves every reference, precomputes reverse indexes, and emits `public/data/dataset.json` plus a content-addressed `dataset.<hash>.json` (injected into production builds via the `__DATASET_URL__` Vite define; dev uses the stable name). The compiled artifact is gitignored and rebuilt on every dev/build.
+`content/*.json` (source of truth, one file per entity under `events/`, `people/`, `works/`) plus the shared `content/taxonomies/` (person/event categories, work types) and `content/relations.json` (person↔event edges) → `scripts/build-content.ts` (logic in `scripts/lib/content.ts`) validates against the Zod schemas in [src/domain/entities.ts](src/domain/entities.ts), resolves every reference, precomputes reverse indexes, and emits `public/data/dataset.json` plus a content-addressed `dataset.<hash>.json` (injected into production builds via the `__DATASET_URL__` Vite define; dev uses the stable name). The compiled artifact is gitignored and rebuilt on every dev/build.
 
 ### Key domain rules
 

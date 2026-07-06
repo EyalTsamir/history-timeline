@@ -4,43 +4,11 @@
  */
 import { useId, useMemo } from 'react';
 import type { Dataset } from '../domain/dataset';
-import type { EntityId, Region } from '../domain/entities';
 import type { ContentType } from '../domain/timelineItem';
 import { STRINGS } from '../app/strings.he';
 import { useFilterStore } from '../state/filterStore';
 import { Chip } from './Chip';
 import styles from './FilterBar.module.css';
-
-interface RegionRow {
-  region: Region;
-  depth: number;
-  /** Direct parent's display name — read to screen readers, since the visual
-   *  indent is the only other signal of nesting (docs/spec/interaction.md: never one signal). */
-  parentName?: string;
-}
-
-/** Flatten the region hierarchy depth-first, preserving dataset order. */
-function flattenRegions(regions: readonly Region[]): RegionRow[] {
-  const ids = new Set(regions.map((r) => r.id));
-  const children = new Map<EntityId, Region[]>();
-  const roots: Region[] = [];
-  for (const r of regions) {
-    if (r.parentId !== undefined && ids.has(r.parentId)) {
-      const list = children.get(r.parentId);
-      if (list) list.push(r);
-      else children.set(r.parentId, [r]);
-    } else {
-      roots.push(r);
-    }
-  }
-  const rows: RegionRow[] = [];
-  const visit = (region: Region, depth: number, parentName?: string): void => {
-    rows.push(parentName !== undefined ? { region, depth, parentName } : { region, depth });
-    for (const child of children.get(region.id) ?? []) visit(child, depth + 1, region.name.he);
-  };
-  for (const root of roots) visit(root, 0);
-  return rows;
-}
 
 interface ContentTypeOption {
   ct: ContentType;
@@ -50,16 +18,13 @@ interface ContentTypeOption {
 
 export function FilterBar({ dataset }: { dataset: Dataset }) {
   const baseId = useId();
-  const regionIds = useFilterStore((s) => s.regionIds);
   const personCategoryIds = useFilterStore((s) => s.personCategoryIds);
   const contentTypes = useFilterStore((s) => s.contentTypes);
   const minImportance = useFilterStore((s) => s.minImportance);
-  const toggleRegion = useFilterStore((s) => s.toggleRegion);
   const togglePersonCategory = useFilterStore((s) => s.togglePersonCategory);
   const toggleContentType = useFilterStore((s) => s.toggleContentType);
   const setMinImportance = useFilterStore((s) => s.setMinImportance);
 
-  const regionRows = useMemo(() => flattenRegions(dataset.regions), [dataset]);
   const contentTypeOptions = useMemo<ContentTypeOption[]>(
     () => [
       { ct: 'event', label: STRINGS.contentTypeEvents, dotToken: 'event' },
@@ -69,34 +34,12 @@ export function FilterBar({ dataset }: { dataset: Dataset }) {
     [dataset],
   );
 
-  const regionsHeadingId = `${baseId}-regions`;
   const contentTypesHeadingId = `${baseId}-content-types`;
   const personCategoriesHeadingId = `${baseId}-person-categories`;
   const importanceInputId = `${baseId}-min-importance`;
 
   return (
     <div className={styles.bar}>
-      <section className={styles.group} aria-labelledby={regionsHeadingId}>
-        <h3 id={regionsHeadingId} className={styles.groupHeading}>
-          {STRINGS.filterRegions}
-        </h3>
-        <ul className={[styles.chipList, styles.regionList].join(' ')}>
-          {regionRows.map(({ region, depth, parentName }) => (
-            <li
-              key={region.id}
-              style={depth > 0 ? { paddingInlineStart: `${depth}rem` } : undefined}
-            >
-              <Chip pressed={regionIds.has(region.id)} onToggle={() => toggleRegion(region.id)}>
-                {region.name.he}
-                {parentName !== undefined && (
-                  <span className="visually-hidden">{STRINGS.regionWithin(parentName)}</span>
-                )}
-              </Chip>
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <section className={styles.group} aria-labelledby={contentTypesHeadingId}>
         <h3 id={contentTypesHeadingId} className={styles.groupHeading}>
           {STRINGS.filterContentTypes}

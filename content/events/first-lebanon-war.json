@@ -16,10 +16,6 @@
   "categoryIds": [
     "war-security"
   ],
-  "regionIds": [
-    "lebanon",
-    "israel"
-  ],
   "image": {
     "src": "https://upload.wikimedia.org/wikipedia/commons/1/18/IDF_Merkava_Mk_I_Tank_on_the_Road_to_Beirut_During_the_1982_Invasion_of_Lebanon.jpg",
     "alt": {

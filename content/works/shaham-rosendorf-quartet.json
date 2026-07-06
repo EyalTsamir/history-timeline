@@ -21,11 +21,6 @@
     "approx": true
   },
   "importance": 30,
-  "regionIds": [
-    "israel",
-    "tel-aviv",
-    "europe"
-  ],
   "sources": [
     {
       "title": {

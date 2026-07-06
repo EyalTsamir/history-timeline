@@ -22,7 +22,7 @@ const WIDTH = 1200;
 const openEndYear = currentDecimalYear();
 const NO_EXPANDED = new Set<string>();
 const emptyFilter: FilterState = {
-  regionIds: new Set(), personCategoryIds: new Set(), contentTypes: new Set(), minImportance: 0,
+  personCategoryIds: new Set(), contentTypes: new Set(), minImportance: 0,
 };
 
 function time(label: string, iters: number, fn: () => number): void {
@@ -64,7 +64,7 @@ for (const [name, window] of windows) {
     `[${name}] altitude=${altitude}  culled=${culled.length}  rendered nodes=${rendered} ` +
       `(marks=${layout.marks.length} chapters=${layout.chapters.length} dots=${layout.dots.length})`,
   );
-  time('applyFilters (empty)', 200, () => applyFilters(items, emptyFilter, dataset.indexes.regionDescendants).length);
+  time('applyFilters (empty)', 200, () => applyFilters(items, emptyFilter).length);
   time('cull', 200, () => cullToWindow(items, window, TIMELINE_INTERACTION.bufferScreens, openEndYear).length);
   time('full recompute (cull+field)', 200, () => {
     const c = cullToWindow(items, window, TIMELINE_INTERACTION.bufferScreens, openEndYear);

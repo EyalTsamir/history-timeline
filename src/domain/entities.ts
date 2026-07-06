@@ -152,7 +152,6 @@ export const EventSchema = z
     parentId: EntityIdSchema.optional(),
     importance: ImportanceSchema,
     categoryIds: z.array(EntityIdSchema).default([]),
-    regionIds: z.array(EntityIdSchema).default([]),
     tags: z.array(z.string()).optional(),
     image: ImageSchema.optional(),
     /** Rare — only when real, good-quality archival footage exists (decision D19). */
@@ -174,7 +173,6 @@ export const PersonSchema = z
     lifespan: LifespanSchema,
     categoryIds: z.array(EntityIdSchema).min(1, 'a person needs at least one category'),
     importance: ImportanceSchema,
-    regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
@@ -205,7 +203,6 @@ export const WorkSchema = z
     /** ← the timeline position derives from this. */
     coveredPeriod: DateRangeSchema,
     importance: ImportanceSchema,
-    regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
@@ -244,29 +241,6 @@ export const WorkTypeDefSchema = z
   })
   .strict();
 export type WorkTypeDef = z.infer<typeof WorkTypeDefSchema>;
-
-export const GEO_KINDS = [
-  'continent',
-  'country',
-  'district',
-  'region',
-  'city',
-  'settlement',
-  'area',
-  'site',
-] as const;
-
-export const RegionSchema = z
-  .object({
-    id: EntityIdSchema,
-    name: TextSchema,
-    kind: z.enum(GEO_KINDS),
-    /** Hierarchy: filtering by a parent includes all descendants (docs/spec/filtering.md). */
-    parentId: EntityIdSchema.optional(),
-    meta: MetaSchema,
-  })
-  .strict();
-export type Region = z.infer<typeof RegionSchema>;
 
 // ---------------------------------------------------------------------------
 // Generic relations — stored + validated now, explorer UI is future (docs/spec/domain.md)

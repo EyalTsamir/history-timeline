@@ -12,8 +12,6 @@
   "categoryIds": ["leaders"],
   "_importance": "Integer 1-100 per the docs/spec/zoom.md rubric: 90-100 era-defining figures; 70-89 major national figures; 40-69 central figures in their field; 20-39 cultural/contextual figures (year-level zoom); 1-19 fine detail (month-level zoom).",
   "importance": 80,
-  "_regionIds": "ids from content/taxonomies/regions.json the person is associated with.",
-  "regionIds": ["israel"],
   "_image": "Optional portrait: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
   "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Every source needs a real, stable \"url\" (decision D18) — a source with no link doesn't help the reader. Prefer an authoritative institution or a Hebrew-Wikipedia article. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website). Placeholder URLs (\"...\", example.com) are rejected.",
   "sources": [

@@ -14,10 +14,6 @@
   "categoryIds": [
     "state-politics"
   ],
-  "regionIds": [
-    "jerusalem",
-    "egypt"
-  ],
   "image": {
     "src": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Sadat_knesset_1977.jpg",
     "alt": {

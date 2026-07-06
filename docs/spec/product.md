@@ -24,8 +24,8 @@ period they're looking at.
 - **Language:** Hebrew only (UI and content), full RTL layout.
 
 The scope is deliberately narrow to validate the technical system (zoom,
-filtering, rendering, content pipeline) before expanding regions, periods, and
-content types. Nothing in the domain model or architecture is specific to this
+filtering, rendering, content pipeline) before expanding geographies, periods,
+and content types. Nothing in the domain model or architecture is specific to this
 scope — see [domain](domain.md) and [performance](performance.md).
 
 ## MVP capabilities (in scope)
@@ -40,7 +40,7 @@ scope — see [domain](domain.md) and [performance](performance.md).
 | Works as a period shelf | Biography / autobiography / historical novel; membership by covered period (D7) |
 | Multiple books per person | Via work→person relations |
 | Item detail on selection | Title, date(s), description, image, category/type, importance, sources, external links |
-| Filters | Region, person category, content type, minimum importance — combinable, [filtering](filtering.md) |
+| Filters | Person category, content type, minimum importance — combinable, [filtering](filtering.md) |
 | Desktop-only | Canvas timeline; the earlier mobile chronicle was removed (D20) — [interaction](interaction.md) |
 | Shareable view state | Viewport + filters + selection encoded in the URL hash |
 
@@ -54,9 +54,9 @@ Recorded here so scope creep is a conscious decision, not drift. Details in
 - Toggling works to publication-date positioning (data is stored; the view toggle is future).
 - Any backend, API, database, CMS, or admin UI.
 - User accounts, favorites, comments, analytics.
-- Additional languages, regions, or periods.
+- Additional languages, geographies, or periods.
 - Automated content generation/ingestion (the content format is designed to receive it later — [content](content.md)).
-- Map view / geographic visualization (regions exist as filter taxonomy only).
+- Map view / geographic visualization (no geographic data is modeled — the region taxonomy was removed, decision D21).
 
 ## Success criteria for the MVP
 

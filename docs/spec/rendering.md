@@ -68,7 +68,6 @@ interface TimelineItem {
   end: number | null;                            // null = open-ended (living person)
   isPoint: boolean;                              // point vs span
   importance: number;
-  regionIds: EntityId[];
   categoryIds: EntityId[];                       // person OR event category ids (empty for works)
   parentId?: EntityId;                           // event hierarchy
   styleToken: string;                            // color/icon key from kind/category/workType

@@ -16,11 +16,6 @@
     "military"
   ],
   "importance": 90,
-  "regionIds": [
-    "israel",
-    "jerusalem",
-    "tel-aviv"
-  ],
   "sources": [
     {
       "title": {

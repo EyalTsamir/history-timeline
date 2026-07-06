@@ -16,7 +16,7 @@ if (errors.length > 0 || warnings.length > 0) console.log('');
 console.log(
   `content: ${counts.events} events, ${counts.people} people, ${counts.works} works, ` +
     `${counts.personCategories} person-categories, ${counts.eventCategories} event-categories, ` +
-    `${counts.workTypes} work-types, ${counts.regions} regions, ${counts.relations} relations ` +
+    `${counts.workTypes} work-types, ${counts.relations} relations ` +
     `(${counts.sourceFiles} source files)`,
 );
 console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);

@@ -60,17 +60,11 @@ describe('FilterBar', () => {
     await renderReadyApp();
 
     const sidebar = screen.getByRole('complementary', { name: STRINGS.filtersHeading });
-    for (const heading of [
-      STRINGS.filterRegions,
-      STRINGS.filterContentTypes,
-      STRINGS.filterPersonCategories,
-    ]) {
+    for (const heading of [STRINGS.filterContentTypes, STRINGS.filterPersonCategories]) {
       expect(within(sidebar).getByRole('heading', { name: heading })).toBeInTheDocument();
     }
-    // Region hierarchy: parent and children all present as toggle chips.
-    // Sub-region names carry hidden "בתוך <parent>" context for screen
-    // readers (review fix), so child chips match by name prefix.
-    for (const name of [/^ארץ ישראל וישראל$/, /^ירושלים בתוך/, /^תל אביב בתוך/]) {
+    // Person categories present as toggle chips from the taxonomy.
+    for (const name of [/^מנהיגים ומדינאים$/, /^סופרים ומשוררים$/]) {
       expect(within(sidebar).getByRole('button', { name })).toHaveAttribute(
         'aria-pressed',
         'false',

@@ -137,7 +137,6 @@ describe('normalizeDataset ordering', () => {
       dates: { start: '1950' },
       importance,
       categoryIds: [],
-      regionIds: [],
       sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     });
     dataset.events.push(tie('fx-tie-b', 50), tie('fx-tie-a', 50), tie('fx-tie-c', 80));

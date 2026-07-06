@@ -81,7 +81,7 @@ interface DataSource {
 
 - GitHub Actions on push to `main`: validate content → lint → typecheck → unit tests → build (content build runs as a pre-step) → e2e → deploy to GitHub Pages. Pages deploys are serialized by a `concurrency: pages` group.
 - Vite `base: './'` (relative) — the bundle is relocatable to any Pages path or a custom domain without knowing the repo name; runtime data fetch prepends `import.meta.env.BASE_URL` (D10).
-- Single-page app, **no router**: the only navigable state is the timeline view, encoded in the URL hash so links are shareable and GH Pages needs no SPA-fallback tricks. Format (`src/app/urlState.ts`): `#t=<center-year>&s=<span-years>&r=<regions>&pc=<person-cats>&ct=<content-types>&imp=<min>&sel=<item-id>` — filter/selection params appear only when active; decode validates every id against the dataset and degrades garbage to the default view. Writes are debounced `history.replaceState` (no history spam); external hash edits (paste, back/forward) apply back into the stores.
+- Single-page app, **no router**: the only navigable state is the timeline view, encoded in the URL hash so links are shareable and GH Pages needs no SPA-fallback tricks. Format (`src/app/urlState.ts`): `#t=<center-year>&s=<span-years>&pc=<person-cats>&ct=<content-types>&imp=<min>&sel=<item-id>` — filter/selection params appear only when active; decode validates every id against the dataset and degrades garbage to the default view. Writes are debounced `history.replaceState` (no history spam); external hash edits (paste, back/forward) apply back into the stores.
 
 ## Decisions
 

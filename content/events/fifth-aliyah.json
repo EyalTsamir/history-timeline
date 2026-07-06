@@ -16,11 +16,6 @@
   "categoryIds": [
     "immigration-settlement"
   ],
-  "regionIds": [
-    "israel",
-    "europe",
-    "germany"
-  ],
   "sources": [
     {
       "title": {

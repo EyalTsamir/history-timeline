@@ -18,7 +18,7 @@ function makeEmptyDataset(): Dataset {
     people: [],
     works: [],
     relations: [],
-    indexes: { childrenByEvent: {}, worksByPerson: {}, worksByAuthor: {}, regionDescendants: {} },
+    indexes: { childrenByEvent: {}, worksByPerson: {}, worksByAuthor: {} },
   };
 }
 

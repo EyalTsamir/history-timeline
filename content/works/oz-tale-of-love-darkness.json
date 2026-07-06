@@ -22,10 +22,6 @@
     "approx": true
   },
   "importance": 50,
-  "regionIds": [
-    "israel",
-    "jerusalem"
-  ],
   "sources": [
     {
       "title": {

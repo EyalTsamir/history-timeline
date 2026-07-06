@@ -11,7 +11,6 @@ import type { FilterState } from '../domain/filters';
 import type { ContentType } from '../domain/timelineItem';
 
 export interface FilterActions {
-  toggleRegion(id: EntityId): void;
   togglePersonCategory(id: EntityId): void;
   toggleContentType(ct: ContentType): void;
   setMinImportance(n: number): void;
@@ -31,14 +30,12 @@ function toggled<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
 /* Actions are created once at store init — stable references forever. */
 export const useFilterStore = create<FilterStore>()((set) => ({
   ...EMPTY_FILTER_STATE,
-  toggleRegion: (id) => set((s) => ({ regionIds: toggled(s.regionIds, id) })),
   togglePersonCategory: (id) => set((s) => ({ personCategoryIds: toggled(s.personCategoryIds, id) })),
   toggleContentType: (ct) => set((s) => ({ contentTypes: toggled(s.contentTypes, ct) })),
   setMinImportance: (n) => set({ minImportance: n }),
   clearAll: () => set({ ...EMPTY_FILTER_STATE }),
   replaceAll: (next) =>
     set({
-      regionIds: new Set(next.regionIds),
       personCategoryIds: new Set(next.personCategoryIds),
       contentTypes: new Set(next.contentTypes),
       minImportance: next.minImportance,

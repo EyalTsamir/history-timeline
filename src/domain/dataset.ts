@@ -13,7 +13,6 @@ import {
   EntityIdSchema,
   EventSchema,
   PersonSchema,
-  RegionSchema,
   RelationSchema,
   WorkSchema,
   WorkTypeDefSchema,
@@ -34,7 +33,6 @@ export const DatasetSchema = z
     personCategories: z.array(CategorySchema),
     eventCategories: z.array(CategorySchema),
     workTypes: z.array(WorkTypeDefSchema),
-    regions: z.array(RegionSchema),
     relations: z.array(RelationSchema),
     /** Precomputed reverse indexes (docs/spec/domain.md#relationship-strategy). */
     indexes: z
@@ -45,8 +43,6 @@ export const DatasetSchema = z
         worksByPerson: IdListIndexSchema,
         /** person id → ids of works they authored. */
         worksByAuthor: IdListIndexSchema,
-        /** region id → [self, …all descendant region ids] for hierarchy filtering. */
-        regionDescendants: IdListIndexSchema,
       })
       .strict(),
   })

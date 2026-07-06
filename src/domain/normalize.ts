@@ -61,7 +61,6 @@ export function eventToTimelineItem(event: EventEntity, ctx: NormalizeContext): 
     end: span.end,
     isPoint: rangeKind(event.dates) === 'point',
     importance: event.importance,
-    regionIds: event.regionIds,
     categoryIds: event.categoryIds,
     styleToken: styleTokenFor(event.categoryIds, ctx.colorByCategoryId, DEFAULT_STYLE_TOKENS.event),
     detail,
@@ -90,7 +89,6 @@ export function personToTimelineItem(person: PersonEntity, ctx: NormalizeContext
     end: span.end, // null while alive → open-ended lifespan rendering
     isPoint: false, // a lifespan is always a span, whatever its precision
     importance: person.importance,
-    regionIds: person.regionIds,
     categoryIds: person.categoryIds,
     styleToken: styleTokenFor(person.categoryIds, ctx.colorByCategoryId, DEFAULT_STYLE_TOKENS.person),
     detail,
@@ -126,7 +124,6 @@ export function workToTimelineItem(work: WorkEntity, ctx: NormalizeContext): Tim
     end: span.end,
     isPoint: rangeKind(work.coveredPeriod) === 'point',
     importance: work.importance,
-    regionIds: work.regionIds,
     categoryIds: [],
     styleToken: ctx.colorByWorkTypeId.get(work.workType) ?? DEFAULT_STYLE_TOKENS.work,
     detail,

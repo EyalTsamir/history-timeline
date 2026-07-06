@@ -5,15 +5,12 @@
     "he": "אירוע"
   },
   "description": {
-    "he": "מפנה לאזור שאינו קיים."
+    "he": "יעד יחסים שאינו קיים."
   },
   "dates": {
     "start": "1930"
   },
   "importance": 50,
-  "regionIds": [
-    "atlantis"
-  ],
   "sources": [
     {
       "title": {

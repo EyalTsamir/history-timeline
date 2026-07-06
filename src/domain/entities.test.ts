@@ -1,13 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { SafeParseReturnType } from 'zod';
-import {
-  EventSchema,
-  PersonSchema,
-  RegionSchema,
-  RelationSchema,
-  SourceSchema,
-  WorkSchema,
-} from './entities';
+import { EventSchema, PersonSchema, RelationSchema, SourceSchema, WorkSchema } from './entities';
 
 /** Dotted issue paths of a failed safeParse; throws if the parse succeeded. */
 function pathsOf(result: SafeParseReturnType<unknown, unknown>): string[] {
@@ -55,7 +48,6 @@ describe('EventSchema', () => {
   it('parses a minimal event and applies array defaults', () => {
     const parsed = EventSchema.parse(minimalEvent());
     expect(parsed.categoryIds).toEqual([]);
-    expect(parsed.regionIds).toEqual([]);
     expect(parsed.sources).toEqual([]);
   });
 
@@ -128,7 +120,6 @@ describe('EventSchema', () => {
 describe('PersonSchema', () => {
   it('parses a minimal person and applies array defaults', () => {
     const parsed = PersonSchema.parse(minimalPerson());
-    expect(parsed.regionIds).toEqual([]);
     expect(parsed.sources).toEqual([]);
   });
 
@@ -154,7 +145,6 @@ describe('WorkSchema', () => {
     expect(parsed.authorPersonIds).toEqual([]);
     expect(parsed.subjectPersonIds).toEqual([]);
     expect(parsed.subjectEventIds).toEqual([]);
-    expect(parsed.regionIds).toEqual([]);
     expect(parsed.sources).toEqual([]);
   });
 
@@ -193,18 +183,6 @@ describe('RelationSchema', () => {
   it('rejects an unknown relation type at path type', () => {
     const result = RelationSchema.safeParse({ from: 'a', to: 'b', type: 'married-to' });
     expect(pathsOf(result)).toContain('type');
-  });
-});
-
-describe('RegionSchema', () => {
-  it('parses a minimal region', () => {
-    const parsed = RegionSchema.parse({ id: 'israel', name: { he: 'ישראל' }, kind: 'country' });
-    expect(parsed.kind).toBe('country');
-  });
-
-  it('rejects an unknown geo kind at path kind', () => {
-    const result = RegionSchema.safeParse({ id: 'mars', name: { he: 'מאדים' }, kind: 'planet' });
-    expect(pathsOf(result)).toContain('kind');
   });
 });
 

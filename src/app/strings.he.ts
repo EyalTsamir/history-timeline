@@ -26,9 +26,6 @@ export const STRINGS = {
   emptyBody: 'מאגר הנתונים נטען בהצלחה, אך אינו מכיל פריטים עדיין.',
 
   filtersHeading: 'סינון',
-  filterRegions: 'אזור',
-  /** Screen-reader-only suffix exposing region nesting on sub-region chips. */
-  regionWithin: (parent: string) => `בתוך ${parent}`,
   filterContentTypes: 'סוג תוכן',
   filterPersonCategories: 'קטגוריית אישים',
   filterMinImportance: 'חשיבות מזערית',

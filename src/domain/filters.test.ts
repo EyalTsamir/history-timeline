@@ -1,17 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { makeFixtureDataset } from '../test/fixtures';
 import { normalizeDataset } from './normalize';
-import {
-  EMPTY_FILTER_STATE,
-  applyFilters,
-  expandSelectedRegions,
-  isFilterActive,
-} from './filters';
+import { EMPTY_FILTER_STATE, applyFilters, isFilterActive } from './filters';
 import type { FilterState } from './filters';
 
 const dataset = makeFixtureDataset();
 const items = normalizeDataset(dataset);
-const regionDescendants = dataset.indexes.regionDescendants;
 
 const ALL_IDS = [
   'fx-autobio',
@@ -28,7 +22,7 @@ function state(partial: Partial<FilterState>): FilterState {
 }
 
 function idsFor(f: FilterState): string[] {
-  return applyFilters(items, f, regionDescendants)
+  return applyFilters(items, f)
     .map((i) => i.id)
     .sort();
 }
@@ -40,23 +34,9 @@ describe('EMPTY_FILTER_STATE', () => {
   });
 
   it('any single dimension activates the filter', () => {
-    expect(isFilterActive(state({ regionIds: new Set(['israel']) }))).toBe(true);
     expect(isFilterActive(state({ personCategoryIds: new Set(['writers']) }))).toBe(true);
     expect(isFilterActive(state({ contentTypes: new Set(['person']) }))).toBe(true);
     expect(isFilterActive(state({ minImportance: 1 }))).toBe(true);
-  });
-});
-
-describe('region dimension', () => {
-  it('selecting a parent includes descendants (israel → jerusalem sub-event too)', () => {
-    expect(idsFor(state({ regionIds: new Set(['israel']) }))).toEqual(ALL_IDS);
-  });
-
-  it('selecting a leaf excludes israel-only items', () => {
-    expect(idsFor(state({ regionIds: new Set(['jerusalem']) }))).toEqual([
-      'fx-battle',
-      'fx-writer-alive',
-    ]);
   });
 });
 
@@ -109,10 +89,11 @@ describe('minImportance dimension', () => {
 });
 
 describe('AND across dimensions', () => {
-  it('region + contentType', () => {
+  it('contentType + minImportance', () => {
+    // Events only, importance floor 50: fx-battle (40) drops.
     expect(
-      idsFor(state({ regionIds: new Set(['jerusalem']), contentTypes: new Set(['event']) })),
-    ).toEqual(['fx-battle']);
+      idsFor(state({ contentTypes: new Set(['event']), minImportance: 50 })),
+    ).toEqual(['fx-declaration', 'fx-war']);
   });
 
   it('personCategory + minImportance', () => {
@@ -120,21 +101,5 @@ describe('AND across dimensions', () => {
     expect(
       idsFor(state({ personCategoryIds: new Set(['writers']), minImportance: 50 })),
     ).toEqual(['fx-autobio', 'fx-declaration', 'fx-war', 'fx-writer-alive']);
-  });
-});
-
-describe('expandSelectedRegions', () => {
-  it('expands a parent to self + all descendants', () => {
-    expect([...expandSelectedRegions(new Set(['israel']), regionDescendants)].sort()).toEqual([
-      'israel',
-      'jerusalem',
-      'tel-aviv',
-    ]);
-  });
-
-  it('an id missing from the index falls back to itself', () => {
-    expect([...expandSelectedRegions(new Set(['atlantis']), regionDescendants)]).toEqual([
-      'atlantis',
-    ]);
   });
 });

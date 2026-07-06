@@ -39,9 +39,8 @@ describe('collectContent — valid tree', () => {
       personCategories: 1,
       eventCategories: 1,
       workTypes: 2,
-      regions: 2,
       relations: 1,
-      sourceFiles: 14,
+      sourceFiles: 13,
     });
   });
 
@@ -80,20 +79,14 @@ describe('buildDataset — valid tree', () => {
     expect(dataset.indexes.childrenByEvent).toEqual({ '1948-war': ['1948-battle'] });
     expect(dataset.indexes.worksByPerson).toEqual({ 'example-leader': ['leader-bio'] });
     expect(dataset.indexes.worksByAuthor).toEqual({ 'example-writer': ['war-novel'] });
-    expect(dataset.indexes.regionDescendants).toEqual({
-      israel: ['israel', 'jerusalem'],
-      jerusalem: ['jerusalem'],
-    });
   });
 });
 
 describe('collectContent — invalid trees', () => {
-  it('dangling-ref: reports unknown region and unknown relation endpoint', () => {
+  it('dangling-ref: reports an unknown relation endpoint', () => {
     const result = collectContent(tree('dangling-ref'));
     expect(result.data).toBeNull();
-    expect(result.errors).toHaveLength(2);
-    const regionError = result.errors.find((e) => e.file === 'events/1930-dangling.json');
-    expect(regionError?.message).toContain('references unknown region "atlantis"');
+    expect(result.errors).toHaveLength(1);
     const relationError = result.errors.find((e) => e.file === 'relations.json');
     expect(relationError?.message).toContain('references unknown entity "nobody"');
   });
@@ -116,14 +109,13 @@ describe('collectContent — invalid trees', () => {
     expect(result.errors[0]!.message).toContain('"1948-13" is not a valid date');
   });
 
-  it('parent-cycle: reports event cycles (incl. self) and region cycles once each', () => {
+  it('parent-cycle: reports event cycles (incl. self) once each', () => {
     const result = collectContent(tree('parent-cycle'));
     expect(result.data).toBeNull();
-    expect(result.errors).toHaveLength(3);
+    expect(result.errors).toHaveLength(2);
     const messages = result.errors.map((e) => e.message).join('\n');
     expect(messages).toContain('event parentId cycle detected: cycle-a -> cycle-b -> cycle-a');
     expect(messages).toContain('event parentId cycle detected: cycle-self -> cycle-self');
-    expect(messages).toContain('region parentId cycle detected: region-a -> region-b -> region-a');
   });
 
   it('malformed-json: reports the syntax error with the file path, not a throw', () => {

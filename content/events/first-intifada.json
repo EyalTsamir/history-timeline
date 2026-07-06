@@ -16,10 +16,6 @@
   "categoryIds": [
     "war-security"
   ],
-  "regionIds": [
-    "gaza-strip",
-    "judea-samaria"
-  ],
   "image": {
     "src": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Intifada_in_Gaza_Strip%2C_1987_V_Dan_Hadani_Archive.jpg",
     "alt": {

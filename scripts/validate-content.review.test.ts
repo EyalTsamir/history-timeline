@@ -23,7 +23,6 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
     'taxonomies/person-categories.json': [{ id: 'cat-p', name: { he: 'קטגוריה' }, color: 'leaders' }],
     'taxonomies/event-categories.json': [{ id: 'cat-e', name: { he: 'קטגוריה' }, color: 'war-security' }],
     'taxonomies/work-types.json': [{ id: 'biography', name: { he: 'ביוגרפיה' }, color: 'biography' }],
-    'taxonomies/regions.json': [{ id: 'reg', name: { he: 'אזור' }, kind: 'country' }],
     'events/ev.json': {
       id: 'ev',
       type: 'event',
@@ -32,7 +31,6 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       dates: { start: '1948' },
       importance: 50,
       categoryIds: ['cat-e'],
-      regionIds: ['reg'],
       sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'people/pe.json': {
@@ -43,7 +41,6 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       lifespan: { start: '1900', end: '1980' },
       categoryIds: ['cat-p'],
       importance: 50,
-      regionIds: ['reg'],
       sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'works/wo.json': {
@@ -58,7 +55,6 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       publicationDate: '1990',
       coveredPeriod: { start: '1900', end: '1980' },
       importance: 40,
-      regionIds: ['reg'],
       sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'relations.json': [{ from: 'pe', to: 'wo', type: 'related-to' }],
@@ -158,7 +154,6 @@ const evBase = (): Record<string, unknown> => ({
   dates: { start: '1948' },
   importance: 50,
   categoryIds: ['cat-e'],
-  regionIds: ['reg'],
   sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
 });
 const peBase = (): Record<string, unknown> => ({
@@ -169,7 +164,6 @@ const peBase = (): Record<string, unknown> => ({
   lifespan: { start: '1900', end: '1980' },
   categoryIds: ['cat-p'],
   importance: 50,
-  regionIds: ['reg'],
   sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
 });
 
@@ -266,9 +260,9 @@ describe('relations hygiene', () => {
 describe('intra-list duplicate references', () => {
   it('warns on a repeated id within a reference list', () => {
     const result = collectContent(
-      writeTree({ 'events/ev.json': { ...evBase(), regionIds: ['reg', 'reg'] } }),
+      writeTree({ 'events/ev.json': { ...evBase(), categoryIds: ['cat-e', 'cat-e'] } }),
     );
-    expect(messages(result.warnings)).toContain('duplicate entry "reg" in regionIds');
+    expect(messages(result.warnings)).toContain('duplicate entry "cat-e" in categoryIds');
   });
 });
 
@@ -286,7 +280,6 @@ function require_work(): Record<string, unknown> {
     publicationDate: '1990',
     coveredPeriod: { start: '1900', end: '1980' },
     importance: 40,
-    regionIds: ['reg'],
     sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
   };
 }

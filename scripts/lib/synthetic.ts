@@ -16,7 +16,6 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
   const rnd = (): number => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
   const pick = <T>(arr: readonly T[]): T => arr[Math.floor(rnd() * arr.length)]!;
   const cats = ['syn-a', 'syn-b', 'syn-c', 'syn-d'] as const;
-  const regions = ['syn-r1', 'syn-r2', 'syn-r3'] as const;
   // Year precision keeps every generated range well-ordered (start ≤ end) —
   // random month/day on both ends could otherwise reverse within a year.
   const date = (y: number): string => `${y}`;
@@ -42,7 +41,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         id: `syn-e-${i}`, type: 'event',
         title: { he: `אירוע ${i}` }, description: { he: 'תיאור סינתטי לבדיקת ביצועים.' },
         dates: { start: date(y), end: date(y2) }, importance: importance(),
-        categoryIds: [pick(cats)], regionIds: [pick(regions)], sources: [],
+        categoryIds: [pick(cats)], sources: [],
       });
     } else if (k < 0.85) {
       const d = Math.min(2000, y + 40 + Math.floor(rnd() * 40));
@@ -50,7 +49,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         id: `syn-p-${i}`, type: 'person',
         name: { he: `אדם ${i}` }, bio: { he: 'ביוגרפיה סינתטית.' },
         lifespan: { start: date(y), end: date(d) }, importance: importance(),
-        categoryIds: [pick(cats)], regionIds: [pick(regions)], sources: [],
+        categoryIds: [pick(cats)], sources: [],
       });
     } else {
       const y2 = Math.min(1999, y + Math.floor(rnd() * 10));
@@ -59,7 +58,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         title: { he: `ספר ${i}` }, description: { he: 'תיאור סינתטי.' },
         authorName: { he: 'מחבר' }, authorPersonIds: [], subjectPersonIds: [], subjectEventIds: [],
         publicationDate: date(y2), coveredPeriod: { start: date(y), end: date(y2) },
-        importance: importance(), regionIds: [pick(regions)], sources: [],
+        importance: importance(), sources: [],
       });
     }
   }
@@ -71,13 +70,11 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
     personCategories: cats.map((c) => ({ id: c, name: { he: c }, color: 'leaders' })),
     eventCategories: cats.map((c) => ({ id: c, name: { he: c }, color: 'war-security' })),
     workTypes: [{ id: 'syn-wt', name: { he: 'סוג' }, color: 'biography' }],
-    regions: regions.map((r) => ({ id: r, name: { he: r }, kind: 'country' as const })),
     relations: [],
     indexes: {
       childrenByEvent: {},
       worksByPerson: {},
       worksByAuthor: {},
-      regionDescendants: Object.fromEntries(regions.map((r) => [r, [r]])),
     },
   };
 }

@@ -1,7 +1,7 @@
 /**
  * Shared test fixture: a tiny but structurally complete Dataset exercising
- * every entity kind, the event hierarchy, an open lifespan, both work
- * positioning dates (D7), and the region hierarchy.
+ * every entity kind, the event hierarchy, an open lifespan, and both work
+ * positioning dates (D7).
  * dataset.test.ts asserts it passes DatasetSchema — keep it valid.
  */
 import type { Dataset } from '../domain/dataset';
@@ -27,7 +27,6 @@ export function makeTimelineItem(
     end,
     isPoint: false,
     importance: 50,
-    regionIds: [],
     categoryIds: [],
     styleToken: 'event',
     detail: { description: '', displayDate: '', sources: [] },
@@ -48,7 +47,6 @@ export function makeFixtureDataset(): Dataset {
         dates: { start: '1947-11-30', end: '1949-07-20' },
         importance: 95,
         categoryIds: ['war-security'],
-        regionIds: ['israel'],
         sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
@@ -60,7 +58,6 @@ export function makeFixtureDataset(): Dataset {
         parentId: 'fx-war',
         importance: 40,
         categoryIds: ['war-security'],
-        regionIds: ['jerusalem'],
         sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
@@ -71,7 +68,6 @@ export function makeFixtureDataset(): Dataset {
         dates: { start: '1948-05-14' },
         importance: 100,
         categoryIds: [],
-        regionIds: ['tel-aviv'],
         sources: [{ title: { he: 'ויקיפדיה העברית' }, url: 'https://he.wikipedia.org/wiki/הכרזת_העצמאות', kind: 'encyclopedia' }],
       },
     ],
@@ -84,7 +80,6 @@ export function makeFixtureDataset(): Dataset {
         lifespan: { start: '1886-10-16', end: '1973-12-01' },
         categoryIds: ['leaders'],
         importance: 98,
-        regionIds: ['israel'],
         sources: [
           {
             title: { he: 'אנציקלופדיה בריטניקה' },
@@ -102,7 +97,6 @@ export function makeFixtureDataset(): Dataset {
         lifespan: { start: '1954', end: null },
         categoryIds: ['writers'],
         importance: 55,
-        regionIds: ['jerusalem'],
         sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
     ],
@@ -119,7 +113,6 @@ export function makeFixtureDataset(): Dataset {
         publicationDate: '1975',
         coveredPeriod: { start: '1886', end: '1973' },
         importance: 55,
-        regionIds: ['israel'],
         sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
@@ -135,7 +128,6 @@ export function makeFixtureDataset(): Dataset {
         publicationDate: '2010',
         coveredPeriod: { start: '1947-11', end: '1949' },
         importance: 45,
-        regionIds: ['israel'],
         sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
     ],
@@ -149,21 +141,11 @@ export function makeFixtureDataset(): Dataset {
       { id: 'autobiography', name: { he: 'אוטוביוגרפיה' }, color: 'autobiography' },
       { id: 'historical-novel', name: { he: 'רומן היסטורי' }, color: 'historical-novel' },
     ],
-    regions: [
-      { id: 'israel', name: { he: 'ארץ ישראל וישראל' }, kind: 'country' },
-      { id: 'jerusalem', name: { he: 'ירושלים' }, kind: 'city', parentId: 'israel' },
-      { id: 'tel-aviv', name: { he: 'תל אביב' }, kind: 'city', parentId: 'israel' },
-    ],
     relations: [{ from: 'fx-leader', to: 'fx-declaration', type: 'participated-in' }],
     indexes: {
       childrenByEvent: { 'fx-war': ['fx-battle'] },
       worksByPerson: { 'fx-leader': ['fx-autobio'] },
       worksByAuthor: { 'fx-leader': ['fx-autobio'] },
-      regionDescendants: {
-        israel: ['israel', 'jerusalem', 'tel-aviv'],
-        jerusalem: ['jerusalem'],
-        'tel-aviv': ['tel-aviv'],
-      },
     },
   };
 }

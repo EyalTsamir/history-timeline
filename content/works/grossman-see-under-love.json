@@ -22,10 +22,6 @@
     "approx": true
   },
   "importance": 42,
-  "regionIds": [
-    "israel",
-    "europe"
-  ],
   "sources": [
     {
       "title": {

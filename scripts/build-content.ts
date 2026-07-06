@@ -50,7 +50,6 @@ const meta = {
     personCategories: dataset.personCategories.length,
     eventCategories: dataset.eventCategories.length,
     workTypes: dataset.workTypes.length,
-    regions: dataset.regions.length,
     relations: dataset.relations.length,
   },
   sourceFiles: result.counts.sourceFiles,

@@ -11,7 +11,6 @@ import {
   CategorySchema,
   EventSchema,
   PersonSchema,
-  RegionSchema,
   RelationSchema,
   WorkSchema,
   WorkTypeDefSchema,
@@ -21,7 +20,6 @@ import type {
   EntityId,
   EventEntity,
   PersonEntity,
-  Region,
   Relation,
   WorkEntity,
   WorkTypeDef,
@@ -46,7 +44,6 @@ export interface ContentData {
   personCategories: Category[];
   eventCategories: Category[];
   workTypes: WorkTypeDef[];
-  regions: Region[];
   relations: Relation[];
 }
 
@@ -57,7 +54,6 @@ export interface ContentCounts {
   personCategories: number;
   eventCategories: number;
   workTypes: number;
-  regions: number;
   relations: number;
   /** Content JSON files discovered (entity files + taxonomy files + relations). */
   sourceFiles: number;
@@ -100,7 +96,6 @@ const TAXONOMY_FILES = {
   personCategories: 'taxonomies/person-categories.json',
   eventCategories: 'taxonomies/event-categories.json',
   workTypes: 'taxonomies/work-types.json',
-  regions: 'taxonomies/regions.json',
 } as const;
 const RELATIONS_FILE = 'relations.json';
 
@@ -244,7 +239,6 @@ export function collectContent(root: string = 'content', options: CollectOptions
   const personCategories = loadListFile(root, TAXONOMY_FILES.personCategories, CategorySchema, errors);
   const eventCategories = loadListFile(root, TAXONOMY_FILES.eventCategories, CategorySchema, errors);
   const workTypes = loadListFile(root, TAXONOMY_FILES.workTypes, WorkTypeDefSchema, errors);
-  const regions = loadListFile(root, TAXONOMY_FILES.regions, RegionSchema, errors);
   const relations = loadListFile(root, RELATIONS_FILE, RelationSchema, errors);
 
   const events = eventsSrc.items.map((s) => s.entity);
@@ -276,7 +270,6 @@ export function collectContent(root: string = 'content', options: CollectOptions
       });
     }
   }
-  for (const r of regions.items) registerId(r.id, TAXONOMY_FILES.regions);
 
   // Taxonomy colors must resolve to real --cat-* design tokens when the token
   // set is supplied (CLIs always supply it; see extractStyleTokens).
@@ -301,7 +294,6 @@ export function collectContent(root: string = 'content', options: CollectOptions
   const personCategoryIds = new Set(personCategories.items.map((c) => c.id));
   const eventCategoryIds = new Set(eventCategories.items.map((c) => c.id));
   const workTypeIds = new Set(workTypes.items.map((t) => t.id));
-  const regionIdSet = new Set(regions.items.map((r) => r.id));
   const timelineEntityIds = new Set<EntityId>([...eventIds, ...personIds, ...works.map((w) => w.id)]);
 
   const requireRef = (file: string, path: string, id: EntityId, known: ReadonlySet<string>, kind: string): void => {
@@ -311,23 +303,15 @@ export function collectContent(root: string = 'content', options: CollectOptions
   for (const { entity: e, file } of eventsSrc.items) {
     if (e.parentId !== undefined) requireRef(file, 'parentId', e.parentId, eventIds, 'event');
     e.categoryIds.forEach((id, i) => requireRef(file, `categoryIds[${i}]`, id, eventCategoryIds, 'event category'));
-    e.regionIds.forEach((id, i) => requireRef(file, `regionIds[${i}]`, id, regionIdSet, 'region'));
   }
   for (const { entity: p, file } of peopleSrc.items) {
     p.categoryIds.forEach((id, i) => requireRef(file, `categoryIds[${i}]`, id, personCategoryIds, 'person category'));
-    p.regionIds.forEach((id, i) => requireRef(file, `regionIds[${i}]`, id, regionIdSet, 'region'));
   }
   for (const { entity: w, file } of worksSrc.items) {
     requireRef(file, 'workType', w.workType, workTypeIds, 'work type');
     w.authorPersonIds.forEach((id, i) => requireRef(file, `authorPersonIds[${i}]`, id, personIds, 'person'));
     w.subjectPersonIds.forEach((id, i) => requireRef(file, `subjectPersonIds[${i}]`, id, personIds, 'person'));
     w.subjectEventIds.forEach((id, i) => requireRef(file, `subjectEventIds[${i}]`, id, eventIds, 'event'));
-    w.regionIds.forEach((id, i) => requireRef(file, `regionIds[${i}]`, id, regionIdSet, 'region'));
-  }
-  for (const r of regions.items) {
-    if (r.parentId !== undefined) {
-      requireRef(TAXONOMY_FILES.regions, `parentId of "${r.id}"`, r.parentId, regionIdSet, 'region');
-    }
   }
   relations.items.forEach((rel, i) => {
     requireRef(RELATIONS_FILE, `[${i}].from`, rel.from, timelineEntityIds, 'entity');
@@ -340,12 +324,6 @@ export function collectContent(root: string = 'content', options: CollectOptions
     errors.push({
       file: fileById.get(head) ?? 'events',
       message: `event parentId cycle detected: ${cycle.join(' -> ')}`,
-    });
-  }
-  for (const cycle of findParentCycles(regions.items)) {
-    errors.push({
-      file: TAXONOMY_FILES.regions,
-      message: `region parentId cycle detected: ${cycle.join(' -> ')}`,
     });
   }
 
@@ -459,17 +437,14 @@ export function collectContent(root: string = 'content', options: CollectOptions
   };
   for (const { entity: e, file } of eventsSrc.items) {
     checkDupRefs(file, 'categoryIds', e.categoryIds);
-    checkDupRefs(file, 'regionIds', e.regionIds);
   }
   for (const { entity: p, file } of peopleSrc.items) {
     checkDupRefs(file, 'categoryIds', p.categoryIds);
-    checkDupRefs(file, 'regionIds', p.regionIds);
   }
   for (const { entity: w, file } of worksSrc.items) {
     checkDupRefs(file, 'authorPersonIds', w.authorPersonIds);
     checkDupRefs(file, 'subjectPersonIds', w.subjectPersonIds);
     checkDupRefs(file, 'subjectEventIds', w.subjectEventIds);
-    checkDupRefs(file, 'regionIds', w.regionIds);
   }
 
   // (k) projectability: every entity must yield a finite timeline span — the app
@@ -496,13 +471,12 @@ export function collectContent(root: string = 'content', options: CollectOptions
     personCategories: personCategories.items.length,
     eventCategories: eventCategories.items.length,
     workTypes: workTypes.items.length,
-    regions: regions.items.length,
     relations: relations.items.length,
     sourceFiles:
       eventsSrc.fileCount +
       peopleSrc.fileCount +
       worksSrc.fileCount +
-      [personCategories, eventCategories, workTypes, regions, relations].filter((f) => f.present).length,
+      [personCategories, eventCategories, workTypes, relations].filter((f) => f.present).length,
   };
 
   const data: ContentData | null =
@@ -515,7 +489,6 @@ export function collectContent(root: string = 'content', options: CollectOptions
           personCategories: personCategories.items,
           eventCategories: eventCategories.items,
           workTypes: workTypes.items,
-          regions: regions.items,
           relations: relations.items,
         };
 
@@ -538,30 +511,6 @@ function sortTimeline<T extends { id: EntityId; importance: number }>(
         a.start - b.start || b.item.importance - a.item.importance || a.item.id.localeCompare(b.item.id),
     )
     .map((entry) => entry.item);
-}
-
-/** region id → [self, …all transitive descendants], pre-order in declaration order. */
-function computeRegionDescendants(regions: readonly Region[]): Record<string, EntityId[]> {
-  const childrenOf = new Map<EntityId, EntityId[]>();
-  for (const r of regions) {
-    if (r.parentId === undefined) continue;
-    const list = childrenOf.get(r.parentId) ?? [];
-    list.push(r.id);
-    childrenOf.set(r.parentId, list);
-  }
-  const out: Record<string, EntityId[]> = {};
-  const collect = (id: EntityId, acc: EntityId[], seen: Set<EntityId>): void => {
-    if (seen.has(id)) return; // defensive against cycles when called outside build flow
-    seen.add(id);
-    acc.push(id);
-    for (const child of childrenOf.get(id) ?? []) collect(child, acc, seen);
-  };
-  for (const r of regions) {
-    const acc: EntityId[] = [];
-    collect(r.id, acc, new Set());
-    out[r.id] = acc;
-  }
-  return out;
 }
 
 /**
@@ -594,13 +543,11 @@ export function buildDataset(data: ContentData, generatedAt: string = new Date()
     personCategories: data.personCategories,
     eventCategories: data.eventCategories,
     workTypes: data.workTypes,
-    regions: data.regions,
     relations: data.relations,
     indexes: {
       childrenByEvent,
       worksByPerson,
       worksByAuthor,
-      regionDescendants: computeRegionDescendants(data.regions),
     },
   });
 }

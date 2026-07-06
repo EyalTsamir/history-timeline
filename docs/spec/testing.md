@@ -28,7 +28,7 @@ warnings, curated-scope minimums, projection of every entity).
 | `timeline/presence` | `castForWindow` / `shelfForWindow` window-intersection + importance sort + overflow |
 | `timeline/scale` | `xOf`/`tOf` round-trip, **RTL and LTR both** (the config flag stays honest), zoom anchoring math |
 | `timeline/ticks`, `timeline/visibility` | adaptive gradations; culling to window ± buffer; open-ended spans |
-| `domain/filters` | combinatorial table: each dimension alone, all pairs, region-hierarchy expansion, person-category "unaffected" rule ([filtering](filtering.md)) |
+| `domain/filters` | combinatorial table: each dimension alone, all pairs, person-category "unaffected" rule ([filtering](filtering.md)) |
 | `domain/normalize` | each entity kind → `TimelineItem`, esp. work positioned by `coveredPeriod` not `publicationDate` (regression-guards decision D7) |
 | `scripts/validate-content` | rejects each class of bad fixture (dangling ref, cyclic parentId, bad date…) |
 
@@ -49,7 +49,7 @@ the real app is RTL.
 1. Load → century view shows anchor marks + the dot band; result-count sanity.
 2. Step-zoom into 1948 (wheel + pinch) → labels and a chapter appear; nothing pops out of existence.
 3. Pan across a decade with inertia; axis labels update.
-4. Apply region + content-type filters together → visible set matches; URL hash round-trips (reload restores view).
+4. Apply person-category + content-type filters together → visible set matches; URL hash round-trips (reload restores view).
 5. Select a person from the cast strip → detail shows bio + books + sources; follow a source link.
 6. Keyboard-only: Tab to an item, Enter opens detail, Esc closes.
 7. Invalid-URL resilience → degrades to the default view (no crash).

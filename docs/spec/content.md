@@ -35,7 +35,6 @@ content/
     person-categories.json      # small closed lists live in one file
     event-categories.json
     work-types.json
-    regions.json
   relations.json                # generic edges (optional, may be empty)
 ```
 
@@ -55,7 +54,6 @@ never by filename.
   "description": { "he": "מלחמתה של מדינת ישראל שזה עתה קמה נגד צבאות ערב, מנובמבר 1947 ועד הסכמי שביתת הנשק ב-1949." },
   "dates": { "start": "1947-11-30", "end": "1949-07-20" },
   "importance": 95,
-  "regionIds": ["israel"],
   "sources": [
     { "title": { "he": "ויקיפדיה העברית" }, "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות", "kind": "encyclopedia" }
   ]
@@ -77,8 +75,7 @@ content/**/*.json
    ▼
 scripts/build-content.ts
    │    • verify refs again, then assemble + DatasetSchema-parse the artifact
-   │    • precompute reverse indexes (personId → workIds, parentId → childIds,
-   │      region → descendants)
+   │    • precompute reverse indexes (personId → workIds, parentId → childIds)
    │    • sort each entity list by timeline start (the app relies on this)
    │    • taxonomy colors must resolve to --cat-* tokens in src/styles/tokens.css
    ▼

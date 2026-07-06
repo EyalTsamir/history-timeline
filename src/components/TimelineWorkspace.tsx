@@ -45,10 +45,7 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
     surfaceRef.current = rootRef.current?.querySelector<HTMLElement>('[role="application"]') ?? null;
   });
 
-  const filtered = useMemo(
-    () => applyFilters(items, filters, dataset.indexes.regionDescendants),
-    [items, filters, dataset],
-  );
+  const filtered = useMemo(() => applyFilters(items, filters), [items, filters]);
   const itemById = useMemo(() => new Map(items.map((i) => [i.id, i] as const)), [items]);
   const typeLabels = useMemo(() => {
     const labels = new Map<string, string>([

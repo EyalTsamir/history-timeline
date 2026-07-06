@@ -4,7 +4,6 @@ import { selectFilterState, useFilterStore } from './filterStore';
 
 beforeEach(() => {
   useFilterStore.setState({
-    regionIds: new Set(),
     personCategoryIds: new Set(),
     contentTypes: new Set(),
     minImportance: 0,
@@ -12,27 +11,19 @@ beforeEach(() => {
 });
 
 describe('useFilterStore', () => {
-  it('toggleRegion adds then removes, producing a new Set each time', () => {
-    const { toggleRegion } = useFilterStore.getState();
-    const before = useFilterStore.getState().regionIds;
+  it('togglePersonCategory adds then removes, producing a new Set each time', () => {
+    const { togglePersonCategory } = useFilterStore.getState();
+    const before = useFilterStore.getState().personCategoryIds;
 
-    toggleRegion('israel');
-    const added = useFilterStore.getState().regionIds;
+    togglePersonCategory('leaders');
+    const added = useFilterStore.getState().personCategoryIds;
     expect(added).not.toBe(before);
-    expect([...added]).toEqual(['israel']);
+    expect([...added]).toEqual(['leaders']);
 
-    toggleRegion('israel');
-    const removed = useFilterStore.getState().regionIds;
+    togglePersonCategory('leaders');
+    const removed = useFilterStore.getState().personCategoryIds;
     expect(removed).not.toBe(added);
     expect(removed.size).toBe(0);
-  });
-
-  it('togglePersonCategory adds then removes', () => {
-    const { togglePersonCategory } = useFilterStore.getState();
-    togglePersonCategory('leaders');
-    expect(useFilterStore.getState().personCategoryIds.has('leaders')).toBe(true);
-    togglePersonCategory('leaders');
-    expect(useFilterStore.getState().personCategoryIds.has('leaders')).toBe(false);
   });
 
   it('toggleContentType adds then removes', () => {
@@ -44,23 +35,19 @@ describe('useFilterStore', () => {
   });
 
   it('dimensions are independent', () => {
-    const { toggleRegion, togglePersonCategory, toggleContentType, setMinImportance } =
-      useFilterStore.getState();
-    toggleRegion('jerusalem');
+    const { togglePersonCategory, toggleContentType, setMinImportance } = useFilterStore.getState();
     togglePersonCategory('writers');
     toggleContentType('event');
     setMinImportance(40);
 
     const s = useFilterStore.getState();
-    expect([...s.regionIds]).toEqual(['jerusalem']);
     expect([...s.personCategoryIds]).toEqual(['writers']);
     expect([...s.contentTypes]).toEqual(['event']);
     expect(s.minImportance).toBe(40);
 
-    toggleRegion('jerusalem');
+    togglePersonCategory('writers');
     const after = useFilterStore.getState();
-    expect(after.regionIds.size).toBe(0);
-    expect([...after.personCategoryIds]).toEqual(['writers']);
+    expect(after.personCategoryIds.size).toBe(0);
     expect([...after.contentTypes]).toEqual(['event']);
     expect(after.minImportance).toBe(40);
   });
@@ -73,16 +60,14 @@ describe('useFilterStore', () => {
   });
 
   it('clearAll resets every dimension to EMPTY_FILTER_STATE values', () => {
-    const { toggleRegion, togglePersonCategory, toggleContentType, setMinImportance, clearAll } =
+    const { togglePersonCategory, toggleContentType, setMinImportance, clearAll } =
       useFilterStore.getState();
-    toggleRegion('israel');
     togglePersonCategory('leaders');
     toggleContentType('person');
     setMinImportance(55);
 
     clearAll();
     const s = selectFilterState(useFilterStore.getState());
-    expect(s.regionIds.size).toBe(EMPTY_FILTER_STATE.regionIds.size);
     expect(s.personCategoryIds.size).toBe(EMPTY_FILTER_STATE.personCategoryIds.size);
     expect(s.contentTypes.size).toBe(EMPTY_FILTER_STATE.contentTypes.size);
     expect(s.minImportance).toBe(EMPTY_FILTER_STATE.minImportance);
@@ -90,9 +75,9 @@ describe('useFilterStore', () => {
 
   it('action references are stable across state updates', () => {
     const before = useFilterStore.getState();
-    before.toggleRegion('israel');
+    before.togglePersonCategory('leaders');
     const after = useFilterStore.getState();
-    expect(after.toggleRegion).toBe(before.toggleRegion);
+    expect(after.togglePersonCategory).toBe(before.togglePersonCategory);
     expect(after.clearAll).toBe(before.clearAll);
   });
 });

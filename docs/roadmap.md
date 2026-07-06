@@ -30,7 +30,7 @@ first release. Release detail and accepted limitations in
 ### Phase 3 — Platform
 - API + database behind `DataSource` (tile queries by window/importance/filters); content files become the import corpus.
 - Data-management/admin UI replacing git-based authoring.
-- Additional regions & periods; region-aware curves if density diverges wildly.
+- Additional geographies & periods; density-aware curves if density diverges wildly.
 - Additional languages (widen `Text`, extract UI strings — both prepared).
 - Relationship explorer over the `Relation` edge list.
 - New content types (photos, press, testimonies) via new normalize rules.
@@ -38,9 +38,9 @@ first release. Release detail and accepted limitations in
 ## Boundary rules of thumb
 
 Build now only what Phase 1 renders; **model** now whatever is cheap to store and
-expensive to migrate. That's why relations, publication dates, region hierarchy,
-and language-keyed text are in the schema today while search, APIs, and explorers
-are not in the code.
+expensive to migrate. That's why relations, publication dates, and language-keyed
+text are in the schema today while search, APIs, and explorers are not in the
+code.
 
 ## Open questions (ask the user when they become relevant)
 

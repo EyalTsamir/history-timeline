@@ -79,7 +79,7 @@ describe('StaticJsonDataSource', () => {
 
   it('maps a structurally invalid body with the right version to kind "schema"', async () => {
     stubFetch(
-      Promise.resolve(jsonResponse({ ...makeFixtureDataset(), events: 'not-an-array', regions: undefined })),
+      Promise.resolve(jsonResponse({ ...makeFixtureDataset(), events: 'not-an-array' })),
     );
     const err = await loadError(new StaticJsonDataSource(TEST_URL));
     expect(err).toBeInstanceOf(DatasetLoadError);

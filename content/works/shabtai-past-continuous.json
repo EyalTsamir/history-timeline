@@ -21,10 +21,6 @@
     "approx": true
   },
   "importance": 32,
-  "regionIds": [
-    "israel",
-    "tel-aviv"
-  ],
   "sources": [
     {
       "title": {
