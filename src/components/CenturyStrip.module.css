@@ -1,5 +1,5 @@
 /*
- * Century strip (docs/14 §6). Horizontal geometry (left/right/width) is
+ * Century strip (docs/spec/rendering.md). Horizontal geometry (left/right/width) is
  * injected inline — the component already resolved the axis direction, so
  * physical properties are correct in both RTL and LTR (same rule as the
  * timeline canvas). Everything else uses logical properties.

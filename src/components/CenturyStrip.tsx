@@ -1,5 +1,5 @@
 /**
- * The century strip (docs/14 §6): the always-visible map of the whole range —
+ * The century strip (docs/spec/rendering.md): the always-visible map of the whole range —
  * tinted named eras, flag dots for anchor events (importance ≥ 80), and a
  * brush marking the current window. Dragging pans (the window center follows
  * the pointer); a tap jumps. The era chips underneath are the keyboard/AT

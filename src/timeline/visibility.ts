@@ -1,5 +1,5 @@
 /**
- * Viewport culling (docs/14 §4, docs/10): nothing is hidden by zoom anymore —
+ * Viewport culling (docs/spec/rendering.md, docs/spec/performance.md): nothing is hidden by zoom anymore —
  * the altitude label floors only decide labeled mark vs dot — so the only
  * visibility question left is virtualization: keep items intersecting the
  * buffered window. Pure; order-preserving over the time-sorted input.
@@ -19,7 +19,7 @@ export function layoutEnd(item: TimelineItem, openEndYear: number): number {
 
 /**
  * Virtualization cull: keep items intersecting the window ± bufferScreens
- * screens, so pan-by-transform has content ready at both edges (docs/10).
+ * screens, so pan-by-transform has content ready at both edges (docs/spec/performance.md).
  */
 export function cullToWindow(
   items: readonly TimelineItem[],

@@ -10,7 +10,7 @@
   "_dates": "start/end use \"YYYY\" | \"YYYY-MM\" | \"YYYY-MM-DD\" (Gregorian). Omit end for a point-in-time event. \"approx\": true marks a circa date. Never invent precision you don't have — a year-only date is displayed as a year.",
   "dates": { "start": "1936-04-19", "end": "1939" },
   "_parentId": "Optional: id of the parent event when this is a sub-event (e.g. a battle inside a war). Add the key only when needed.",
-  "_importance": "Integer 1-100 per the docs/05 rubric: 90-100 era-defining (visible fully zoomed out); 70-89 major national events; 40-69 notable events and sub-events; 20-39 contextual detail (year-level zoom); 1-19 fine detail (month-level zoom). A sub-event must score LOWER than its parent (validator warns otherwise).",
+  "_importance": "Integer 1-100 per the docs/spec/zoom.md rubric: 90-100 era-defining (visible fully zoomed out); 70-89 major national events; 40-69 notable events and sub-events; 20-39 contextual detail (year-level zoom); 1-19 fine detail (month-level zoom). A sub-event must score LOWER than its parent (validator warns otherwise).",
   "importance": 75,
   "_categoryIds": "ids from content/taxonomies/event-categories.json.",
   "categoryIds": ["war-security"],
@@ -20,7 +20,7 @@
   "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
   "_links": "Optional related reading (further links). NOT the citation — use \"sources\" for that. label is the Hebrew display text; placeholder URLs (containing \"...\", example.com) are rejected.",
   "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות" }],
-  "_sources": "REQUIRED — at least one citation backing the facts (docs/04#sourcing). Prefer naming an authoritative institution (national library, archive, university, museum, established encyclopedia). Add \"url\" only when it is a real, stable page — omit it rather than guess. \"publisher\" and \"kind\" (archive|library|museum|encyclopedia|reference|academic|government|book|press|website) are optional.",
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Prefer naming an authoritative institution (national library, archive, university, museum, established encyclopedia). Add \"url\" only when it is a real, stable page — omit it rather than guess. \"publisher\" and \"kind\" (archive|library|museum|encyclopedia|reference|academic|government|book|press|website) are optional.",
   "sources": [
     { "title": { "he": "הספרייה הלאומית — עיתונות היסטורית" }, "publisher": "הספרייה הלאומית של ישראל", "url": "https://www.nli.org.il/he", "kind": "library" }
   ]

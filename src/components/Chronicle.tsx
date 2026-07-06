@@ -1,5 +1,5 @@
 /**
- * The mobile chronicle (docs/14 §7): below the desktop breakpoint the canvas
+ * The mobile chronicle (docs/spec/interaction.md): below the desktop breakpoint the canvas
  * is replaced by a vertical feed — scroll IS movement through time. Era
  * sections → sticky year headings → entries sized by importance tier;
  * sub-events fold into their parent's chapter card ("עוד N" expands in

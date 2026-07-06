@@ -1,14 +1,14 @@
 /**
- * The event-field canvas (docs/14 §3–4): era washes + weighted event marks +
+ * The event-field canvas (docs/spec/rendering.md): era washes + weighted event marks +
  * chapter bands + the always-present dot band, over the adaptive ruler.
  *
  * Rendering: pure pipeline output only — filters (upstream) → cull →
  * layoutField, memoized on the SETTLED window. During a pan gesture the
  * item/ruler layers move by CSS transform alone; layout recomputes when the
  * gesture settles, crosses the cull buffer, or the window span changes
- * (rAF-throttled) — docs/10's transform-only rule.
+ * (rAF-throttled) — docs/spec/performance.md's transform-only rule.
  *
- * Zoom is ALTITUDE STEPPING (docs/14 §3): wheel/pinch deltas accumulate to a
+ * Zoom is ALTITUDE STEPPING (docs/spec/zoom.md): wheel/pinch deltas accumulate to a
  * threshold and step century↔decade↔year anchored at the pointer; panning
  * stays continuous. Every gesture keeps a non-gesture equivalent (buttons,
  * segmented control, keyboard).
@@ -54,9 +54,11 @@ const FALLBACK_WIDTH_PX = 960;
 const ERA_LABEL_MIN_PX = 110;
 /** Wheel accumulation resets after this idle gap (a new gesture intent). */
 const WHEEL_IDLE_MS = 400;
+/** No-transition modifier toggled on the field layer during pan re-anchors (see CSS). */
+const INSTANT_CLASS = styles.instant!;
 
 interface TimelineProps {
-  /** Already user-filtered, time-sorted items (docs/07 flows in above us). */
+  /** Already user-filtered, time-sorted items (docs/spec/filtering.md flows in above us). */
   items: readonly TimelineItem[];
   /** contentType → Hebrew label, for accessible item names. */
   typeLabels: ReadonlyMap<string, string>;
@@ -131,25 +133,41 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
   useEffect(() => {
     let raf = 0;
     let settle: ReturnType<typeof setTimeout> | undefined;
-    const relayout = (): void => setLayoutWindow(useViewportStore.getState().window);
+    let pendingInstant = false;
+    /**
+     * `instant` relayouts re-anchor a pan: the transform reset restores every
+     * item to the exact same screen position, so their `left`/`top` transition
+     * must be off for this commit or they slide by the accumulated offset
+     * (Timeline.module.css `.instant`). Zoom/filter relayouts animate.
+     */
+    const relayout = (instant: boolean): void => {
+      if (instant) bandsLayerRef.current?.classList.add(INSTANT_CLASS);
+      setLayoutWindow(useViewportStore.getState().window);
+    };
     const unsubscribe = useViewportStore.subscribe((s) => {
       const live = s.window;
       const layout = layoutWindowRef.current;
       const width = widthRef.current;
       const isPan = Math.abs(spanYears(live) - spanYears(layout)) < 1e-9;
       if (isPan) {
+        // Keep the sheet glued to the live window at ALL times — the transform
+        // tracks even past the buffer, so a pan never freezes and then snaps to
+        // catch up. The buffer only decides when to relayout to refill items.
         const offset = panOffsetPx(layout, live, width, dir);
+        applyTransform(offset);
         if (Math.abs(offset) < width * TIMELINE_INTERACTION.bufferScreens) {
-          applyTransform(offset);
           clearTimeout(settle);
-          settle = setTimeout(relayout, TIMELINE_INTERACTION.settleMs);
+          settle = setTimeout(() => relayout(true), TIMELINE_INTERACTION.settleMs);
           return;
         }
+        // Panned past the laid-out buffer: refill via an instant relayout below.
+        // The transform above already re-anchored, so the refill is seamless.
       }
+      pendingInstant = isPan; // pan past the buffer re-anchors instantly; zoom morphs
       if (raf === 0) {
         raf = requestAnimationFrame(() => {
           raf = 0;
-          relayout();
+          relayout(pendingInstant);
         });
       }
     });
@@ -161,11 +179,18 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
   }, [dir, applyTransform]);
 
   // After a relayout commits, re-anchor the transform to wherever "live" is now.
+  // A pan relayout ran with item transitions suppressed (`.instant`); now that
+  // the new left/top have painted at the anchored position, re-enable them one
+  // frame later so the next zoom/filter relayout animates.
   useLayoutEffect(() => {
     applyTransform(panOffsetPx(layoutWindow, useViewportStore.getState().window, widthPx, dir));
+    const layer = bandsLayerRef.current;
+    if (layer === null || !layer.classList.contains(INSTANT_CLASS)) return undefined;
+    const id = requestAnimationFrame(() => layer.classList.remove(INSTANT_CLASS));
+    return () => cancelAnimationFrame(id);
   }, [layoutWindow, widthPx, dir, applyTransform]);
 
-  // --- the pure pipeline (docs/14 §4), memoized on the settled window ---------
+  // --- the pure pipeline (docs/spec/rendering.md), memoized on the settled window ---------
   const altitude = altitudeOf(spanYears(layoutWindow));
   const scale = useMemo<Scale>(() => ({ window: layoutWindow, widthPx, dir }), [layoutWindow, widthPx, dir]);
 
@@ -196,16 +221,23 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       const start = Math.max(era.start, coverStart);
       const end = Math.min(era.end, coverEnd);
       if (start >= end) return [];
-      const rect = rectOf(scale, start, end);
-      const lo = Math.max(rect.x, 0);
-      const hi = Math.min(rect.x + rect.width, widthPx);
-      return [{ era, rect, labelX: lo, labelWidth: hi - lo }];
+      const rect = rectOf(scale, start, end); // wash: cover-clamped (bounds off-screen overflow)
+      // Label anchored to the era's TRUE centre — a pure function of time, so it
+      // rides the pan rigidly and never snaps on settle. It shows only when the
+      // era itself is wide enough (pan-invariant); the RangeReadout always names
+      // the current era when a wide one's centre is off-screen.
+      const full = rectOf(scale, era.start, era.end);
+      return [{ era, rect, centerX: full.x + full.width / 2, showLabel: full.width >= ERA_LABEL_MIN_PX }];
     });
-  }, [scale, widthPx, layoutWindow]);
+  }, [scale, layoutWindow]);
 
   const rowPx = ROW_PX[altitude];
   const dotSubRows = FIELD_CONFIGS[altitude].dotSubRows;
-  const rowsPx = Math.max(layout.rowsUsed, 1) * rowPx;
+  // Reserve the altitude's full row budget so the field height depends only on
+  // altitude, never on which items happen to be in view. Otherwise `rowsUsed`
+  // fluctuates as content pans in/out, resizing the field and shoving the ruler
+  // and the cast/works strips below it — a vertical jump on every pan.
+  const rowsPx = FIELD_CONFIGS[altitude].maxRows * rowPx;
   const dotBandTop = FIELD_PAD_TOP_PX + rowsPx + DOT_BAND_PAD_PX;
   const fieldHeightPx = dotBandTop + dotSubRows * DOT_ROW_PX + DOT_BAND_PAD_PX;
   const isEmpty = layout.marks.length === 0 && layout.chapters.length === 0 && layout.dots.length === 0;
@@ -221,7 +253,7 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
     });
   };
 
-  // --- altitude stepping (docs/14 §3) ----------------------------------------
+  // --- altitude stepping (docs/spec/zoom.md) ----------------------------------------
   const liveWindow = (): TimeWindow => useViewportStore.getState().window;
   const surfaceX = (clientX: number): number =>
     clientX - (surfaceRef.current?.getBoundingClientRect().left ?? 0);
@@ -370,7 +402,7 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       const newDist = Math.max(1, Math.hypot(tracked.x - other.x, tracked.y - other.y));
 
       // Pan follows the midpoint continuously; the zoom component accumulates
-      // into an altitude step (docs/14 §3) instead of scaling freely.
+      // into an altitude step (docs/spec/zoom.md) instead of scaling freely.
       setWindow(panWindowByPx(liveWindow(), widthRef.current, dir, newMidX - prevMidX));
       pinchRatio.current *= prevDist / newDist;
       const anchor = surfaceX(newMidX);
@@ -543,19 +575,15 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
 
         <div className={styles.bandsViewport} style={{ height: fieldHeightPx }} onScroll={pinScroll}>
           <div ref={bandsLayerRef} className={styles.bandsLayer}>
-            {eraWashes.map(({ era, rect, labelX, labelWidth }) => (
+            {eraWashes.map(({ era, rect, centerX, showLabel }) => (
               <Fragment key={era.id}>
                 <span
                   className={styles.eraWash}
                   style={{ left: rect.x, width: rect.width, background: `var(--era-${era.id})` }}
                   aria-hidden="true"
                 />
-                {labelWidth >= ERA_LABEL_MIN_PX && (
-                  <span
-                    className={styles.eraWashLabel}
-                    style={{ left: labelX, width: labelWidth }}
-                    aria-hidden="true"
-                  >
+                {showLabel && (
+                  <span className={styles.eraWashLabel} style={{ left: centerX }} aria-hidden="true">
                     {STRINGS.eraNames[era.id]}
                   </span>
                 )}

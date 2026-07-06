@@ -1,8 +1,8 @@
 /**
- * One positioned event mark on the field (docs/14 §4). A real <button>
+ * One positioned event mark on the field (docs/spec/rendering.md). A real <button>
  * (decision D6): focusable, labeled in Hebrew, chronological tab order.
  *
- * Weight is carried by SHAPE + SIZE, never color alone (docs/08#accessibility):
+ * Weight is carried by SHAPE + SIZE, never color alone (docs/spec/interaction.md#accessibility):
  *   seal   → brass medal + serif headline (importance ≥ 95) over a span underline
  *   bar    → filled span bar, strong start edge; label inside when wide enough
  *   point  → diamond marker sized by tier + side label

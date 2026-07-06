@@ -1,5 +1,5 @@
 /**
- * Lightweight item detail (docs/08#selection--detail) — the BODY only; the
+ * Lightweight item detail (docs/spec/interaction.md#selection--detail) — the BODY only; the
  * hosting surface (desktop side panel / mobile bottom sheet) owns the title
  * and close affordance. Shows precision-aware dates, type/category chips,
  * description, image, external links, and the one relationship traversal the

@@ -1,5 +1,5 @@
 /**
- * Shareable view state in the URL hash (docs/02: single-page, no router —
+ * Shareable view state in the URL hash (docs/spec/architecture.md: single-page, no router —
  * `#t=<center>&s=<span>&r=…&pc=…&ct=…&imp=…&sel=…`).
  *
  * - encode/decode are pure and validated: unknown ids are dropped, numbers

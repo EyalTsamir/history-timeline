@@ -76,7 +76,7 @@
   min-block-size: 50vh;
 }
 
-/* Curation disclaimer (docs/01): the content is a representative selection. */
+/* Curation disclaimer (docs/spec/product.md): the content is a representative selection. */
 .footer {
   padding-block: var(--space-2);
   padding-inline: var(--space-5);

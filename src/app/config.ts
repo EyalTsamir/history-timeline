@@ -1,4 +1,4 @@
-/** Application configuration — decisions from docs/02-architecture.md. */
+/** Application configuration — decisions from docs/spec/architecture.md. */
 export const APP_CONFIG = {
   /**
    * Decision D5: the time axis flows right-to-left (past on the right),
@@ -8,7 +8,7 @@ export const APP_CONFIG = {
    */
   timeDirection: 'rtl' as 'rtl' | 'ltr',
 
-  /** First content scope (docs/01-product.md). Content outside is allowed;
+  /** First content scope (docs/spec/product.md). Content outside is allowed;
    *  this only seeds the initial viewport in the timeline stage. */
   contentRange: { startYear: 1930, endYear: 2000 },
 

@@ -1,11 +1,11 @@
 /*
- * Event-field styling (docs/14 §4). Horizontal geometry (left/width) is
+ * Event-field styling (docs/spec/rendering.md). Horizontal geometry (left/width) is
  * injected inline by the layout pipeline — those values already encode the
  * axis direction (timeline/scale.ts), so `left` is correct in both RTL and
  * LTR. Everything else uses logical properties; inside item boxes, flex
  * order follows the document direction, giving RTL reading order for free.
  *
- * Visual weight comes from the importance tier (docs/14 §3): marker size and
+ * Visual weight comes from the importance tier (docs/spec/zoom.md): marker size and
  * label size step down from seal → anchor → major → minor; below the label
  * floor items render in the dot band.
  */
@@ -22,7 +22,7 @@
 .surface {
   position: relative;
   cursor: grab;
-  touch-action: pan-y; /* vertical scroll stays with the browser (docs/08) */
+  touch-action: pan-y; /* vertical scroll stays with the browser (docs/spec/interaction.md) */
   -webkit-user-select: none;
   user-select: none;
   outline-offset: -2px;
@@ -66,15 +66,15 @@
 .eraWashLabel {
   position: absolute;
   inset-block-start: 4px;
-  display: flex;
-  justify-content: center;
+  /* Anchored to the era's true centre (left = centreX) and centred on it, so it
+     translates rigidly with a pan and never snaps on settle. */
+  transform: translateX(-50%);
   font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--text-faint);
   pointer-events: none;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .gridline,
@@ -159,7 +159,7 @@
   overflow: hidden;
 }
 
-/* Tier typography — importance IS the type scale (docs/14 §3). */
+/* Tier typography — importance IS the type scale (docs/spec/zoom.md). */
 .tier-seal {
   font-size: 0.95rem;
   font-weight: 700;
@@ -252,7 +252,7 @@
   block-size: 9px;
 }
 
-/* --- chapters (docs/14 §4) ----------------------------------------------------- */
+/* --- chapters (docs/spec/rendering.md) ----------------------------------------------------- */
 
 .chapterTint {
   position: absolute;
@@ -308,7 +308,7 @@
   border-color: var(--accent);
 }
 
-/* --- the dot band (docs/14 principle 2) ---------------------------------------- */
+/* --- the dot band (docs/spec/rendering.md) ---------------------------------------- */
 
 .dot {
   position: absolute;
@@ -474,4 +474,19 @@
   .dot::after {
     transition: scale 120ms ease, opacity 120ms ease;
   }
+}
+
+/*
+ * Pan re-anchor (Timeline.tsx): when a pan settles, the layer relayouts to the
+ * new window and its transform resets to ~0. Item left/top now equal their
+ * pre-relayout screen position, so the position transition above MUST be off
+ * for that one commit — otherwise every item eases by the accumulated pan
+ * offset ("everything jumps"). Toggled imperatively around the relayout; zoom
+ * and filter relayouts keep the transition so they still morph.
+ */
+.instant .mark,
+.instant .chapterHeader,
+.instant .chapterTint,
+.instant .dot {
+  transition: none;
 }

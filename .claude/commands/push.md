@@ -15,7 +15,7 @@ This machine has **two** GitHub accounts logged into `gh`: `EyalTsamir` (this pr
    - Ask the user to confirm the repo name (default: `history-timeline`, matching `package.json`'s `name`) and visibility (public/private) — creating a GitHub repo is a one-time, outward-facing action, so confirm before creating it.
    - Create it with the owner **explicit** in the name, never relying on whichever account happens to be active: `gh repo create EyalTsamir/<repo-name> --source=. --remote=origin --private` (or `--public`, per the user's answer).
    - Verify afterward with `git remote -v` that it points to `github.com/EyalTsamir/...`.
-   - Remind the user of the one-time manual step from [docs/12-development.md](../../docs/12-development.md#deployment-github-pages): after this first push, go to the repo's **Settings → Pages → Source: GitHub Actions** on GitHub — this can't be done via git/gh push and only needs doing once.
+   - Remind the user of the one-time manual step from [docs/spec/development.md](../../docs/spec/development.md#deployment-github-pages): after this first push, go to the repo's **Settings → Pages → Source: GitHub Actions** on GitHub — this can't be done via git/gh push and only needs doing once.
 
 ## Step 1: Stage ALL modified files
 
@@ -25,16 +25,11 @@ This machine has **two** GitHub accounts logged into `gh`: `EyalTsamir` (this pr
 4. **If uncertain** about any file — ask the user before proceeding. Do not silently exclude or include ambiguous files.
 5. Run `git diff --cached --stat` for an overview of what will be committed.
 
-## Step 2: Local sanity check
+## Step 2: Local sanity check — SKIPPED BY DEFAULT
 
-These are the same stages `.github/workflows/ci.yml` runs on every push to `main` — running them first avoids handing the user a commit that fails CI. There is no `lint` script in this project; do not invent one.
+`/push` is a fast command. By default, do **not** run `content:validate`, `typecheck`, `test`, or `build` before pushing — rely on CI (`.github/workflows/ci.yml`) to catch issues on `main`. Just note in one line that CI will run these checks.
 
-1. `npm run content:validate`
-2. `npm run typecheck`
-3. `npm test`
-4. `npm run build`
-
-If any step fails, fix the issue (or ask the user how to proceed) before continuing.
+Only run any of these checks in a given `/push` if the user explicitly asks for it in that turn (e.g. "run typecheck first" or "make sure tests pass before pushing"). If they do, run just what they asked for — don't expand it into the full gauntlet. If a check the user asked for fails, fix the issue (or ask how to proceed) before continuing.
 
 ## Step 3: Generate commit message and commit
 

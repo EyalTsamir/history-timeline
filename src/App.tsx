@@ -1,5 +1,5 @@
 /**
- * Application shell (docs/08-interaction.md layout): header, desktop filter
+ * Application shell (docs/spec/interaction.md layout): header, desktop filter
  * sidebar / mobile filter sheet (single 900px breakpoint, CSS-only), and the
  * timeline workspace. Loads the dataset once through DataSource with a
  * loading | error | ready state machine.

@@ -1,5 +1,5 @@
 /**
- * Item selection (docs/08-interaction.md#selection--detail). Just the id —
+ * Item selection (docs/spec/interaction.md#selection--detail). Just the id —
  * the detail surface resolves it against the normalized items. No React.
  */
 import { create } from 'zustand';

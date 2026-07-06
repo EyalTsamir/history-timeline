@@ -1,7 +1,7 @@
 /**
  * The timeline workspace: existing filtered data flow → interactive Timeline;
  * selection → detail surface (desktop side panel / mobile bottom sheet,
- * docs/08); URL-hash sync for shareable state (docs/02). Filter changes only
+ * docs/spec/interaction.md); URL-hash sync for shareable state (docs/spec/architecture.md). Filter changes only
  * swap the item list — the user's period and zoom are never reset.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -27,7 +27,7 @@ import { Sheet } from './Sheet';
 import { Timeline } from './Timeline';
 import styles from './TimelineWorkspace.module.css';
 
-/** Single breakpoint (docs/08): side panel ↔ bottom sheet. jsdom → desktop. */
+/** Single breakpoint (docs/spec/interaction.md): side panel ↔ bottom sheet. jsdom → desktop. */
 function useIsDesktop(): boolean {
   const [isDesktop, setIsDesktop] = useState(
     () => typeof window.matchMedia !== 'function' || window.matchMedia('(min-width: 900px)').matches,
@@ -83,7 +83,7 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   // Mirror viewport/filters/selection into the URL hash (and back).
   useEffect(() => startTimelineUrlSync(items, dataset), [items, dataset]);
 
-  // Keyboard flow (docs/08): Enter on an item moves focus into the desktop
+  // Keyboard flow (docs/spec/interaction.md): Enter on an item moves focus into the desktop
   // panel; skip the mount-time value so a URL-restored selection doesn't yank
   // focus on load.
   const prevSelectedRef = useRef(selectedId);
@@ -121,7 +121,7 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
     const item = itemById.get(id);
     if (item === undefined) return;
     select(id);
-    // Only events live on the canvas (docs/14 §5) — people/works open their
+    // Only events live on the canvas (docs/spec/rendering.md) — people/works open their
     // detail from the strips, and panning the window at them shows nothing.
     if (item.kind === 'event') panIntoView(item);
   };

@@ -1,5 +1,5 @@
 /**
- * Combined-filter logic (docs/07-filtering.md).
+ * Combined-filter logic (docs/spec/filtering.md).
  * Semantics: OR within a dimension, AND across dimensions.
  * An empty set means "dimension inactive — everything passes".
  * Person-category narrows PEOPLE only; other kinds are unaffected by it.

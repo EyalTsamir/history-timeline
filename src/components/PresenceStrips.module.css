@@ -1,4 +1,4 @@
-/* Cast strip + period shelf (docs/14 §5) — slim presence rows under the canvas. */
+/* Cast strip + period shelf (docs/spec/rendering.md) — slim presence rows under the canvas. */
 
 .strip {
   display: flex;

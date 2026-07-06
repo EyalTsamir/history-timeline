@@ -1,5 +1,5 @@
 /**
- * Content pipeline library (docs/04-data-and-content.md#build-pipeline):
+ * Content pipeline library (docs/spec/content.md#build-pipeline):
  * discovery + validation of authored JSON under content/, and assembly of the
  * compiled Dataset artifact. Pure functions over a content root so the two
  * CLIs and the tests share one code path; issues are aggregated, never thrown.
@@ -84,7 +84,7 @@ export interface CollectOptions {
 
 /**
  * `TimelineItem.contentType` uses 'event' and 'person' alongside workType
- * slugs (docs/07); a work type with one of these ids would silently corrupt
+ * slugs (docs/spec/filtering.md); a work type with one of these ids would silently corrupt
  * the content-type filter dimension.
  */
 const RESERVED_CONTENT_TYPE_IDS = new Set(['event', 'person']);
@@ -272,7 +272,7 @@ export function collectContent(root: string = 'content', options: CollectOptions
     if (RESERVED_CONTENT_TYPE_IDS.has(t.id)) {
       errors.push({
         file: TAXONOMY_FILES.workTypes,
-        message: `work type id "${t.id}" is reserved — it collides with the built-in content-type values (docs/07)`,
+        message: `work type id "${t.id}" is reserved — it collides with the built-in content-type values (docs/spec/filtering.md)`,
       });
     }
   }
@@ -349,7 +349,7 @@ export function collectContent(root: string = 'content', options: CollectOptions
     });
   }
 
-  // (d) importance rubric: sub-events should score lower than their parent (docs/05).
+  // (d) importance rubric: sub-events should score lower than their parent (docs/spec/zoom.md).
   const eventById = new Map(events.map((e) => [e.id, e] as const));
   for (const { entity: e, file } of eventsSrc.items) {
     if (e.parentId === undefined) continue;
@@ -359,17 +359,17 @@ export function collectContent(root: string = 'content', options: CollectOptions
         file,
         message:
           `sub-event importance (${e.importance}) >= parent event "${parent.id}" importance ` +
-          `(${parent.importance}) — sub-events should score lower (docs/05 rubric)`,
+          `(${parent.importance}) — sub-events should score lower (docs/spec/zoom.md rubric)`,
       });
     }
   }
 
-  // (e) sourcing (docs/04#sourcing): every timeline entity must cite ≥1 source.
+  // (e) sourcing (docs/spec/content.md#sourcing): every timeline entity must cite ≥1 source.
   for (const { entity, file } of [...eventsSrc.items, ...peopleSrc.items, ...worksSrc.items]) {
     if (entity.sources.length === 0) {
       errors.push({
         file,
-        message: 'no sources — every entity must cite at least one source (docs/04#sourcing)',
+        message: 'no sources — every entity must cite at least one source (docs/spec/content.md#sourcing)',
         path: 'sources',
       });
     }
@@ -412,7 +412,7 @@ export function collectContent(root: string = 'content', options: CollectOptions
   }
 
   // (h) sub-event temporal containment (WARNING): a sub-event whose period does
-  //     not overlap its parent's at all is almost certainly misdated (docs/06).
+  //     not overlap its parent's at all is almost certainly misdated (docs/spec/rendering.md).
   for (const { entity: e, file } of eventsSrc.items) {
     if (e.parentId === undefined) continue;
     const parent = eventById.get(e.parentId);
@@ -425,7 +425,7 @@ export function collectContent(root: string = 'content', options: CollectOptions
     if (!overlaps) {
       warnings.push({
         file,
-        message: `sub-event period does not overlap parent event "${parent.id}" period — check the dates (docs/06)`,
+        message: `sub-event period does not overlap parent event "${parent.id}" period — check the dates (docs/spec/rendering.md)`,
         path: 'dates',
       });
     }
@@ -526,7 +526,7 @@ export function collectContent(root: string = 'content', options: CollectOptions
 // Dataset assembly
 // ---------------------------------------------------------------------------
 
-/** Sort by timeline start asc; ties: higher importance first, then id (docs/10). */
+/** Sort by timeline start asc; ties: higher importance first, then id (docs/spec/performance.md). */
 function sortTimeline<T extends { id: EntityId; importance: number }>(
   items: readonly T[],
   startOf: (item: T) => number,

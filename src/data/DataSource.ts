@@ -1,5 +1,5 @@
 /**
- * Data-access boundary (docs/02-architecture.md#application-layers).
+ * Data-access boundary (docs/spec/architecture.md#application-layers).
  * All data enters the app through this interface; MVP ships
  * StaticJsonDataSource, a future API server implements the same contract.
  */

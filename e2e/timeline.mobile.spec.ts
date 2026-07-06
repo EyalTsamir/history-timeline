@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Dedicated mobile journey (docs/09 §3, docs/14 §7): the vertical chronicle,
+// Dedicated mobile journey (docs/spec/testing.md §3, docs/spec/interaction.md): the vertical chronicle,
 // the filter bottom-sheet, and the item-detail bottom-sheet, on a 390px touch
 // device. (mobile project only)
 
@@ -21,7 +21,7 @@ test('mobile: chronicle renders; filter sheet narrows; detail sheet opens and re
   await expect(page.getByText(/40\s+מתוך\s+148/)).toBeVisible();
 
   // Clear via the results-line button, then open an item detail bottom-sheet
-  // from the era cast row (people live there, docs/14 §5).
+  // from the era cast row (people live there, docs/spec/rendering.md).
   await page.getByRole('button', { name: 'נקה הכול' }).click();
   await expect(page.getByText(/148\s+מתוך\s+148/)).toBeVisible();
 
@@ -33,7 +33,7 @@ test('mobile: chronicle renders; filter sheet narrows; detail sheet opens and re
   await expect(detail).toBeVisible();
   await expect(detail.getByText('מקורות')).toBeVisible(); // sources section renders
 
-  // Close returns focus to the originating chip (docs/08 focus restoration).
+  // Close returns focus to the originating chip (docs/spec/interaction.md focus restoration).
   await detail.getByRole('button', { name: 'סגירה' }).click();
   await expect(detail).toBeHidden();
   await expect(item).toBeFocused();

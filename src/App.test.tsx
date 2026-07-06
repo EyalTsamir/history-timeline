@@ -59,13 +59,13 @@ describe('App', () => {
     expect(screen.getByRole('application', { name: STRINGS.timelineRegionLabel })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shownCount(7, 7))).toBeInTheDocument();
 
-    // Presence guarantee (docs/14): anchors are labeled marks AND the
+    // Presence guarantee (docs/spec/rendering.md): anchors are labeled marks AND the
     // low-importance sub-event is still on screen as a selectable dot.
     expect(
       screen.getByRole('button', { name: 'אירוע: הכרזה לדוגמה, 14 במאי 1948' }),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /קרב לדוגמה/ })).toBeInTheDocument();
-    // People live in the cast strip, works in the period shelf (docs/14 §5).
+    // People live in the cast strip, works in the period shelf (docs/spec/rendering.md).
     expect(screen.getByText(STRINGS.castTitle)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'מנהיג לדוגמה' })).toBeInTheDocument();
     expect(screen.getByText(STRINGS.shelfTitle)).toBeInTheDocument();

@@ -73,7 +73,7 @@ describe('TimelineWorkspace — desktop detail panel', () => {
     const user = userEvent.setup();
     render(<TimelineWorkspace items={items} dataset={dataset} />);
 
-    // People live in the cast strip (docs/14 §5), not on the canvas.
+    // People live in the cast strip (docs/spec/rendering.md), not on the canvas.
     const cast = screen.getByText(STRINGS.castTitle).parentElement!;
     await user.click(within(cast).getByRole('button', { name: /מנהיג לדוגמה/ }));
     const panel = await screen.findByRole('complementary', { name: STRINGS.detailPanelLabel });
@@ -88,7 +88,7 @@ describe('TimelineWorkspace — desktop detail panel', () => {
         name: 'אוטוביוגרפיה לדוגמה',
       }),
     ).toBeInTheDocument();
-    // Works aren't canvas geometry — selecting one never moves the period (docs/14 §5).
+    // Works aren't canvas geometry — selecting one never moves the period (docs/spec/rendering.md).
     expect(useViewportStore.getState().window).toEqual(before);
 
     // Works publication metadata is shown but never used for positioning (D7).

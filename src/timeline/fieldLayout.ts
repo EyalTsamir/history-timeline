@@ -1,5 +1,5 @@
 /**
- * The event field layout (docs/14-ui-redesign.md §4) — replaces laneLayout.
+ * The event field layout (docs/spec/rendering.md) — replaces laneLayout.
  *
  * One field, events only (people → cast strip, works → shelf). Every event in
  * the culled input is ALWAYS represented: as a labeled mark (importance clears
@@ -22,7 +22,7 @@ import type { TimelineItem } from '../domain/timelineItem';
 import type { Altitude, ImportanceTier } from './altitude';
 import { isLabeled, tierOf } from './altitude';
 import type { PxRect, Scale } from './scale';
-import { extendRectTowardLater, rectOf } from './scale';
+import { extendRectTowardLater, pxPerYear, rectOf } from './scale';
 import { layoutEnd } from './visibility';
 
 // ---------------------------------------------------------------------------
@@ -53,7 +53,7 @@ export interface FieldConfig {
   dotSubRows: number;
   /**
    * Dots landing in the same (subRow, ⌊x/bucket⌋) cell merge into one element
-   * representing its weightiest item (docs/10 DOM bound at synthetic scale;
+   * representing its weightiest item (docs/spec/performance.md DOM bound at synthetic scale;
    * `count` carries the merged total for the accessible name).
    */
   dotBucketPx: number;
@@ -322,14 +322,6 @@ function labelPxOf(item: TimelineItem, tier: ImportanceTier, config: FieldConfig
   return Math.min(maxPx, Math.max(minPx, item.title.length * perChar + basePx));
 }
 
-/** Clamp a box to the viewport for label anchoring (falls back to the box). */
-function labelAnchor(box: PxRect, widthPx: number): PxRect {
-  const lo = Math.max(box.x, 0);
-  const hi = Math.min(box.x + box.width, widthPx);
-  if (hi <= lo) return box; // fully in the pan buffer — not visible anyway
-  return { x: lo, width: hi - lo };
-}
-
 /** Box + shape for one labeled event; `row` is assigned by the caller. */
 function buildMark(
   item: TimelineItem,
@@ -368,14 +360,16 @@ function buildMark(
   // Span bar. Wide enough → label inside (viewport-clamped, D14); otherwise
   // the box extends toward later time and the label sits beside the bar.
   if (raw.width >= config.barInsideLabelMinPx) {
-    const anchor = labelAnchor(raw, scale.widthPx);
+    // Label anchored to the bar itself (not the span∩viewport) so it rides the
+    // pan rigidly and never snaps on settle. The bar's overflow-hidden box clips
+    // the text; a bar wider than the screen shows its label at its reading edge.
     return {
       item, tier,
       shape: 'bar',
       row: 0,
       x: raw.x, width: raw.width,
       spanX: raw.x, spanWidth: raw.width,
-      labelX: anchor.x, labelWidth: anchor.width,
+      labelX: raw.x, labelWidth: raw.width,
       labelInside: true,
       inChapter,
     };
@@ -437,7 +431,6 @@ function buildChapter(
   }
 
   const rowsUsed = 1 + Math.max(1, childRows.length);
-  const anchor = labelAnchor(headerBox, scale.widthPx);
   return {
     chapter: {
       item: head,
@@ -448,8 +441,9 @@ function buildChapter(
       width: maxX - minX,
       spanX: raw.x,
       spanWidth: raw.width,
-      labelX: anchor.x,
-      labelWidth: anchor.width,
+      // Header label anchored to the header box (pan-rigid — see buildMark).
+      labelX: headerBox.x,
+      labelWidth: headerBox.width,
       children: children.sort(byTime),
       hiddenCount,
       expanded,
@@ -459,27 +453,36 @@ function buildChapter(
   };
 }
 
-function dotOf(item: TimelineItem, scale: Scale, openEndYear: number, config: FieldConfig): FieldDot {
+function dotOf(
+  item: TimelineItem,
+  scale: Scale,
+  openEndYear: number,
+  config: FieldConfig,
+): { dot: FieldDot; mid: number } {
   const end = layoutEnd(item, openEndYear);
-  // Long spans crossing the window keep their dot on-screen: clamp the span
-  // to the window before taking its midpoint.
-  const lo = Math.max(item.start, scale.window.start);
-  const hi = Math.min(end, scale.window.end);
-  const mid = lo <= hi ? (lo + hi) / 2 : (item.start + end) / 2;
+  // A dot sits at its span's TRUE midpoint — a pure function of time. It is
+  // deliberately NOT clamped to the viewport: clamping made a long span's dot
+  // ride the window, so a settle relayout after a pan snapped it back to centre
+  // (visible jump). Pan must be a rigid translation; the RangeReadout names the
+  // era/period a long span belongs to.
+  const mid = (item.start + end) / 2;
   const raw = rectOf(scale, mid, mid);
   return {
-    item,
-    tier: tierOf(item.importance),
-    x: raw.x,
-    subRow: idHash(item.id) % config.dotSubRows,
-    count: 1,
+    dot: {
+      item,
+      tier: tierOf(item.importance),
+      x: raw.x,
+      subRow: idHash(item.id) % config.dotSubRows,
+      count: 1,
+    },
+    mid,
   };
 }
 
 /**
  * Merge dots sharing a (subRow, x-bucket) cell into one element carrying the
  * weightiest item and the merged count — the density texture stays honest
- * while the DOM stays bounded by pixels, not by dataset size (docs/10).
+ * while the DOM stays bounded by pixels, not by dataset size (docs/spec/performance.md).
  */
 function bucketDots(
   items: readonly TimelineItem[],
@@ -488,9 +491,15 @@ function bucketDots(
   config: FieldConfig,
 ): FieldDot[] {
   const buckets = new Map<string, FieldDot>();
+  // Bucket by TIME, not by viewport pixel: `dot.x` is measured from the screen
+  // edge, so a pixel grid moves under the dots as you pan and re-merges them
+  // every relayout (visible shimmer). `mid * ppy` is pan-invariant — under a
+  // pure pan pxPerYear is constant and a point's midpoint never moves — so a
+  // dot stays in the same bucket while the window slides.
+  const ppy = pxPerYear(scale);
   for (const item of items) {
-    const dot = dotOf(item, scale, openEndYear, config);
-    const key = `${dot.subRow}:${Math.round(dot.x / config.dotBucketPx)}`;
+    const { dot, mid } = dotOf(item, scale, openEndYear, config);
+    const key = `${dot.subRow}:${Math.round((mid * ppy) / config.dotBucketPx)}`;
     const existing = buckets.get(key);
     if (existing === undefined) {
       buckets.set(key, dot);

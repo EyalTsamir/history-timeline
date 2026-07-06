@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-ציר הזמן ההיסטורי — an interactive historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The UI follows the **guided-expedition concept** (decision D16, [docs/14-ui-redesign.md](docs/14-ui-redesign.md)): a persistent century strip with named eras, three zoom altitudes (century/decade/year) with importance-tier label budgets, one event field (overflow degrades to always-present dots — never chips), people as a cast strip, works as a period shelf, and a vertical chronicle feed on mobile.
+ציר הזמן ההיסטורי — an interactive historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The UI follows the **guided-expedition concept** (decision D16 in [docs/decisions.md](docs/decisions.md); presentation spec in [docs/spec/rendering.md](docs/spec/rendering.md)): a persistent century strip with named eras, three zoom altitudes (century/decade/year) with importance-tier label budgets, one event field (overflow degrades to always-present dots — never chips), people as a cast strip, works as a period shelf, and a vertical chronicle feed on mobile.
 
-All product/technical decisions are recorded in `docs/` (01–14), including a decision log in [docs/02-architecture.md](docs/02-architecture.md). Check the relevant doc before changing direction on anything architectural, and update the docs when a decision changes. docs/14 supersedes the presentation parts of docs/05/06/08.
+Docs are split three ways: [docs/spec/](docs/spec/) — how the system works **today**, one authoritative doc per topic; [docs/decisions.md](docs/decisions.md) — the decision log (D1–D16) and rationale; [docs/roadmap.md](docs/roadmap.md) — what's deferred. Check the relevant spec doc before changing direction on anything architectural, and update it (adding a decision entry) when a decision changes.
 
 ## Commands
 
@@ -21,7 +21,7 @@ All product/technical decisions are recorded in `docs/` (01–14), including a d
 | `npm run content:build` | Validate + compile `public/data/dataset.json` + meta |
 | `npm run content:clean` | Delete compiled `public/data/` (regenerated on next dev/build) |
 
-CI (`.github/workflows/ci.yml`): validate → typecheck → test → build; pushes to `main` deploy to GitHub Pages.
+CI (`.github/workflows/ci.yml`): validate → lint → typecheck → test → build → e2e; pushes to `main` deploy to GitHub Pages.
 
 ## Architecture
 
@@ -52,7 +52,7 @@ domain/              Zod entity schemas, date model, normalize → TimelineItem,
 - **Dates**: authored as `"1948"`, `"1948-05"`, or `"1948-05-14"`; compiled to decimal years by `domain/dates.ts`. All layout/zoom math uses decimal years; nothing downstream parses date strings. Precision is preserved for display (a year-only date never renders a fabricated day).
 - **Works** are positioned by `coveredPeriod`, not `publicationDate` (decision D7).
 - **Person lifespan** requires an explicit `end` (death date or `null` = still alive) — an omitted end is invalid.
-- `importance` is numeric 1–100 per the rubric in [docs/05-semantic-zoom.md](docs/05-semantic-zoom.md); the altitude label floors (docs/14) decide *labeled mark vs dot* from it — items below a floor stay visible as dots, they never disappear.
+- `importance` is numeric 1–100 per the rubric in [docs/spec/zoom.md](docs/spec/zoom.md); the altitude label floors (same doc) decide *labeled mark vs dot* from it — items below a floor stay visible as dots, they never disappear.
 - Category `color` values must be existing `--cat-*` tokens in `src/styles/tokens.css` (validated at build).
 
 ## Conventions

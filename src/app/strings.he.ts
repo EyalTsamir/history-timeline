@@ -46,7 +46,7 @@ export const STRINGS = {
     shown === 1 ? `מוצג פריט אחד מתוך ${total}` : `מוצגים ${shown} מתוך ${total} פריטים`,
   importanceValue: (n: number) => `חשיבות ${n}`,
 
-  // --- timeline surface (docs/14 guided expedition) ---
+  // --- timeline surface (docs/spec/rendering.md guided expedition) ---
   timelineRegionLabel: 'ציר הזמן',
   timelineInstructions:
     'מקשי החיצים מזיזים את התצוגה על פני הזמן; פלוס צולל לרמת תקריב קרובה, מינוס מרחיק; Home חוזר למבט המאה. מקש Tab מגיע לפריטים עצמם, ו-Enter פותח את פרטי הפריט.',
@@ -60,7 +60,7 @@ export const STRINGS = {
   /** Visual affordance on an open-ended lifespan — never a fabricated end date. */
   ongoingLifespan: 'נמשך עד היום',
 
-  // --- altitudes (docs/14 §3) ---
+  // --- altitudes (docs/spec/zoom.md) ---
   altitudeControlLabel: 'רמת התקריב',
   altitudeNames: {
     century: 'מאה',
@@ -68,7 +68,7 @@ export const STRINGS = {
     year: 'שנה',
   } as Record<'century' | 'decade' | 'year', string>,
 
-  // --- eras & century strip (docs/14 §6) ---
+  // --- eras & century strip (docs/spec/rendering.md) ---
   eraNames: {
     mandate: 'המנדט הבריטי',
     independence: 'קוממיות',
@@ -85,7 +85,7 @@ export const STRINGS = {
   eraChipsLabel: 'קפיצה לתקופה',
   eraChipAria: (name: string, from: number, to: number) => `${name}, ${from}–${to}`,
 
-  // --- event field (docs/14 §4) ---
+  // --- event field (docs/spec/rendering.md) ---
   chapterBadge: (n: number) => (n === 1 ? 'פרק אחד' : `${n} פרקים`),
   chapterMore: (n: number) => `עוד ${n}`,
   chapterMoreAria: (n: number, title: string) =>
@@ -93,21 +93,21 @@ export const STRINGS = {
   chapterCollapse: 'צמצום',
   chapterCollapseAria: (title: string) => `צמצום הפרקים של ${title}`,
 
-  /** Aggregated dot (docs/14 §4): the bucket's weightiest item + how many more share it. */
+  /** Aggregated dot (docs/spec/rendering.md): the bucket's weightiest item + how many more share it. */
   dotAggregateSuffix: (n: number) => (n === 1 ? ' ועוד פריט סמוך אחד' : ` ועוד ${n} פריטים סמוכים`),
 
-  // --- cast strip & period shelf (docs/14 §5) ---
+  // --- cast strip & period shelf (docs/spec/rendering.md) ---
   castTitle: 'מי בתמונה',
   shelfTitle: 'מדף התקופה',
   presenceMore: (n: number) => `עוד ${n}`,
   presenceMoreAria: (n: number) => (n === 1 ? 'הצגת פריט נוסף אחד' : `הצגת עוד ${n} פריטים`),
   presenceCollapse: 'צמצום',
 
-  // --- mobile chronicle (docs/14 §7) ---
+  // --- mobile chronicle (docs/spec/interaction.md) ---
   chronicleRegionLabel: 'כרוניקת ציר הזמן',
   chronicleEraYears: (from: number, to: number) => `${from}–${to}`,
 
-  // --- detail surface (docs/08#selection--detail) ---
+  // --- detail surface (docs/spec/interaction.md#selection--detail) ---
   detailPanelLabel: 'פרטי הפריט',
   detailPublished: (date: string) => `יצא לאור: ${date}`,
   detailAuthors: (names: string) => `מאת: ${names}`,
@@ -116,6 +116,6 @@ export const STRINGS = {
   detailSubEvents: 'תתי־אירועים',
   detailSources: 'מקורות',
   detailLinks: 'קישורים',
-  /** Curation disclaimer (docs/01) — the content is selective, not exhaustive. */
+  /** Curation disclaimer (docs/spec/product.md) — the content is selective, not exhaustive. */
   curationNote: 'תוכן נבחר ומתעדכן — מבחר מייצג, לא רשימה ממצה.',
 } as const;

@@ -1,4 +1,4 @@
-# 03 — Domain model
+# Domain model
 
 ## Entity overview
 
@@ -16,11 +16,15 @@ erDiagram
     REGION ||--o{ REGION : "contains"
 ```
 
-Three **timeline entities** appear on the axis — `Event`, `Person`, `Work` — plus two **taxonomy entities** used for filtering and styling — `PersonCategory`, `Region` — and a generic **relation** edge list for everything the embedded foreign keys don't cover.
+Three **timeline entities** — `Event`, `Person`, `Work` — plus two **taxonomy
+entities** used for filtering and styling — `PersonCategory`, `Region` — and a
+generic **relation** edge list for everything the embedded foreign keys don't
+cover.
 
 ## The date model
 
-Historical dates have variable precision and open ends. Dates are authored as strings and compiled to numbers for layout.
+Historical dates have variable precision and open ends. Dates are authored as
+strings and compiled to numbers for layout.
 
 ```ts
 /** Authored form: "1948" | "1948-05" | "1948-05-14" */
@@ -39,7 +43,9 @@ interface DateRange {
 
 ## Entities (authoritative shapes)
 
-Zod schemas in `src/domain/entities.ts` are the single source of truth; TypeScript types derive from them and the content validator uses them. Shapes shown as TS for readability:
+Zod schemas in `src/domain/entities.ts` are the single source of truth;
+TypeScript types derive from them and the content validator uses them. Shapes
+shown as TS for readability:
 
 ```ts
 type EntityId = string;          // kebab-case slug, unique across all types, e.g. "war-of-independence"
@@ -52,7 +58,7 @@ interface EventEntity {
   description: Text;             // short — 1–3 sentences
   dates: DateRange;
   parentId?: EntityId;           // sub-event → parent event; arbitrary depth allowed, MVP populates ≤2 levels
-  importance: number;            // 1–100, see docs/05
+  importance: number;            // 1–100, see zoom.md
   regionIds: EntityId[];
   tags?: string[];
   image?: { src: string; alt: Text; credit?: string };
@@ -91,8 +97,8 @@ interface WorkEntity {
   authorName?: Text;             // when not
   subjectPersonIds?: EntityId[]; // who the book is about (autobiography: same as author)
   subjectEventIds?: EntityId[];
-  publicationDate: HistDate;     // stored, NOT used for MVP positioning (decision D7)
-  coveredPeriod: DateRange;      // ← timeline position derives from this
+  publicationDate: HistDate;     // stored, NOT used for positioning (decision D7)
+  coveredPeriod: DateRange;      // ← shelf membership derives from this
   importance: number;
   regionIds: EntityId[];
   image?: Image;                 // cover
@@ -101,8 +107,7 @@ interface WorkEntity {
 }
 
 // A citation backing an entity's facts — distinct from `links` (related
-// reading). Prefer naming an authoritative institution; attach `url` only when
-// it is a real, stable page. Placeholder/non-http(s) URLs are rejected at build.
+// reading). Sourcing policy lives in content.md#sourcing.
 interface Source {
   title: Text;                   // the source's name (Hebrew field, may hold a Latin name)
   publisher?: string;            // institution/publisher, when distinct from title
@@ -137,10 +142,6 @@ interface Relation {
 }
 ```
 
-## Sourcing (decision D15)
-
-Every timeline entity carries a `sources: Source[]` — the citations behind its facts, kept **separate from `links`** (which is optional related reading). The validator requires **at least one source per entity**, and `Source.url` (like `Link.url`) must be a real http(s) URL, not an authoring placeholder. Sourcing policy — prefer authoritative institutions, preserve uncertainty, omit a URL rather than fabricate one — lives in [04](04-data-and-content.md#sourcing). Sources render under "מקורות" in the detail panel.
-
 ## Relationship strategy
 
 Two mechanisms, deliberately:
@@ -148,11 +149,23 @@ Two mechanisms, deliberately:
 1. **Embedded foreign keys** for the relationships the MVP actually renders — `work.subjectPersonIds`, `work.authorPersonIds`, `event.parentId`, `*.regionIds`, `person.categoryIds`. Simple to author, cheap to resolve, and the detail panel can already show "ספרים על אישיות זו" by reverse lookup.
 2. **The `Relation` edge list** for open-ended connections (person participated in event, event influenced event). This is the growth path to a relationship explorer without schema migration. MVP validates and loads it; UI ignores it.
 
-The content build resolves and verifies every reference (no dangling IDs reach the app) and precomputes reverse indexes (person → works about them) into the compiled dataset.
+The content build resolves and verifies every reference (no dangling IDs reach
+the app) and precomputes reverse indexes (person → works about them) into the
+compiled dataset.
+
+## Sourcing
+
+Every timeline entity carries a `sources: Source[]` — citations behind its
+facts, kept **separate from `links`** (optional related reading). The validator
+requires **≥1 source per entity**, and `Source.url` must be a real http(s) URL,
+not a placeholder. The full authoring policy — prefer authoritative
+institutions, preserve uncertainty, omit a URL rather than fabricate one — is in
+[content.md#sourcing](content.md#sourcing). Sources render under "מקורות" in the
+detail panel. (Decision D15.)
 
 ## Extensibility notes
 
-- **New content types** (e.g. photographs, newspapers, testimonies): add a new entity schema + a normalization rule to `TimelineItem` ([06](06-timeline-rendering.md)); filters pick it up via `contentType`.
+- **New content types** (photographs, newspapers, testimonies): add a new entity schema + a normalization rule to `TimelineItem` ([rendering](rendering.md)); filters pick it up via `contentType`.
 - **New regions/periods**: pure content addition; nothing in the model references 1930–2000 or Israel.
 - **New person categories / event tags**: taxonomy file additions.
 - **Multilingual**: widen `Text` to `{ he: string; en?: string }` — additive.

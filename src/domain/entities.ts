@@ -1,6 +1,6 @@
 /**
  * Entity schemas — the single source of truth for the domain model
- * (docs/03-domain-model.md). Zod schemas validate content at build time
+ * (docs/spec/domain.md). Zod schemas validate content at build time
  * AND derive the TypeScript types used across the app. Change shapes here,
  * bump SCHEMA_VERSION in dataset.ts when the change is breaking.
  */
@@ -65,7 +65,7 @@ export type Image = z.infer<typeof ImageSchema>;
 /**
  * A citable http(s) URL that isn't an authoring placeholder. `z.string().url()`
  * alone accepts the templates' `https://…/wiki/...` and `example.com` stand-ins;
- * those must never reach the app as if they were real sources (docs/04 sourcing
+ * those must never reach the app as if they were real sources (docs/spec/content.md sourcing
  * policy). Reachability is deliberately NOT checked — that needs the network and
  * would make validation flaky; broken links are a content-review concern.
  */
@@ -86,7 +86,7 @@ export const LinkSchema = z
 export type Link = z.infer<typeof LinkSchema>;
 
 /**
- * A citation backing an entity's facts (docs/04#sourcing). Distinct from `links`
+ * A citation backing an entity's facts (docs/spec/content.md#sourcing). Distinct from `links`
  * (related reading): a source answers "how do we know this?". Prefer naming an
  * authoritative institution (national library, archive, university, museum,
  * established encyclopedia); attach `url` only when it is a real, stable page.
@@ -118,7 +118,7 @@ export const SourceSchema = z
   .strict();
 export type Source = z.infer<typeof SourceSchema>;
 
-/** 1–100; authored per the rubric in docs/05-semantic-zoom.md#importance-rubric. */
+/** 1–100; authored per the rubric in docs/spec/zoom.md#importance-rubric. */
 export const ImportanceSchema = z.number().int().min(1).max(100);
 
 /** Open extension point so future needs don't force a schema bump. */
@@ -143,7 +143,7 @@ export const EventSchema = z
     tags: z.array(z.string()).optional(),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
-    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
@@ -163,7 +163,7 @@ export const PersonSchema = z
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
-    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
@@ -176,7 +176,7 @@ export const WorkSchema = z
     type: z.literal('work'),
     /**
      * Slug validated against the work-types taxonomy at build time — adding a
-     * work type is a content change, not a code change (docs/03, taxonomies).
+     * work type is a content change, not a code change (docs/spec/domain.md, taxonomies).
      */
     workType: EntityIdSchema,
     title: TextSchema,
@@ -195,7 +195,7 @@ export const WorkSchema = z
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
     links: z.array(LinkSchema).default([]),
-    /** Citations backing the facts; validator requires ≥1 (docs/04#sourcing). */
+    /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
   })
@@ -207,7 +207,7 @@ export const WorkSchema = z
 export type WorkEntity = z.infer<typeof WorkSchema>;
 
 // ---------------------------------------------------------------------------
-// Taxonomies — one consistent shape (docs/03-domain-model.md#extensibility-notes)
+// Taxonomies — one consistent shape (docs/spec/domain.md#extensibility-notes)
 // ---------------------------------------------------------------------------
 
 /** Person categories AND event categories share this shape. */
@@ -249,7 +249,7 @@ export const RegionSchema = z
     id: EntityIdSchema,
     name: TextSchema,
     kind: z.enum(GEO_KINDS),
-    /** Hierarchy: filtering by a parent includes all descendants (docs/07). */
+    /** Hierarchy: filtering by a parent includes all descendants (docs/spec/filtering.md). */
     parentId: EntityIdSchema.optional(),
     meta: MetaSchema,
   })
@@ -257,7 +257,7 @@ export const RegionSchema = z
 export type Region = z.infer<typeof RegionSchema>;
 
 // ---------------------------------------------------------------------------
-// Generic relations — stored + validated now, explorer UI is future (docs/03)
+// Generic relations — stored + validated now, explorer UI is future (docs/spec/domain.md)
 // ---------------------------------------------------------------------------
 
 export const RELATION_TYPES = ['participated-in', 'led', 'influenced', 'related-to'] as const;

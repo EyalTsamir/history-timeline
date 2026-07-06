@@ -1,5 +1,5 @@
 /**
- * Zoom altitudes and importance tiers (docs/14-ui-redesign.md §3) — the
+ * Zoom altitudes and importance tiers (docs/spec/zoom.md) — the
  * replacement for the continuous semantic-zoom curve.
  *
  * The viewport window stays a free {start,end} (URLs and era jumps produce
@@ -69,7 +69,7 @@ export function tierOf(importance: number): ImportanceTier {
 
 /**
  * Minimum importance that earns a LABELED mark at each altitude; everything
- * below stays a dot (docs/14 principle 2 — presence is never zoom-dependent).
+ * below stays a dot (docs/spec/rendering.md — presence is never zoom-dependent).
  */
 export const LABEL_FLOORS: Record<Altitude, number> = {
   century: 80,

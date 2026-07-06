@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Accessibility-critical interactions (docs/08, docs/14): keyboard operation of
+// Accessibility-critical interactions (docs/spec/interaction.md, docs/spec/rendering.md): keyboard operation of
 // items and the timeline surface, focus return, and accessible names. (desktop project)
 
 test('keyboard-only: focus an item, Enter opens, Esc closes and returns focus', async ({ page }) => {

@@ -27,7 +27,7 @@ export const DatasetSchema = z
   .object({
     schemaVersion: z.literal(SCHEMA_VERSION),
     generatedAt: z.string(),
-    /** Entity arrays are sorted by timeline start (build guarantee, docs/10). */
+    /** Entity arrays are sorted by timeline start (build guarantee, docs/spec/performance.md). */
     events: z.array(EventSchema),
     people: z.array(PersonSchema),
     works: z.array(WorkSchema),
@@ -36,7 +36,7 @@ export const DatasetSchema = z
     workTypes: z.array(WorkTypeDefSchema),
     regions: z.array(RegionSchema),
     relations: z.array(RelationSchema),
-    /** Precomputed reverse indexes (docs/03-domain-model.md#relationship-strategy). */
+    /** Precomputed reverse indexes (docs/spec/domain.md#relationship-strategy). */
     indexes: z
       .object({
         /** parent event id → child event ids (chronological). */

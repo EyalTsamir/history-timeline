@@ -1,5 +1,5 @@
 /**
- * Presence selectors (docs/14-ui-redesign.md §5): who and what belongs to the
+ * Presence selectors (docs/spec/rendering.md): who and what belongs to the
  * visible window. People and works are no longer geometry on the axis — the
  * CAST is the people alive during the window ("מי בתמונה") and the SHELF is
  * the works whose covered period intersects it ("מדף התקופה", decision D7:

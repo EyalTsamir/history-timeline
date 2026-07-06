@@ -1,5 +1,5 @@
 /**
- * Synthetic dataset generator for PERFORMANCE testing only (docs/10 guardrail).
+ * Synthetic dataset generator for PERFORMANCE testing only (docs/spec/performance.md guardrail).
  *
  * This produces an in-memory `Dataset` of arbitrary size with a realistic
  * importance pyramid and time spread. It is NEVER written to `content/` or

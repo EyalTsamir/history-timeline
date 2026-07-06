@@ -1,6 +1,6 @@
 /**
  * The viewport/scale model — the ONLY place the time axis direction exists
- * (decision D5, docs/06-timeline-rendering.md#rtl-time-axis).
+ * (decision D5, docs/spec/rendering.md#rtl-time-axis).
  *
  * Coordinate systems:
  * - Historical time: decimal years (domain/dates.ts).
@@ -47,7 +47,7 @@ export function pxPerYear(scale: Scale): number {
   return scale.widthPx / spanYears(scale.window);
 }
 
-/** The semantic-zoom scale unit (docs/05): years per 1000 CSS pixels. */
+/** The semantic-zoom scale unit (docs/spec/zoom.md): years per 1000 CSS pixels. */
 export function yearsPer1000px(window: TimeWindow, widthPx: number): number {
   return (spanYears(window) / widthPx) * 1000;
 }
@@ -96,7 +96,7 @@ export function extendRectTowardLater(scale: Scale, rect: PxRect, allocWidth: nu
 
 /**
  * Pan by a pointer movement of dxPx (positive = rightward): the time under
- * the pointer stays under it ("grab" semantics, docs/08).
+ * the pointer stays under it ("grab" semantics, docs/spec/interaction.md).
  */
 export function panWindowByPx(window: TimeWindow, widthPx: number, dir: TimeDirection, dxPx: number): TimeWindow {
   const dt = (dxPx / widthPx) * spanYears(window);
@@ -106,7 +106,7 @@ export function panWindowByPx(window: TimeWindow, widthPx: number, dir: TimeDire
 
 /**
  * Zoom by `factor` (newSpan = span × factor; <1 zooms in) keeping the time
- * under `anchorPx` exactly at `anchorPx` — the focal-point rule (docs/08).
+ * under `anchorPx` exactly at `anchorPx` — the focal-point rule (docs/spec/interaction.md).
  */
 export function zoomWindowAtPx(
   window: TimeWindow,
@@ -148,7 +148,7 @@ export function clampWindow(window: TimeWindow, limits: WindowLimits): TimeWindo
 /**
  * translateX (px) that displays `live` on a layer laid out for `layout`.
  * Exact for pure pans (equal spans) — the transform-only gesture path
- * (docs/06 pipeline, docs/10). Zoom changes relayout instead.
+ * (docs/spec/rendering.md pipeline, docs/spec/performance.md). Zoom changes relayout instead.
  */
 export function panOffsetPx(layout: TimeWindow, live: TimeWindow, widthPx: number, dir: TimeDirection): number {
   const ppy = widthPx / spanYears(live);

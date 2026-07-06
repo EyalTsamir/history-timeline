@@ -1,5 +1,5 @@
 /**
- * Production content gate (docs/09 §1) — runs the REAL content/ tree through
+ * Production content gate (docs/spec/testing.md §1) — runs the REAL content/ tree through
  * the validator and the timeline projection, so a bad content PR fails here in
  * unit CI, not only in the `content:validate` build step. Distinct from the
  * fixture-tree tests, which exercise the validator RULES in isolation.

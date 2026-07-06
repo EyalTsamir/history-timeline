@@ -21,7 +21,7 @@
   gap: var(--space-4);
 }
 
-/* Bottom-sheet variant (mobile item detail, docs/08). */
+/* Bottom-sheet variant (mobile item detail, docs/spec/interaction.md). */
 .overlayBottom {
   justify-content: stretch;
   align-items: flex-end;

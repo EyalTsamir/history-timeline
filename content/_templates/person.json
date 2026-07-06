@@ -10,14 +10,14 @@
   "lifespan": { "start": "1898-05-03", "end": "1978-12-08" },
   "_categoryIds": "At least one id from content/taxonomies/person-categories.json — the first category drives the item color.",
   "categoryIds": ["leaders"],
-  "_importance": "Integer 1-100 per the docs/05 rubric: 90-100 era-defining figures; 70-89 major national figures; 40-69 central figures in their field; 20-39 cultural/contextual figures (year-level zoom); 1-19 fine detail (month-level zoom).",
+  "_importance": "Integer 1-100 per the docs/spec/zoom.md rubric: 90-100 era-defining figures; 70-89 major national figures; 40-69 central figures in their field; 20-39 cultural/contextual figures (year-level zoom); 1-19 fine detail (month-level zoom).",
   "importance": 80,
   "_regionIds": "ids from content/taxonomies/regions.json the person is associated with.",
   "regionIds": ["israel"],
   "_image": "Optional portrait: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
   "_links": "Optional related reading (further links). NOT the citation — use \"sources\". Placeholder URLs (\"...\", example.com) are rejected.",
   "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/גולדה_מאיר" }],
-  "_sources": "REQUIRED — at least one citation backing the facts (docs/04#sourcing). Prefer an authoritative institution; add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Prefer an authoritative institution; add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
   "sources": [
     { "title": { "he": "אנציקלופדיה בריטניקה" }, "publisher": "Encyclopædia Britannica", "kind": "encyclopedia" }
   ]

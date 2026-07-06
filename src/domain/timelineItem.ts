@@ -1,6 +1,6 @@
 /**
  * TimelineItem — the single presentation format every timeline entity
- * normalizes into (docs/06-timeline-rendering.md). Downstream code
+ * normalizes into (docs/spec/rendering.md). Downstream code
  * (filtering, semantic zoom, layout, rendering, detail panel) consumes ONLY
  * this shape; entity-specific data survives inside `detail`.
  */
@@ -10,7 +10,7 @@ import type { HistDate } from './dates';
 export type TimelineKind = 'event' | 'person' | 'work';
 
 /**
- * The content-type filter dimension (docs/07-filtering.md):
+ * The content-type filter dimension (docs/spec/filtering.md):
  * 'event' | 'person' | a workType slug ('biography' | 'autobiography' |
  * 'historical-novel' | future types straight from the taxonomy).
  */
@@ -23,7 +23,7 @@ export interface TimelineItemDetail {
   displayDate: string;
   image?: Image;
   links: Link[];
-  /** Citations backing the facts (docs/04#sourcing) — shown under "מקורות". */
+  /** Citations backing the facts (docs/spec/content.md#sourcing) — shown under "מקורות". */
   sources: Source[];
   /** Works: formatted publication date ("יצא לאור…", decision D7 keeps it off the axis). */
   publicationDate?: string;
@@ -44,7 +44,7 @@ export interface TimelineItem {
   contentType: ContentType;
   /** Hebrew, already resolved from Text. */
   title: string;
-  /** Decimal years (docs/03 date model). end null = open-ended. */
+  /** Decimal years (docs/spec/domain.md date model). end null = open-ended. */
   start: number;
   end: number | null;
   /** Point marker vs span rendering. */
@@ -53,7 +53,7 @@ export interface TimelineItem {
   regionIds: EntityId[];
   /** Person/event category ids (empty for works). */
   categoryIds: EntityId[];
-  /** Event hierarchy (docs/06-timeline-rendering.md#event-hierarchy). */
+  /** Event hierarchy (docs/spec/rendering.md#event-hierarchy). */
   parentId?: EntityId;
   /** Design-token key driving item color/icon, resolved from taxonomies. */
   styleToken: string;

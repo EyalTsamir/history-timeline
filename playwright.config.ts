@@ -1,10 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * E2E config (docs/09 §3). Runs against the BUILT static site via `vite preview`
+ * E2E config (docs/spec/testing.md §3). Runs against the BUILT static site via `vite preview`
  * so the tests exercise the real production bundle (hashed dataset URL, base './').
  * Two projects: a desktop viewport and a 390px touch mobile emulation — the RTL
- * app is inherently exercised in both. Perf guardrail (docs/09 §4) lives here too.
+ * app is inherently exercised in both. Perf guardrail (docs/spec/testing.md §4) lives here too.
  */
 const PORT = 4173;
 

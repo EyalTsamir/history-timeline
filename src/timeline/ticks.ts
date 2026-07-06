@@ -1,5 +1,5 @@
 /**
- * Adaptive time-ruler gradations (docs/06-timeline-rendering.md#axis--labels):
+ * Adaptive time-ruler gradations (docs/spec/rendering.md#axis--labels):
  * decades → years → months, chosen so labeled ticks keep a readable pixel
  * spacing at any zoom. Pure — the component maps tick times to x via scale.
  */
@@ -81,7 +81,7 @@ function monthTicks(stepMonths: number, cover: TimeWindow): Tick[] {
 
 /**
  * Human-readable summary of the visible range for the ruler readout — the
- * "where am I" answer that must always be available (docs/08). Year precision
+ * "where am I" answer that must always be available (docs/spec/interaction.md). Year precision
  * on wide views, month precision when zoomed under ~3 years.
  */
 export function formatWindowRange(window: TimeWindow): string {

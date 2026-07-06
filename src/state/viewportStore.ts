@@ -1,9 +1,9 @@
 /**
  * The timeline viewport: the visible date range in decimal years plus its
- * pan/zoom limits (docs/06 pipeline, docs/08 zoom bounds). Window math lives
+ * pan/zoom limits (docs/spec/rendering.md pipeline, docs/spec/interaction.md zoom bounds). Window math lives
  * in timeline/scale.ts — components compute a candidate window with those
  * pure functions and hand it here; setWindow clamps, so no gesture can
- * escape the bounds. No React imports (docs/02 layering).
+ * escape the bounds. No React imports (docs/spec/architecture.md layering).
  */
 import { create } from 'zustand';
 import type { TimeWindow, ViewportDefaults, WindowLimits } from '../timeline/scale';

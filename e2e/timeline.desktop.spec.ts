@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// The main desktop journey (docs/09 §3, docs/14): orient on the century view,
+// The main desktop journey (docs/spec/testing.md §3, docs/spec/rendering.md): orient on the century view,
 // jump to an era, dive to a decade, open a chapter item, follow a source link,
 // filter, clear, and restore state after refresh. (desktop project only)
 
@@ -10,7 +10,7 @@ test('main flow: orient → era jump → dive → open → source → filter →
   await expect(surface).toBeVisible();
   const items = page.locator('[data-item-id]');
 
-  // Century view, presence guarantee (docs/14 principle 2): every event is on
+  // Century view, presence guarantee (docs/spec/rendering.md): every event is on
   // screen as a mark or dot, plus the cast/shelf strips — never an empty museum.
   await expect(page.getByText(/148\s+מתוך\s+148/)).toBeVisible();
   expect(await items.count()).toBeGreaterThan(80);

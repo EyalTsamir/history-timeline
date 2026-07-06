@@ -1,5 +1,5 @@
 /**
- * The cast strip ("מי בתמונה") and period shelf ("מדף התקופה") — docs/14 §5.
+ * The cast strip ("מי בתמונה") and period shelf ("מדף התקופה") — docs/spec/rendering.md.
  * People and works stopped being geometry on the axis; these strips answer
  * "who is active in the visible window" and "what documents it", updating
  * live as the window moves. Chips are real buttons carrying data-item-id

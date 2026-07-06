@@ -1,5 +1,5 @@
 /**
- * CLI: validate authored content (docs/04-data-and-content.md#build-pipeline).
+ * CLI: validate authored content (docs/spec/content.md#build-pipeline).
  * Prints all issues grouped by file, then a summary; exits 1 when errors exist.
  * Usage: tsx scripts/validate-content.ts [contentRoot]
  */

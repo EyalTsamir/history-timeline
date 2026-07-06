@@ -1,5 +1,5 @@
 /**
- * Named era definitions (docs/14-ui-redesign.md §6) — the product's curated
+ * Named era definitions (docs/spec/rendering.md) — the product's curated
  * chapter structure for the first content scope. Pure data + lookups; Hebrew
  * display names live in strings.he.ts under `eraNames`, keyed by era id, and
  * background tints are the `--era-<id>` tokens in styles/tokens.css.

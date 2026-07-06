@@ -4,10 +4,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // base './' keeps the build relocatable — it works on GitHub Pages at any repo
-// path without knowing the repo name (decision D2, docs/02-architecture.md).
+// path without knowing the repo name (decision D2, docs/spec/architecture.md).
 //
 // __DATASET_URL__: production bundles fetch the content-addressed
-// dataset.<hash>.json (immutable caching, docs/10); dev and tests use the
+// dataset.<hash>.json (immutable caching, docs/spec/performance.md); dev and tests use the
 // stable dataset.json so content rebuilds don't require a server restart.
 // build-content.ts (a pre-step of both dev and build) emits both names + meta.
 function hashedDatasetUrl(): string {

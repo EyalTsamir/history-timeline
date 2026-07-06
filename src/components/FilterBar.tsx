@@ -1,5 +1,5 @@
 /**
- * Chip-group filter controls over the dataset taxonomies (docs/07-filtering.md).
+ * Chip-group filter controls over the dataset taxonomies (docs/spec/filtering.md).
  * Reads/writes the filter store directly; rendered once in the desktop sidebar
  * and again inside the mobile Sheet — both bind to the same store.
  */
@@ -16,7 +16,7 @@ interface RegionRow {
   region: Region;
   depth: number;
   /** Direct parent's display name — read to screen readers, since the visual
-   *  indent is the only other signal of nesting (docs/08: never one signal). */
+   *  indent is the only other signal of nesting (docs/spec/interaction.md: never one signal). */
   parentName?: string;
 }
 

@@ -185,7 +185,7 @@ describe('Timeline', () => {
     expect(
       screen.getByRole('button', { name: 'אירוע: הכרזה לדוגמה, 14 במאי 1948' }),
     ).toBeInTheDocument();
-    // People are NOT on the canvas anymore (docs/14 §5 — they live in the cast strip).
+    // People are NOT on the canvas anymore (docs/spec/rendering.md — they live in the cast strip).
     expect(screen.queryByRole('button', { name: /^אישיות:/ })).not.toBeInTheDocument();
     const marks = screen.getAllByRole('button', { name: /^אירוע:/ });
     expect(marks.map((b) => b.getAttribute('data-item-id'))).toEqual([

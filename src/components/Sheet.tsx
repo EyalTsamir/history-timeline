@@ -1,5 +1,5 @@
 /**
- * Accessible modal drawer (mobile filter surface, docs/08-interaction.md).
+ * Accessible modal drawer (mobile filter surface, docs/spec/interaction.md).
  * Focus moves in on open and is contained while open: Escape/Tab are handled
  * at document level (so they keep working when focus lands on non-interactive
  * content), a focusin listener recaptures focus that escapes the panel, and
@@ -41,7 +41,7 @@ interface SheetProps {
   fallbackFocusRef?: RefObject<HTMLElement | null>;
   /**
    * 'end' — slide-over drawer at the inline-end edge (filters, the default);
-   * 'bottom' — bottom sheet (mobile item detail, docs/08). Same focus/scroll
+   * 'bottom' — bottom sheet (mobile item detail, docs/spec/interaction.md). Same focus/scroll
    * behavior, different geometry.
    */
   side?: 'end' | 'bottom';

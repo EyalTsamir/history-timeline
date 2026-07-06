@@ -1,5 +1,5 @@
 /**
- * The historical date model (docs/03-domain-model.md#the-date-model).
+ * The historical date model (docs/spec/domain.md#the-date-model).
  *
  * Dates are authored as precision-carrying strings — "1948" | "1948-05" |
  * "1948-05-14" — and converted to decimal years for all layout/zoom math.

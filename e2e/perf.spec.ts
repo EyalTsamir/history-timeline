@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { makeSyntheticDataset } from '../scripts/lib/synthetic';
 
-// Performance guardrail (docs/09 §4, docs/10): drive the app over a SYNTHETIC
+// Performance guardrail (docs/spec/testing.md §4, docs/spec/performance.md): drive the app over a SYNTHETIC
 // 10k-item dataset (served via route interception — never production data) and
 // assert the two properties that keep it fast at scale: rendered DOM nodes stay
 // bounded regardless of dataset size, and a pan/zoom burst stays responsive. (desktop project)
@@ -18,7 +18,7 @@ test('10k synthetic items: bounded rendering + responsive pan/zoom', async ({ pa
   await expect(page.getByText(/10000/)).toBeVisible();
 
   const items = page.locator('[data-item-id]');
-  // Core invariant (docs/14 + docs/10): labeled rows are budgeted and dots
+  // Core invariant (docs/spec/rendering.md + docs/spec/performance.md): labeled rows are budgeted and dots
   // bucket per pixel cell, so the DOM node count is bounded by SCREEN SIZE,
   // never by dataset size.
   await expect(async () => expect(await items.count()).toBeLessThanOrEqual(1200)).toPass();

@@ -1,5 +1,5 @@
 /**
- * Filter selections (docs/07-filtering.md). UI state only — predicate logic
+ * Filter selections (docs/spec/filtering.md). UI state only — predicate logic
  * lives in domain/filters.ts. Set updates are immutable (new Set per toggle)
  * so selectors can rely on reference equality. No persistence or URL sync
  * yet (next stage).
@@ -16,7 +16,7 @@ export interface FilterActions {
   toggleContentType(ct: ContentType): void;
   setMinImportance(n: number): void;
   clearAll(): void;
-  /** Bulk restore (URL-hash state, docs/07) — replaces every dimension at once. */
+  /** Bulk restore (URL-hash state, docs/spec/filtering.md) — replaces every dimension at once. */
   replaceAll(next: FilterState): void;
 }
 

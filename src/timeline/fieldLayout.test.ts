@@ -23,7 +23,7 @@ function allIds(layout: FieldLayout): Set<string> {
   return ids;
 }
 
-describe('layoutField — presence guarantee (docs/14 principle 2)', () => {
+describe('layoutField — presence guarantee (docs/spec/rendering.md)', () => {
   it('every event is represented; below-floor items become dots, not nothing', () => {
     const items = [
       makeTimelineItem('labeled', 1948, 1949, { importance: 60 }),
@@ -86,9 +86,9 @@ describe('layoutField — shapes and weight', () => {
     expect(point.labelInside).toBe(false);
     expect(wide.shape).toBe('bar');
     expect(wide.labelInside).toBe(true);
-    // Inside labels clamp to the viewport (D14).
-    expect(wide.labelX).toBeGreaterThanOrEqual(0);
-    expect(wide.labelX + wide.labelWidth).toBeLessThanOrEqual(SCALE.widthPx);
+    // Inside label anchors to the bar box itself (pan-rigid), not span∩viewport.
+    expect(wide.labelX).toBe(wide.x);
+    expect(wide.labelWidth).toBe(wide.width);
   });
 
   it('overlapping labeled marks land on different rows deterministically', () => {
@@ -157,13 +157,16 @@ describe('layoutField — chapters', () => {
 });
 
 describe('layoutField — dots', () => {
-  it('a long span crossing the window keeps its dot on-screen (clamped midpoint)', () => {
-    // 1949–1979: raw midpoint (1964) is outside the 1945–1957 window.
+  it('a dot sits at its true-time midpoint — pan-invariant, never viewport-clamped', () => {
+    // 1949–1979: midpoint 1964. Panning the window shifts the dot by exactly
+    // the pan amount, so a settle relayout after a pan never snaps it (rigid
+    // panning — the whole point). No clamping to keep it on-screen.
     const items = [makeTimelineItem('austerity', 1949, 1979, { importance: 20 })];
-    const layout = layoutField(items, SCALE, 'decade', NONE, OPEN_END);
-    const dot = layout.dots[0]!;
-    expect(dot.x).toBeGreaterThanOrEqual(0);
-    expect(dot.x).toBeLessThanOrEqual(SCALE.widthPx);
+    const ppy = SCALE.widthPx / (SCALE.window.end - SCALE.window.start);
+    const base = layoutField(items, SCALE, 'decade', NONE, OPEN_END).dots[0]!;
+    const panned: Scale = { ...SCALE, window: { start: SCALE.window.start + 3, end: SCALE.window.end + 3 } };
+    const after = layoutField(items, panned, 'decade', NONE, OPEN_END).dots[0]!;
+    expect(after.x - base.x).toBeCloseTo(3 * ppy, 6); // rigid translation
   });
 
   it('sub-row jitter is deterministic per id', () => {

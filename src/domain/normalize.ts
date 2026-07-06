@@ -1,6 +1,6 @@
 /**
  * Normalization: domain entities → TimelineItem, the single presentation
- * format (docs/06-timeline-rendering.md). Pure functions, no React/DOM.
+ * format (docs/spec/rendering.md). Pure functions, no React/DOM.
  *
  * Key rule (decision D7): a work's timeline span derives from coveredPeriod,
  * NOT publicationDate — publication data survives in `detail`.
@@ -122,7 +122,7 @@ export function workToTimelineItem(work: WorkEntity, ctx: NormalizeContext): Tim
   return {
     id: work.id,
     kind: 'work',
-    contentType: work.workType, // filter dimension value (docs/07)
+    contentType: work.workType, // filter dimension value (docs/spec/filtering.md)
     title: work.title.he,
     start: span.start,
     end: span.end,
@@ -136,7 +136,7 @@ export function workToTimelineItem(work: WorkEntity, ctx: NormalizeContext): Tim
 }
 
 /** Normalize the whole dataset, sorted by (start, importance desc, id) — the
- *  order the timeline pipeline relies on (docs/10-performance.md). */
+ *  order the timeline pipeline relies on (docs/spec/performance.md). */
 export function normalizeDataset(dataset: Dataset): TimelineItem[] {
   const ctx = buildNormalizeContext(dataset);
   const items: TimelineItem[] = [

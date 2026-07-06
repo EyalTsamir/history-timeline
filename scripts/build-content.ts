@@ -1,9 +1,9 @@
 /**
  * CLI: validate content and compile the Dataset artifact
- * (docs/04-data-and-content.md#build-pipeline). Aborts on any validation
+ * (docs/spec/content.md#build-pipeline). Aborts on any validation
  * error; the emitted artifact is DatasetSchema-parsed, valid by construction.
  *
- * Emits BOTH names for the same bytes (docs/10 caching strategy):
+ * Emits BOTH names for the same bytes (docs/spec/performance.md caching strategy):
  *   dataset.json          — stable name, used by the dev server
  *   dataset.<hash>.json   — content-addressed, injected into the production
  *                           bundle by vite.config.ts for immutable caching
@@ -32,7 +32,7 @@ const dataset = buildDataset(result.data);
 const serialized = JSON.stringify(dataset);
 // Content-address the artifact: hash the dataset with the build timestamp
 // normalized out, so identical content produces an identical hash (hence
-// filename) across builds — the point of the immutable-caching scheme (docs/10).
+// filename) across builds — the point of the immutable-caching scheme (docs/spec/performance.md).
 // generatedAt stays in the emitted file for provenance.
 const hashInput = JSON.stringify({ ...dataset, generatedAt: '' });
 const hash = createHash('sha256').update(hashInput).digest('hex').slice(0, 10);

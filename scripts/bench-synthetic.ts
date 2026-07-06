@@ -1,5 +1,5 @@
 /**
- * Performance profiling harness (docs/10). Runs the pure timeline pipeline over
+ * Performance profiling harness (docs/spec/performance.md). Runs the pure timeline pipeline over
  * a synthetic dataset (never production data) and reports per-stage timings so
  * optimization decisions are measured, not speculative. Run: tsx scripts/bench-synthetic.ts [n]
  */

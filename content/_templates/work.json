@@ -20,7 +20,7 @@
   "publicationDate": "1987",
   "_coveredPeriod": "The historical period the work DESCRIBES — the timeline position derives from this (decision D7). Same date format as everywhere: \"YYYY\" | \"YYYY-MM\" | \"YYYY-MM-DD\".",
   "coveredPeriod": { "start": "1898", "end": "1978" },
-  "_importance": "Integer 1-100 per the docs/05 rubric: most works sit at 20-39 (contextual, year-level zoom); important/canonical works 40-69; 1-19 niche works (month-level zoom).",
+  "_importance": "Integer 1-100 per the docs/spec/zoom.md rubric: most works sit at 20-39 (contextual, year-level zoom); important/canonical works 40-69; 1-19 niche works (month-level zoom).",
   "importance": 35,
   "_regionIds": "ids from content/taxonomies/regions.json the work is set in.",
   "regionIds": ["israel"],

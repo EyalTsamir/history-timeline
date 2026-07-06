@@ -1,4 +1,4 @@
-# CI + GitHub Pages deploy (docs/02-architecture.md#deployment, docs/09-testing.md#ci-pipeline)
+# CI + GitHub Pages deploy (docs/spec/architecture.md#deployment, docs/spec/testing.md#ci-pipeline)
 # PRs: validate content → typecheck → tests → build.
 # Push to main: same, then deploy the static site to GitHub Pages.
 name: CI
@@ -28,7 +28,7 @@ jobs:
       - run: npm run build
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
-      - name: E2E (desktop + mobile, docs/09 §3–4)
+      - name: E2E (desktop + mobile, docs/spec/testing.md §3–4)
         run: npm run e2e
       - name: Upload Pages artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

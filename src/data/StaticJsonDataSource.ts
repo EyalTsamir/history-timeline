@@ -17,7 +17,7 @@ export class StaticJsonDataSource implements DataSource {
   /**
    * URL override is for tests. Production bundles get the content-addressed
    * dataset.<hash>.json via the __DATASET_URL__ define (vite.config.ts,
-   * docs/10 immutable caching); outside a Vite transform the stable
+   * docs/spec/performance.md immutable caching); outside a Vite transform the stable
    * APP_CONFIG.datasetUrl is the fallback.
    */
   constructor(
