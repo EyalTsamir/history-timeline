@@ -72,7 +72,10 @@ export function tierOf(importance: number): ImportanceTier {
  * below stays a dot (docs/spec/rendering.md — presence is never zoom-dependent).
  */
 export const LABEL_FLOORS: Record<Altitude, number> = {
-  century: 80,
+  // Century names the major national events (importance ≥ 70 per the rubric),
+  // not only the 9 anchors ≥ 80 — the overview should read rich, not bare
+  // (decision D22 follow-up). Everything below stays an always-present dot.
+  century: 70,
   decade: 45,
   year: 1,
 };

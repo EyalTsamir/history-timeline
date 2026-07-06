@@ -37,14 +37,14 @@ describe('layoutField — presence guarantee (docs/spec/rendering.md)', () => {
     expect(allIds(layout).has('person')).toBe(false);
   });
 
-  it('century altitude labels only importance ≥ 80; the rest are dots', () => {
+  it('century altitude labels only importance ≥ 70; the rest are dots', () => {
     const items = [
-      makeTimelineItem('anchor', 1948, 1949, { importance: 80 }),
-      makeTimelineItem('major', 1952, 1953, { importance: 79 }),
+      makeTimelineItem('labeled', 1948, 1949, { importance: 70 }),
+      makeTimelineItem('sub-floor', 1952, 1953, { importance: 69 }),
     ];
     const layout = layoutField(items, SCALE, 'century', NONE, OPEN_END);
-    expect(layout.marks.map((m) => m.item.id)).toEqual(['anchor']);
-    expect(layout.dots.map((d) => d.item.id)).toEqual(['major']);
+    expect(layout.marks.map((m) => m.item.id)).toEqual(['labeled']);
+    expect(layout.dots.map((d) => d.item.id)).toEqual(['sub-floor']);
   });
 
   it('row overflow degrades the weakest to dots — never drops them', () => {

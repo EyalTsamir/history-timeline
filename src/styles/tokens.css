@@ -1,15 +1,29 @@
 /*
  * Design tokens — the single styling vocabulary (docs/spec/architecture.md, decision D8).
+ *
+ * DESIGN LANGUAGE — "ארכיון חי / Living Archive" (decision D22):
+ * history staged in a dark, cinematic gallery. The canvas is deep archival
+ * ink; every event is a luminous artifact that GLOWS in its category colour,
+ * and importance reads as light. A warm gold "lantern" is the guiding
+ * interactive accent. Editorial Hebrew serif (Frank Ruhl Libre) carries the
+ * headlines; a clean grotesque (Assistant) runs the UI. The old warm-paper,
+ * muted-archival palette (dull by design) was retired for this.
+ *
  * Category tokens (--cat-*) are the runtime targets of the taxonomy `color`
  * keys (content/taxonomies/*.json) and TimelineItem.styleToken; adding a
- * taxonomy color is a one-line addition here.
+ * taxonomy colour is a one-line addition here. Redefining a --cat-* or a
+ * surface/ink token re-skins the whole product at once — nothing downstream
+ * hard-codes a colour.
  */
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* System stack with Hebrew coverage on every platform; no external fonts. */
-  --font-body: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', 'Arial Hebrew', Arial,
-    sans-serif;
+  /* ------------------------------------------------------------------ type
+     Two Hebrew-first faces, self-hosted (src/main.tsx, @fontsource):
+       display → Frank Ruhl Libre — the classic Hebrew editorial serif, gravitas
+       body    → Assistant        — a clean contemporary grotesque for UI     */
+  --font-display: 'Frank Ruhl Libre', 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Assistant', 'Segoe UI', system-ui, -apple-system, 'Arial Hebrew', sans-serif;
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -20,105 +34,90 @@
   --space-6: 2rem;
   --space-7: 3rem;
 
-  /* Radii */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.75rem;
+  /* Radii — softer, more contemporary than the old sharp editorial corners */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.375rem;
   --radius-pill: 999px;
 
-  /* Type scale */
+  /* Type scale — a touch larger and more confident */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-md: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
 
   /* Z-index layers */
   --z-header: 10;
   --z-backdrop: 100;
   --z-sheet: 110;
 
-  /* Surfaces & ink — warm paper, dark ink, editorial */
-  --surface-page: #faf7f2;
-  --surface-raised: #ffffff;
-  --surface-sunken: #f1ece3;
-  --text-primary: #262219;
-  --text-secondary: #5f594d;
-  /* Faint but still WCAG AA (≥4.5:1) on page/raised/sunken surfaces — docs/spec/interaction.md. */
-  --text-faint: #6f695a;
-  --border: #e2dbce;
-  --border-strong: #c9c0af;
-  --accent: #3a5570;
-  --accent-contrast: #ffffff;
-  --danger: #a03c2e;
+  /* --------------------------------------------------------------- surfaces
+     The room: deep archival ink with a faint indigo cast, so BOTH warm
+     (gold, vermillion) and cool (cyan, cobalt) artifacts glow against it. */
+  --surface-page: #0a0c12;
+  --surface-raised: #14171f;
+  --surface-raised-2: #1c2029;
+  --surface-sunken: #06070c;
+  --surface-canvas: #0e121c; /* timeline stage; a radial lantern-glow rides on top */
+  --surface-glass: rgba(20, 23, 31, 0.72); /* blurred sticky chrome */
 
-  /* Category colors — muted archival hues, one per taxonomy color token.
+  /* Ink */
+  --text-primary: #f4f1e9; /* warm paper white */
+  --text-secondary: #b0b6c4;
+  /* Faint but WCAG AA (≥4.5:1) on page/raised surfaces — docs/spec/interaction.md. */
+  --text-faint: #8a92a3;
+
+  /* Structure */
+  --border: #262b38;
+  --border-strong: #3b4356;
+  --hairline: rgba(244, 241, 233, 0.08); /* gridlines, faint dividers */
+
+  /* Lantern — the warm guiding accent (interactive: focus, brush, active) */
+  --accent: #f0b64c;
+  --accent-strong: #ffc75e;
+  --accent-contrast: #17120a;
+  --accent-glow: rgba(240, 182, 76, 0.28);
+
+  /* Spark / destructive */
+  --danger: #ff6a4d;
+
+  /* ------------------------------------------------------- category colours
+     Luminous, saturated, distinct — tuned to GLOW on the ink field while
+     keeping the taxonomy's meaning (war→red, sea/settlement→green, …).
      Person categories */
-  --cat-leaders: #37507d;
-  --cat-military: #6d7a4f;
-  --cat-writers: #8c4a5e;
-  --cat-artists: #7b5e8a;
-  --cat-pioneers: #a06b3c;
-  --cat-scientists: #2f8290;
-  --cat-religious: #6d5a7a;
+  --cat-leaders: #5b93ff;
+  --cat-military: #a6c24e;
+  --cat-writers: #ec7aa4;
+  --cat-artists: #bd83f2;
+  --cat-pioneers: #f2965a;
+  --cat-scientists: #33c8dc;
+  --cat-religious: #9d92f5;
   /* Event categories */
-  --cat-war-security: #a34a3a;
-  --cat-state-politics: #598196;
-  --cat-immigration-settlement: #3f7d6f;
-  --cat-culture-society: #a8842f;
-  --cat-economy-labor: #3f7c88;
-  --cat-science-tech: #585a9e;
+  --cat-war-security: #fb5c4c;
+  --cat-state-politics: #54b0e8;
+  --cat-immigration-settlement: #36c98f;
+  --cat-culture-society: #f0bb46;
+  --cat-economy-labor: #48c0cf;
+  --cat-science-tech: #7d86ff;
   /* Work types */
-  --cat-biography: #7d6248;
-  --cat-autobiography: #9a6b4f;
-  --cat-historical-novel: #a86678;
+  --cat-biography: #d0a068;
+  --cat-autobiography: #e4a56d;
+  --cat-historical-novel: #ec8fb0;
   /* Kind fallbacks (DEFAULT_STYLE_TOKENS in domain/normalize.ts) */
-  --cat-event: #857c6b;
-  --cat-person: #6c7583;
-  --cat-work: #8a7a8f;
+  --cat-event: #b6bccb;
+  --cat-person: #a3adc2;
+  --cat-work: #c0b0cd;
 
-  /* Anchor seal (importance ≥ 95) — aged-brass, used only for seal marks. */
-  --seal: #a8842c;
-  --seal-contrast: #ffffff;
-}
+  /* Anchor seal (importance ≥ 95) — luminous brass medallion. */
+  --seal: #ffcf5c;
+  --seal-contrast: #241a06;
+  --seal-glow: rgba(255, 207, 92, 0.35);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    --surface-page: #201d18;
-    --surface-raised: #2a261f;
-    --surface-sunken: #191713;
-    --text-primary: #ece7dc;
-    --text-secondary: #b3ab9c;
-    --text-faint: #9a9384;
-    --border: #3d382e;
-    --border-strong: #55503f;
-    --accent: #9db8d2;
-    --accent-contrast: #1a2530;
-    --danger: #d07a63;
-
-    --cat-leaders: #7d9cc9;
-    --cat-military: #a3b076;
-    --cat-writers: #c98599;
-    --cat-artists: #ad8fc0;
-    --cat-pioneers: #cd9a63;
-    --cat-scientists: #74bcc7;
-    --cat-religious: #a892b5;
-    --cat-war-security: #d0806c;
-    --cat-state-politics: #85aec6;
-    --cat-immigration-settlement: #74af9f;
-    --cat-culture-society: #cfae57;
-    --cat-economy-labor: #7ab3bf;
-    --cat-science-tech: #9a95d6;
-    --cat-biography: #b09577;
-    --cat-autobiography: #c69a78;
-    --cat-historical-novel: #cf93a6;
-    --cat-event: #a89f8d;
-    --cat-person: #98a2b1;
-    --cat-work: #ab9bb0;
-
-    --seal: #c9a45f;
-    --seal-contrast: #241c09;
-  }
+  /* Elevation — soft, deep, cinematic (dark UIs need real shadow to separate) */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 6px 20px -6px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-3: 0 24px 60px -18px rgba(0, 0, 0, 0.7), 0 8px 20px rgba(0, 0, 0, 0.45);
 }

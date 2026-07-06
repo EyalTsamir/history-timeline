@@ -104,12 +104,22 @@ export default function App({ dataSource }: AppProps) {
   return (
     <div className={styles.app}>
       <header className={styles.header}>
-        <div>
-          <h1 ref={titleRef} tabIndex={-1} className={styles.title}>
-            {STRINGS.appTitle}
-          </h1>
-          <p className={styles.subtitle}>{STRINGS.appSubtitle}</p>
+        <div className={styles.brand}>
+          <span className={styles.brandMark} aria-hidden="true" />
+          <div className={styles.brandText}>
+            <h1 ref={titleRef} tabIndex={-1} className={styles.title}>
+              {STRINGS.appTitle}
+            </h1>
+            <p className={styles.subtitle}>{STRINGS.appSubtitle}</p>
+          </div>
         </div>
+        <span className={styles.motif} aria-hidden="true">
+          <span className={styles.motifDot} data-c="war-security" />
+          <span className={styles.motifDot} data-c="immigration-settlement" />
+          <span className={styles.motifDot} data-c="culture-society" />
+          <span className={styles.motifDot} data-c="leaders" />
+          <span className={styles.motifSeal} />
+        </span>
       </header>
       {body}
       <footer className={styles.footer}>{STRINGS.curationNote}</footer>

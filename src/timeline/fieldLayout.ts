@@ -69,7 +69,7 @@ const MARKER_PX: Record<ImportanceTier, number> = {
 
 export const FIELD_CONFIGS: Record<Altitude, FieldConfig> = {
   century: {
-    maxRows: 3,
+    maxRows: 5,
     minGapPx: 10,
     label: { charPx: 7, basePx: 18, minPx: 40, maxPx: 220 },
     headlineCharBonusPx: 2,
@@ -83,7 +83,7 @@ export const FIELD_CONFIGS: Record<Altitude, FieldConfig> = {
     dotBucketPx: 5,
   },
   decade: {
-    maxRows: 5,
+    maxRows: 6,
     minGapPx: 8,
     label: { charPx: 7, basePx: 18, minPx: 40, maxPx: 200 },
     headlineCharBonusPx: 1,

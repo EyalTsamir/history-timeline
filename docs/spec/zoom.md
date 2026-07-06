@@ -48,15 +48,20 @@ hierarchy reads at a glance (D16 principle 3). Tier bounds (`TIER_FLOORS` in
 
 Each altitude has a **label floor** (`LABEL_FLOORS` in `altitude.ts`): at or
 above it an item is a labeled mark; below it, an always-present dot. Floors are
-`century: 80`, `decade: 45`, `year: 1` — so:
+`century: 70`, `decade: 45`, `year: 1` — so:
 
 | Tier | century | decade | year |
 |---|---|---|---|
 | seal (≥95) | seal mark | seal mark | seal mark |
 | anchor (80–94) | labeled | labeled | labeled |
-| major (55–79) | dot | labeled | labeled |
+| major (55–79) | labeled from ≥70; 55–69 dot | labeled | labeled |
 | minor (30–54) | dot | labeled from ≥45; 30–44 dot | labeled |
 | background (<30) | dot | dot | labeled |
+
+The century floor names the major national events (≥70), not only the nine
+anchors ≥80 — so the widest view reads as a rich map, not a bare one, with the
+altitude's row budget (`FIELD_CONFIGS`, [rendering](rendering.md)) sized to hold
+them (D22 follow-up).
 
 Tuning label density is editing these numbers, exactly as the old curve was
 config. `isLabeled(importance, altitude)` is the single predicate; the event

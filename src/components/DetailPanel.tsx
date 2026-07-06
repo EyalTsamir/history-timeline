@@ -7,7 +7,7 @@
  * that re-select and pan the timeline.
  */
 import { useMemo } from 'react';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { STRINGS } from '../app/strings.he';
 import type { Dataset } from '../domain/dataset';
 import type { EntityId } from '../domain/entities';
@@ -52,7 +52,10 @@ export function DetailPanel({ item, dataset, typeLabels, itemById, onSelectRelat
 
   const { detail } = item;
   return (
-    <div className={styles.body}>
+    <div
+      className={styles.body}
+      style={{ '--item-color': `var(--cat-${item.styleToken})` } as CSSProperties}
+    >
       <p className={styles.date}>
         {detail.displayDate}
         {item.kind === 'person' && item.end === null && (

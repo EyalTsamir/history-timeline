@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import styles from './Chip.module.css';
 
 interface ChipProps {
@@ -11,8 +11,12 @@ interface ChipProps {
 
 /** Toggle chip: a real button with aria-pressed, so state is programmatic, not visual-only. */
 export function Chip({ pressed, onToggle, children, dotToken }: ChipProps) {
+  // Expose the taxonomy colour to the stylesheet so the active state can flood
+  // with that category's own hue (Chip.module.css).
+  const style =
+    dotToken !== undefined ? ({ '--item-color': `var(--cat-${dotToken})` } as CSSProperties) : undefined;
   return (
-    <button type="button" className={styles.chip} aria-pressed={pressed} onClick={onToggle}>
+    <button type="button" className={styles.chip} style={style} aria-pressed={pressed} onClick={onToggle}>
       {dotToken !== undefined && (
         <span
           className={styles.dot}

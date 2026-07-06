@@ -1,35 +1,54 @@
+/*
+ * Filter toggle chip. Colour-forward: an inactive chip carries a bright
+ * category dot; an active chip floods with that category's own colour and
+ * glows — so the palette does the talking, not a wall of identical pills.
+ * --item-color is set inline by Chip.tsx from the taxonomy token.
+ */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  background: var(--surface-raised);
+  background: var(--surface-raised-2);
   color: var(--text-secondary);
   padding-block: calc(var(--space-1) + 1px);
   padding-inline: var(--space-3);
   font-size: var(--text-sm);
+  font-weight: 600;
   line-height: 1.4;
   cursor: pointer;
   transition:
-    background-color 120ms ease,
-    border-color 120ms ease,
-    color 120ms ease;
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .chip:hover {
-  border-color: var(--text-faint);
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--item-color, var(--text-faint)) 55%, var(--border-strong));
+  color: var(--text-primary);
 }
 
 .chip[aria-pressed='true'] {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-  color: var(--surface-page);
+  background: color-mix(in srgb, var(--item-color, var(--accent)) 20%, var(--surface-raised));
+  border-color: color-mix(in srgb, var(--item-color, var(--accent)) 65%, transparent);
+  color: var(--text-primary);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--item-color, var(--accent)) 22%, transparent),
+    0 0 18px -6px var(--item-color, var(--accent));
 }
 
 .dot {
-  inline-size: 0.5rem;
-  block-size: 0.5rem;
+  inline-size: 0.6rem;
+  block-size: 0.6rem;
   border-radius: var(--radius-pill);
   flex: none;
+  box-shadow: 0 0 8px -1px var(--item-color, transparent);
+}
+
+.chip[aria-pressed='true'] .dot {
+  box-shadow: 0 0 10px 0 var(--item-color, transparent);
 }

@@ -8,29 +8,38 @@
   padding-block: var(--space-2);
   padding-inline: var(--space-4);
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition:
-    background-color 120ms ease,
-    border-color 120ms ease,
-    color 120ms ease;
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button:active {
+  transform: translateY(1px);
 }
 
 .solid {
-  background: var(--text-primary);
-  color: var(--surface-page);
+  background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+  color: var(--accent-contrast);
+  box-shadow: 0 0 18px -6px var(--accent-glow);
 }
 
 .solid:hover {
-  background: var(--text-secondary);
+  filter: brightness(1.08);
 }
 
 .ghost {
-  background: transparent;
+  background: var(--surface-raised-2);
   border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .ghost:hover {
-  background: var(--surface-sunken);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-raised);
 }

@@ -8,7 +8,10 @@ export const TIMELINE_INTERACTION = {
   minWindowSpanYears: 1 / 12,
   /** Pan bounds extend this fraction of the content extent beyond it. */
   boundsPaddingFraction: 0.02,
-  /** The reset ("טווח מלא") view pads the content range by this fraction. */
+  /** The reset ("טווח מלא") view pads the content range by this fraction.
+   *  Kept at 0.05 for edge breathing room — trimming it clips the newest
+   *  event's label (Rabin, 1995) against the recent edge, and the empty recent
+   *  gutter is a data-scope artifact (content thins after ~1997), not padding. */
   resetPaddingFraction: 0.05,
   /** Accumulated wheel deltaY (px) that triggers one altitude step. */
   wheelStepPx: 110,

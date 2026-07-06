@@ -42,8 +42,10 @@ import { Button } from './Button';
 import { EventMark } from './EventMark';
 import styles from './Timeline.module.css';
 
-/** Row metrics (px) per altitude — mirrored by the CSS module's sizes. */
-const ROW_PX: Record<Altitude, number> = { century: 46, decade: 36, year: 34 };
+/** Row metrics (px) per altitude — mirrored by the CSS module's sizes.
+ *  Generous rows + a taller row budget (fieldLayout FIELD_CONFIGS) make the
+ *  stage fill the view and give the widened label set room (D22 follow-up). */
+const ROW_PX: Record<Altitude, number> = { century: 50, decade: 40, year: 34 };
 const FIELD_PAD_TOP_PX = 10;
 const DOT_ROW_PX = 13;
 const DOT_BAND_PAD_PX = 8;

@@ -5,7 +5,7 @@
  * item list — the user's period and zoom are never reset. Desktop-only.
  */
 import { useEffect, useMemo, useRef } from 'react';
-import type { KeyboardEvent } from 'react';
+import type { CSSProperties, KeyboardEvent } from 'react';
 import { STRINGS } from '../app/strings.he';
 import { startTimelineUrlSync } from '../app/urlState';
 import type { Dataset } from '../domain/dataset';
@@ -142,6 +142,7 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
             ref={panelRef}
             tabIndex={-1}
             className={styles.detailPanel}
+            style={{ '--item-color': `var(--cat-${selected.styleToken})` } as CSSProperties}
             aria-label={STRINGS.detailPanelLabel}
             onKeyDown={onPanelKeyDown}
           >

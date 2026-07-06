@@ -20,6 +20,8 @@
     "content:clean": "node -e \"require('fs').rmSync('public/data',{recursive:true,force:true})\""
   },
   "dependencies": {
+    "@fontsource/assistant": "^5.2.9",
+    "@fontsource/frank-ruhl-libre": "^5.2.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.25.0",

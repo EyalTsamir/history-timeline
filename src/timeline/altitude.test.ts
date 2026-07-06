@@ -59,8 +59,8 @@ describe('tiers and label floors', () => {
   it('label floors narrow as you dive; year altitude labels everything', () => {
     expect(LABEL_FLOORS.century).toBeGreaterThan(LABEL_FLOORS.decade);
     expect(LABEL_FLOORS.decade).toBeGreaterThan(LABEL_FLOORS.year);
-    expect(isLabeled(80, 'century')).toBe(true);
-    expect(isLabeled(79, 'century')).toBe(false);
+    expect(isLabeled(70, 'century')).toBe(true);
+    expect(isLabeled(69, 'century')).toBe(false);
     expect(isLabeled(45, 'decade')).toBe(true);
     expect(isLabeled(44, 'decade')).toBe(false);
     expect(isLabeled(1, 'year')).toBe(true);
