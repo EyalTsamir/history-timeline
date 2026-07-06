@@ -3,8 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * E2E config (docs/spec/testing.md §3). Runs against the BUILT static site via `vite preview`
  * so the tests exercise the real production bundle (hashed dataset URL, base './').
- * Two projects: a desktop viewport and a 390px touch mobile emulation — the RTL
- * app is inherently exercised in both. Perf guardrail (docs/spec/testing.md §4) lives here too.
+ * The app is desktop-only; a single desktop project drives the RTL journeys.
+ * Perf guardrail (docs/spec/testing.md §4) lives here too.
  */
 const PORT = 4173;
 
@@ -24,11 +24,6 @@ export default defineConfig({
       name: 'desktop',
       testMatch: /(timeline\.desktop|a11y|perf)\.spec\.ts$/,
       use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 820 } },
-    },
-    {
-      name: 'mobile',
-      testMatch: /timeline\.mobile\.spec\.ts$/,
-      use: { ...devices['Pixel 7'] },
     },
   ],
   webServer: {

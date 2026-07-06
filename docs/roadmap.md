@@ -19,6 +19,7 @@ first release. Release detail and accepted limitations in
 [decisions.md](decisions.md#release-status).
 
 ### Phase 2 — Content scale & discovery
+- Responsive / mobile experience (removed in D20 — the app is currently desktop-only; a touch-first view may return, not necessarily the old vertical chronicle).
 - Free-text search (client-side index; Hebrew stemming considerations).
 - Static list/index view (SEO + no-JS fallback + accessibility alternative).
 - Importance-tiered data splitting if the payload budget is hit ([performance](spec/performance.md)).

@@ -5,7 +5,7 @@
 The presentation follows five rules (decision D16 — they answer the six failures
 of the first UI, recorded in [decisions.md](../decisions.md#why-the-first-ui-was-replaced-d16-diagnosis)):
 
-1. **The whole range is always on screen** — a persistent century strip (minimap) with named, tinted eras and a brush marking the current window.
+1. **The whole range is always on screen** — a persistent century strip (minimap) with neutral decade banding and a brush marking the current window. (Named editorial eras were removed — D20.)
 2. **No empty screens** — every filtered-in item is always present: a labeled mark if it clears the altitude's label floor, otherwise an always-present dot. Zoom adds *labels and detail*, never *existence*. Layout overflow degrades a label to a dot — never to a cluster chip, never to nothing.
 3. **Importance = visual weight** — marker and label size derive from the importance tier ([zoom](zoom.md)), so hierarchy reads at a glance.
 4. **Three fixed altitudes, not a continuous curve** — each altitude is a designed, predictable layout; gestures step between them; panning stays continuous.
@@ -95,7 +95,6 @@ field — no kind bands:
 - **Dots** live in a fixed dot band at the bottom, jittered into sub-rows by an id hash (deterministic), each a clickable/focusable button with its title as accessible name and tooltip.
 - **Dot bucketing**: dots sit at their span's **true-time midpoint** (never viewport-clamped — D17) and merge, within a `(sub-row, ~5px)` cell keyed in **time** (`mid · pxPerYear`, so the merge grid rides the pan rather than the screen), into ONE element representing the bucket's weightiest item, with the merged count in its accessible name ("…ועוד N פריטים סמוכים") — the density texture stays honest while the DOM stays bounded by pixels, not by dataset size ([performance](performance.md) guardrail).
 - **Chapters**: at decade/year altitude, an event whose children are in the filtered set and whose span is ≥ a minimum pixel width becomes a **chapter band** — a tinted container with a header and its children packed inside (up to 2 rows collapsed; "עוד N" expands the rest in place — component state, never a zoom change). At century altitude, or when too narrow, the parent renders as a normal mark and children as dots. A chapter that finds no room degrades to a plain mark + dots.
-- **Era washes** render behind the field (`rectOf` per era), the era name shown when its on-screen width allows.
 - The adaptive **ruler** and the pan gesture layer (transform fast-path, inertia, keyboard) are shared with the previous implementation.
 
 ### Event hierarchy
@@ -109,16 +108,15 @@ field — no kind bands:
 window) and `shelfForWindow` (works whose covered period intersects it), both
 importance-sorted with a top-N + "עוד N" overflow toggle.
 
-- Desktop renders both as slim horizontal strips under the canvas (`PresenceStrips.tsx`); mobile renders them as cards in the chronicle ([interaction](interaction.md)).
-- Chips are buttons: selecting opens the existing detail panel/sheet. People and works keep full detail, relations, and sources; they simply stopped being bars on the axis.
+- Both render as slim horizontal strips under the canvas (`PresenceStrips.tsx`).
+- Chips are buttons: selecting opens the detail panel. People and works keep full detail, relations, and sources; they simply stopped being bars on the axis.
 
 ## Century strip (minimap)
 
 `components/CenturyStrip.tsx`, always visible above the canvas:
 
-- Era zones (tinted, labeled when wide), flag dots for anchor events (importance ≥ 80), and a brush rectangle for the current window (hidden at century altitude, where the strip and canvas coincide).
-- Drag the brush (or anywhere on the strip) to pan; click jumps the window center. The era chip row underneath jumps to an era's padded range.
-- On mobile the strip tracks the chronicle scroll position and taps jump.
+- Neutral decade banding (alternate decades faintly shaded — no editorial colour), flag dots for anchor events (importance ≥ 80), and a brush rectangle for the current window (hidden at century altitude, where the strip and canvas coincide).
+- Drag the brush (or anywhere on the strip) to pan; click jumps the window center. The decade chip row underneath (plus a "טווח מלא" reset chip) jumps to a decade's padded range — the keyboard/AT navigation path.
 
 ## <a name="rtl-time-axis"></a>RTL time axis
 
@@ -138,5 +136,5 @@ config reverses the axis with no other changes.
 ## Axis & labels
 
 - The time ruler (`timeline/ticks.ts`) renders adaptive gradations chosen so labeled ticks keep ≥72px spacing (≥96px for month labels): a year-step ladder (1000…1) that switches to calendar-aligned month steps (6/3/1) when a single year is wide enough. Year ticks are labeled "1948" (decades emphasized as majors); month ticks "מאי 1948". Gridlines extend up through the field.
-- A **visible-range readout** near the controls always states the current window ("1947–1952", or "מרץ 1948 – יולי 1948" under 3 years) — the "where am I" answer required by [interaction](interaction.md).
-- Labels anchor to their own geometry — a bar/chapter label to its box, an era name to the era's true centre — **not** to the span∩viewport (decision D17 revises D14): the old viewport clamp made a wide span's label ride the pan and snap back on settle. A span/era wider than the viewport therefore shows its label only near its own centre (the visible-range readout and century-strip minimap still name the current era); point items mark the center of the date's precision range with the label beside them, and packing reserves the label's estimated width so side labels can't collide.
+- A **visible-range readout** near the controls always states the current decade and window ("שנות ה־50 · 1947–1952", or "מרץ 1948 – יולי 1948" under 3 years) — the "where am I" answer required by [interaction](interaction.md).
+- Labels anchor to their own geometry — a bar/chapter label to its box — **not** to the span∩viewport (decision D17 revises D14): the old viewport clamp made a wide span's label ride the pan and snap back on settle. A span wider than the viewport therefore shows its label only near its own centre (the visible-range readout and century-strip minimap still orient you); point items mark the center of the date's precision range with the label beside them, and packing reserves the label's estimated width so side labels can't collide.

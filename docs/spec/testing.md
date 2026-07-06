@@ -35,17 +35,16 @@ warnings, curated-scope minimums, projection of every entity).
 Component tests (React Testing Library) cover the interactive shells: FilterBar
 state wiring, DetailPanel rendering of each kind, the event field's
 selection/`aria-current` and chapter expansion, the century strip, the cast/shelf
-strips, the desktop panel's focus lifecycle, the mobile bottom sheet (incl. the
-ref-counted scroll lock and single-owner focus restoration), URL mirroring, and
-filter changes preserving the viewport. `app/urlState` round-trips and validates.
+strips, the detail panel's focus lifecycle, URL mirroring, and filter changes
+preserving the viewport. `app/urlState` round-trips and validates.
 One class of bug jsdom cannot catch — real pointer-capture/click interplay — is
 covered by the e2e suite.
 
 ## 3. E2E (Playwright) — few, high-value flows
 
-Run against the built static site (`vite preview`), a desktop viewport + a
-mobile emulation project (touch, 390px). RTL rendering is inherently covered
-since the real app is RTL.
+Run against the built static site (`vite preview`) in a single desktop-viewport
+project (the app is desktop-only, D20). RTL rendering is inherently covered since
+the real app is RTL.
 
 1. Load → century view shows anchor marks + the dot band; result-count sanity.
 2. Step-zoom into 1948 (wheel + pinch) → labels and a chapter appear; nothing pops out of existence.
@@ -53,7 +52,7 @@ since the real app is RTL.
 4. Apply region + content-type filters together → visible set matches; URL hash round-trips (reload restores view).
 5. Select a person from the cast strip → detail shows bio + books + sources; follow a source link.
 6. Keyboard-only: Tab to an item, Enter opens detail, Esc closes.
-7. Mobile: filter and detail flows in the chronicle; invalid-URL resilience.
+7. Invalid-URL resilience → degrades to the default view (no crash).
 
 ## <a name="performance-guardrail"></a>4. Performance guardrail
 
@@ -65,7 +64,7 @@ content reaches that size.
 ## CI pipeline (GitHub Actions)
 
 ```
-PR:    validate-content → lint → typecheck → unit+component → build → e2e (chromium desktop+mobile)
+PR:    validate-content → lint → typecheck → unit+component → build → e2e (chromium desktop)
 main:  all of the above → deploy to GitHub Pages (serialized by a `pages` concurrency group)
 ```
 

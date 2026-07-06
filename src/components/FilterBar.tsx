@@ -1,7 +1,6 @@
 /**
  * Chip-group filter controls over the dataset taxonomies (docs/spec/filtering.md).
- * Reads/writes the filter store directly; rendered once in the desktop sidebar
- * and again inside the mobile Sheet — both bind to the same store.
+ * Reads/writes the filter store directly; rendered in the sidebar.
  */
 import { useId, useMemo } from 'react';
 import type { Dataset } from '../domain/dataset';

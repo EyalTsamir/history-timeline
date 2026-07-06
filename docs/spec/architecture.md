@@ -19,10 +19,10 @@ Strict layering — a layer may import from below, never above:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  app/         Shell, Hebrew strings (strings.he.ts), eras,   │
+│  app/         Shell, Hebrew strings (strings.he.ts), decades,│
 │  components/  URL state, config; React UI: Timeline,         │
-│               CenturyStrip, EventMark, PresenceStrips,       │
-│               Chronicle, FilterBar, DetailPanel, Sheet       │
+│               CenturyStrip, EventMark, PresenceStrips,        │
+│               FilterBar, DetailPanel                          │
 ├─────────────────────────────────────────────────────────────┤
 │  state/       Zustand stores: viewport, filters, selection   │
 │               (no React imports below here)                  │
@@ -64,7 +64,7 @@ interface DataSource {
 /content              authored content JSON (source of truth)
 /scripts              validate-content.ts, build-content.ts, lib/, bench-synthetic.ts
 /src
-  /app                config.ts, strings.he.ts, urlState.ts, eras.ts
+  /app                config.ts, strings.he.ts, urlState.ts, decades.ts
   /components         *.tsx + *.module.css
   /state              viewportStore, filterStore, selectionStore
   /timeline           scale.ts, altitude.ts, fieldLayout.ts, presence.ts,

@@ -77,14 +77,6 @@
   --cat-person: #6c7583;
   --cat-work: #8a7a8f;
 
-  /* Era washes (docs/spec/rendering.md) — one token per era id in src/app/eras.ts.
-     Subtle tints over the paper surfaces; must stay quiet under item marks. */
-  --era-mandate: #efe7d6;
-  --era-independence: #f3e1d8;
-  --era-statebuilding: #e6ecdd;
-  --era-wars: #e2e8f0;
-  --era-upheaval: #ece2ee;
-  --era-oslo: #dcebe6;
   /* Anchor seal (importance ≥ 95) — aged-brass, used only for seal marks. */
   --seal: #a8842c;
   --seal-contrast: #ffffff;
@@ -126,12 +118,6 @@
     --cat-person: #98a2b1;
     --cat-work: #ab9bb0;
 
-    --era-mandate: #2b2719;
-    --era-independence: #322219;
-    --era-statebuilding: #232b1c;
-    --era-wars: #1f2733;
-    --era-upheaval: #2b2130;
-    --era-oslo: #1c2b26;
     --seal: #c9a45f;
     --seal-contrast: #241c09;
   }

@@ -6,9 +6,9 @@ Users move continuously through time, step-zoom between century, decade, and yea
 
 ## Status
 
-**Phase 1 (MVP) — complete.** The guided-expedition timeline (a century-strip minimap, altitude pan/zoom, an event field with chapters, a cast strip and period shelf, a mobile chronicle, selection, and URL-shareable state) is built, and the first curated content pass is in: **80 events, 40 people, 28 works, 25 relations** spanning 1930–2000 across politics, military, society, immigration, economy, culture, religion, science and civil-rights history — each entity carrying at least one real source, and every date web-verified. Importance is calibrated to a pyramid so wide views stay readable and deep zoom rewards exploration.
+**Phase 1 (MVP) — complete.** The guided-expedition timeline (a century-strip minimap with neutral decade banding, altitude pan/zoom, an event field with chapters, a cast strip and period shelf, selection, and URL-shareable state; desktop-only per D20) is built, and the first curated content pass is in: **80 events, 40 people, 28 works, 25 relations** spanning 1930–2000 across politics, military, society, immigration, economy, culture, religion, science and civil-rights history — each entity carrying at least one real source, and every date web-verified. Importance is calibrated to a pyramid so wide views stay readable and deep zoom rewards exploration.
 
-Quality gates: a full **unit / component / real-content** Vitest suite, a **Playwright e2e suite** (desktop + mobile flows, keyboard a11y, and a 10k-item performance guardrail), strict TypeScript, ESLint, and content validation — all green in CI. The content is a **curated, representative selection, not an exhaustive record**.
+Quality gates: a full **unit / component / real-content** Vitest suite, a **Playwright e2e suite** (desktop journey, keyboard a11y, and a 10k-item performance guardrail), strict TypeScript, ESLint, and content validation — all green in CI. The content is a **curated, representative selection, not an exhaustive record**.
 
 How the system works today is documented in [docs/spec/](docs/spec/); the decision log and rationale are in [docs/decisions.md](docs/decisions.md). Developer commands (install / run / test / e2e / lint / seed) are in [docs/spec/development.md](docs/spec/development.md).
 

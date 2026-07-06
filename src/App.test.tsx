@@ -72,7 +72,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /אוטוביוגרפיה לדוגמה/ })).toBeInTheDocument();
 
     // Explicit navigation controls (gesture alternatives): altitude control,
-    // step buttons, and the full-range era chip.
+    // step buttons, and the full-range reset chip.
     expect(screen.getByRole('group', { name: STRINGS.altitudeControlLabel })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: STRINGS.zoomIn })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: STRINGS.zoomOut })).toBeInTheDocument();

@@ -1,5 +1,5 @@
 /**
- * The event-field canvas (docs/spec/rendering.md): era washes + weighted event marks +
+ * The event-field canvas (docs/spec/rendering.md): weighted event marks +
  * chapter bands + the always-present dot band, over the adaptive ruler.
  *
  * Rendering: pure pipeline output only — filters (upstream) → cull →
@@ -16,7 +16,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, KeyboardEvent, MouseEvent, PointerEvent as ReactPointerEvent, UIEvent } from 'react';
 import { APP_CONFIG } from '../app/config';
-import { ERAS, eraAt } from '../app/eras';
+import { decadeAt } from '../app/decades';
 import { STRINGS } from '../app/strings.he';
 import { currentDecimalYear } from '../domain/dates';
 import type { EntityId } from '../domain/entities';
@@ -29,7 +29,6 @@ import type { FieldChapter } from '../timeline/fieldLayout';
 import {
   panOffsetPx,
   panWindowByPx,
-  rectOf,
   spanYears,
   xOf,
   zoomWindowAtPx,
@@ -50,8 +49,6 @@ const DOT_ROW_PX = 13;
 const DOT_BAND_PAD_PX = 8;
 /** jsdom / first-paint fallback before ResizeObserver reports. */
 const FALLBACK_WIDTH_PX = 960;
-/** Era washes show their name only when this much of them is on screen. */
-const ERA_LABEL_MIN_PX = 110;
 /** Wheel accumulation resets after this idle gap (a new gesture intent). */
 const WHEEL_IDLE_MS = 400;
 /** No-transition modifier toggled on the field layer during pan re-anchors (see CSS). */
@@ -69,17 +66,17 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Live "where am I" readout — era name + visible range; isolated so per-frame
+ * Live "where am I" readout — decade name + visible range; isolated so per-frame
  * pans re-render only this. aria-live announces changes politely.
  */
 function RangeReadout() {
   const window = useViewportStore((s) => s.window);
   const wholeRange = altitudeOf(spanYears(window)) === 'century';
-  const era = eraAt((window.start + window.end) / 2);
+  const decade = decadeAt((window.start + window.end) / 2);
   return (
     <span className={styles.readout} aria-live="polite" aria-atomic="true">
       <span className="visually-hidden">{STRINGS.visibleRangeLabel}: </span>
-      <strong>{wholeRange ? STRINGS.readoutWholeRange : STRINGS.eraNames[era.id]}</strong> ·{' '}
+      <strong>{wholeRange ? STRINGS.readoutWholeRange : STRINGS.decadeName(decade.startYear)}</strong> ·{' '}
       {formatWindowRange(window)}
     </span>
   );
@@ -206,30 +203,6 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
       end: layoutWindow.end + buffer,
     });
   }, [layoutWindow, widthPx]);
-
-  /**
-   * Era washes, clipped to the buffered cover range — an unclipped era can
-   * project tens of thousands of px off-screen at the year altitude, and
-   * such overflow displaces the scroll origin of the overflow:hidden
-   * viewport. Labels clamp to the visible part (D14).
-   */
-  const eraWashes = useMemo(() => {
-    const buffer = spanYears(layoutWindow) * TIMELINE_INTERACTION.bufferScreens;
-    const coverStart = layoutWindow.start - buffer;
-    const coverEnd = layoutWindow.end + buffer;
-    return ERAS.flatMap((era) => {
-      const start = Math.max(era.start, coverStart);
-      const end = Math.min(era.end, coverEnd);
-      if (start >= end) return [];
-      const rect = rectOf(scale, start, end); // wash: cover-clamped (bounds off-screen overflow)
-      // Label anchored to the era's TRUE centre — a pure function of time, so it
-      // rides the pan rigidly and never snaps on settle. It shows only when the
-      // era itself is wide enough (pan-invariant); the RangeReadout always names
-      // the current era when a wide one's centre is off-screen.
-      const full = rectOf(scale, era.start, era.end);
-      return [{ era, rect, centerX: full.x + full.width / 2, showLabel: full.width >= ERA_LABEL_MIN_PX }];
-    });
-  }, [scale, layoutWindow]);
 
   const rowPx = ROW_PX[altitude];
   const dotSubRows = FIELD_CONFIGS[altitude].dotSubRows;
@@ -575,20 +548,6 @@ export function Timeline({ items, typeLabels }: TimelineProps) {
 
         <div className={styles.bandsViewport} style={{ height: fieldHeightPx }} onScroll={pinScroll}>
           <div ref={bandsLayerRef} className={styles.bandsLayer}>
-            {eraWashes.map(({ era, rect, centerX, showLabel }) => (
-              <Fragment key={era.id}>
-                <span
-                  className={styles.eraWash}
-                  style={{ left: rect.x, width: rect.width, background: `var(--era-${era.id})` }}
-                  aria-hidden="true"
-                />
-                {showLabel && (
-                  <span className={styles.eraWashLabel} style={{ left: centerX }} aria-hidden="true">
-                    {STRINGS.eraNames[era.id]}
-                  </span>
-                )}
-              </Fragment>
-            ))}
             {ticks.map((tick) => (
               <span
                 key={`grid-${tick.t}`}

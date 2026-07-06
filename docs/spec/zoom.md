@@ -14,7 +14,7 @@ items entirely, and it runs upstream of layout ([filtering](filtering.md)).
 
 ## Altitudes
 
-The viewport window stays a free `{start, end}` in decimal years (era jumps and
+The viewport window stays a free `{start, end}` in decimal years (decade jumps and
 shared URLs produce arbitrary spans); the **altitude is derived from the span**,
 and every zoom gesture *steps* between canonical spans rather than scaling
 freely. Authoritative code: `timeline/altitude.ts`.

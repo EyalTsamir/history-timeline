@@ -28,28 +28,15 @@
   cursor: grabbing;
 }
 
-.compact {
-  block-size: 28px;
-}
-
+/* Neutral decade banding — alternate decades get a faint sunken wash so the
+   strip still reads as a scaled map, without any editorial colour. */
 .zone {
   position: absolute;
   inset-block: 0;
 }
 
-.zoneName {
-  position: absolute;
-  inset-block-start: 3px;
-  inset-inline-start: 50%;
-  transform: translateX(50%);
-  font-style: normal;
-  font-size: 10px;
-  color: var(--text-faint);
-  white-space: nowrap;
-  pointer-events: none;
-  max-inline-size: 96%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.zoneAlt {
+  background: color-mix(in srgb, var(--text-primary) 5%, transparent);
 }
 
 .flag {
@@ -61,12 +48,6 @@
   background: var(--seal);
   transform: translateX(50%);
   pointer-events: none;
-}
-
-.compact .flag {
-  inset-block-end: 3px;
-  inline-size: 4px;
-  block-size: 4px;
 }
 
 .brush {

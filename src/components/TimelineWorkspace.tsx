@@ -1,10 +1,10 @@
 /**
  * The timeline workspace: existing filtered data flow → interactive Timeline;
- * selection → detail surface (desktop side panel / mobile bottom sheet,
- * docs/spec/interaction.md); URL-hash sync for shareable state (docs/spec/architecture.md). Filter changes only
- * swap the item list — the user's period and zoom are never reset.
+ * selection → detail side panel (docs/spec/interaction.md); URL-hash sync for
+ * shareable state (docs/spec/architecture.md). Filter changes only swap the
+ * item list — the user's period and zoom are never reset. Desktop-only.
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import { STRINGS } from '../app/strings.he';
 import { startTimelineUrlSync } from '../app/urlState';
@@ -20,27 +20,10 @@ import { useSelectionStore } from '../state/selectionStore';
 import { useViewportStore } from '../state/viewportStore';
 import { Button } from './Button';
 import { CenturyStrip } from './CenturyStrip';
-import { Chronicle } from './Chronicle';
 import { DetailPanel } from './DetailPanel';
 import { CastStrip, PeriodShelf } from './PresenceStrips';
-import { Sheet } from './Sheet';
 import { Timeline } from './Timeline';
 import styles from './TimelineWorkspace.module.css';
-
-/** Single breakpoint (docs/spec/interaction.md): side panel ↔ bottom sheet. jsdom → desktop. */
-function useIsDesktop(): boolean {
-  const [isDesktop, setIsDesktop] = useState(
-    () => typeof window.matchMedia !== 'function' || window.matchMedia('(min-width: 900px)').matches,
-  );
-  useEffect(() => {
-    if (typeof window.matchMedia !== 'function') return;
-    const mq = window.matchMedia('(min-width: 900px)');
-    const onChange = (e: MediaQueryListEvent): void => setIsDesktop(e.matches);
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-  return isDesktop;
-}
 
 interface TimelineWorkspaceProps {
   items: readonly TimelineItem[];
@@ -54,7 +37,6 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   const select = useSelectionStore((s) => s.select);
   const clearSelection = useSelectionStore((s) => s.clear);
   const setWindow = useViewportStore((s) => s.setWindow);
-  const isDesktop = useIsDesktop();
   const rootRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLElement | null>(null);
   /** The timeline surface — focus fallback when a selected item is culled off-screen. */
@@ -83,28 +65,25 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
   // Mirror viewport/filters/selection into the URL hash (and back).
   useEffect(() => startTimelineUrlSync(items, dataset), [items, dataset]);
 
-  // Keyboard flow (docs/spec/interaction.md): Enter on an item moves focus into the desktop
+  // Keyboard flow (docs/spec/interaction.md): Enter on an item moves focus into the
   // panel; skip the mount-time value so a URL-restored selection doesn't yank
   // focus on load.
   const prevSelectedRef = useRef(selectedId);
   useEffect(() => {
     if (selectedId === prevSelectedRef.current) return;
     prevSelectedRef.current = selectedId;
-    if (selectedId !== null && isDesktop) panelRef.current?.focus();
-  }, [selectedId, isDesktop]);
+    if (selectedId !== null) panelRef.current?.focus();
+  }, [selectedId]);
 
   const closeDetail = (): void => {
     const id = selectedId;
     clearSelection();
-    // Desktop side panel has no focus owner of its own, so restore focus here:
-    // to the originating item, or the surface if it was culled off-screen while
-    // the panel was open. On mobile the Sheet owns restoration (opener →
-    // fallbackFocusRef) — running it here too would fight the Sheet.
-    if (isDesktop) {
-      const origin = id !== null ? rootRef.current?.querySelector<HTMLElement>(`[data-item-id="${id}"]`) : null;
-      if (origin) origin.focus();
-      else surfaceRef.current?.focus();
-    }
+    // The side panel has no focus owner of its own, so restore focus here: to
+    // the originating item, or the surface if it was culled off-screen while
+    // the panel was open.
+    const origin = id !== null ? rootRef.current?.querySelector<HTMLElement>(`[data-item-id="${id}"]`) : null;
+    if (origin) origin.focus();
+    else surfaceRef.current?.focus();
   };
 
   /** Bring an item into view without changing zoom unless it doesn't fit. */
@@ -152,20 +131,16 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
         {isFilterActive(filters) && <Button onClick={clearAll}>{STRINGS.clearAll}</Button>}
       </div>
 
-      <CenturyStrip items={filtered} compact={!isDesktop} />
+      <CenturyStrip items={filtered} />
 
-      <div className={isDesktop && selected !== undefined ? `${styles.stage} ${styles.stageWithPanel}` : styles.stage}>
-        {isDesktop ? (
-          <div className={styles.canvasColumn}>
-            <Timeline items={filtered} typeLabels={typeLabels} />
-            <CastStrip items={filtered} onSelect={onSelectRelated} />
-            <PeriodShelf items={filtered} onSelect={onSelectRelated} />
-          </div>
-        ) : (
-          <Chronicle items={filtered} typeLabels={typeLabels} />
-        )}
+      <div className={selected !== undefined ? `${styles.stage} ${styles.stageWithPanel}` : styles.stage}>
+        <div className={styles.canvasColumn}>
+          <Timeline items={filtered} typeLabels={typeLabels} />
+          <CastStrip items={filtered} onSelect={onSelectRelated} />
+          <PeriodShelf items={filtered} onSelect={onSelectRelated} />
+        </div>
 
-        {isDesktop && selected !== undefined && (
+        {selected !== undefined && (
           <aside
             ref={panelRef}
             tabIndex={-1}
@@ -183,19 +158,6 @@ export function TimelineWorkspace({ items, dataset }: TimelineWorkspaceProps) {
           </aside>
         )}
       </div>
-
-      {!isDesktop && (
-        <Sheet
-          open={selected !== undefined}
-          side="bottom"
-          title={selected?.title ?? ''}
-          closeLabel={STRINGS.close}
-          onClose={closeDetail}
-          fallbackFocusRef={surfaceRef}
-        >
-          {detailBody}
-        </Sheet>
-      )}
     </div>
   );
 }

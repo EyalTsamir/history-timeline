@@ -33,8 +33,6 @@ export const STRINGS = {
   filterPersonCategories: 'קטגוריית אישים',
   filterMinImportance: 'חשיבות מזערית',
   clearAll: 'נקה הכול',
-  mobileFilterButton: 'סינון',
-  activeFilterCount: (n: number) => (n === 1 ? 'מסנן פעיל אחד' : `${n} מסננים פעילים`),
   close: 'סגירה',
 
   contentTypeEvents: 'אירועים',
@@ -68,22 +66,16 @@ export const STRINGS = {
     year: 'שנה',
   } as Record<'century' | 'decade' | 'year', string>,
 
-  // --- eras & century strip (docs/spec/rendering.md) ---
-  eraNames: {
-    mandate: 'המנדט הבריטי',
-    independence: 'קוממיות',
-    statebuilding: 'בניין המדינה',
-    wars: 'מלחמות והתפכחות',
-    upheaval: 'המהפך והשלום',
-    oslo: 'שנות אוסלו',
-  } as Record<string, string>,
+  // --- decades & century strip (docs/spec/rendering.md) ---
+  /** Neutral decade label keyed by start year — "שנות ה־50", "שנות ה־90". */
+  decadeName: (startYear: number) => `שנות ה־${String(startYear % 100).padStart(2, '0')}`,
   centuryStripLabel: 'מפת המאה',
-  /** Readout era slot at the century altitude — the whole range is in view. */
+  /** Readout slot at the century altitude — the whole range is in view. */
   readoutWholeRange: 'כל המאה',
   /** Accessible label of the brush marking the visible window on the strip. */
   stripWindowLabel: 'החלון המוצג',
-  eraChipsLabel: 'קפיצה לתקופה',
-  eraChipAria: (name: string, from: number, to: number) => `${name}, ${from}–${to}`,
+  decadeChipsLabel: 'קפיצה לעשור',
+  decadeChipAria: (name: string, from: number, to: number) => `${name}, ${from}–${to}`,
 
   // --- event field (docs/spec/rendering.md) ---
   chapterBadge: (n: number) => (n === 1 ? 'פרק אחד' : `${n} פרקים`),
@@ -102,10 +94,6 @@ export const STRINGS = {
   presenceMore: (n: number) => `עוד ${n}`,
   presenceMoreAria: (n: number) => (n === 1 ? 'הצגת עוד פריט אחד' : `הצגת עוד ${n} פריטים`),
   presenceCollapse: 'צמצום',
-
-  // --- mobile chronicle (docs/spec/interaction.md) ---
-  chronicleRegionLabel: 'כרוניקת ציר הזמן',
-  chronicleEraYears: (from: number, to: number) => `${from}–${to}`,
 
   // --- detail surface (docs/spec/interaction.md#selection--detail) ---
   detailPanelLabel: 'פרטי הפריט',

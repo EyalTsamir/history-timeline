@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 // The main desktop journey (docs/spec/testing.md §3, docs/spec/rendering.md): orient on the century view,
-// jump to an era, dive to a decade, open a chapter item, follow a source link,
+// jump to a decade, dive in, open a chapter item, follow a source link,
 // filter, clear, and restore state after refresh. (desktop project only)
 
-test('main flow: orient → era jump → dive → open → source → filter → clear → restore', async ({ page }) => {
+test('main flow: orient → decade jump → dive → open → source → filter → clear → restore', async ({ page }) => {
   await page.goto('/');
   const surface = page.getByRole('application');
   await expect(surface).toBeVisible();
@@ -17,8 +17,8 @@ test('main flow: orient → era jump → dive → open → source → filter →
   await expect(page.locator('[data-item-id="david-ben-gurion"]')).toBeVisible(); // cast strip chip
   await expect(page.locator('[data-item-id="war-of-independence"]')).toBeVisible(); // seal mark
 
-  // Era chips are first-class navigation: one tap flies to קוממיות.
-  await page.getByRole('button', { name: /קוממיות/ }).click();
+  // Decade chips are first-class navigation: one tap flies to the 1940s.
+  await page.getByRole('button', { name: /שנות ה־40/ }).click();
   await expect(page.locator('[data-item-id="declaration-of-independence"]')).toBeVisible();
 
   // Decade altitude via URL: the war folds its sub-events into a chapter band.
@@ -45,7 +45,7 @@ test('main flow: orient → era jump → dive → open → source → filter →
 
   // Apply a content-type filter (people only) → works/events drop out; the
   // results line is exact (40 people of 148).
-  await page.getByRole('button', { name: 'אנשים', exact: true }).click();
+  await page.getByRole('button', { name: 'אישים', exact: true }).click();
   await expect(page.getByText(/40\s+מתוך\s+148/)).toBeVisible();
   await expect(page.locator('[data-item-id="yemei-tziklag"]')).toHaveCount(0);
 

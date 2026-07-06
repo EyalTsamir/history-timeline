@@ -26,7 +26,7 @@ is rebuilt from `content/` on every dev/build run. Schema-versioning policy:
 | `npm run preview` | Serves the production `dist/` on http://localhost:4173 |
 | `npm test` | Full Vitest suite (domain, data, state, scripts, components, real-content gates) |
 | `npm run test:watch` | Vitest in watch mode |
-| `npm run e2e` | Playwright e2e (builds + previews, then desktop + mobile projects) |
+| `npm run e2e` | Playwright e2e (builds + previews, then the desktop project) |
 | `npm run e2e:report` | Open the last Playwright HTML report |
 | `npm run bench` | Profile the pipeline over a synthetic 10k dataset ([performance](performance.md)) |
 | `npm run lint` | ESLint (flat config: typescript-eslint + react-hooks) |
@@ -52,13 +52,13 @@ Full authoring policy in [content](content.md).
 - Content-pipeline tests run against fixture trees in `scripts/__fixtures__/` — add a new fixture tree (or a temp-tree case in `validate-content.review.test.ts`) when adding a validator rule.
 - Component tests: vitest globals are off; every component test file calls `afterEach(cleanup)` itself.
 - **Real-content gate**: `scripts/production-content.test.ts` validates the actual `content/` tree (zero errors *and* warnings), checks the curated-scope minimums, and projects every entity to a valid `TimelineItem` (works by `coveredPeriod` D7, living people open-ended, date precision preserved). A failure there means fix the **content**, not the test.
-- **E2E (Playwright)**: `e2e/` holds the desktop journey, the mobile flows, keyboard a11y, and the 10k perf guardrail. Two projects (`desktop`, `mobile`) selected by `testMatch` in [playwright.config.ts](../../playwright.config.ts). Run `npx playwright install chromium` once. Synthetic 10k data is served via route interception — it never enters `content/` or a build.
+- **E2E (Playwright)**: `e2e/` holds the desktop journey, keyboard a11y, and the 10k perf guardrail. A single `desktop` project selected by `testMatch` in [playwright.config.ts](../../playwright.config.ts) (the app is desktop-only, D20). Run `npx playwright install chromium` once. Synthetic 10k data is served via route interception — it never enters `content/` or a build.
 - **Lint**: `npm run lint` (flat `eslint.config.js`). tsconfig strictness carries most static safety; ESLint adds the react-hooks rules tsc can't.
 
 ## Deployment (GitHub Pages)
 
 CI is [.github/workflows/ci.yml](../../.github/workflows/ci.yml): every PR runs
-validate → lint → typecheck → test → build → e2e (chromium desktop + mobile);
+validate → lint → typecheck → test → build → e2e (chromium desktop);
 pushes to `main` also deploy `dist/` to GitHub Pages.
 
 One-time setup after creating the GitHub repository:

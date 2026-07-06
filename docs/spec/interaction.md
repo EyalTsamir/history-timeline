@@ -1,29 +1,25 @@
-# Interaction & responsive design
+# Interaction
 
 The whole UI is Hebrew, `dir="rtl"` on the root, CSS logical properties
 throughout. The time axis also runs right-to-left (decision D5): panning
-**leftward moves forward in time**.
+**leftward moves forward in time**. The app is **desktop-only** (decision D20);
+the earlier mobile chronicle and its bottom/filter sheets were removed.
 
 ## Layout
 
 ```
-Desktop (≥ 900px)                              Mobile (< 900px)
-┌──────────────────────────────┬─────────┐    ┌─────────────────────┐
-│ header: title + filters      │         │    │ header + filter btn │
-│ results line (count · clear) │ detail  │    │ results line        │
-│ century strip (eras + brush) │ panel   │    │ century strip       │
-│ event field (canvas)         │ (opens  │    ├─────────────────────┤
-│ cast strip · period shelf    │ on      │    │ chronicle feed:     │
-│ time ruler + altitude ctrls  │ select) │    │   era → year → items│
-└──────────────────────────────┴─────────┘    │   (scroll = time)   │
-                                               └─────────────────────┘
-                                                detail  = bottom sheet
-                                                filters = slide-over sheet
+┌──────────────────────────────┬─────────┐
+│ header: title                │         │
+│ results line (count · clear) │ detail  │
+│ century strip (decades+brush)│ panel   │
+│ event field (canvas)         │ (opens  │
+│ cast strip · period shelf    │ on      │
+│ time ruler + altitude ctrls  │ select) │
+└──────────────────────────────┴─────────┘
+    (filters live in a persistent inline-start sidebar)
 ```
 
-One responsive breakpoint (~900px) switches both the detail surface (side panel
-↔ bottom sheet) and the primary view (event-field canvas ↔ vertical chronicle),
-and the filter surface (inline bar ↔ sheet).
+Selecting an item opens the detail side panel at the timeline's inline-end.
 
 ## Gestures & controls (desktop canvas)
 
@@ -32,14 +28,14 @@ to a threshold, then step century↔decade↔year anchored at the pointer; panni
 stays continuous. As implemented (`components/Timeline.tsx`; knobs in
 `timeline/config.ts`):
 
-| Action | Desktop | Mobile |
-|---|---|---|
-| Pan through time | drag (inertial); horizontal wheel/trackpad (deltaX); ←/→ keys | one-finger horizontal drag, inertial |
-| Zoom (step altitude) | vertical wheel (cursor-anchored, accumulates then steps); ctrl/⌘+wheel = stronger; +/− keys; +/− buttons; double-click empty canvas dives one level | two-finger pinch (midpoint-anchored, accumulates then steps); +/− buttons |
-| Jump to an altitude | century/decade/year segmented control (centered) | segmented control |
-| Select item | click; Tab/Enter (items are real focusable buttons) | tap |
-| Reset view | "טווח מלא" button; Home key (→ century) | "טווח מלא" button |
-| Close detail | Esc / close button | close button, Esc, backdrop tap |
+| Action | Control |
+|---|---|
+| Pan through time | drag (inertial); horizontal wheel/trackpad (deltaX); ←/→ keys; two-finger trackpad pan |
+| Zoom (step altitude) | vertical wheel (cursor-anchored, accumulates then steps); ctrl/⌘+wheel = stronger; +/− keys; +/− buttons; double-click empty canvas dives one level; trackpad pinch (midpoint-anchored) |
+| Jump to an altitude | century/decade/year segmented control (centered) |
+| Select item | click; Tab/Enter (items are real focusable buttons) |
+| Reset view | "טווח מלא" button; Home key (→ century) |
+| Close detail | Esc / close button |
 
 Interaction rules that matter:
 
@@ -52,16 +48,6 @@ Interaction rules that matter:
 - **Touch coexistence**: the surface sets `touch-action: pan-y`, so vertical swipes stay with the browser (page scroll) and horizontal swipes/pinches belong to the timeline. Row budgets bound the canvas height, so no inner vertical scrolling is needed.
 - Nothing depends on hover; every gesture has a button/keyboard equivalent.
 
-## Mobile: the chronicle
-
-Below the 900px breakpoint the canvas is replaced by a **vertical feed**
-(`components/Chronicle.tsx`) — scroll *is* movement through time:
-
-- Sections per era → year headings → items sorted by time.
-- Card size follows tier ([zoom](zoom.md)): seal/anchor → large card with description; chapter → card listing children (expand in place); major/minor → compact row; background → pill row. Cast and shelf appear as cards per era section.
-- No pinch, no horizontal gestures. The century strip on top shows position (scroll spy via IntersectionObserver) and jumps on tap.
-- Viewport sync: the active year updates `viewportStore` (a coarse window), so shared URLs work in both directions across form factors.
-
 ## Selection & detail
 
 Selecting an item opens the detail surface without moving the timeline: title ·
@@ -73,14 +59,10 @@ person: books about them; for a work: its subjects and author; for an event: its
 sub-events. Each related item is a button that selects it and pans it into view
 (events only; people/works open from the strips).
 
-Surfaces (`TimelineWorkspace`): **desktop** — an inline side panel at the
-timeline's inline-end; selecting moves focus into the panel (skipped for a
-URL-restored selection on load), Esc or ✕ closes and returns focus to the item's
-button (or the timeline surface if it was culled off-screen). **Mobile** — the
-shared `Sheet` component in its bottom-sheet variant: modal, focus-trapped,
-scroll-locked (ref-counted across sheets), Esc/backdrop/✕ close. Focus
-restoration on mobile has a **single owner** — the Sheet restores to the opener
-or a fallback; `closeDetail` does not also restore, so the two never fight.
+Surface (`TimelineWorkspace`): an inline side panel at the timeline's inline-end;
+selecting moves focus into the panel (skipped for a URL-restored selection on
+load), Esc or ✕ closes and returns focus to the item's button (or the timeline
+surface if it was culled off-screen).
 
 ## Accessibility
 

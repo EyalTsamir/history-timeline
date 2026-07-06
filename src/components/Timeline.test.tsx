@@ -49,7 +49,7 @@ describe('Timeline', () => {
     // Altitude segmented control, current altitude pressed.
     const centuryButton = screen.getByRole('button', { name: STRINGS.altitudeNames.century });
     expect(centuryButton).toHaveAttribute('aria-pressed', 'true');
-    // Decade ruler labels at this zoom, and the live era-aware readout.
+    // Decade ruler labels at this zoom, and the live decade-aware readout.
     expect(screen.getByText('1950')).toBeInTheDocument();
     expect(screen.getByText(/1926–2003/)).toBeInTheDocument();
   });

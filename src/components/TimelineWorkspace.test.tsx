@@ -20,21 +20,6 @@ function setup(): void {
   initTimelineStateFromUrl(items, dataset);
 }
 
-/** Pretend to be a phone: min-width media queries don't match. */
-function mockMobileMatchMedia(): void {
-  (window as unknown as { matchMedia: typeof window.matchMedia }).matchMedia = ((query: string) =>
-    ({
-      matches: false,
-      media: query,
-      addEventListener: () => undefined,
-      removeEventListener: () => undefined,
-      addListener: () => undefined,
-      removeListener: () => undefined,
-      onchange: null,
-      dispatchEvent: () => false,
-    }) as unknown as MediaQueryList) as typeof window.matchMedia;
-}
-
 describe('TimelineWorkspace — desktop detail panel', () => {
   beforeEach(setup);
   afterEach(cleanup);
@@ -131,32 +116,5 @@ describe('TimelineWorkspace — desktop detail panel', () => {
       expect(screen.queryByRole('button', { name: /מלחמה לדוגמה/ })).not.toBeInTheDocument();
     });
     expect(useViewportStore.getState().window).toEqual(before);
-  });
-});
-
-describe('TimelineWorkspace — mobile bottom sheet', () => {
-  beforeEach(() => {
-    mockMobileMatchMedia();
-    setup();
-  });
-
-  afterEach(() => {
-    cleanup();
-    delete (window as { matchMedia?: unknown }).matchMedia;
-  });
-
-  it('selecting an item opens a modal bottom sheet; closing clears the selection', async () => {
-    const user = userEvent.setup();
-    render(<TimelineWorkspace items={items} dataset={dataset} />);
-
-    await user.click(screen.getByRole('button', { name: /מלחמה לדוגמה/ }));
-
-    const sheet = await screen.findByRole('dialog', { name: 'מלחמה לדוגמה' });
-    expect(within(sheet).getByText('אירוע-על עם תתי-אירועים.')).toBeInTheDocument();
-    expect(screen.queryByRole('complementary', { name: STRINGS.detailPanelLabel })).not.toBeInTheDocument();
-
-    await user.click(within(sheet).getByRole('button', { name: STRINGS.close }));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    expect(useSelectionStore.getState().selectedId).toBeNull();
   });
 });

@@ -54,29 +54,6 @@
   direction: rtl;
 }
 
-/* --- era washes -------------------------------------------------------------- */
-
-.eraWash {
-  position: absolute;
-  inset-block: 0;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.eraWashLabel {
-  position: absolute;
-  inset-block-start: 4px;
-  /* Anchored to the era's true centre (left = centreX) and centred on it, so it
-     translates rigidly with a pan and never snaps on settle. */
-  transform: translateX(-50%);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: var(--text-faint);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
 .gridline,
 .gridlineMajor {
   position: absolute;

@@ -28,34 +28,19 @@
   color: var(--text-faint);
 }
 
-.filterButton {
-  flex: none;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-inline-size: 1.25rem;
-  block-size: 1.25rem;
-  padding-inline: var(--space-1);
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: var(--accent-contrast);
-  font-size: var(--text-xs);
-  font-weight: 700;
-}
-
 .layout {
   flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 18rem minmax(0, 1fr);
   align-items: start;
 }
 
-/* Mobile-first: the sidebar exists only from the 900px breakpoint up. */
+/* First grid column = inline-start side (where RTL reading begins). */
 .sidebar {
-  display: none;
+  display: block;
+  padding: var(--space-5);
+  border-inline-end: 1px solid var(--border);
+  align-self: stretch;
 }
 
 .sidebarHeading {
@@ -84,22 +69,4 @@
   color: var(--text-faint);
   font-size: var(--text-xs);
   text-align: center;
-}
-
-@media (min-width: 900px) {
-  .filterButton {
-    display: none;
-  }
-
-  .layout {
-    grid-template-columns: 18rem minmax(0, 1fr);
-  }
-
-  /* First grid column = inline-start side (where RTL reading begins). */
-  .sidebar {
-    display: block;
-    padding: var(--space-5);
-    border-inline-end: 1px solid var(--border);
-    align-self: stretch;
-  }
 }

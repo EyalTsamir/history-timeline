@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-ציר הזמן ההיסטורי — an interactive historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**. React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The UI follows the **guided-expedition concept** (decision D16 in [docs/decisions.md](docs/decisions.md); presentation spec in [docs/spec/rendering.md](docs/spec/rendering.md)): a persistent century strip with named eras, three zoom altitudes (century/decade/year) with importance-tier label budgets, one event field (overflow degrades to always-present dots — never chips), people as a cast strip, works as a period shelf, and a vertical chronicle feed on mobile.
+ציר הזמן ההיסטורי — an interactive historical timeline (Israel 1930–2000 first scope), **Hebrew-only with full RTL layout**, **desktop-only** (D20). React 19 + TypeScript strict + Vite; Zustand for state; Zod for validation; static JSON data, no backend. The UI follows the **guided-expedition concept** (decision D16 in [docs/decisions.md](docs/decisions.md); presentation spec in [docs/spec/rendering.md](docs/spec/rendering.md)): a persistent century strip framed by **neutral decades** (D20 — the earlier named eras were removed), three zoom altitudes (century/decade/year) with importance-tier label budgets, one event field (overflow degrades to always-present dots — never chips), people as a cast strip, and works as a period shelf.
 
-Docs are split three ways: [docs/spec/](docs/spec/) — how the system works **today**, one authoritative doc per topic; [docs/decisions.md](docs/decisions.md) — the decision log (D1–D16) and rationale; [docs/roadmap.md](docs/roadmap.md) — what's deferred. Check the relevant spec doc before changing direction on anything architectural, and update it (adding a decision entry) when a decision changes.
+Docs are split three ways: [docs/spec/](docs/spec/) — how the system works **today**, one authoritative doc per topic; [docs/decisions.md](docs/decisions.md) — the decision log (D1–D20) and rationale; [docs/roadmap.md](docs/roadmap.md) — what's deferred. Check the relevant spec doc before changing direction on anything architectural, and update it (adding a decision entry) when a decision changes.
 
 ## Commands
 
@@ -32,7 +32,7 @@ Strict layering (top may import from below, never the reverse):
 
 ```
 app/ + components/   React shell & UI; ALL Hebrew strings live in src/app/strings.he.ts;
-                     app/eras.ts = named era definitions; app/urlState.ts = shareable #hash
+                     app/decades.ts = neutral decade periods; app/urlState.ts = shareable #hash
 state/               Zustand stores: filterStore, viewportStore, selectionStore — no React imports
 timeline/            pure logic: scale.ts (time↔px; axis direction lives ONLY here),
                      altitude.ts (century/decade/year, importance tiers, label floors),

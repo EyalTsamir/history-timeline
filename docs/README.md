@@ -19,7 +19,7 @@ Docs are written in English (developer-facing); the application UI and all conte
 | [zoom](spec/zoom.md) | Numeric importance + three altitudes with importance-tier label budgets |
 | [rendering](spec/rendering.md) | `TimelineItem`, the layout pipeline, the event field / cast strip / period shelf / century strip, RTL axis |
 | [filtering](spec/filtering.md) | How combined filters compose |
-| [interaction](spec/interaction.md) | Altitude-stepping gestures, responsiveness, mobile chronicle, a11y |
+| [interaction](spec/interaction.md) | Altitude-stepping gestures, selection/detail, a11y (desktop-only) |
 | [testing](spec/testing.md) | Test pyramid, what to test, CI gates |
 | [performance](spec/performance.md) | Budgets and the scaling path for 10k–100k+ items |
 | [development](spec/development.md) | Install, run, test, reset — exact commands |

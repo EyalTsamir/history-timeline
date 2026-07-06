@@ -1,8 +1,8 @@
 /**
  * The century strip (docs/spec/rendering.md): the always-visible map of the whole range —
- * tinted named eras, flag dots for anchor events (importance ≥ 80), and a
+ * neutral decade banding, flag dots for anchor events (importance ≥ 80), and a
  * brush marking the current window. Dragging pans (the window center follows
- * the pointer); a tap jumps. The era chips underneath are the keyboard/AT
+ * the pointer); a tap jumps. The decade chips underneath are the keyboard/AT
  * path to the same navigation, so the strip surface itself stays a pointer
  * affordance (aria-hidden interactive layer + labeled chips).
  *
@@ -13,7 +13,7 @@
  */
 import { useMemo, useRef } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
-import { ERAS, eraAt, eraWindow } from '../app/eras';
+import { DECADES, decadeAt, decadeWindow } from '../app/decades';
 import { STRINGS } from '../app/strings.he';
 import { APP_CONFIG } from '../app/config';
 import type { TimelineItem } from '../domain/timelineItem';
@@ -25,11 +25,9 @@ import styles from './CenturyStrip.module.css';
 interface CenturyStripProps {
   /** Filtered items — anchor events become flag dots. */
   items: readonly TimelineItem[];
-  /** Mobile: shallower strip, era names dropped (chips carry them). */
-  compact?: boolean;
 }
 
-export function CenturyStrip({ items, compact = false }: CenturyStripProps) {
+export function CenturyStrip({ items }: CenturyStripProps) {
   const dir = APP_CONFIG.timeDirection;
   const window = useViewportStore((s) => s.window);
   const defaultWindow = useViewportStore((s) => s.defaultWindow);
@@ -59,7 +57,7 @@ export function CenturyStrip({ items, compact = false }: CenturyStripProps) {
   );
 
   const altitude = altitudeOf(spanYears(window));
-  const activeEra = eraAt((window.start + window.end) / 2);
+  const activeDecade = decadeAt((window.start + window.end) / 2);
 
   const brush = useMemo(() => {
     const lo = Math.max(0, Math.min(1, frac(window.start)));
@@ -102,25 +100,22 @@ export function CenturyStrip({ items, compact = false }: CenturyStripProps) {
     <div className={styles.wrap}>
       <div
         ref={stripRef}
-        className={compact ? `${styles.strip} ${styles.compact}` : styles.strip}
+        className={styles.strip}
         aria-hidden="true"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerEnd}
         onPointerCancel={onPointerEnd}
       >
-        {ERAS.map((era) => (
+        {DECADES.map((decade, i) => (
           <span
-            key={era.id}
-            className={styles.zone}
+            key={decade.startYear}
+            className={i % 2 === 0 ? `${styles.zone} ${styles.zoneAlt}` : styles.zone}
             style={{
-              [pastSide]: `${frac(era.start) * 100}%`,
-              width: `${(frac(era.end) - frac(era.start)) * 100}%`,
-              background: `var(--era-${era.id})`,
+              [pastSide]: `${frac(decade.startYear) * 100}%`,
+              width: `${(frac(decade.endYear) - frac(decade.startYear)) * 100}%`,
             }}
-          >
-            {!compact && <i className={styles.zoneName}>{STRINGS.eraNames[era.id]}</i>}
-          </span>
+          />
         ))}
         {flags.map((f) => (
           <span key={f.id} className={styles.flag} style={{ [pastSide]: `${frac(f.start) * 100}%` }} />
@@ -133,7 +128,7 @@ export function CenturyStrip({ items, compact = false }: CenturyStripProps) {
         )}
       </div>
 
-      <div className={styles.chips} role="group" aria-label={STRINGS.eraChipsLabel}>
+      <div className={styles.chips} role="group" aria-label={STRINGS.decadeChipsLabel}>
         <button
           type="button"
           className={altitude === 'century' ? `${styles.chip} ${styles.chipActive}` : styles.chip}
@@ -141,21 +136,21 @@ export function CenturyStrip({ items, compact = false }: CenturyStripProps) {
         >
           {STRINGS.resetView}
         </button>
-        {ERAS.map((era) => {
-          const active = altitude !== 'century' && era.id === activeEra.id;
+        {DECADES.map((decade) => {
+          const active = altitude !== 'century' && decade.startYear === activeDecade.startYear;
           return (
             <button
-              key={era.id}
+              key={decade.startYear}
               type="button"
               className={active ? `${styles.chip} ${styles.chipActive}` : styles.chip}
-              aria-label={STRINGS.eraChipAria(
-                STRINGS.eraNames[era.id] ?? era.id,
-                era.displayStart,
-                era.displayEnd,
+              aria-label={STRINGS.decadeChipAria(
+                STRINGS.decadeName(decade.startYear),
+                decade.startYear,
+                decade.endYear,
               )}
-              onClick={() => setWindow(eraWindow(era))}
+              onClick={() => setWindow(decadeWindow(decade))}
             >
-              {STRINGS.eraNames[era.id]}
+              {STRINGS.decadeName(decade.startYear)}
             </button>
           );
         })}

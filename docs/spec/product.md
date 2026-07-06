@@ -9,12 +9,12 @@ lesser figures, sub-events, and individual books as they zoom in. Alongside the
 events, the timeline surfaces the **people** active in the visible period (a
 cast strip) and the **written works** that document it — biographies,
 autobiographies, and historical novels — connecting readers to books about the
-era they're looking at.
+period they're looking at.
 
 ## Audiences
 
 1. **History enthusiasts** — want depth: sub-events, secondary figures, sources.
-2. **Curious general users** — want orientation: the big picture of a period at a glance, in Hebrew, on any device.
+2. **Curious general users** — want orientation: the big picture of a period at a glance, in Hebrew.
 3. **Book seekers** — want to discover biographies, autobiographies, and historical novels tied to a period or person.
 
 ## First content scope
@@ -32,7 +32,7 @@ scope — see [domain](domain.md) and [performance](performance.md).
 
 | Capability | Notes |
 |---|---|
-| Horizontal, continuously pannable timeline | Desktop drag / mobile swipe, inertial |
+| Horizontal, continuously pannable timeline | Drag / wheel / keyboard, inertial |
 | Altitude zoom | Century → decade → year, stepped by gesture; panning stays continuous — [zoom](zoom.md), [interaction](interaction.md) |
 | Importance-driven detail | Weightiest items are labeled marks; the rest are always-present dots — nothing disappears by zoom ([zoom](zoom.md)) |
 | Events and nested sub-events | Two levels populated in MVP; model supports arbitrary depth. Deeper zoom folds sub-events into a parent "chapter" |
@@ -41,7 +41,7 @@ scope — see [domain](domain.md) and [performance](performance.md).
 | Multiple books per person | Via work→person relations |
 | Item detail on selection | Title, date(s), description, image, category/type, importance, sources, external links |
 | Filters | Region, person category, content type, minimum importance — combinable, [filtering](filtering.md) |
-| Responsive desktop + mobile | Canvas on desktop, vertical chronicle on mobile — [interaction](interaction.md) |
+| Desktop-only | Canvas timeline; the earlier mobile chronicle was removed (D20) — [interaction](interaction.md) |
 | Shareable view state | Viewport + filters + selection encoded in the URL hash |
 
 ## Explicitly out of MVP scope
