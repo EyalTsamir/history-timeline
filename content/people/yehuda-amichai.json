@@ -22,17 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/יהודה_עמיחי"
+      "url": "https://he.wikipedia.org/wiki/יהודה_עמיחי",
+      "kind": "encyclopedia"
     }
   ]
 }

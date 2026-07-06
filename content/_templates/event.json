@@ -17,10 +17,9 @@
   "_regionIds": "ids from content/taxonomies/regions.json; filtering by a parent region includes all its descendants.",
   "regionIds": ["israel"],
   "_tags": "Optional free-form strings (not validated against a taxonomy). Add a \"tags\": [] key only when needed.",
-  "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Optional related reading (further links). NOT the citation — use \"sources\" for that. label is the Hebrew display text; placeholder URLs (containing \"...\", example.com) are rejected.",
-  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות" }],
-  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Prefer naming an authoritative institution (national library, archive, university, museum, established encyclopedia). Add \"url\" only when it is a real, stable page — omit it rather than guess. \"publisher\" and \"kind\" (archive|library|museum|encyclopedia|reference|academic|government|book|press|website) are optional.",
+  "_image": "Optional: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }. Prefer a Wikimedia Commons direct file URL (upload.wikimedia.org/...) — stable and hotlink-safe — with a credit naming the source/license.",
+  "_video": "Optional and rare — only when real, good-quality archival footage exists from a reputable channel: { \"provider\": \"youtube\", \"videoId\": \"11-char-id\", \"title\": { \"he\": \"...\" }, \"credit\": \"...\" }. Rendered via a fixed youtube-nocookie.com embed (decision D19) — never a raw URL or embed HTML.",
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Every source needs a real, stable \"url\" (decision D18) — a source with no link doesn't help the reader, so unlinked citations are rejected. Prefer an authoritative institution (national library, archive, university, museum) or a Hebrew-Wikipedia article. \"publisher\" and \"kind\" (archive|library|museum|encyclopedia|reference|academic|government|book|press|website) are optional. Placeholder URLs (containing \"...\", example.com) and non-http(s) URLs are rejected.",
   "sources": [
     { "title": { "he": "הספרייה הלאומית — עיתונות היסטורית" }, "publisher": "הספרייה הלאומית של ישראל", "url": "https://www.nli.org.il/he", "kind": "library" }
   ]

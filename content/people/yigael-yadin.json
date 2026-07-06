@@ -23,23 +23,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/יגאל_ידין"
+      "url": "https://he.wikipedia.org/wiki/יגאל_ידין",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -18,26 +18,28 @@
     "jerusalem",
     "egypt"
   ],
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Sadat_knesset_1977.jpg",
+    "alt": {
+      "he": "נשיא מצרים אנואר סאדאת נואם בפני הכנסת בעת ביקורו; לצדו יו״ר הכנסת יצחק שמיר ונשיא המדינה אפרים קציר, 20 בנובמבר 1977"
+    },
+    "credit": "אתר הכנסת, נחלת הכלל"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "GuIVCgmJMSI",
+    "title": {
+      "he": "נשיא מצרים אנואר סאדאת נואם בכנסת"
+    },
+    "credit": "ערוץ הכנסת"
+  },
   "sources": [
     {
       "title": {
-        "he": "הכנסת — אתר הכנסת"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    },
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ביקור_נשיא_מצרים_סאדאת_בישראל"
+      "url": "https://he.wikipedia.org/wiki/ביקור_נשיא_מצרים_סאדאת_בישראל",
+      "kind": "encyclopedia"
     }
   ]
 }

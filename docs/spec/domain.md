@@ -62,8 +62,8 @@ interface EventEntity {
   regionIds: EntityId[];
   tags?: string[];
   image?: { src: string; alt: Text; credit?: string };
-  links?: { label: Text; url: string }[];   // related reading (further links)
-  sources?: Source[];                        // citations backing the facts; validator requires ≥1
+  video?: { provider: 'youtube'; videoId: string; title: Text; credit?: string }; // rare — real footage only (D19)
+  sources?: Source[];                        // cited references (title + url); validator requires ≥1
 }
 
 interface PersonEntity {
@@ -78,7 +78,6 @@ interface PersonEntity {
   importance: number;
   regionIds: EntityId[];
   image?: Image;
-  links?: Link[];
   sources?: Source[];            // ≥1 required (validator)
 }
 
@@ -102,16 +101,16 @@ interface WorkEntity {
   importance: number;
   regionIds: EntityId[];
   image?: Image;                 // cover
-  links?: Link[];                // related reading / catalog
   sources?: Source[];            // ≥1 required (validator)
 }
 
-// A citation backing an entity's facts — distinct from `links` (related
-// reading). Sourcing policy lives in content.md#sourcing.
+// A cited reference backing an entity's facts. `url` is REQUIRED (decision
+// D18) — a source with no reachable page doesn't help the reader. Sourcing
+// policy lives in content.md#sourcing.
 interface Source {
   title: Text;                   // the source's name (Hebrew field, may hold a Latin name)
+  url: string;                   // real, stable http(s) URL — required
   publisher?: string;            // institution/publisher, when distinct from title
-  url?: string;                  // real, stable URL — omit rather than guess
   kind?: 'archive' | 'library' | 'museum' | 'encyclopedia' | 'reference'
        | 'academic' | 'government' | 'book' | 'press' | 'website';
 }
@@ -155,13 +154,26 @@ compiled dataset.
 
 ## Sourcing
 
-Every timeline entity carries a `sources: Source[]` — citations behind its
-facts, kept **separate from `links`** (optional related reading). The validator
-requires **≥1 source per entity**, and `Source.url` must be a real http(s) URL,
-not a placeholder. The full authoring policy — prefer authoritative
-institutions, preserve uncertainty, omit a URL rather than fabricate one — is in
-[content.md#sourcing](content.md#sourcing). Sources render under "מקורות" in the
-detail panel. (Decision D15.)
+Every timeline entity carries a `sources: Source[]` — one unified list of cited
+references behind its facts (this folds in the old related-`links` list; decision
+D18). The validator requires **≥1 source per entity**, and every `Source.url`
+must be a real http(s) URL, not a placeholder — a citation with no reachable page
+doesn't help the reader. The full authoring policy — prefer authoritative
+institutions, preserve uncertainty, cite a page you can confirm rather than
+fabricate one — is in [content.md#sourcing](content.md#sourcing). Sources render
+under "מקורות וקישורים" in the detail panel. (Decisions D15, D18.)
+
+## Media
+
+`image` (any entity) and `video` (events only) are optional and always
+external links — nothing binary lives in the repo. `video` is deliberately a
+closed `provider` enum (`youtube` today) plus a bare, regex-validated
+`videoId`, never a raw URL or embed HTML: the render path is the only thing
+that builds the iframe src (`https://www.youtube-nocookie.com/embed/<videoId>`),
+so a content file can never point an embed at an arbitrary domain (decision
+D19). Authoring policy — preferred sources per media type, when to omit rather
+than force a weak match — is in
+[content.md#media](content.md#media).
 
 ## Extensibility notes
 

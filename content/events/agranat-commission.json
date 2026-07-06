@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ועדת_אגרנט"
+      "url": "https://he.wikipedia.org/wiki/ועדת_אגרנט",
+      "kind": "encyclopedia"
     }
   ]
 }

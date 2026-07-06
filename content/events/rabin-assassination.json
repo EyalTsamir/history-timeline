@@ -17,27 +17,28 @@
   "regionIds": [
     "tel-aviv"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/רצח_יצחק_רבין"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "מרכז יצחק רבין"
-      },
-      "kind": "museum"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/3/35/Yizhak_Rabin_%2800310004%29.jpg",
+    "alt": {
+      "he": "יצחק רבין בתצלום רשמי בלשכתו, עם דגל ישראל ברקע"
     },
+    "credit": "ארכיון הכנסת, CC BY-SA 4.0"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "jBTRLHMclhQ",
+    "title": {
+      "he": "יצחק רבין נואם בעצרת השלום — נאומו האחרון, 4 בנובמבר 1995"
+    },
+    "credit": "AP Archive"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/רצח_יצחק_רבין",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -17,6 +17,9 @@ Docs are split three ways: [docs/spec/](docs/spec/) — how the system works **t
 | `npm test` | Full Vitest suite |
 | `npx vitest run src/domain/dates.test.ts` | Run a single test file |
 | `npm run typecheck` | TypeScript strict check |
+| `npm run lint` | ESLint over the repo (CI gate) |
+| `npm run e2e` | Playwright end-to-end suite (`npm run e2e:report` opens the last report) |
+| `npm run bench` | Synthetic layout benchmark (`scripts/bench-synthetic.ts`) |
 | `npm run content:validate` | Validate all of `content/` — schemas, refs, cycles, dates |
 | `npm run content:build` | Validate + compile `public/data/dataset.json` + meta |
 | `npm run content:clean` | Delete compiled `public/data/` (regenerated on next dev/build) |
@@ -45,7 +48,7 @@ domain/              Zod entity schemas, date model, normalize → TimelineItem,
 
 ### Content pipeline
 
-`content/*.json` (source of truth, one file per entity) → `scripts/build-content.ts` validates against the Zod schemas in [src/domain/entities.ts](src/domain/entities.ts), resolves every reference, precomputes reverse indexes, and emits `public/data/dataset.json` plus a content-addressed `dataset.<hash>.json` (injected into production builds via the `__DATASET_URL__` Vite define; dev uses the stable name). The compiled artifact is gitignored and rebuilt on every dev/build.
+`content/*.json` (source of truth, one file per entity under `events/`, `people/`, `works/`) plus the shared `content/taxonomies/` (person/event categories, work types, regions) and `content/relations.json` (person↔event edges) → `scripts/build-content.ts` (logic in `scripts/lib/content.ts`) validates against the Zod schemas in [src/domain/entities.ts](src/domain/entities.ts), resolves every reference, precomputes reverse indexes, and emits `public/data/dataset.json` plus a content-addressed `dataset.<hash>.json` (injected into production builds via the `__DATASET_URL__` Vite define; dev uses the stable name). The compiled artifact is gitignored and rebuilt on every dev/build.
 
 ### Key domain rules
 

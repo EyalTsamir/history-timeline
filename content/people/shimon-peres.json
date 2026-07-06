@@ -22,24 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "אנציקלופדיה בריטניקה"
-      },
-      "publisher": "Encyclopædia Britannica",
+      "url": "https://he.wikipedia.org/wiki/שמעון_פרס",
       "kind": "encyclopedia"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/שמעון_פרס"
     }
   ]
 }

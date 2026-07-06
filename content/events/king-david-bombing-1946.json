@@ -20,23 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "יד יצחק בן-צבי"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "academic"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/פיצוץ_מלון_המלך_דוד"
+      "url": "https://he.wikipedia.org/wiki/פיצוץ_מלון_המלך_דוד",
+      "kind": "encyclopedia"
     }
   ]
 }

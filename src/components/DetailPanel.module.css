@@ -68,6 +68,23 @@
   color: var(--text-faint);
 }
 
+.videoWrapper {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.videoFrame {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -80,7 +97,6 @@
 }
 
 .relatedList,
-.linkList,
 .sourceList {
   list-style: none;
   display: flex;
@@ -134,8 +150,4 @@
   font-size: var(--text-xs);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-}
-
-.linkList a {
-  color: var(--accent);
 }

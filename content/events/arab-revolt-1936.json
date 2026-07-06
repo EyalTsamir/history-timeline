@@ -19,27 +19,20 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/המרד_הערבי_הגדול"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "יד יצחק בן-צבי"
-      },
-      "kind": "academic"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Palestine_disturbances_1936._Scotch_%28i.e.%2C_Scots%29_soldiers_stopping_Arab_camel-men_in_search_for_arms%2C_near_Rachel%27s_Tomb_on_Bethlehem_road_LOC_matpc.18200.jpg",
+    "alt": {
+      "he": "חיילים סקוטים בריטים עוצרים גמלים ערביים לחיפוש נשק ליד קבר רחל, בדרך ירושלים–בית לחם, בעת המרד הערבי, 1936"
     },
+    "credit": "אוסף מטסון, ספריית הקונגרס האמריקני; נחלת הכלל"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/המרד_הערבי_הגדול",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

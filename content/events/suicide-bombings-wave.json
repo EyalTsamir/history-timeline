@@ -24,17 +24,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/פיגועי_התאבדות_בישראל"
+      "url": "https://he.wikipedia.org/wiki/פיגועי_התאבדות_בישראל",
+      "kind": "encyclopedia"
     }
   ]
 }

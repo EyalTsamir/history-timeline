@@ -21,27 +21,13 @@
     "israel",
     "hungary"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/חנה_סנש"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "יד ושם"
-      },
-      "kind": "museum"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/חנה_סנש",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -17,27 +17,28 @@
   "regionIds": [
     "tel-aviv"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מגילת_העצמאות"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/3/36/Declaration_of_State_of_Israel_1948.jpg",
+    "alt": {
+      "he": "דוד בן־גוריון מכריז על הקמת מדינת ישראל באולם מוזיאון תל אביב, מתחת לתמונת דיוקנו של הרצל, 14 במאי 1948"
     },
+    "credit": "צילום: רודי ויסנשטיין, נחלת הכלל"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "xttJPWUWVbU",
+    "title": {
+      "he": "בן־גוריון מקריא את מגילת העצמאות, 14.5.1948"
+    },
+    "credit": "ערוץ היוטיוב הרשמי של הכנסת"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מגילת_העצמאות",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

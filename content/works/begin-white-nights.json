@@ -28,17 +28,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/%D7%91%D7%9C%D7%99%D7%9C%D7%95%D7%AA_%D7%9C%D7%91%D7%A0%D7%99%D7%9D"
+      "url": "https://he.wikipedia.org/wiki/%D7%91%D7%9C%D7%99%D7%9C%D7%95%D7%AA_%D7%9C%D7%91%D7%A0%D7%99%D7%9D",
+      "kind": "encyclopedia"
     }
   ]
 }

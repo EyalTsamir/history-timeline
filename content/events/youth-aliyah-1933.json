@@ -22,17 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/עליית_הנוער"
+      "url": "https://he.wikipedia.org/wiki/עליית_הנוער",
+      "kind": "encyclopedia"
     }
   ]
 }

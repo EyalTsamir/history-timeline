@@ -74,7 +74,7 @@ interface TimelineItem {
   styleToken: string;                            // color/icon key from kind/category/workType
   detail: DetailPayload;                         // everything else the detail panel shows:
 }                                                //   description, displayDate (precision-aware),
-                                                 //   image, links, sources, publicationDate,
+                                                 //   image, video (events, rare), sources, publicationDate,
                                                  //   resolved author names, reverse-index ids…
 ```
 

@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "הכנסת — אתר הכנסת"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ממשלת_ישראל_העשרים_ואחת"
+      "url": "https://he.wikipedia.org/wiki/ממשלת_ישראל_העשרים_ואחת",
+      "kind": "encyclopedia"
     }
   ]
 }

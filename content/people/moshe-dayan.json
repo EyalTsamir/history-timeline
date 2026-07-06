@@ -19,28 +19,13 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/משה_דיין"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "אנציקלופדיה בריטניקה"
-      },
-      "publisher": "Encyclopædia Britannica",
-      "kind": "encyclopedia"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/משה_דיין",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

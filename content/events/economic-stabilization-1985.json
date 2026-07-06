@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "בנק ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/תוכנית_הייצוב_הכלכלית_של_1985"
+      "url": "https://he.wikipedia.org/wiki/תוכנית_הייצוב_הכלכלית_של_1985",
+      "kind": "encyclopedia"
     }
   ]
 }

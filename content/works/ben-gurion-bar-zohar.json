@@ -23,27 +23,13 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "הערך על מיכאל בר-זוהר בוויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מיכאל_בר-זוהר"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מיכאל_בר-זוהר",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

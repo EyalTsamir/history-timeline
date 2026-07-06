@@ -22,17 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "הסוכנות היהודית לארץ ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מבצע_שלמה"
+      "url": "https://he.wikipedia.org/wiki/מבצע_שלמה",
+      "kind": "encyclopedia"
     }
   ]
 }

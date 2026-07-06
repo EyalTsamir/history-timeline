@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "רשות השידור (ארכיון)"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/אבניבי"
+      "url": "https://he.wikipedia.org/wiki/אבניבי",
+      "kind": "encyclopedia"
     }
   ]
 }

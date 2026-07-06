@@ -22,24 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "אנציקלופדיה בריטניקה"
+        "he": "ויקיפדיה העברית"
       },
-      "publisher": "Encyclopædia Britannica",
+      "url": "https://he.wikipedia.org/wiki/ישראל_אומן",
       "kind": "encyclopedia"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ישראל_אומן"
     }
   ]
 }

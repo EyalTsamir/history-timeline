@@ -25,10 +25,8 @@
   "_regionIds": "ids from content/taxonomies/regions.json the work is set in.",
   "regionIds": ["israel"],
   "_image": "Optional cover image: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Optional related reading / catalog links. NOT the citation — use \"sources\". Placeholder URLs (\"...\", example.com) are rejected.",
-  "links": [],
-  "_sources": "REQUIRED — at least one citation (e.g. the publisher, a library catalogue, or a review). Add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
+  "_sources": "REQUIRED — at least one citation (e.g. the publisher, a library catalogue, a review, or a Hebrew-Wikipedia article). Every source needs a real, stable \"url\" (decision D18) — a source with no link doesn't help the reader. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website). Placeholder URLs (\"...\", example.com) are rejected.",
   "sources": [
-    { "title": { "he": "קטלוג הספרייה הלאומית" }, "publisher": "הספרייה הלאומית של ישראל", "kind": "library" }
+    { "title": { "he": "קטלוג הספרייה הלאומית" }, "publisher": "הספרייה הלאומית של ישראל", "url": "https://www.nli.org.il/he", "kind": "library" }
   ]
 }

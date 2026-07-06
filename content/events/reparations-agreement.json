@@ -22,17 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הסכם_השילומים"
+      "url": "https://he.wikipedia.org/wiki/הסכם_השילומים",
+      "kind": "encyclopedia"
     }
   ]
 }

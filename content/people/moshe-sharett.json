@@ -22,23 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/משה_שרת"
+      "url": "https://he.wikipedia.org/wiki/משה_שרת",
+      "kind": "encyclopedia"
     }
   ]
 }

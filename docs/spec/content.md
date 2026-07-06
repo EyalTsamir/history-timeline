@@ -57,9 +57,8 @@ never by filename.
   "importance": 95,
   "regionIds": ["israel"],
   "sources": [
-    { "title": { "he": "הספרייה הלאומית של ישראל" }, "kind": "library" }
-  ],
-  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/..." }]
+    { "title": { "he": "ויקיפדיה העברית" }, "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות", "kind": "encyclopedia" }
+  ]
 }
 ```
 
@@ -71,7 +70,7 @@ content/**/*.json
    │    • schema validity, date well-formedness (start ≤ end), importance ∈ [1,100]
    │    • referential integrity: every *Id resolves; parentId acyclic
    │    • uniqueness of ids; filename/id mismatch warnings
-   │    • ≥1 source per entity; http(s) non-placeholder source/link URLs
+   │    • ≥1 source per entity; every source needs an http(s) non-placeholder url
    │    • no future dates; lifespan ≤ ~120y (warn); sub-event overlaps parent (warn)
    │    • relations: no self-loops; duplicate edges (warn); no duplicate ids in a ref list (warn)
    │    • projectability: every entity yields a finite timeline span
@@ -95,19 +94,43 @@ build`. Locally: `npm run content:validate` and `npm run content:build` (see
 ## Sourcing
 
 The content is **curated, not comprehensive**, and must be traceable. Every
-entity carries a `sources: Source[]` (shape in [domain](domain.md#sourcing)),
-distinct from optional `links` (related reading). Authoring rules (decision
-D15):
+entity carries a `sources: Source[]` (shape in [domain](domain.md#sourcing)) —
+one unified list of cited references, each a real place the reader can go.
+Authoring rules (decisions D15, D18):
 
-- **Every entity cites ≥1 source** (build error otherwise). A source is `{ title, publisher?, url?, kind? }`.
-- **Do not invent** dates, biographies, authors, coverage periods, places, or sources. If a fact is uncertain or disputed, use the `approx` date flag, hedge the description, and prefer a stronger source.
+- **Every entity cites ≥1 source** (build error otherwise). A source is `{ title, url, publisher?, kind? }`.
+- **Every source needs a real, stable `url`** (decision D18) — a citation with no reachable page doesn't help the reader, so unlinked sources are rejected at build. This folds the old related-`links` list into `sources`: there is now a single "מקורות וקישורים" section, not two.
+- **Do not invent** dates, biographies, authors, coverage periods, places, or sources. If a fact is uncertain or disputed, use the `approx` date flag, hedge the description, and prefer a stronger source. Don't fabricate a `url` to satisfy the rule — cite a page you can confirm exists (a Hebrew-Wikipedia article on a notable topic is reliable) rather than guess a deep link.
 - **Prefer authoritative institutions** — national libraries (the National Library of Israel), archives, universities, museums and memorial institutions (Yad Vashem), established encyclopedias (Britannica), the Knesset/government records, established publishers. Wikipedia may aid discovery but important or disputed facts should lean on stronger sources.
-- **Attach a `url` only when it is a real, stable page** — omit it and cite the institution by name rather than guess a deep link. Placeholder URLs (containing `...`, `example.com`) and non-http(s) URLs are rejected at build.
+- Placeholder URLs (containing `...`, `example.com`) and non-http(s) URLs are rejected at build.
 - Descriptions stay **concise and discovery-oriented**; the source, not the description, carries the authority. The UI shows a curation disclaimer so users know the set is a representative selection.
 
 Validation cannot prove historical truth — it enforces that a claim is *sourced
 and structurally sound*, not that it is correct. Accuracy remains a human
 content-review responsibility.
+
+## Media
+
+`image` (any entity) and `video` (events only, decision D19) are optional,
+illustrative, and **always external links — never stored in the repo**:
+
+- **Images**: prefer a Wikimedia Commons direct file URL
+  (`upload.wikimedia.org/wikipedia/commons/...`) — stable, hotlink-safe, and
+  how Wikipedia itself embeds them. For sensitive subjects, an authoritative
+  institutional source (e.g. Yad Vashem) is preferred when it offers a stable
+  hotlinkable URL. Every image needs a Hebrew `alt` and a `credit` naming the
+  source/license.
+- **Video**: `{ provider: "youtube", videoId, title, credit? }` only — the
+  schema rejects a raw URL or embed HTML (see
+  [domain.md#media](domain.md#media)). Use only reputable channels (national
+  archives, established news organizations, official government/institutional
+  channels); skip the field entirely rather than link a dubious-rights
+  re-upload or low quality footage.
+- Media is illustrative — it does not substitute for the required `sources[]`
+  citation, and a candidate URL should be verified to actually resolve before
+  it's authored, the same discipline as a source `url`.
+- Not every entity needs media, and most won't — add it only where a real,
+  well-attributed, good-quality item exists.
 
 ## Manual authoring workflow
 

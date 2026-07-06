@@ -21,17 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הסכם_השלום_בין_ישראל_לירדן"
+      "url": "https://he.wikipedia.org/wiki/הסכם_השלום_בין_ישראל_לירדן",
+      "kind": "encyclopedia"
     }
   ]
 }

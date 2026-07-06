@@ -19,27 +19,28 @@
     "israel",
     "sinai"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מלחמת_יום_הכיפורים"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/9/92/Israeli_M48_Tanks_Crossing_the_Suez_Canal_During_Yom_Kippur_War%2C_17_October%2C_1973.jpg",
+    "alt": {
+      "he": "טנקי M48 ישראליים חוצים את תעלת סואץ במהלך מלחמת יום הכיפורים, 17 באוקטובר 1973"
     },
+    "credit": "צילום: אלי לנדאו, אוסף דן הדני, הספרייה הלאומית; CC BY 4.0"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "118QgNTzP3w",
+    "title": {
+      "he": "דיווח חדשות NBC מרגע פרוץ מלחמת יום הכיפורים, 1973"
+    },
+    "credit": "NBC News"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מלחמת_יום_הכיפורים",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -25,15 +25,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    },
-    {
-      "title": {
-        "he": "לקסיקון הספרות העברית החדשה"
-      },
-      "kind": "reference"
+      "url": "https://he.wikipedia.org/wiki/באדנהיים_עיר_נופש",
+      "kind": "encyclopedia"
     }
   ]
 }

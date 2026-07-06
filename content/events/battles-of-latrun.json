@@ -19,27 +19,13 @@
   "regionIds": [
     "jerusalem"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/קרבות_לטרון"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/קרבות_לטרון",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

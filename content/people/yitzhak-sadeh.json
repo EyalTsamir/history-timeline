@@ -22,23 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/%D7%99%D7%A6%D7%97%D7%A7_%D7%A9%D7%93%D7%94"
+      "url": "https://he.wikipedia.org/wiki/%D7%99%D7%A6%D7%97%D7%A7_%D7%A9%D7%93%D7%94",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -19,27 +19,13 @@
     "jerusalem",
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/דויד_גרוסמן"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/דויד_גרוסמן",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

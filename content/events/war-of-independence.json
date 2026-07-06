@@ -18,27 +18,28 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/2/25/Raising_the_Ink_Flag_at_Umm_Rashrash_%28Eilat%29.jpg",
+    "alt": {
+      "he": "חייל ישראלי מניף דגל מאולתר, מצויר בדיו, באום רשרש (אילת) עם תום מלחמת העצמאות, 10 במרץ 1949"
     },
+    "credit": "צילום: מיכה פרי, CC BY-SA 3.0"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "XuiUxAlTweU",
+    "title": {
+      "he": "כתבת חדשות ארכיונית ממלחמת העצמאות, 1948"
+    },
+    "credit": "British Pathé"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מלחמת_העצמאות",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

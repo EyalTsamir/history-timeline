@@ -19,19 +19,12 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "מקור"
-      },
-      "url": "https://www.nli.org.il/he"
-    }
-  ],
   "sources": [
     {
       "title": {
         "he": "מקור לדוגמה"
-      }
+      },
+      "url": "https://www.nli.org.il/he"
     }
   ]
 }

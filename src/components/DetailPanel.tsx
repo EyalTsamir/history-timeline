@@ -2,7 +2,7 @@
  * Lightweight item detail (docs/spec/interaction.md#selection--detail) — the BODY only; the
  * hosting surface (desktop side panel / mobile bottom sheet) owns the title
  * and close affordance. Shows precision-aware dates, type/category chips,
- * description, image, external links, and the one relationship traversal the
+ * description, image, embedded video (events, rare), cited sources, and the one relationship traversal the
  * MVP exposes: person ↔ works, event → sub-events. Related items are buttons
  * that re-select and pan the timeline.
  */
@@ -98,6 +98,24 @@ export function DetailPanel({ item, dataset, typeLabels, itemById, onSelectRelat
         </figure>
       )}
 
+      {detail.video && (
+        <figure className={styles.figure}>
+          <div className={styles.videoWrapper}>
+            <iframe
+              className={styles.videoFrame}
+              src={`https://www.youtube-nocookie.com/embed/${detail.video.videoId}`}
+              title={detail.video.title.he}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          {detail.video.credit !== undefined && (
+            <figcaption className={styles.credit}>{detail.video.credit}</figcaption>
+          )}
+        </figure>
+      )}
+
       {item.kind === 'person' && relatedList(STRINGS.detailWorksAbout, detail.workIds ?? [])}
       {item.kind === 'work' && relatedList(STRINGS.detailSubjects, detail.subjectPersonIds ?? [])}
       {item.kind === 'event' && relatedList(STRINGS.detailSubEvents, detail.childEventIds ?? [])}
@@ -107,32 +125,13 @@ export function DetailPanel({ item, dataset, typeLabels, itemById, onSelectRelat
           <h3 className={styles.sectionHeading}>{STRINGS.detailSources}</h3>
           <ul className={styles.sourceList}>
             {detail.sources.map((source, i) => (
-              <li key={source.url ?? `${source.title.he}-${i}`}>
-                {source.url !== undefined ? (
-                  <a href={source.url} target="_blank" rel="noopener noreferrer">
-                    {source.title.he}
-                  </a>
-                ) : (
-                  <span>{source.title.he}</span>
-                )}
+              <li key={`${source.url}-${i}`}>
+                <a href={source.url} target="_blank" rel="noopener noreferrer">
+                  {source.title.he}
+                </a>
                 {source.publisher !== undefined && (
                   <span className={styles.sourcePublisher}> — {source.publisher}</span>
                 )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {detail.links.length > 0 && (
-        <section className={styles.section}>
-          <h3 className={styles.sectionHeading}>{STRINGS.detailLinks}</h3>
-          <ul className={styles.linkList}>
-            {detail.links.map((link) => (
-              <li key={link.url}>
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.label.he}
-                </a>
               </li>
             ))}
           </ul>

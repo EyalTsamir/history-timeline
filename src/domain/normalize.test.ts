@@ -138,8 +138,7 @@ describe('normalizeDataset ordering', () => {
       importance,
       categoryIds: [],
       regionIds: [],
-      links: [],
-      sources: [{ title: { he: 'מקור' } }],
+      sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     });
     dataset.events.push(tie('fx-tie-b', 50), tie('fx-tie-a', 50), tie('fx-tie-c', 80));
     const tied = normalizeDataset(dataset)

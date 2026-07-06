@@ -4,7 +4,7 @@
  * (filtering, semantic zoom, layout, rendering, detail panel) consumes ONLY
  * this shape; entity-specific data survives inside `detail`.
  */
-import type { EntityId, Image, Link, Source } from './entities';
+import type { EntityId, Image, Source, Video } from './entities';
 import type { HistDate } from './dates';
 
 export type TimelineKind = 'event' | 'person' | 'work';
@@ -22,7 +22,8 @@ export interface TimelineItemDetail {
   /** Precision-aware Hebrew display: "מאי 1948", "1936–1939", "≈1942", "1954–". */
   displayDate: string;
   image?: Image;
-  links: Link[];
+  /** Events only, rare: real archival footage (decision D19). */
+  video?: Video;
   /** Citations backing the facts (docs/spec/content.md#sourcing) — shown under "מקורות". */
   sources: Source[];
   /** Works: formatted publication date ("יצא לאור…", decision D7 keeps it off the axis). */

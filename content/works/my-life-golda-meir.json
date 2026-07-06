@@ -23,27 +23,13 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "הערך על גולדה מאיר בוויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/גולדה_מאיר"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/גולדה_מאיר",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

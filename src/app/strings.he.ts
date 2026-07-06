@@ -38,7 +38,7 @@ export const STRINGS = {
   close: 'סגירה',
 
   contentTypeEvents: 'אירועים',
-  contentTypePeople: 'אנשים',
+  contentTypePeople: 'אישים',
   kindEvent: 'אירוע',
   kindPerson: 'אישיות',
 
@@ -89,7 +89,7 @@ export const STRINGS = {
   chapterBadge: (n: number) => (n === 1 ? 'פרק אחד' : `${n} פרקים`),
   chapterMore: (n: number) => `עוד ${n}`,
   chapterMoreAria: (n: number, title: string) =>
-    n === 1 ? `הצגת פרק נוסף אחד של ${title}` : `הצגת עוד ${n} פרקים של ${title}`,
+    n === 1 ? `הצגת עוד פרק אחד של ${title}` : `הצגת עוד ${n} פרקים של ${title}`,
   chapterCollapse: 'צמצום',
   chapterCollapseAria: (title: string) => `צמצום הפרקים של ${title}`,
 
@@ -100,7 +100,7 @@ export const STRINGS = {
   castTitle: 'מי בתמונה',
   shelfTitle: 'מדף התקופה',
   presenceMore: (n: number) => `עוד ${n}`,
-  presenceMoreAria: (n: number) => (n === 1 ? 'הצגת פריט נוסף אחד' : `הצגת עוד ${n} פריטים`),
+  presenceMoreAria: (n: number) => (n === 1 ? 'הצגת עוד פריט אחד' : `הצגת עוד ${n} פריטים`),
   presenceCollapse: 'צמצום',
 
   // --- mobile chronicle (docs/spec/interaction.md) ---
@@ -114,8 +114,7 @@ export const STRINGS = {
   detailWorksAbout: 'ספרים על אישיות זו',
   detailSubjects: 'הספר עוסק ב:',
   detailSubEvents: 'תתי־אירועים',
-  detailSources: 'מקורות',
-  detailLinks: 'קישורים',
+  detailSources: 'מקורות וקישורים',
   /** Curation disclaimer (docs/spec/product.md) — the content is selective, not exhaustive. */
   curationNote: 'תוכן נבחר ומתעדכן — מבחר מייצג, לא רשימה ממצה.',
 } as const;

@@ -21,17 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/פינוי_חבל_ימית"
+      "url": "https://he.wikipedia.org/wiki/פינוי_חבל_ימית",
+      "kind": "encyclopedia"
     }
   ]
 }

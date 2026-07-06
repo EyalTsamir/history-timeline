@@ -20,27 +20,13 @@
     "jerusalem",
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מבצע_נחשון"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מבצע_נחשון",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

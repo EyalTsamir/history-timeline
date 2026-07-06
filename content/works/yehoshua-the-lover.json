@@ -29,30 +29,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    },
-    {
-      "title": {
-        "he": "ההוצאה לאור"
-      },
-      "publisher": "הוצאת שוקן",
-      "kind": "book"
-    },
-    {
-      "title": {
-        "he": "לקסיקון הספרות העברית החדשה"
-      },
-      "kind": "reference"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/המאהב"
+      "url": "https://he.wikipedia.org/wiki/המאהב",
+      "kind": "encyclopedia"
     }
   ]
 }

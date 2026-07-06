@@ -19,27 +19,13 @@
     "israel",
     "tel-aviv"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/דוד_בן-גוריון"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "מכון בן-גוריון לחקר ישראל והציונות"
-      },
-      "kind": "academic"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/דוד_בן-גוריון",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

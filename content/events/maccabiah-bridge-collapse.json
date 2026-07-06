@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/אסון_המכביה"
+      "url": "https://he.wikipedia.org/wiki/אסון_המכביה",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -29,22 +29,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    },
-    {
-      "title": {
-        "he": "ההוצאה לאור"
-      },
-      "publisher": "הוצאת הקיבוץ המאוחד",
-      "kind": "book"
-    },
-    {
-      "title": {
-        "he": "לקסיקון הספרות העברית החדשה"
-      },
-      "kind": "reference"
+      "url": "https://he.wikipedia.org/wiki/עיין_ערך:_אהבה",
+      "kind": "encyclopedia"
     }
   ]
 }

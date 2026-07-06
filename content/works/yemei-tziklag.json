@@ -24,27 +24,13 @@
   "regionIds": [
     "negev"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ימי_צקלג"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/ימי_צקלג",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -19,27 +19,28 @@
     "israel",
     "sinai"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מלחמת_ששת_הימים"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/6/62/%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9B%D7%95%D7%AA%D7%9C_%D7%94%D7%9E%D7%A2%D7%A8%D7%91%D7%99.jpg",
+    "alt": {
+      "he": "צנחנים ישראלים עומדים מול הכותל המערבי בעיר העתיקה בירושלים, מיד לאחר כיבושה, 7 ביוני 1967"
     },
+    "credit": "צילום: דוד רובינגר, לשכת העיתונות הממשלתית — נחלת הכלל בישראל; שימוש מסחרי מחייב אישור לע״ם"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "pcP8W8wLPoU",
+    "title": {
+      "he": "50 שנה למלחמת ששת הימים: ארכיון צה״ל במשרד הביטחון מציג"
+    },
+    "credit": "משרד הביטחון — הערוץ הרשמי (ארכיון צה״ל)"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מלחמת_ששת_הימים",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

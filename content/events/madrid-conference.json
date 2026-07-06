@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/ועידת_מדריד_(1991)"
+      "url": "https://he.wikipedia.org/wiki/ועידת_מדריד_(1991)",
+      "kind": "encyclopedia"
     }
   ]
 }

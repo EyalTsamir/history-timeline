@@ -19,27 +19,13 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הסכמי_שביתת_הנשק_בתום_מלחמת_העצמאות"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/הסכמי_שביתת_הנשק_בתום_מלחמת_העצמאות",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

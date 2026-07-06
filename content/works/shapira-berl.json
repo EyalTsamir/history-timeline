@@ -28,9 +28,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
+      "url": "https://he.wikipedia.org/wiki/ברל_כצנלסון",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -27,9 +27,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
+      "url": "https://he.wikipedia.org/wiki/אריאל_שרון",
+      "kind": "encyclopedia"
     }
   ]
 }

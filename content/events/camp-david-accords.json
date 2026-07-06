@@ -19,20 +19,28 @@
     "egypt",
     "israel"
   ],
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Begin%2C_Carter_and_Sadat_at_Camp_David_1978.jpg",
+    "alt": {
+      "he": "מימין לשמאל: ראש הממשלה מנחם בגין, הנשיא ג׳ימי קרטר ונשיא מצרים אנואר סאדאת בקמפ דייוויד, ספטמבר 1978"
+    },
+    "credit": "צילום: ביל פיץ׳-פטריק, ספריית ג׳ימי קרטר לנשיאות (הארכיון הלאומי האמריקני); נחלת הכלל"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "D_M3WyVLV4o",
+    "title": {
+      "he": "מהארכיון: ג׳ימי קרטר וחתימת הסכמי קמפ דייוויד"
+    },
+    "credit": "CBS News"
+  },
   "sources": [
     {
       "title": {
-        "he": "ארכיון המדינה"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הסכמי_קמפ_דייוויד"
+      "url": "https://he.wikipedia.org/wiki/הסכמי_קמפ_דייוויד",
+      "kind": "encyclopedia"
     }
   ]
 }

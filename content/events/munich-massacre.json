@@ -21,23 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "הוועד האולימפי בישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הטבח_באולימפיאדת_מינכן"
+      "url": "https://he.wikipedia.org/wiki/הטבח_באולימפיאדת_מינכן",
+      "kind": "encyclopedia"
     }
   ]
 }

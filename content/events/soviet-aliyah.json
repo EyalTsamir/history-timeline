@@ -23,23 +23,10 @@
   "sources": [
     {
       "title": {
-        "he": "הסוכנות היהודית לארץ ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/העלייה_מברית_המועצות_לשעבר_בשנות_ה-90"
+      "url": "https://he.wikipedia.org/wiki/העלייה_מברית_המועצות_לשעבר_בשנות_ה-90",
+      "kind": "encyclopedia"
     }
   ]
 }

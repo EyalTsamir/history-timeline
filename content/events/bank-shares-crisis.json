@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "בנק ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/משבר_מניות_הבנקים"
+      "url": "https://he.wikipedia.org/wiki/משבר_מניות_הבנקים",
+      "kind": "encyclopedia"
     }
   ]
 }

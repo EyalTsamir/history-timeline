@@ -21,23 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/צבא_הגנה_לישראל"
+      "url": "https://he.wikipedia.org/wiki/צבא_הגנה_לישראל",
+      "kind": "encyclopedia"
     }
   ]
 }

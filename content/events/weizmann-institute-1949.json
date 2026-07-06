@@ -20,23 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "מכון ויצמן למדע"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "academic"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מכון_ויצמן_למדע"
+      "url": "https://he.wikipedia.org/wiki/מכון_ויצמן_למדע",
+      "kind": "encyclopedia"
     }
   ]
 }

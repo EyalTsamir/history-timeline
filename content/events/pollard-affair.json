@@ -21,17 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/פרשת_פולארד"
+      "url": "https://he.wikipedia.org/wiki/פרשת_פולארד",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "הכנסת — אתר הכנסת"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הבחירות_לכנסת_הארבע_עשרה_ולראשות_הממשלה"
+      "url": "https://he.wikipedia.org/wiki/הבחירות_לכנסת_הארבע_עשרה_ולראשות_הממשלה",
+      "kind": "encyclopedia"
     }
   ]
 }

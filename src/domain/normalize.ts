@@ -45,10 +45,10 @@ export function eventToTimelineItem(event: EventEntity, ctx: NormalizeContext): 
   const detail: TimelineItemDetail = {
     description: event.description.he,
     displayDate: formatDateRange(event.dates),
-    links: event.links,
     sources: event.sources,
   };
   if (event.image) detail.image = event.image;
+  if (event.video) detail.video = event.video;
   const children = ctx.indexes.childrenByEvent[event.id];
   if (children && children.length > 0) detail.childEventIds = children;
 
@@ -75,7 +75,6 @@ export function personToTimelineItem(person: PersonEntity, ctx: NormalizeContext
   const detail: TimelineItemDetail = {
     description: person.bio.he,
     displayDate: formatDateRange(person.lifespan),
-    links: person.links,
     sources: person.sources,
   };
   if (person.image) detail.image = person.image;
@@ -110,7 +109,6 @@ export function workToTimelineItem(work: WorkEntity, ctx: NormalizeContext): Tim
   const detail: TimelineItemDetail = {
     description: work.description.he,
     displayDate: formatDateRange(work.coveredPeriod),
-    links: work.links,
     sources: work.sources,
     publicationDate: formatHistDate(work.publicationDate),
     publicationDateRaw: work.publicationDate,

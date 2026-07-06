@@ -21,20 +21,20 @@
     "poland",
     "germany"
   ],
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/1/13/Selection_on_the_ramp_at_Auschwitz-Birkenau%2C_1944_%28Auschwitz_Album%29_1b.jpg",
+    "alt": {
+      "he": "יהודים הונגרים בסלקציה ברציף ההגעה במחנה אושוויץ-בירקנאו, מאי 1944"
+    },
+    "credit": "מתוך \"אלבום אושוויץ\", באדיבות יד ושם; נחלת הכלל"
+  },
   "sources": [
     {
       "title": {
-        "he": "יד ושם"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "museum"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/השואה"
+      "url": "https://he.wikipedia.org/wiki/השואה",
+      "kind": "encyclopedia"
     }
   ]
 }

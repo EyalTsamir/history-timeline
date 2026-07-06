@@ -56,7 +56,6 @@ describe('EventSchema', () => {
     const parsed = EventSchema.parse(minimalEvent());
     expect(parsed.categoryIds).toEqual([]);
     expect(parsed.regionIds).toEqual([]);
-    expect(parsed.links).toEqual([]);
     expect(parsed.sources).toEqual([]);
   });
 
@@ -90,12 +89,39 @@ describe('EventSchema', () => {
     expect(codesOf(result)).toContain('unrecognized_keys');
   });
 
-  it('rejects a bad link URL at path links.0.url', () => {
+  it('rejects a bad source URL at path sources.0.url', () => {
     const result = EventSchema.safeParse({
       ...minimalEvent(),
-      links: [{ label: { he: 'קישור' }, url: 'not-a-url' }],
+      sources: [{ title: { he: 'מקור' }, url: 'not-a-url' }],
     });
-    expect(pathsOf(result)).toContain('links.0.url');
+    expect(pathsOf(result)).toContain('sources.0.url');
+  });
+
+  it('accepts a valid youtube video', () => {
+    const parsed = EventSchema.parse({
+      ...minimalEvent(),
+      video: { provider: 'youtube', videoId: 'dQw4w9WgXcQ', title: { he: 'סרטון' } },
+    });
+    expect(parsed.video).toEqual({ provider: 'youtube', videoId: 'dQw4w9WgXcQ', title: { he: 'סרטון' } });
+  });
+
+  it.each(['too-short', 'this-id-is-way-too-long', 'https://youtu.be/dQw4w9WgXcQ'])(
+    'rejects a malformed videoId %p at path video.videoId',
+    (videoId) => {
+      const result = EventSchema.safeParse({
+        ...minimalEvent(),
+        video: { provider: 'youtube', videoId, title: { he: 'סרטון' } },
+      });
+      expect(pathsOf(result)).toContain('video.videoId');
+    },
+  );
+
+  it('rejects an unknown video provider', () => {
+    const result = EventSchema.safeParse({
+      ...minimalEvent(),
+      video: { provider: 'vimeo', videoId: 'dQw4w9WgXcQ', title: { he: 'סרטון' } },
+    });
+    expect(pathsOf(result)).toContain('video.provider');
   });
 });
 
@@ -103,7 +129,7 @@ describe('PersonSchema', () => {
   it('parses a minimal person and applies array defaults', () => {
     const parsed = PersonSchema.parse(minimalPerson());
     expect(parsed.regionIds).toEqual([]);
-    expect(parsed.links).toEqual([]);
+    expect(parsed.sources).toEqual([]);
   });
 
   it('accepts an open lifespan (end null)', () => {
@@ -129,7 +155,7 @@ describe('WorkSchema', () => {
     expect(parsed.subjectPersonIds).toEqual([]);
     expect(parsed.subjectEventIds).toEqual([]);
     expect(parsed.regionIds).toEqual([]);
-    expect(parsed.links).toEqual([]);
+    expect(parsed.sources).toEqual([]);
   });
 
   it('accepts authorPersonIds without authorName', () => {
@@ -183,10 +209,15 @@ describe('RegionSchema', () => {
 });
 
 describe('SourceSchema', () => {
-  it('parses a title-only source (no url required)', () => {
-    const parsed = SourceSchema.parse({ title: { he: 'הספרייה הלאומית' } });
+  it('parses a minimal source (title + required url)', () => {
+    const parsed = SourceSchema.parse({ title: { he: 'הספרייה הלאומית' }, url: 'https://www.nli.org.il/he' });
     expect(parsed.title.he).toBe('הספרייה הלאומית');
-    expect(parsed.url).toBeUndefined();
+    expect(parsed.url).toBe('https://www.nli.org.il/he');
+  });
+
+  it('rejects a source with no url at path url (url is required — decision D18)', () => {
+    const result = SourceSchema.safeParse({ title: { he: 'הספרייה הלאומית' } });
+    expect(pathsOf(result)).toContain('url');
   });
 
   it('parses a full source with publisher, url and kind', () => {

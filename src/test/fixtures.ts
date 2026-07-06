@@ -30,7 +30,7 @@ export function makeTimelineItem(
     regionIds: [],
     categoryIds: [],
     styleToken: 'event',
-    detail: { description: '', displayDate: '', links: [], sources: [] },
+    detail: { description: '', displayDate: '', sources: [] },
     ...overrides,
   };
 }
@@ -49,8 +49,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 95,
         categoryIds: ['war-security'],
         regionIds: ['israel'],
-        links: [],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
         id: 'fx-battle',
@@ -62,8 +61,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 40,
         categoryIds: ['war-security'],
         regionIds: ['jerusalem'],
-        links: [],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
         id: 'fx-declaration',
@@ -74,8 +72,7 @@ export function makeFixtureDataset(): Dataset {
         importance: 100,
         categoryIds: [],
         regionIds: ['tel-aviv'],
-        links: [{ label: { he: 'קישור' }, url: 'https://he.wikipedia.org/wiki/הכרזת_העצמאות' }],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'ויקיפדיה העברית' }, url: 'https://he.wikipedia.org/wiki/הכרזת_העצמאות', kind: 'encyclopedia' }],
       },
     ],
     people: [
@@ -88,7 +85,6 @@ export function makeFixtureDataset(): Dataset {
         categoryIds: ['leaders'],
         importance: 98,
         regionIds: ['israel'],
-        links: [],
         sources: [
           {
             title: { he: 'אנציקלופדיה בריטניקה' },
@@ -107,8 +103,7 @@ export function makeFixtureDataset(): Dataset {
         categoryIds: ['writers'],
         importance: 55,
         regionIds: ['jerusalem'],
-        links: [],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
     ],
     works: [
@@ -125,8 +120,7 @@ export function makeFixtureDataset(): Dataset {
         coveredPeriod: { start: '1886', end: '1973' },
         importance: 55,
         regionIds: ['israel'],
-        links: [],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
       {
         id: 'fx-novel',
@@ -142,8 +136,7 @@ export function makeFixtureDataset(): Dataset {
         coveredPeriod: { start: '1947-11', end: '1949' },
         importance: 45,
         regionIds: ['israel'],
-        links: [],
-        sources: [{ title: { he: 'מקור' } }],
+        sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
       },
     ],
     personCategories: [

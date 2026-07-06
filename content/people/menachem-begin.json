@@ -19,27 +19,13 @@
     "israel",
     "jerusalem"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מנחם_בגין"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "מרכז מורשת מנחם בגין"
-      },
-      "kind": "museum"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מנחם_בגין",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

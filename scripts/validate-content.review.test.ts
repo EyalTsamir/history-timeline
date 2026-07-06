@@ -33,7 +33,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       importance: 50,
       categoryIds: ['cat-e'],
       regionIds: ['reg'],
-      sources: [{ title: { he: 'מקור' } }],
+      sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'people/pe.json': {
       id: 'pe',
@@ -44,7 +44,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       categoryIds: ['cat-p'],
       importance: 50,
       regionIds: ['reg'],
-      sources: [{ title: { he: 'מקור' } }],
+      sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'works/wo.json': {
       id: 'wo',
@@ -59,7 +59,7 @@ function writeTree(overrides: Record<string, Json> = {}, omit: string[] = []): s
       coveredPeriod: { start: '1900', end: '1980' },
       importance: 40,
       regionIds: ['reg'],
-      sources: [{ title: { he: 'מקור' } }],
+      sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
     },
     'relations.json': [{ from: 'pe', to: 'wo', type: 'related-to' }],
   };
@@ -159,7 +159,7 @@ const evBase = (): Record<string, unknown> => ({
   importance: 50,
   categoryIds: ['cat-e'],
   regionIds: ['reg'],
-  sources: [{ title: { he: 'מקור' } }],
+  sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
 });
 const peBase = (): Record<string, unknown> => ({
   id: 'pe',
@@ -170,7 +170,7 @@ const peBase = (): Record<string, unknown> => ({
   categoryIds: ['cat-p'],
   importance: 50,
   regionIds: ['reg'],
-  sources: [{ title: { he: 'מקור' } }],
+  sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
 });
 
 describe('sourcing rule', () => {
@@ -287,6 +287,6 @@ function require_work(): Record<string, unknown> {
     coveredPeriod: { start: '1900', end: '1980' },
     importance: 40,
     regionIds: ['reg'],
-    sources: [{ title: { he: 'מקור' } }],
+    sources: [{ title: { he: 'מקור' }, url: 'https://www.nli.org.il/he' }],
   };
 }

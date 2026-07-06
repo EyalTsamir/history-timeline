@@ -19,27 +19,28 @@
     "sinai",
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מבצע_קדש"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/0/04/Simchoni_Dayan_Yafe_IDF_Lineup.jpg",
+    "alt": {
+      "he": "רמטכ״ל משה דיין, אלוף פיקוד הדרום אסף שמחוני ומפקד חטיבה 9 אברהם יפה סוקרים את החטיבה בשארם א־שייח׳ בתום מבצע קדש, 1956"
     },
+    "credit": "צילום: דובר צה״ל, CC BY-SA 3.0"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "cM0tzeHYdrE",
+    "title": {
+      "he": "1956: משבר סואץ — הפלישה הישראלית לסיני (מבצע קדש)"
+    },
+    "credit": "Frontline by ITN"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/מבצע_קדש",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

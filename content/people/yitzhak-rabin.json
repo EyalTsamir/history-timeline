@@ -21,27 +21,13 @@
     "jerusalem",
     "tel-aviv"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/יצחק_רבין"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "מרכז יצחק רבין"
-      },
-      "kind": "museum"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/יצחק_רבין",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

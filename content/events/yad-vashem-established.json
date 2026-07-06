@@ -20,23 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "יד ושם"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "museum"
-    },
-    {
-      "title": {
-        "he": "הכנסת — אתר הכנסת"
-      },
-      "kind": "government"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/חוק_זיכרון_השואה_והגבורה_–_יד_ושם"
+      "url": "https://he.wikipedia.org/wiki/חוק_זיכרון_השואה_והגבורה_–_יד_ושם",
+      "kind": "encyclopedia"
     }
   ]
 }

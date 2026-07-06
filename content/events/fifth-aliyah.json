@@ -24,17 +24,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/העלייה_החמישית"
+      "url": "https://he.wikipedia.org/wiki/העלייה_החמישית",
+      "kind": "encyclopedia"
     }
   ]
 }

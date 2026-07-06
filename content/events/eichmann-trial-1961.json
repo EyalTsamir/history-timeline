@@ -18,27 +18,13 @@
   "regionIds": [
     "jerusalem"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/משפט_אייכמן"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "יד ושם"
-      },
-      "kind": "museum"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/משפט_אייכמן",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

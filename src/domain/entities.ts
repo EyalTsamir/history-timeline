@@ -62,6 +62,26 @@ export const ImageSchema = z
   .strict();
 export type Image = z.infer<typeof ImageSchema>;
 
+export const VIDEO_PROVIDERS = ['youtube'] as const;
+
+/**
+ * A closed `provider` + a validated bare id (never a raw URL or embed HTML) so
+ * the render path fully controls the resulting iframe src
+ * (`https://www.youtube-nocookie.com/embed/<videoId>`) — a content file can
+ * never smuggle in an arbitrary domain or markup (decision D19).
+ */
+const YOUTUBE_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+
+export const VideoSchema = z
+  .object({
+    provider: z.enum(VIDEO_PROVIDERS),
+    videoId: z.string().regex(YOUTUBE_ID_RE, 'videoId must be an 11-character YouTube video id'),
+    title: TextSchema,
+    credit: z.string().optional(),
+  })
+  .strict();
+export type Video = z.infer<typeof VideoSchema>;
+
 /**
  * A citable http(s) URL that isn't an authoring placeholder. `z.string().url()`
  * alone accepts the templates' `https://…/wiki/...` and `example.com` stand-ins;
@@ -77,20 +97,13 @@ export const CitationUrlSchema = z
     message: 'url looks like a placeholder — cite a real source URL, or omit the url',
   });
 
-export const LinkSchema = z
-  .object({
-    label: TextSchema,
-    url: CitationUrlSchema,
-  })
-  .strict();
-export type Link = z.infer<typeof LinkSchema>;
-
 /**
- * A citation backing an entity's facts (docs/spec/content.md#sourcing). Distinct from `links`
- * (related reading): a source answers "how do we know this?". Prefer naming an
- * authoritative institution (national library, archive, university, museum,
- * established encyclopedia); attach `url` only when it is a real, stable page.
- * The validator requires every timeline entity to carry at least one source.
+ * A citation backing an entity's facts (docs/spec/content.md#sourcing). A source
+ * both answers "how do we know this?" and gives the reader somewhere to go — so a
+ * `url` is REQUIRED (a source with no reachable page doesn't help; decision D18).
+ * Prefer naming an authoritative institution (national library, archive, university,
+ * museum, established encyclopedia). The validator requires every timeline entity to
+ * carry at least one source.
  */
 export const SOURCE_KINDS = [
   'archive',
@@ -111,8 +124,8 @@ export const SourceSchema = z
     title: TextSchema,
     /** Institution or publisher behind the source, when distinct from the title. */
     publisher: z.string().trim().min(1).optional(),
-    /** Real, stable URL — omit rather than guess. */
-    url: CitationUrlSchema.optional(),
+    /** Real, stable URL backing the citation — required (decision D18). */
+    url: CitationUrlSchema,
     kind: z.enum(SOURCE_KINDS).optional(),
   })
   .strict();
@@ -142,7 +155,8 @@ export const EventSchema = z
     regionIds: z.array(EntityIdSchema).default([]),
     tags: z.array(z.string()).optional(),
     image: ImageSchema.optional(),
-    links: z.array(LinkSchema).default([]),
+    /** Rare — only when real, good-quality archival footage exists (decision D19). */
+    video: VideoSchema.optional(),
     /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
@@ -162,7 +176,6 @@ export const PersonSchema = z
     importance: ImportanceSchema,
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
-    links: z.array(LinkSchema).default([]),
     /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,
@@ -194,7 +207,6 @@ export const WorkSchema = z
     importance: ImportanceSchema,
     regionIds: z.array(EntityIdSchema).default([]),
     image: ImageSchema.optional(),
-    links: z.array(LinkSchema).default([]),
     /** Citations backing the facts; validator requires ≥1 (docs/spec/content.md#sourcing). */
     sources: z.array(SourceSchema).default([]),
     meta: MetaSchema,

@@ -21,23 +21,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הבריגדה_היהודית"
+      "url": "https://he.wikipedia.org/wiki/הבריגדה_היהודית",
+      "kind": "encyclopedia"
     }
   ]
 }

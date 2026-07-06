@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/אירועי_ואדי_סאליב"
+      "url": "https://he.wikipedia.org/wiki/אירועי_ואדי_סאליב",
+      "kind": "encyclopedia"
     }
   ]
 }

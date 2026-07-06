@@ -17,27 +17,20 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/כ%22ט_בנובמבר"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/1/17/%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D_-_%D7%97%D7%92%D7%99%D7%92%D7%95%D7%AA_29_%D7%91%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8_%D7%9C%D7%99%D7%93_%D7%91%D7%A0%D7%99%D7%A0%D7%99_%D7%94%D7%9E%D7%95%D7%A1%D7%93%D7%95%D7%AA-JNF037402.jpeg",
+    "alt": {
+      "he": "חגיגות בירושלים ליד בנייני המוסדות הלאומיים לרגל החלטת החלוקה של עצרת האו״ם, 29 בנובמבר 1947"
     },
+    "credit": "אוסף קק״ל (JNF), נחלת הכלל"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/כ%22ט_בנובמבר",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

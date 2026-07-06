@@ -29,23 +29,10 @@
   "sources": [
     {
       "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    },
-    {
-      "title": {
-        "he": "לקסיקון הספרות העברית החדשה"
-      },
-      "kind": "reference"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/%D7%A4%D7%A6%D7%A2%D7%99_%D7%91%D7%92%D7%A8%D7%95%D7%AA_(%D7%A1%D7%A4%D7%A8)"
+      "url": "https://he.wikipedia.org/wiki/%D7%A4%D7%A6%D7%A2%D7%99_%D7%91%D7%92%D7%A8%D7%95%D7%AA_(%D7%A1%D7%A4%D7%A8)",
+      "kind": "encyclopedia"
     }
   ]
 }

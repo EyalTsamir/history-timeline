@@ -20,23 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "מוזיאון ישראל, ירושלים"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "museum"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מוזיאון_ישראל"
+      "url": "https://he.wikipedia.org/wiki/מוזיאון_ישראל",
+      "kind": "encyclopedia"
     }
   ]
 }

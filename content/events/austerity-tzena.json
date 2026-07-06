@@ -22,23 +22,10 @@
   "sources": [
     {
       "title": {
-        "he": "בנק ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    },
-    {
-      "title": {
-        "he": "הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מדיניות_הקיצוב"
+      "url": "https://he.wikipedia.org/wiki/מדיניות_הקיצוב",
+      "kind": "encyclopedia"
     }
   ]
 }

@@ -20,26 +20,20 @@
     "gaza-strip",
     "judea-samaria"
   ],
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Intifada_in_Gaza_Strip%2C_1987_V_Dan_Hadani_Archive.jpg",
+    "alt": {
+      "he": "כוחות צה״ל מול מפגינים פלסטינים בעזה בעימות של האינתיפאדה הראשונה, דצמבר 1987"
+    },
+    "credit": "צילום: אפי שריר, אוסף דן הדני, הספרייה הלאומית; CC BY 4.0"
+  },
   "sources": [
     {
       "title": {
-        "he": "הספרייה הלאומית של ישראל"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "library"
-    },
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/האינתיפאדה_הראשונה"
+      "url": "https://he.wikipedia.org/wiki/האינתיפאדה_הראשונה",
+      "kind": "encyclopedia"
     }
   ]
 }

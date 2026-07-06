@@ -25,27 +25,13 @@
     "hungary",
     "europe"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "הערך על חנה סנש בוויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/חנה_סנש"
-    }
-  ],
   "sources": [
-    {
-      "title": {
-        "he": "קטלוג הספרייה הלאומית של ישראל"
-      },
-      "kind": "library"
-    },
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/חנה_סנש",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

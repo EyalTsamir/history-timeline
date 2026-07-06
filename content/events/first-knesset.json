@@ -20,23 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "הכנסת — אתר הכנסת"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "government"
-    },
-    {
-      "title": {
-        "he": "ארכיון המדינה"
-      },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הכנסת_הראשונה"
+      "url": "https://he.wikipedia.org/wiki/הכנסת_הראשונה",
+      "kind": "encyclopedia"
     }
   ]
 }

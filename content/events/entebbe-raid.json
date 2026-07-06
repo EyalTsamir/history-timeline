@@ -20,17 +20,10 @@
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מבצע_אנטבה"
+      "url": "https://he.wikipedia.org/wiki/מבצע_אנטבה",
+      "kind": "encyclopedia"
     }
   ]
 }

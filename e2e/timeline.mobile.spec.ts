@@ -31,7 +31,7 @@ test('mobile: chronicle renders; filter sheet narrows; detail sheet opens and re
   await item.click();
   const detail = page.getByRole('dialog', { name: 'דוד בן-גוריון' });
   await expect(detail).toBeVisible();
-  await expect(detail.getByText('מקורות')).toBeVisible(); // sources section renders
+  await expect(detail.getByText('מקורות וקישורים')).toBeVisible(); // sources section renders
 
   // Close returns focus to the originating chip (docs/spec/interaction.md focus restoration).
   await detail.getByRole('button', { name: 'סגירה' }).click();

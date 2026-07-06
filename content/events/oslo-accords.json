@@ -17,27 +17,28 @@
   "regionIds": [
     "israel"
   ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/הסכמי_אוסלו"
-    }
-  ],
-  "sources": [
-    {
-      "title": {
-        "he": "הכנסת — אתר הכנסת"
-      },
-      "kind": "government"
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Bill_Clinton%2C_Yitzhak_Rabin%2C_Yasser_Arafat_at_the_White_House_1993-09-13.jpg",
+    "alt": {
+      "he": "יצחק רבין, ביל קלינטון ויאסר עראפת בלחיצת היד בטקס חתימת הסכמי אוסלו, מדשאת הבית הלבן, 13 בספטמבר 1993"
     },
+    "credit": "צילום ממשלת ארצות הברית (הבית הלבן), נחלת הכלל"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "T8CFL6gHgxI",
+    "title": {
+      "he": "טקס החתימה על הצהרת העקרונות הישראלית-פלסטינית, 1993"
+    },
+    "credit": "ספריית הנשיא ביל קלינטון (הארכיון הלאומי האמריקני)"
+  },
+  "sources": [
     {
       "title": {
         "he": "ויקיפדיה העברית"
       },
       "url": "https://he.wikipedia.org/wiki/הסכמי_אוסלו",
-      "kind": "website"
+      "kind": "encyclopedia"
     }
   ]
 }

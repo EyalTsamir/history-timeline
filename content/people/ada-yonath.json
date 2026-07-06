@@ -23,24 +23,10 @@
   "sources": [
     {
       "title": {
-        "he": "מכון ויצמן למדע"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "academic"
-    },
-    {
-      "title": {
-        "he": "אנציקלופדיה בריטניקה"
-      },
-      "publisher": "Encyclopædia Britannica",
+      "url": "https://he.wikipedia.org/wiki/עדה_יונת",
       "kind": "encyclopedia"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/עדה_יונת"
     }
   ]
 }

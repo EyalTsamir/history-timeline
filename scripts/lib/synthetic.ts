@@ -42,7 +42,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         id: `syn-e-${i}`, type: 'event',
         title: { he: `אירוע ${i}` }, description: { he: 'תיאור סינתטי לבדיקת ביצועים.' },
         dates: { start: date(y), end: date(y2) }, importance: importance(),
-        categoryIds: [pick(cats)], regionIds: [pick(regions)], links: [], sources: [],
+        categoryIds: [pick(cats)], regionIds: [pick(regions)], sources: [],
       });
     } else if (k < 0.85) {
       const d = Math.min(2000, y + 40 + Math.floor(rnd() * 40));
@@ -50,7 +50,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         id: `syn-p-${i}`, type: 'person',
         name: { he: `אדם ${i}` }, bio: { he: 'ביוגרפיה סינתטית.' },
         lifespan: { start: date(y), end: date(d) }, importance: importance(),
-        categoryIds: [pick(cats)], regionIds: [pick(regions)], links: [], sources: [],
+        categoryIds: [pick(cats)], regionIds: [pick(regions)], sources: [],
       });
     } else {
       const y2 = Math.min(1999, y + Math.floor(rnd() * 10));
@@ -59,7 +59,7 @@ export function makeSyntheticDataset(n: number, seed = 1): Dataset {
         title: { he: `ספר ${i}` }, description: { he: 'תיאור סינתטי.' },
         authorName: { he: 'מחבר' }, authorPersonIds: [], subjectPersonIds: [], subjectEventIds: [],
         publicationDate: date(y2), coveredPeriod: { start: date(y), end: date(y2) },
-        importance: importance(), regionIds: [pick(regions)], links: [], sources: [],
+        importance: importance(), regionIds: [pick(regions)], sources: [],
       });
     }
   }

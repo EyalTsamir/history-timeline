@@ -20,20 +20,28 @@
     "lebanon",
     "israel"
   ],
+  "image": {
+    "src": "https://upload.wikimedia.org/wikipedia/commons/1/18/IDF_Merkava_Mk_I_Tank_on_the_Road_to_Beirut_During_the_1982_Invasion_of_Lebanon.jpg",
+    "alt": {
+      "he": "טנק מרכבה Mk I של צה״ל בדרך לביירות במהלך מלחמת לבנון הראשונה, 8 ביולי 1982"
+    },
+    "credit": "צילום: עמנון, אוסף דן הדני, הספרייה הלאומית; CC BY 4.0"
+  },
+  "video": {
+    "provider": "youtube",
+    "videoId": "GObuiO3QU54",
+    "title": {
+      "he": "הפלישה הישראלית ללבנון, 1982 — קטעי חדשות מהחזית"
+    },
+    "credit": "Frontline by ITN"
+  },
   "sources": [
     {
       "title": {
-        "he": "ארכיון צה״ל ומערכת הביטחון"
+        "he": "ויקיפדיה העברית"
       },
-      "kind": "archive"
-    }
-  ],
-  "links": [
-    {
-      "label": {
-        "he": "ויקיפדיה"
-      },
-      "url": "https://he.wikipedia.org/wiki/מלחמת_לבנון_הראשונה"
+      "url": "https://he.wikipedia.org/wiki/מלחמת_לבנון_הראשונה",
+      "kind": "encyclopedia"
     }
   ]
 }

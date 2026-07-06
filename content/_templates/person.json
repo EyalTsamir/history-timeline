@@ -15,10 +15,8 @@
   "_regionIds": "ids from content/taxonomies/regions.json the person is associated with.",
   "regionIds": ["israel"],
   "_image": "Optional portrait: { \"src\": \"...\", \"alt\": { \"he\": \"...\" }, \"credit\": \"...\" }.",
-  "_links": "Optional related reading (further links). NOT the citation — use \"sources\". Placeholder URLs (\"...\", example.com) are rejected.",
-  "links": [{ "label": { "he": "ערך בוויקיפדיה" }, "url": "https://he.wikipedia.org/wiki/גולדה_מאיר" }],
-  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Prefer an authoritative institution; add \"url\" only when it is a real, stable page. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website).",
+  "_sources": "REQUIRED — at least one citation backing the facts (docs/spec/content.md#sourcing). Every source needs a real, stable \"url\" (decision D18) — a source with no link doesn't help the reader. Prefer an authoritative institution or a Hebrew-Wikipedia article. \"publisher\"/\"kind\" optional (archive|library|museum|encyclopedia|reference|academic|government|book|press|website). Placeholder URLs (\"...\", example.com) are rejected.",
   "sources": [
-    { "title": { "he": "אנציקלופדיה בריטניקה" }, "publisher": "Encyclopædia Britannica", "kind": "encyclopedia" }
+    { "title": { "he": "אנציקלופדיה בריטניקה" }, "publisher": "Encyclopædia Britannica", "url": "https://www.britannica.com/", "kind": "encyclopedia" }
   ]
 }
