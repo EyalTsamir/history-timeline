@@ -10,3 +10,7 @@ playwright-report/
 blob-report/
 playwright/.cache/
 .playwright-mcp/
+# /add skill eval/benchmark scratch workspace (throwaway grading output)
+.claude/skills/add-workspace/
+# Local point-in-time content reference (derivable from content/events/)
+events-summary.md
