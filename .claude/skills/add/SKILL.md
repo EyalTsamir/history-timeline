@@ -26,11 +26,12 @@ the dataset is a curated historical record — a wrong date or invented "fact" i
 no entry at all.
 
 1. **Never invent facts** — dates, actors, casualty numbers, precision, URLs, images, licenses.
-   Every fact you author must come from a source page you actually opened this session.
-   A year-only date stays `"YYYY"`; use `"approx": true` for circa dates. Don't guess deep links.
+   Every fact you author must come from a source you actually opened this session (a
+   Wikipedia REST-API extract counts as opening that article). A year-only date stays
+   `"YYYY"`; use `"approx": true` for circa dates. Don't guess deep links.
 2. **All-or-nothing per topic** — never write a partial entry "to fix later". A topic's file is
-   written only after its checklist (references/checklist.md) fully passes; otherwise the topic
-   is reported as not-added with the concrete reason.
+   written only after the pre-write checklist (references/authoring.md) fully passes;
+   otherwise the topic is reported as not-added with the concrete reason.
 3. **Zero-warning discipline** — validator *warnings* (filename≠id, sub-event importance ≥
    parent, sub-event period outside parent, duplicate relation edges, duplicate ids in a ref
    list) fail the production tests. Treat warnings as errors.
@@ -55,21 +56,27 @@ applies with the person/work template and rules (see "People and works" below).
    and Hebrew title — it is your duplicate-detection index AND importance-calibration ladder.
    Do not rely on `events-summary.md` (untracked, may be stale).
 2. Read `content/_templates/event.json` (and person/work templates if needed) and
-   `<skill-dir>/references/checklist.md`.
+   `<skill-dir>/references/authoring.md`.
 3. Confirm the tree starts green: `npm run content:validate` (0 errors, 0 warnings). If the
    environment lacks `node_modules`, set it up first (npm install, or link an existing one).
    If the tree starts red, stop and tell the user — don't build on a broken baseline.
 
 ## Per-topic pipeline
 
-Every topic goes through all eight steps, in every mode (single, small batch, large batch).
+Every topic goes through all seven steps, in every mode (single, small batch, large batch).
 
-1. **Research** — search Hebrew + English; open at least two independent, reliable pages
-   (Hebrew Wikipedia is a fine anchor for notable topics; prefer adding an institutional page:
-   National Library, Knesset, gov.il, Yad Vashem, IDI, museums, academia). Record each core
-   fact (what/when/where/who/outcome) together with the URL that supports it. Verify every
-   URL you intend to cite by opening it. references/research-brief.md defines the exact
-   "dossier" this step must produce.
+1. **Research — lean by default.** Start with the Hebrew-Wikipedia REST summary:
+   `https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title>` — a
+   compact extract that usually settles what/when/where/who at a fraction of a full-page
+   fetch. A successful, on-topic response also verifies the corresponding `/wiki/` article
+   URL for citation. Escalate to the full article (or further pages) **only** for facts the
+   extract doesn't settle: exact day precision, actors, outcomes, numbers. **One anchor
+   source suffices** for a notable topic with a solid, uncontested Hebrew-Wikipedia article.
+   Open a second independent page only when the topic is obscure or thinly covered, sources
+   may disagree, or a claim is sensitive/disputed; an institutional page (National Library,
+   Knesset, gov.il, Yad Vashem, IDI, museums, academia) is a welcome second source when you
+   actually confirmed one — never a requirement. Record, for each core fact
+   (what/when/where/who/outcome), the URL that supports it. Never cite a URL you didn't open.
 2. **Dedup** — scan the inventory for: likely id slugs, Hebrew title substrings, and
    same-category events in the same period. The batch itself counts: check earlier topics in
    this invocation too. A duplicate → status `duplicate-of:<id>`, move on.
@@ -84,7 +91,7 @@ Every topic goes through all eight steps, in every mode (single, small batch, la
 4. **Classify** — 1–2 `categoryIds` from `content/taxonomies/event-categories.json`
    (first category drives the item color). Never invent a category — a new category needs a
    CSS token and is a design decision; flag it instead.
-5. **Score** — follow the calibration protocol in references/scoring.md: nearest-neighbor
+5. **Score** — follow the calibration protocol in references/authoring.md: nearest-neighbor
    table from the inventory → rubric band → integer. Record the one-line rationale for the
    report. Do not inflate scores to "make it visible" — low-importance items still render
    as dots by design.
@@ -93,57 +100,59 @@ Every topic goes through all eight steps, in every mode (single, small batch, la
    significance clause after a semicolon). Dates at sourced precision only. `id` is a unique
    kebab-case ASCII slug (year suffix only to disambiguate; hierarchy via parentId, never via
    filename). 1–3 verified `sources` with `kind` (and `publisher` when distinct). Image/video
-   per the media rules in checklist.md — an image is expected for importance ≥70 (that is the
+   per the media rules in authoring.md — an image is expected for importance ≥70 (that is the
    existing corpus convention), and must be a verified Wikimedia-Commons direct file URL with
    checked license, Hebrew alt, and credit; when in doubt, omit media.
-7. **Write** — create `content/events/<id>.json` with the Write tool (UTF-8, 2-space indent,
+7. **Gate + write** — every line of the pre-write checklist in references/authoring.md must
+   pass; then create `content/events/<id>.json` with the Write tool (UTF-8, 2-space indent,
    key order: id, type, title, description, dates, parentId?, importance, categoryIds, tags?,
    image?, video?, sources). Filename must equal `id`. Well-grounded person↔event edges
    (existing people only, 0–3, no duplicates) are appended to `content/relations.json` in its
    one-line-per-edge style.
-8. **Validate** — `npm run content:validate` must report 0 errors and 0 warnings. If it
-   doesn't, fix or revert this topic's files before moving on.
+
+## Validation cadence
+
+`npm run content:validate` must report **0 errors and 0 warnings** after every 3–5 written
+topics, and always as a final gate. For a single topic or a small batch, one run at the end
+is enough. If a run fails, only the topics written since the last green run are suspect —
+fix or revert them before continuing.
 
 ## Batch protocol
 
-Why a protocol at all: one invocation that researches 20 topics with all their raw sources in
-context at once exhausts the window mid-batch — the failure mode that produces shallow
-research, skipped fields, and score drift. The cure is **context hygiene**, not parallelism:
-one topic fully in focus at a time, its research dropped before the next begins, with a
-manifest on disk carrying the small amount of state that must survive between topics.
+Why any protocol at all: one invocation that researches many topics with all their raw
+sources in context at once exhausts the window mid-batch — the failure mode that produces
+shallow research, skipped fields, and score drift. The cure is **context hygiene**: one topic
+fully in focus at a time, its research dropped before the next begins.
 
-**Default for any size (1 topic or 30): sequential with a manifest.** This is the reliable
-path — it never stalls, its token cost is predictable, it survives context compaction, and it
-works identically whether `/add` runs in a main session or as a subagent.
-
-- **Manifest:** create `add-manifest.json` in the session scratchpad (never inside the repo),
-  one entry per topic: `{ topic, status, id?, decisions?, reason? }`; statuses
-  `pending → researched → written → validated`, or `duplicate-of:<id>` / `not-added:<reason>`
-  / `needs-decision:<question>`. Update it after each topic — it is the resumable source of
-  truth for the final report even if the conversation is compacted.
-- **Pre-pass (whole batch, cheap — no deep research yet):** normalize the topic list; dedup
-  against the repo inventory AND within the batch; spot hierarchy pairs (topic A a parent of
-  topic B); assign each topic a rough rubric band so siblings are scored relative to each
-  other, not in isolation. Record this in the manifest.
-- **Then one topic at a time:** run the full eight-step pipeline for a single topic —
-  research → checklist → calibrate (against the pre-pass bands) → write → `content:validate`
-  (0/0) → update manifest. Only then move on, deliberately letting that topic's raw sources
-  fall out of focus. Never carry half-finished topics forward in parallel.
-- Validate after **every** topic, not just at the end, so a mistake is caught against a known
-  green baseline while you still remember the topic.
-
-**Optional accelerator — synchronous research subagents (only when ALL of these hold):** you
-are confident you're in a main session (not yourself a subagent), the Agent tool is available,
-and the batch is large enough (roughly ≥8) that orientation-per-topic dominates. Then you may
-delegate *research only* (never writing) to subagents using the prompt in
-references/research-brief.md — but **call them synchronously and consume their results in the
-same turn**. Spawn a wave, wait for that wave's results to return to you, verify and write
-them, then spawn the next wave. Never launch background/fire-and-forget research agents and
-end your turn to "wait for notifications": a subagent that stops with pending background
-children is not reliably re-woken, so the batch silently stalls and the work is lost. If you
-cannot guarantee synchronous consumption, use the sequential default — it is not the fallback,
-it is the primary design. A single writer (you) always does all file writes and the one
-`relations.json` edit, so formatting, scoring, and edges stay uniform and conflict-free.
+- **1–4 topics — no manifest, no ceremony.** Normalize the list, then run topics
+  sequentially through the pipeline. Still dedup each topic against the inventory AND earlier
+  topics in the invocation, and rank sibling topics against each other before fixing scores.
+- **≥5 topics — manifest + pre-pass, then sequential.**
+  - **Manifest:** create `add-manifest.json` in the session scratchpad (never inside the
+    repo), one entry per topic: `{ topic, status, id?, decisions?, reason? }`; statuses
+    `pending → researched → written → validated`, or `duplicate-of:<id>` /
+    `not-added:<reason>` / `needs-decision:<question>`. Update it as topics complete — it is
+    the resumable source of truth for the final report even if the conversation is compacted.
+  - **Pre-pass (whole batch, cheap — no deep research yet):** normalize the topic list; dedup
+    against the repo inventory AND within the batch; spot hierarchy pairs (topic A a parent
+    of topic B); assign each topic a rough rubric band so siblings are scored relative to
+    each other, not in isolation. Record this in the manifest.
+  - **Then one topic at a time:** full pipeline per topic, deliberately letting that topic's
+    raw sources fall out of focus before the next. Never carry half-finished topics forward
+    in parallel. Validate on the cadence above.
+- **Optional accelerator — synchronous research subagents (only when ALL of these hold):**
+  you are confident you're in a main session (not yourself a subagent), the Agent tool is
+  available, and the batch is large enough (roughly ≥8) that orientation-per-topic dominates.
+  Then you may delegate *research only* (never writing) to subagents using the handoff
+  contract in references/authoring.md — but **call them synchronously and consume their
+  results in the same turn**. Spawn a wave of ≤4, wait for that wave's results to return to
+  you, verify and write them, then spawn the next wave. Never launch background/
+  fire-and-forget research agents and end your turn to "wait for notifications": a subagent
+  that stops with pending background children is not reliably re-woken, so the batch silently
+  stalls and the work is lost. If you cannot guarantee synchronous consumption, use the
+  sequential default — it is not the fallback, it is the primary design. A single writer
+  (you) always does all file writes and the one `relations.json` edit, so formatting,
+  scoring, and edges stay uniform and conflict-free.
 
 ## People and works
 
@@ -186,7 +195,6 @@ existing entities only; missing people go in the report as suggestions.
 
 ## Reference files
 
-- `references/checklist.md` — the pre-write gate; read it during orientation, apply per topic.
-- `references/scoring.md` — importance calibration protocol + worked example (הקמת מפא״י).
-- `references/research-brief.md` — research dossier definition + subagent prompt template.
+- `references/authoring.md` — pre-write checklist, importance calibration protocol, and the
+  subagent research handoff; read it during orientation, apply per topic.
 - `scripts/list-events.mjs` — inventory/calibration index of the current content tree.
