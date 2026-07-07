@@ -1,0 +1,35 @@
+{
+  "id": "special-night-squads",
+  "type": "event",
+  "title": {
+    "he": "הקמת פלוגות הלילה המיוחדות"
+  },
+  "description": {
+    "he": "פלוגות הלילה המיוחדות הוקמו בקיץ 1938 בידי הקצין הבריטי אורד וינגייט, ידיד הציונות, ושילבו חיילים בריטים עם מתנדבים יהודים מפלוגות השדה של ההגנה. הפלוגות פעלו בצפון להגנת קו הנפט ולתקיפת כנופיות, והיו למסגרת הראשונה שבה נטלו יהודים חלק בפעולה צבאית יזומה."
+  },
+  "dates": {
+    "start": "1938-06"
+  },
+  "parentId": "arab-revolt-1936",
+  "importance": 34,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/פלגות_הלילה_המיוחדות",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "פלוגות הלילה המיוחדות"
+      },
+      "publisher": "ארכיון צה״ל ומערכת הביטחון",
+      "url": "https://archives.mod.gov.il/sites/HaHagana/Exhib/SpecialNightSquads/Pages/default.aspx",
+      "kind": "archive"
+    }
+  ]
+}

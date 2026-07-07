@@ -1,0 +1,27 @@
+{
+  "id": "yishuv-protest-white-paper-1939",
+  "type": "event",
+  "title": {
+    "he": "מחאת היישוב נגד הספר הלבן"
+  },
+  "description": {
+    "he": "תגובת היישוב לפרסום הספר הלבן במאי 1939: שביתה כללית, הפגנות וצעדות מחאה בתל אביב ובירושלים, שחלקן התנגשו במשטרה הבריטית. דוד בן־גוריון כינה את המסמך ספר המעל, וכאות התרסה הוקמו באותו חודש שנים־עשר יישובים חדשים."
+  },
+  "dates": {
+    "start": "1939-05"
+  },
+  "parentId": "white-paper-1939",
+  "importance": 34,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/הספר_הלבן_(1939)",
+      "kind": "encyclopedia"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "ben-gurion-jewish-agency-chairman",
+  "type": "event",
+  "title": {
+    "he": "מינוי בן־גוריון ליו״ר הסוכנות היהודית"
+  },
+  "description": {
+    "he": "ב־1935 נבחר דוד בן־גוריון ליושב ראש הנהלת הסוכנות היהודית, בעקבות הקונגרס הציוני ה־19 שבו הייתה מפא״י לסיעה הגדולה. מן התפקיד הזה, שבו כיהן עד קום המדינה ב־1948, הוביל בן־גוריון את הנהגת היישוב לעבר העצמאות."
+  },
+  "dates": {
+    "start": "1935"
+  },
+  "importance": 42,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/דוד_בן-גוריון",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "אבני דרך בחיי בן־גוריון"
+      },
+      "publisher": "מכון בן־גוריון לחקר ישראל",
+      "url": "https://bgh.org.il/milestones/",
+      "kind": "archive"
+    }
+  ]
+}

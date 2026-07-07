@@ -1,0 +1,34 @@
+{
+  "id": "jewish-settlement-police-founded",
+  "type": "event",
+  "title": {
+    "he": "הקמת משטרת היישובים העבריים והנוטרים"
+  },
+  "description": {
+    "he": "מערך הנוטרים ומשטרת היישובים העבריים הוקמו ב־1936 כמסגרת חוקית מטעם שלטון המנדט להגנת היישובים היהודים בימי המרד הערבי, ובפועל היו נתונים לפיקוד ההגנה. המסגרת אפשרה לחמש ולאמן אלפי אנשי הגנה, ובשורותיה שירתו מפקדים צעירים כיצחק שדה, משה דיין ויגאל אלון."
+  },
+  "dates": {
+    "start": "1936"
+  },
+  "importance": 34,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/משטרת_היישובים_העבריים",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "נוטרות, נוטרים"
+      },
+      "publisher": "אתר ההגנה",
+      "url": "https://www.hahagana.org.il/lexicon/lexiconpage/?itemId=47826",
+      "kind": "archive"
+    }
+  ]
+}

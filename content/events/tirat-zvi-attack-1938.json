@@ -1,0 +1,36 @@
+{
+  "id": "tirat-zvi-attack-1938",
+  "type": "event",
+  "title": {
+    "he": "ההתקפה הראשונה על טירת צבי"
+  },
+  "description": {
+    "he": "התקפת כנופיה ערבית מאורגנת על קיבוץ טירת צבי שבעמק בית שאן בליל 28 בפברואר 1938, כשמונה חודשים לאחר הקמתו. המגינים הדפו את המתקפה לאחר כשעתיים והתוקפים נסוגו עם אבדות; ההגנה המוצלחת נחשבה לניסיון הפריצה המאורגן הראשון על יישוב עברי בימי המאורעות."
+  },
+  "dates": {
+    "start": "1938-02-28"
+  },
+  "parentId": "arab-revolt-1936",
+  "importance": 26,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "אתר ההגנה — מורשת ההגנה"
+      },
+      "publisher": "מוזיאון ההגנה",
+      "url": "https://hahagana.org.il/sites/sites/sitepage/?itemId=48393",
+      "kind": "archive"
+    },
+    {
+      "title": {
+        "he": "ההתקפה על טירת צבי 1938"
+      },
+      "publisher": "קיבוץ טירת צבי",
+      "url": "https://www.tiratzvi.org.il/viewpage_mobile.asp?pagesCatID=6581&siteName=tiratzvi",
+      "kind": "website"
+    }
+  ]
+}

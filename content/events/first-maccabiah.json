@@ -1,0 +1,34 @@
+{
+  "id": "first-maccabiah",
+  "type": "event",
+  "title": {
+    "he": "המכביה הראשונה"
+  },
+  "description": {
+    "he": "המכביה הראשונה, אולימפיאדת הספורט היהודית הבינלאומית, נפתחה ב־28 במרץ 1932 בתל אביב ביוזמת יוסף יקותיאלי. כמאות ספורטאים יהודים מרחבי העולם השתתפו בה, וראש העיר מאיר דיזנגוף, רכוב על סוס לבן, הוביל את מצעד הפותחים אל האצטדיון החדש."
+  },
+  "dates": {
+    "start": "1932-03-28"
+  },
+  "importance": 30,
+  "categoryIds": [
+    "culture-society"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/המכביה_הראשונה",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "המכביה הראשונה"
+      },
+      "publisher": "התאחדות מכבי העולמית",
+      "url": "https://www.maccabiah.com/he/maccabiah/maccabiah-history/המכביה-הראשונה",
+      "kind": "website"
+    }
+  ]
+}

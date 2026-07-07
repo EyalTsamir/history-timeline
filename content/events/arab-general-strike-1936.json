@@ -1,0 +1,36 @@
+{
+  "id": "arab-general-strike-1936",
+  "type": "event",
+  "title": {
+    "he": "השביתה הערבית הכללית"
+  },
+  "description": {
+    "he": "השביתה הכללית שהכריז הוועד הערבי העליון באפריל 1936 ופתחה את המרד הערבי הגדול, ונמשכה כחצי שנה עד אוקטובר 1936. השביתה דרשה להפסיק את העלייה היהודית ואת מכירת הקרקעות ליהודים ולוותה במעשי אלימות; היא פגעה בכלכלה הערבית יותר מבזו היהודית, שהאיצה מהלכים כהקמת נמל תל אביב."
+  },
+  "dates": {
+    "start": "1936-04-19",
+    "end": "1936-10-11"
+  },
+  "parentId": "arab-revolt-1936",
+  "importance": 44,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/המרד_הערבי_הגדול",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "מאורעות 1936/39"
+      },
+      "publisher": "אתר ההגנה",
+      "url": "https://www.hahagana.org.il/lexicon/lexiconpage/?itemId=47670",
+      "kind": "archive"
+    }
+  ]
+}

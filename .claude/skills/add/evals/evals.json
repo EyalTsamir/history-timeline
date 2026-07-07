@@ -1,0 +1,55 @@
+{
+  "skill_name": "add",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "הוסף לציר הזמן את האירוע: הקמת מפא\"י",
+      "expected_output": "Creates content/events/<slug>.json for the founding of Mapai with a verified January 1930 date (day precision only if sourced), state-politics category, calibrated importance (~40-69) with a stated rationale, 1-3 real verified sources, no fabricated media; validation passes with 0 errors 0 warnings; clear report.",
+      "files": [],
+      "expectations": [
+        "new-event-file-created: a new event JSON exists under content/events/ for the founding of Mapai, filename equals its id, id is a kebab-case ASCII slug",
+        "date-verified-january-1930: dates.start matches ^1930(-01(-0[1-9])?)?$ — January 1930 at sourced precision, no fabricated date or false precision",
+        "hebrew-content-mentions-merger: title.he and description.he are natural Hebrew; description is 1-3 sentences and mentions the merger of אחדות העבודה and הפועל הצעיר",
+        "category-state-politics: categoryIds includes state-politics and only ids existing in the event-categories taxonomy",
+        "importance-calibrated-notable-band: importance is an integer in 40-69 (notable band — near first-knesset=50, below law-of-return=65), not inflated to the >=70 major-national tier",
+        "sources-real-and-verified: 1-3 sources, every url resolves to a real page about Mapai (grader spot-check), no placeholder URLs",
+        "validation-green-zero-warnings: npm run content:validate passes in the run's worktree with 0 errors AND 0 warnings",
+        "no-unverified-media: if an image is present its src is an upload.wikimedia.org/wikipedia/commons direct file URL with Hebrew alt and a credit naming source/license; omitted media also passes",
+        "report-explains-decisions: the run's report states what was added, the importance rationale, and the sources used"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "תוסיף בבקשה לציר הזמן את האירועים הבאים: מרד הימאים, ביטול הממשל הצבאי, זכיית מכבי תל אביב באליפות אירופה בכדורסל, מבצע שלמה",
+      "expected_output": "Adds three new verified events (seamen's strike 1951, abolition of the military government 1966, Maccabi Tel Aviv's first European championship 1977) with consistent cross-calibrated scores and real sources; detects מבצע שלמה as existing operation-solomon and does not re-add it; validation passes; report separates added vs skipped.",
+      "files": [],
+      "expectations": [
+        "exactly-three-new-events: exactly three new event files created (seamen's strike, military-government abolition, Maccabi European championship); no fourth file for מבצע שלמה",
+        "duplicate-detected-not-readded: מבצע שלמה is reported as already existing (operation-solomon) and content/events/operation-solomon.json is NOT modified",
+        "seamen-strike-date-and-category: seamen's strike event starts in Nov-Dec 1951 (^1951(-1[12](-\\d\\d)?)?$) and categoryIds includes economy-labor",
+        "military-government-date: abolition event dated to the Nov 8 1966 announcement or Dec 1 1966 effective date (^1966(-(11|12)(-\\d\\d)?)?$) with state-politics category",
+        "maccabi-date: Maccabi event dated 1977-04-07 (or coarser sourced precision ^1977(-04(-07)?)?$) with culture-society category",
+        "batch-scoring-consistent: all three importance values are integers within 15-50, not all identical (no plateau); ordering defensible vs neighbors (eurovision-1978=24, wadi-salib=38)",
+        "sources-verified-each: every new event carries 1-3 sources with real resolvable URLs (grader spot-checks at least one per event)",
+        "validation-green-zero-warnings: npm run content:validate passes in the run's worktree with 0 errors AND 0 warnings",
+        "report-separates-added-vs-skipped: the report lists the three additions AND explicitly reports מבצע שלמה as a skipped duplicate with the existing id"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "הוסף את אסון צור לציר הזמן",
+      "expected_output": "Research reveals אסון צור denotes TWO separate disasters (11 Nov 1982 collapse; 4 Nov 1983 bombing). The run must not conflate them: either both added as separate sourced sub-events of first-lebanon-war (importance < 78) or the ambiguity surfaced as an explicit decision. Validation passes; the decision is reported.",
+      "files": [],
+      "expectations": [
+        "ambiguity-not-conflated: no single 'אסון צור' event with one arbitrary date; either two separate events (1982, 1983) are created or the two-referent ambiguity is explicitly surfaced in the report",
+        "correct-dates-if-added: created events use sourced dates — 1982-11-11 and 1983-11-04 (month precision acceptable); no other dates",
+        "nested-under-lebanon-war: created events set parentId=first-lebanon-war with importance strictly below 78, or the report explicitly justifies not nesting",
+        "sub-event-importance-band: created events score integers in 15-48 (below parent=78, at/below sabra-shatila=48)",
+        "war-security-category: created events carry war-security among categoryIds",
+        "sources-real-per-event: each created event has 1-3 sources with real resolvable URLs; no placeholders",
+        "validation-green-zero-warnings: npm run content:validate passes in the run's worktree with 0 errors AND 0 warnings",
+        "report-explains-disambiguation: the report names both disasters (11.11.1982 collapse; 4.11.1983 bombing) and states the decision taken"
+      ]
+    }
+  ]
+}

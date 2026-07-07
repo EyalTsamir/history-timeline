@@ -1,0 +1,34 @@
+{
+  "id": "hanita-founded",
+  "type": "event",
+  "title": {
+    "he": "הקמת חניתה"
+  },
+  "description": {
+    "he": "קיבוץ חניתה עלה על הקרקע ב־21 במרץ 1938 כיישוב חומה ומגדל על גבול הלבנון בגליל המערבי, במבצע שהשתתפו בו כ־400 איש ובהם אנשי פלוגות השדה בפיקוד יצחק שדה. המקום היה קשה להגנה ומגיניו נתקפו כבר בלילה הראשון; חניתה הפכה לסמל של התיישבות בתנאי סכנה בימי המרד."
+  },
+  "dates": {
+    "start": "1938-03-21"
+  },
+  "parentId": "tower-and-stockade",
+  "importance": 30,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/חניתה",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "חומה ומגדל"
+      },
+      "url": "https://he.wikipedia.org/wiki/חומה_ומגדל",
+      "kind": "encyclopedia"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "tiberias-massacre-1938",
+  "type": "event",
+  "title": {
+    "he": "טבח טבריה"
+  },
+  "description": {
+    "he": "בליל 2 באוקטובר 1938 תקפה כנופיה ערבית את שכונת קריית שמואל בטבריה ורצחה 19 יהודים, בהם אחד עשר ילדים. הטבח, בשלהי המרד הערבי, חשף את חולשת ההגנה בעיר, ובעקבותיו הקימה ההגנה ועדת חקירה בראשות יוסף אבידר."
+  },
+  "dates": {
+    "start": "1938-10-02"
+  },
+  "parentId": "arab-revolt-1936",
+  "importance": 30,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/הטבח_בטבריה",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "הטבח בטבריה, אוקטובר 1938"
+      },
+      "publisher": "סגולה — מגזין ישראלי להיסטוריה",
+      "url": "https://segulamag.com/today_event/tiberias-massacre-oct-2-1938/",
+      "kind": "press"
+    }
+  ]
+}

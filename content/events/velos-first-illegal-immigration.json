@@ -1,0 +1,34 @@
+{
+  "id": "velos-first-illegal-immigration",
+  "type": "event",
+  "title": {
+    "he": "הפלגת ״ולוס״ הראשונה"
+  },
+  "description": {
+    "he": "הפלגתה הראשונה של אוניית המעפילים ולוס, שהגיעה לחופי הארץ ביולי 1934 ובה כ־350 חלוצים, רובם מבית״ר ומהחלוץ בפולין. ההפלגה, שאורגנה בידי אנשי ההגנה והחלוץ, נחשבת לאחת מראשונות ההעפלה המאורגנת, והורדת המעפילים נעשתה בחשאי סמוך לכפר ויתקין ולתל אביב."
+  },
+  "dates": {
+    "start": "1934-07"
+  },
+  "importance": 26,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/ולוס_(אוניית_מעפילים)",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "ולוס א׳"
+      },
+      "publisher": "עמותת יורדי ים",
+      "url": "https://www.amutayam.org.il/?CategoryID=1223&ArticleID=4038",
+      "kind": "website"
+    }
+  ]
+}
