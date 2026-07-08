@@ -1,0 +1,12 @@
+{
+  "id": "atlit-camp-break",
+  "type": "event",
+  "title": { "he": "פריצת מחנה עתלית" },
+  "description": { "he": "בלילה שבין 9 ל־10 באוקטובר 1945 פרץ כוח מהפלמ״ח למחנה המעצר הבריטי בעתלית ושחרר 208 מעפילים שהיו כלואים בו. הפעולה הייתה מן המעשים המוקדמים של המאבק המזוין נגד מדיניות ההעפלה הבריטית, סמוך להקמתה של תנועת המרי העברי." },
+  "dates": { "start": "1945-10-10" },
+  "importance": 38,
+  "categoryIds": ["immigration-settlement", "war-security"],
+  "sources": [
+    { "title": { "he": "פריצת מחנה עתלית" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/%D7%A4%D7%A8%D7%99%D7%A6%D7%AA_%D7%9E%D7%97%D7%A0%D7%94_%D7%A2%D7%AA%D7%9C%D7%99%D7%AA", "kind": "encyclopedia" }
+  ]
+}

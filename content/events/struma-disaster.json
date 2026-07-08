@@ -1,0 +1,12 @@
+{
+  "id": "struma-disaster",
+  "type": "event",
+  "title": { "he": "אסון הסטרומה" },
+  "description": { "he": "ב־24 בפברואר 1942 הוטבעה בים השחור אוניית המעפילים ״סטרומה״, שנשאה 768 יהודים שנמלטו מרומניה הפשיסטית ונמנעה מהם הכניסה לארץ ישראל. האונייה טובעה בטורפדו של צוללת סובייטית וכל נוסעיה ואנשי צוותה טבעו למעט ניצול אחד; זהו האסון הגדול בתולדות ההעפלה לארץ ישראל." },
+  "dates": { "start": "1942-02-24" },
+  "importance": 46,
+  "categoryIds": ["immigration-settlement", "war-security"],
+  "sources": [
+    { "title": { "he": "סטרומה" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/%D7%A1%D7%98%D7%A8%D7%95%D7%9E%D7%94", "kind": "encyclopedia" }
+  ]
+}

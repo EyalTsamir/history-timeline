@@ -1,0 +1,13 @@
+{
+  "id": "hannah-szenes-fall",
+  "type": "event",
+  "title": { "he": "נפילתה של חנה סנש" },
+  "description": { "he": "חנה סנש, מצנחני היישוב, צנחה ביוגוסלביה במרץ 1944, חצתה את הגבול להונגריה, נתפסה בידי הצבא ההונגרי ונחקרה בעינויים; ב־7 בנובמבר 1944 הוצאה להורג בבודפשט. נפילתה הפכה אותה לסמל לאומי של גבורה והקרבה, ושיריה — ובהם ״הליכה לקיסריה״ ו״אשרי הגפרור״ — נחקקו בזיכרון התרבותי." },
+  "dates": { "start": "1944-11-07" },
+  "parentId": "yishuv-parachutists",
+  "importance": 36,
+  "categoryIds": ["war-security", "culture-society"],
+  "sources": [
+    { "title": { "he": "חנה סנש" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/%D7%97%D7%A0%D7%94_%D7%A1%D7%A0%D7%A9", "kind": "encyclopedia" }
+  ]
+}
