@@ -1,0 +1,34 @@
+{
+  "id": "ben-yehuda-street-bombing-1948",
+  "type": "event",
+  "title": {
+    "he": "הפיגוע ברחוב בן־יהודה"
+  },
+  "description": {
+    "he": "פיצוץ שלוש משאיות תופת שהניחו עריקים מהצבא הבריטי בשירות עבד אל-קאדר אל-חוסייני ופאוזי אל-כותוב ברחוב בן־יהודה בירושלים ב-22 בפברואר 1948, בראשית מלחמת העצמאות; בפיגוע נהרגו 58 בני אדם ונהרסו שלושה בניינים, והוא נמנה עם הפיגועים הקטלניים ביותר שפקדו את ירושלים באותה עת."
+  },
+  "dates": {
+    "start": "1948-02-22"
+  },
+  "parentId": "war-of-independence",
+  "importance": 37,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/הפיגוע_ברחוב_בן-יהודה_(1948)",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "Wikipedia (English) - Ben Yehuda Street bombings"
+      },
+      "url": "https://en.wikipedia.org/wiki/Ben_Yehuda_Street_bombings",
+      "kind": "encyclopedia"
+    }
+  ]
+}

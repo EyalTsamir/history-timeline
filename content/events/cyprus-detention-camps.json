@@ -1,0 +1,13 @@
+{
+  "id": "cyprus-detention-camps",
+  "type": "event",
+  "title": { "he": "מחנות המעצר בקפריסין" },
+  "description": { "he": "בריטניה הקימה בקפריסין ב־13 באוגוסט 1946 מחנות מעצר לכליאת מעפילים יהודים שנתפסו בדרכם לארץ ישראל, לאחר שהיקף ההעפלה בקיץ 1946 חרג בהרבה ממכסת הסרטיפיקטים שהתיר המנדט. עד סגירתם ב־11 בפברואר 1949 הוחזקו בשנים־עשר המחנות למעלה מ־52,000 מעפילים, רובם ניצולי שואה, ונולדו בהם כ־2,200 תינוקות; המחנות הפכו לסמל מצוקת העקורים היהודים לאחר השואה ותרמו ללחץ הבינלאומי שקידם את החלטת החלוקה ואת הקמת המדינה." },
+  "dates": { "start": "1946-08-13", "end": "1949-02-11" },
+  "importance": 40,
+  "categoryIds": ["immigration-settlement"],
+  "sources": [
+    { "title": { "he": "מחנות המעצר בקפריסין" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/מחנות_המעצר_בקפריסין", "kind": "encyclopedia" },
+    { "title": { "he": "Cyprus internment camps" }, "publisher": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Cyprus_internment_camps", "kind": "encyclopedia" }
+  ]
+}

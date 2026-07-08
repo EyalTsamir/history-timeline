@@ -1,0 +1,34 @@
+{
+  "id": "harold-laski",
+  "type": "person",
+  "name": {
+    "he": "הרולד לסקי"
+  },
+  "bio": {
+    "he": "תיאורטיקן פוליטי ופרופסור למדעי המדינה בבית הספר לכלכלה בלונדון (LSE), ויושב ראש מפלגת העבודה הבריטית בשנים 1945–1946. יהודי-ציוני שראה עצמו חלק מהעם היהודי; כדמות בכירה במפלגה השלטת בבריטניה בתקופת פרשת לה-ספציה (1946), נחשב לגורם שיכול היה להפעיל השפעה על הממשלה הבריטית בנושאי מדיניות ההגירה לארץ ישראל."
+  },
+  "lifespan": {
+    "start": "1893-06-30",
+    "end": "1950-03-24"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 26,
+  "sources": [
+    {
+      "title": {
+        "he": "הרולד לסקי - ויקיפדיה העברית"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%94%D7%A8%D7%95%D7%9C%D7%93_%D7%9C%D7%A1%D7%A7%D7%99",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "Harold Laski - English Wikipedia"
+      },
+      "url": "https://en.wikipedia.org/wiki/Harold_Laski",
+      "kind": "encyclopedia"
+    }
+  ]
+}

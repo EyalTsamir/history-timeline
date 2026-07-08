@@ -1,0 +1,13 @@
+{
+  "id": "zionist-congress-22-1946",
+  "type": "event",
+  "title": { "he": "הקונגרס הציוני הכ״ב" },
+  "description": { "he": "הקונגרס הציוני ה-22 התכנס בבזל ב-9–24 בדצמבר 1946, הקונגרס הציוני הראשון לאחר השואה, ובו הוחלט על דחיית תוכנית מוריסון-גריידי ועל אי-השתתפות בוועידת לונדון ברוב של 171 מול 154, ובעקבות ההצבעה התפטר הנשיא חיים ויצמן מבלי שנבחר נשיא חדש תחתיו. דוד בן-גוריון עמד מחדש בראש ההנהלה הציונית וקיבל גם את תיק הביטחון; הקונגרס סימן הקשחת העמדה הציונית מול בריטניה בדרך להכרעת האו״ם ולעצמאות." },
+  "dates": { "start": "1946-12-09", "end": "1946-12-24" },
+  "importance": 29,
+  "categoryIds": ["state-politics"],
+  "sources": [
+    { "title": { "he": "הקונגרס הציוני העולמי" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/%D7%94%D7%A7%D7%95%D7%A0%D7%92%D7%A8%D7%A1_%D7%94%D7%A6%D7%99%D7%95%D7%A0%D7%99_%D7%94%D7%A2%D7%95%D7%9C%D7%9E%D7%99", "kind": "encyclopedia" },
+    { "title": { "he": "Zionist Congresses" }, "publisher": "Encyclopaedia Judaica / Encyclopedia.com", "url": "https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/zionist-congresses", "kind": "encyclopedia" }
+  ]
+}

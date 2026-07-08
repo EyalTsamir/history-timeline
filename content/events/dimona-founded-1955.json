@@ -1,0 +1,27 @@
+{
+  "id": "dimona-founded-1955",
+  "type": "event",
+  "title": {
+    "he": "הקמת דימונה"
+  },
+  "description": {
+    "he": "העיר דימונה בנגב המזרחי הוקמה ב-19 בספטמבר 1955 במסגרת פרויקט פיתוח הנגב, כאשר הובאו למקום 36 משפחות של עולים מצפון אפריקה; היישוב, שקם בסמוך למפעלי ים המלח, הוכרז כעיר בשנת 1969."
+  },
+  "dates": {
+    "start": "1955-09-19"
+  },
+  "importance": 17,
+  "categoryIds": [
+    "immigration-settlement"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "דימונה - ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%93%D7%99%D7%9E%D7%95%D7%A0%D7%94",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה העברית"
+    }
+  ]
+}

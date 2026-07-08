@@ -1,0 +1,43 @@
+{
+  "id": "knesset-move-to-jerusalem-1949",
+  "type": "event",
+  "title": {
+    "he": "העברת הכנסת לירושלים"
+  },
+  "description": {
+    "he": "ב-26 בדצמבר 1949 שבה הכנסת מתל אביב לירושלים ופתחה בה מחדש את מושבה, ומ-13 במרץ 1950 התכנסה בבית פרומין; המעבר גילם את הכרזתו של ראש הממשלה דוד בן-גוריון בכנסת ימים אחדים קודם לכן (13 בדצמבר 1949), כי לישראל בירה אחת בלבד - ירושלים הנצחית, בתגובה להחלטת עצרת האו״ם (9 בדצמבר 1949) על בינאום העיר."
+  },
+  "dates": {
+    "start": "1949-12-26"
+  },
+  "importance": 29,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "הכנסת"
+      },
+      "publisher": "ויקיפדיה העברית",
+      "url": "https://he.wikipedia.org/wiki/הכנסת",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "הכרזת ירושלים כבירת ישראל"
+      },
+      "publisher": "ויקיפדיה העברית",
+      "url": "https://he.wikipedia.org/wiki/הכרזת_ירושלים_כבירת_ישראל",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "בית פרומין"
+      },
+      "publisher": "ויקיפדיה העברית",
+      "url": "https://he.wikipedia.org/wiki/בית_פרומין",
+      "kind": "encyclopedia"
+    }
+  ]
+}

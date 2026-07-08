@@ -1,0 +1,44 @@
+{
+  "id": "national-insurance-law-1953",
+  "type": "event",
+  "title": {
+    "he": "חוק הביטוח הלאומי"
+  },
+  "description": {
+    "he": "חוק שחוקקה הכנסת השנייה בנובמבר 1953 והניח את יסוד מערכת הביטחון הסוציאלי בישראל, במימון מדורג של עובדים ומעסיקים; ב-1 באפריל 1954 החל לפעול מכוחו המוסד לביטוח לאומי, שתחילה עסק בביטוח זקנה ושאירים."
+  },
+  "dates": {
+    "start": "1953-11"
+  },
+  "importance": 38,
+  "categoryIds": [
+    "economy-labor",
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "חוק הביטוח הלאומי – ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה"
+    },
+    {
+      "title": {
+        "he": "כיצד הכל התחיל - הסטוריה, המוסד לביטוח לאומי"
+      },
+      "url": "https://www.btl.gov.il/About/Israel60/History/Pages/BirthofBtl.aspx",
+      "kind": "government",
+      "publisher": "המוסד לביטוח לאומי"
+    },
+    {
+      "title": {
+        "he": "המוסד לביטוח לאומי – ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%94%D7%9E%D7%95%D7%A1%D7%93_%D7%9C%D7%91%D7%99%D7%98%D7%95%D7%97_%D7%9C%D7%90%D7%95%D7%9E%D7%99",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה"
+    }
+  ]
+}

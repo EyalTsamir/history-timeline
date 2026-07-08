@@ -1,0 +1,41 @@
+{
+  "id": "shakib-wahab",
+  "type": "person",
+  "name": {
+    "he": "שכיב ואהב"
+  },
+  "bio": {
+    "he": "קצין סורי-דרוזי לשעבר שגייס והוביל גדוד דרוזי מתנדבים ('ג'בל אל-ערב') בצבא ההצלה של פאוזי אל-קאוקג'י; פיקד על הגדוד בקרב רמת יוחנן באפריל 1948, ולאחר קרב עקוב מדם עמד בראש הסכם אי-התקפה עם ההגנה שהחזיק לאורך כל מלחמת העצמאות. לפני כן נלחם לצד סולטאן אל-אטרש נגד השלטון הצרפתי בסוריה ובמרד הדרוזים (1925–1927); נפטר בכפר הולדתו גריפה שבלבנון ב-1980."
+  },
+  "lifespan": {
+    "start": "1890",
+    "end": "1980-08-08"
+  },
+  "categoryIds": [
+    "military"
+  ],
+  "importance": 30,
+  "sources": [
+    {
+      "title": {
+        "he": "קרב רמת יוחנן – ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A8%D7%9E%D7%AA_%D7%99%D7%95%D7%97%D7%A0%D7%9F",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "القائد شكيب وهّاب – מגזין אל-עמאמה"
+      },
+      "url": "https://al-amama.net/%D8%A7%D9%84%D9%82%D8%A7%D8%A6%D8%AF-%D8%B4%D9%83%D9%8A%D8%A8-%D9%88%D9%87%D9%91%D8%A7%D8%A8/",
+      "kind": "website"
+    },
+    {
+      "title": {
+        "he": "Arab Liberation Army – Wikipedia"
+      },
+      "url": "https://en.wikipedia.org/wiki/Arab_Liberation_Army",
+      "kind": "encyclopedia"
+    }
+  ]
+}

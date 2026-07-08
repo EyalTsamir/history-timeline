@@ -46,7 +46,7 @@ Only run any of these checks in a given `/push` if the user explicitly asks for 
    - Body: a flat bullet list (`-`), one line per logical change, feature-level not file-level. Skip the body entirely for small, single-purpose commits.
    - Write in **English**, even though the UI and content are Hebrew.
    - If a change is purely internal (refactor, test-only, docs) with no user-visible effect, say so plainly rather than overstating it.
-3. Present the commit message to the user for approval before committing.
+3. Present the commit message to the user for approval before committing — output it as plain text in the chat response (a fenced code block), not embedded inside an AskUserQuestion option. Ask for approval as a separate, short yes/no question after the message is already visible.
 4. Once approved, commit with a `Co-Authored-By: Claude <model> <noreply@anthropic.com>` trailer, then push to `origin main` (after re-confirming Step 0's remote check).
 
 ## Important notes

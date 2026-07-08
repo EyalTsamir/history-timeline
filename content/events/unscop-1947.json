@@ -1,0 +1,13 @@
+{
+  "id": "unscop-1947",
+  "type": "event",
+  "title": { "he": "ועדת אונסקו״פ" },
+  "description": { "he": "עצרת האו״ם הקימה ב־15 במאי 1947 (החלטה 106) ועדת חקירה בת 11 מדינות לבירור שאלת פלשתין (א״י), לאחר שבריטניה ביקשה מהאו״ם עצה כיצד לנהוג במנדט. הוועדה, בראשות השוודי אמיל סנדסטרם, הגיעה לארץ ב־16 ביוני 1947 וב־31 באוגוסט חתמה על מסקנותיה: תוכנית הרוב קראה לחלוקת הארץ למדינה יהודית ולמדינה ערבית באיחוד כלכלי וירושלים בנאמנות בין־לאומית, ותוכנית המיעוט (הודו, איראן ויוגוסלביה) הציעה הקמת מדינה פדרלית אחת; הדו״ח, שהוגש לעצרת ב־3 בספטמבר 1947, הניח את הבסיס להחלטת החלוקה 181 שהתקבלה ב־29 בנובמבר אותה שנה." },
+  "dates": { "start": "1947-05-15", "end": "1947-09-03" },
+  "importance": 46,
+  "categoryIds": ["state-politics"],
+  "sources": [
+    { "title": { "he": "ועדת אונסקו״פ" }, "publisher": "ויקיפדיה העברית", "url": "https://he.wikipedia.org/wiki/ועדת_אונסקו%22פ", "kind": "encyclopedia" },
+    { "title": { "he": "United Nations Special Committee on Palestine" }, "publisher": "Wikipedia", "url": "https://en.wikipedia.org/wiki/United_Nations_Special_Committee_on_Palestine", "kind": "encyclopedia" }
+  ]
+}

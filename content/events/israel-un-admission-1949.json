@@ -1,0 +1,35 @@
+{
+  "id": "israel-un-admission-1949",
+  "type": "event",
+  "title": {
+    "he": "קבלת ישראל לאו״ם"
+  },
+  "description": {
+    "he": "ב־11 במאי 1949 קיבלה העצרת הכללית של האו״ם את החלטה 273, שהתקבלה ברוב של 37 תומכים מול 12 מתנגדים ו־9 נמנעים, ובכך הפכה ישראל לחברה ה־59 בארגון - כחמישה חודשים לאחר שמועצת הביטחון דחתה ב־17 בדצמבר 1948 בקשה קודמת להתקבלות. למחרת ההצבעה הניפו שר החוץ משה שרת והשגריר אבא אבן את דגל ישראל בבניין האו״ם, בציון ההכרה הבינלאומית הרשמית במדינה הצעירה."
+  },
+  "dates": {
+    "start": "1949-05-11"
+  },
+  "importance": 42,
+  "categoryIds": [
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "יחסי האו״ם-ישראל"
+      },
+      "publisher": "ויקיפדיה העברית",
+      "url": "https://he.wikipedia.org/wiki/יחסי_האו%22ם–ישראל",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "החלטה 273 של העצרת הכללית"
+      },
+      "publisher": "Wikipedia (English)",
+      "url": "https://en.wikipedia.org/wiki/United_Nations_General_Assembly_Resolution_273",
+      "kind": "encyclopedia"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "ben-gurion-retires-sde-boker-1953",
+  "type": "event",
+  "title": {
+    "he": "פרישת בן־גוריון לשדה בוקר"
+  },
+  "description": {
+    "he": "ב-14 בדצמבר 1953, שבוע לאחר שהתפטר מראשות הממשלה, עבר דוד בן־גוריון עם רעייתו פולה להתגורר בקיבוץ שדה בוקר שבנגב, כדי לשמש דוגמה אישית למפעל ההתיישבות ולהפרחת השממה; פרישתו יצרה חלל מנהיגותי בממשלת משה שרת, שבעקבותיו שב בן־גוריון לשמש שר הביטחון בפברואר 1955 ולראשות הממשלה בשנית ב-3 בנובמבר אותה שנה."
+  },
+  "dates": {
+    "start": "1953-12-14"
+  },
+  "importance": 27,
+  "categoryIds": [
+    "state-politics",
+    "immigration-settlement"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "דוד בן־גוריון"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%93%D7%95%D7%93_%D7%91%D7%9F-%D7%92%D7%95%D7%A8%D7%99%D7%95%D7%9F",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "משה שרת"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%A9%D7%94_%D7%A9%D7%A8%D7%AA",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "אבני דרך בחיי בן־גוריון"
+      },
+      "publisher": "מכון בן־גוריון לחקר ישראל",
+      "url": "https://bgh.org.il/milestones/",
+      "kind": "archive"
+    }
+  ]
+}

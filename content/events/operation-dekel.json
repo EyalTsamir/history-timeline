@@ -1,0 +1,35 @@
+{
+  "id": "operation-dekel",
+  "type": "event",
+  "title": {
+    "he": "מבצע דקל"
+  },
+  "description": {
+    "he": "מבצע של צה״ל בפיקוד משה כרמל, חיים לסקוב ובן דונקלמן, שנערך בגליל התחתון בין ה־9 ל־18 ביולי 1948 במסגרת מערכת עשרת הימים במלחמת העצמאות; ב־16 ביולי נכבשה נצרת, ובתום המבצע עברו הגליל המערבי ורוב הגליל התחתון לשליטה ישראלית."
+  },
+  "dates": {
+    "start": "1948-07-09",
+    "end": "1948-07-18"
+  },
+  "parentId": "war-of-independence",
+  "importance": 28,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מבצע דקל — ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%93%D7%A7%D7%9C",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "Operation Dekel — Wikipedia"
+      },
+      "url": "https://en.wikipedia.org/wiki/Operation_Dekel",
+      "kind": "encyclopedia"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "harry-truman",
+  "type": "person",
+  "name": {
+    "he": "הארי טרומן"
+  },
+  "bio": {
+    "he": "הארי טרומן (1884–1972) היה נשיאה ה-33 של ארצות הברית בשנים 1945–1953, שעלה לתפקיד לאחר מותו של פרנקלין רוזוולט. בתקופתו סירבה ארה\"ב לתמוך בתוכנית מוריסון-גריידי (1946), ובמאי 1948 הכריז על הכרת ארה\"ב במדינת ישראל מיד לאחר הקמתה — צעד שתרם משמעותית ללגיטימציה הבינלאומית של המדינה הצעירה."
+  },
+  "lifespan": {
+    "start": "1884-05-08",
+    "end": "1972-12-26"
+  },
+  "categoryIds": [
+    "leaders"
+  ],
+  "importance": 58,
+  "sources": [
+    {
+      "title": {
+        "he": "הארי טרומן (ויקיפדיה העברית)"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%94%D7%90%D7%A8%D7%99_%D7%98%D7%A8%D7%95%D7%9E%D7%9F",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "Harry S. Truman (English Wikipedia)"
+      },
+      "url": "https://en.wikipedia.org/wiki/Harry_S._Truman",
+      "kind": "encyclopedia",
+      "publisher": "Wikipedia"
+    }
+  ]
+}

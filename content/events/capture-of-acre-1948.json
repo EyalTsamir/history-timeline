@@ -1,0 +1,35 @@
+{
+  "id": "capture-of-acre-1948",
+  "type": "event",
+  "title": {
+    "he": "כיבוש עכו"
+  },
+  "description": {
+    "he": "בליל 16–17 במאי 1948 פתחה חטיבת כרמלי בהתקפה מכרעת על עכו הנצורה, וב־18 במאי לפנות בוקר חתמה הנהגת העיר על כתב כניעה לאחר מצור של כחומש חודשים; הכיבוש הביא לעזיבת רוב תושביה הערבים של העיר ולהטלת ממשל צבאי עליה."
+  },
+  "dates": {
+    "start": "1948-05-16",
+    "end": "1948-05-18"
+  },
+  "parentId": "war-of-independence",
+  "importance": 24,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "המצור על עכו (1948) — ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%94%D7%9E%D7%A6%D7%95%D7%A8_%D7%A2%D7%9C_%D7%A2%D7%9B%D7%95_(1948)",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "מבצע בן עמי — ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%91%D7%9F_%D7%A2%D7%9E%D7%99",
+      "kind": "encyclopedia"
+    }
+  ]
+}
