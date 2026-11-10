@@ -1,0 +1,28 @@
+{
+  "id": "operation-rooster-53-1969",
+  "type": "event",
+  "title": {
+    "he": "מבצע תרנגול 53"
+  },
+  "description": {
+    "he": "בלילה שבין 26 ל-27 בדצמבר 1969, במהלך מלחמת ההתשה, השתלטו כוחות צה״ל על תחנת מכ״ם מצרית בראס ע׳אריב שבמפרץ סואץ ופינו את המתקן לישראל."
+  },
+  "dates": {
+    "start": "1969-12-26",
+    "end": "1969-12-27"
+  },
+  "importance": 25,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מבצע תרנגול 53"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%AA%D7%A8%D7%A0%D7%92%D7%95%D7%9C_53",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה העברית"
+    }
+  ]
+}

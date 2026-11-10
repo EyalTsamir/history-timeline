@@ -1,0 +1,27 @@
+{
+  "id": "haifa-university-institute-opened-1963",
+  "type": "event",
+  "title": {
+    "he": "פתיחת המכון האוניברסיטאי בחיפה"
+  },
+  "description": {
+    "he": "בשנת 1963 הוקם בחיפה המכון האוניברסיטאי בחיפה, בחסותה האקדמית של האוניברסיטה העברית בירושלים; המכון היה הגרעין להקמת אוניברסיטת חיפה, שהוכרזה ב-1972 לאוניברסיטה עצמאית - הרביעית בישראל."
+  },
+  "dates": {
+    "start": "1963"
+  },
+  "importance": 20,
+  "categoryIds": [
+    "science-tech"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "אוניברסיטת חיפה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%90%D7%95%D7%A0%D7%99%D7%91%D7%A8%D7%A1%D7%99%D7%98%D7%AA_%D7%97%D7%99%D7%A4%D7%94",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה העברית"
+    }
+  ]
+}

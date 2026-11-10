@@ -1,0 +1,42 @@
+{
+  "id": "givat-ram-campus-inauguration-1958",
+  "type": "event",
+  "title": {
+    "he": "השלמת קמפוס גבעת רם של האוניברסיטה העברית"
+  },
+  "description": {
+    "he": "בשנת 1958 הושלמה הקמתו של קמפוס גבעת רם, המשכן הקבוע החדש של האוניברסיטה העברית בירושלים המערבית, לאחר שאבן הפינה שלו הונחה ב-2 ביוני 1954 בטקס בהשתתפות נשיא המדינה, ראש הממשלה ונשיא האוניברסיטה; הקמפוס הוקם בעקבות ניתוק הגישה להר הצופים במלחמת העצמאות, ואיפשר לאוניברסיטה לשוב ולפעול במתחם מרכזי אחד בעיר במקום פיזור הלימודים בכ-40 מבנים ברחבי ירושלים."
+  },
+  "dates": {
+    "start": "1958"
+  },
+  "importance": 27,
+  "categoryIds": [
+    "science-tech",
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "האוניברסיטה העברית בירושלים – ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%94%D7%90%D7%95%D7%A0%D7%99%D7%91%D7%A8%D7%A1%D7%99%D7%98%D7%94_%D7%94%D7%A2%D7%91%D7%A8%D7%99%D7%AA_%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "60 שנה להקמת קמפוס גבעת רם"
+      },
+      "url": "https://archives.huji.ac.il/60-%D7%A9%D7%A0%D7%94-%D7%9C%D7%94%D7%A7%D7%9E%D7%AA-%D7%A7%D7%9E%D7%A4%D7%95%D7%A1-%D7%92%D7%91%D7%A2%D7%AA-%D7%A8%D7%9D",
+      "kind": "archive",
+      "publisher": "ארכיון האוניברסיטה העברית בירושלים"
+    },
+    {
+      "title": {
+        "he": "Hebrew University of Jerusalem – Wikipedia (אנגלית)"
+      },
+      "url": "https://en.wikipedia.org/wiki/Hebrew_University_of_Jerusalem",
+      "kind": "encyclopedia"
+    }
+  ]
+}

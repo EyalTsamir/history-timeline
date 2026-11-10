@@ -1,0 +1,35 @@
+{
+  "id": "bathsheva-de-rothschild",
+  "type": "person",
+  "name": {
+    "he": "בת שבע דה רוטשילד"
+  },
+  "bio": {
+    "he": "בת שבע דה רוטשילד (1914–1999), ברונית ממשפחת רוטשילד הבריטית שעלתה לישראל, ייסדה ומימנה יחד עם מרתה גרהאם את להקת המחול 'בת-שבע' ב-1964, וכן הקימה בהמשך את להקת ובית-הספר 'בת-דור'. תרמה תרומות נרחבות למדע ולאמנות בישראל וזכתה בפרס ישראל ב-1989 על תרומתה לחברה ולמדינה."
+  },
+  "lifespan": {
+    "start": "1914-09-23",
+    "end": "1999-04-20"
+  },
+  "categoryIds": [
+    "artists",
+    "pioneers"
+  ],
+  "importance": 34,
+  "sources": [
+    {
+      "title": {
+        "he": "בת שבע דה רוטשילד – ויקיפדיה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%91%D7%AA_%D7%A9%D7%91%D7%A2_%D7%93%D7%94_%D7%A8%D7%95%D7%98%D7%A9%D7%99%D7%9C%D7%93",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "Batsheva Dance Company – Wikipedia (אנגלית)"
+      },
+      "url": "https://en.wikipedia.org/wiki/Batsheva_Dance_Company",
+      "kind": "encyclopedia"
+    }
+  ]
+}

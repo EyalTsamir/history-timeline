@@ -1,0 +1,28 @@
+{
+  "id": "war-of-attrition-ceasefire-1970",
+  "type": "event",
+  "title": {
+    "he": "הפסקת האש במלחמת ההתשה"
+  },
+  "description": {
+    "he": "ב-7 באוגוסט 1970 הסכימו ישראל ומצרים על הפסקת אש שנכנסה לתוקף למחרת; בכך הסתיימה מלחמת ההתשה בין שתי המדינות, שנמשכה כשלוש שנים לאורך תעלת סואץ מאז 11 ביוני 1967."
+  },
+  "dates": {
+    "start": "1970-08-07"
+  },
+  "parentId": "war-of-attrition-1967",
+  "importance": 29,
+  "categoryIds": [
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מלחמת ההתשה"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%94%D7%94%D7%AA%D7%A9%D7%94",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה העברית"
+    }
+  ]
+}

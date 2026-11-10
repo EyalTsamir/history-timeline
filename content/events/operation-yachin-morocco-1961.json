@@ -1,0 +1,29 @@
+{
+  "id": "operation-yachin-morocco-1961",
+  "type": "event",
+  "title": {
+    "he": "מבצע יכין"
+  },
+  "description": {
+    "he": "מבצע יכין, מבצע חשאי להעלאת יהודי מרוקו לישראל מכוח הסכם סודי עם המלך חסן השני, החל ב-28 בנובמבר 1961 ונמשך עד 1964; במסגרתו עלו לישראל כ-90,000 יהודים, בתיאום בין המוסד, הסוכנות היהודית וארגון היא״ס שנבחר כגוף ההגירה הרשמי."
+  },
+  "dates": {
+    "start": "1961-11-28",
+    "end": "1964"
+  },
+  "importance": 43,
+  "categoryIds": [
+    "immigration-settlement",
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מבצע יכין"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%99%D7%9B%D7%99%D7%9F",
+      "kind": "encyclopedia",
+      "publisher": "ויקיפדיה העברית"
+    }
+  ]
+}

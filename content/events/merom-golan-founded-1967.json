@@ -1,0 +1,28 @@
+{
+  "id": "merom-golan-founded-1967",
+  "type": "event",
+  "title": {
+    "he": "הקמת קיבוץ מרום גולן"
+  },
+  "description": {
+    "he": "קיבוץ מרום גולן, של התנועה הקיבוצית המאוחדת, הוקם ב-14 ביולי 1967 והתיישב תחילה במחנה סורי נטוש בעליקה, ולאחר כארבעה חודשים עבר לקוניטרה; זהו היישוב הישראלי הראשון שהוקם ברמת הגולן לאחר מלחמת ששת הימים, ופתח את גל ההתיישבות הישראלית באזור."
+  },
+  "dates": {
+    "start": "1967-07-14"
+  },
+  "parentId": "settlement-in-territories",
+  "importance": 26,
+  "categoryIds": [
+    "immigration-settlement",
+    "war-security"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "מרום גולן"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9E%D7%A8%D7%95%D7%9D_%D7%92%D7%95%D7%9C%D7%9F",
+      "kind": "encyclopedia"
+    }
+  ]
+}

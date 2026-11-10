@@ -4,18 +4,29 @@ export const meta = {
   whenToUse: 'When the user provides a large list (dozens to hundreds) of timeline topics to add. Launch ONLY when no other /add session is writing to content/. Pass args = { topics: ["<Hebrew topic>", ...] }; optional args.repoRoot.',
   phases: [
     { title: 'Pre-pass', detail: 'dedup against inventory + rough banding', model: 'sonnet' },
-    { title: 'Research', detail: 'one lean researcher per topic', model: 'sonnet' },
+    { title: 'Research', detail: 'one researcher per topic — web-only, one-fetch, no repo access', model: 'sonnet' },
     { title: 'Calibrate', detail: 'central importance calibration (main model)' },
     { title: 'Write', detail: 'sequential writer batches, validate each', model: 'sonnet' },
     { title: 'Finalize', detail: 'relations pass + final gates', model: 'sonnet' },
   ],
 }
 
-const topics = Array.isArray(args && args.topics) ? args.topics.map(t => String(t).trim()).filter(Boolean) : []
+// Robust args: name-invocation may hand `args` (or args.topics) through as a JSON string.
+const rawArgs = typeof args === 'string' ? JSON.parse(args) : (args || {})
+const rawTopics = typeof rawArgs.topics === 'string' ? JSON.parse(rawArgs.topics) : rawArgs.topics
+const topics = Array.isArray(rawTopics) ? rawTopics.map(t => String(t).trim()).filter(Boolean) : []
 if (!topics.length) throw new Error('args.topics must be a non-empty array of Hebrew topic strings')
-const REPO = (args && args.repoRoot) || 'c:/Projects/HistoryTimeLine'
+const REPO = rawArgs.repoRoot || 'c:/Projects/HistoryTimeLine'
 const INV_CMD = 'node "' + REPO + '/.claude/skills/add/scripts/list-events.mjs"'
 const AUTHORING = REPO + '/.claude/skills/add/references/authoring.md'
+
+// Event categories, injected inline into research prompts so researchers never Read the
+// taxonomy file (that was ~66 redundant reads / one per agent in the prior run).
+const EVENT_CATEGORIES =
+  'war-security (wars, military operations, security), state-politics (political/legal/' +
+  'diplomatic), immigration-settlement (aliyah, absorption, new settlements), culture-society ' +
+  '(culture, society, religion, memory), economy-labor (economy, labor, Histadrut), ' +
+  'science-tech (science, technology, infrastructure, higher education)'
 
 const chunk = (arr, n) => { const out = []; for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out }
 
@@ -111,10 +122,13 @@ log('Pre-pass done: ' + toResearch.length + ' to research, ' + preSkipped.length
 phase('Research')
 const researcherPrompt = (row) => {
   const imageRequired = (row.band || 0) >= 70
-  return 'Research the historical topic "' + row.topic + '" for a curated Hebrew timeline of Israel 1930-2000 and return a JSON dossier via StructuredOutput. This is fact-verification, not summarization. Repo (for reference files): ' + REPO + '\n\n' +
-  'Lean method:\n' +
-  '1. Start with the Hebrew-Wikipedia REST summary: https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title> (WebFetch it). A correct on-topic extract also verifies the corresponding /wiki/ article URL for citation. Escalate to the full article or more pages ONLY for facts the extract does not settle (exact day precision, actors, outcomes, numbers).\n' +
-  '2. One anchor source suffices for a notable topic with a solid, uncontested article. Open a second independent page only if the topic is obscure or thinly covered, sources may disagree, or a claim is sensitive/disputed. Never cite a URL you did not open. Cannot confirm core facts from real opened pages -> status "insufficient-sources".\n' +
+  return 'Research the historical topic "' + row.topic + '" for a curated Hebrew timeline of Israel 1930-2000 and return a JSON dossier via StructuredOutput. This is fact-verification, not summarization.\n\n' +
+  'TOKEN DISCIPLINE (cost is linear in your turn count — obey strictly):\n' +
+  '- Do NOT touch the repository. No Bash, no Read, no ls/cat/grep, no content:validate, no reading content/ files or taxonomies. Everything you need is in this prompt. Use ONLY WebFetch/WebSearch.\n' +
+  '- ONE fetch per source. NEVER fetch the same URL twice. NEVER fetch both the REST summary and the full /wiki/ article of the same page.\n\n' +
+  'Method:\n' +
+  '1. WebFetch the Hebrew-Wikipedia REST summary FIRST: https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title>. For a well-defined topic (a law, a founding, one dated event) the summary usually settles what/when/where/who — STOP THERE and author from it (a correct summary already verifies the /wiki/ URL, so cite the article without fetching it).\n' +
+  '2. Only if a load-bearing fact is still open (exact day, actors, outcome, casualty numbers) WebFetch the full /wiki/ article ONCE and author from that instead. One anchor source suffices for a notable topic; open a second page only if obscure/contested/sensitive. Cannot confirm core facts from real opened pages -> status "insufficient-sources".\n' +
   '3. Every load-bearing fact in the proposal (the date above all) needs an evidence entry {fact, url, quote} with a short verbatim quote at the SAME precision as the claim (claim a day only if a page states the day). Source disagreements go in openQuestions, never silently resolved.\n' +
   '4. Dates: "YYYY" | "YYYY-MM" | "YYYY-MM-DD"; optional end only for real ranges (start <= end); approx: true for circa dates. Precision equals source precision.\n' +
   '5. Hebrew authoring: title.he short (fits a timeline card), gershayim ״ inside acronyms; description.he 1-3 sentences - concrete dated facts, then a significance clause after a semicolon; natural precise Hebrew, no filler.\n' +
@@ -122,12 +136,12 @@ const researcherPrompt = (row) => {
   '7. If the name maps to more than one well-defined historical referent -> status "ambiguous"; name the referents in ambiguity; do not pick one.\n' +
   '8. relationCandidates: 0-3 key historical persons tied to the topic as { personName (Hebrew), type: led|participated-in|influenced|related-to, noteHe (role in a few words) }. Names only - mapping to existing people ids happens centrally.\n' +
   (imageRequired
-    ? '9. This topic is banded >=70, which obliges an image (corpus convention): find a Wikimedia Commons image - open the file\'s Commons description page, read the license (must be public domain or CC), and return { src: a direct https://upload.wikimedia.org/wikipedia/commons/... file URL you verified loads, filePage, license, altHe (describes the picture, not the event), credit (photographer/source + license, in Hebrew) }. If none is verifiable, return empty imageCandidates and note it in openQuestions.\n'
+    ? '9. This topic is banded >=70, which obliges an image (corpus convention): find a Wikimedia Commons image - open the file\'s Commons description page ONCE, read the license (must be public domain or CC), and return { src: a direct https://upload.wikimedia.org/wikipedia/commons/... file URL, filePage, license, altHe (describes the picture, not the event), credit (photographer/source + license, in Hebrew) }. If none is verifiable in one look, return empty imageCandidates and note it in openQuestions.\n'
     : '9. imageCandidates: return an empty list (below the image-obligation band) unless an outstanding, clearly-licensed Commons candidate surfaces during research anyway.\n') +
   '\nProposal fields: id (use "' + (row.idSuggestion || '') + '" unless research shows it is wrong), type "' + (row.entityType || 'event') + '", title, description, dates, ' +
   (row.parentHint ? 'parentId (likely "' + row.parentHint + '" - confirm the period fits inside the parent and set it only if it does), ' : 'parentId (omit unless the topic clearly belongs inside an existing curated parent event), ') +
-  'importance (your proposal near band ' + (row.band || 30) + ' - final calibration is central; include scoreRationale with 2-3 anchors), categoryIds (["' + (row.categoryId || '') + '"] or better existing ids from ' + REPO + '/content/taxonomies/, max 2, most specific first), sources.\n' +
-  'Entity rules: person -> lifespan requires an explicit end (null while alive; an omitted end is invalid) and categories from person-categories; work -> positioned by coveredPeriod (what it is about), not publicationDate, and needs authorPersonIds and/or authorName.'
+  'importance (your proposal near band ' + (row.band || 30) + ' - final calibration is central; include scoreRationale with 2-3 anchors), categoryIds (1-2, most specific first, from: ' + EVENT_CATEGORIES + '; prefer the pre-assigned "' + (row.categoryId || '') + '"), sources.\n' +
+  'Entity rules: person -> lifespan requires an explicit end (null while alive; an omitted end is invalid), categories leaders|military|writers|artists|pioneers|scientists|religious; work -> positioned by coveredPeriod (what it is about), not publicationDate, and needs authorPersonIds and/or authorName.'
 }
 const dossiers = (await parallel(toResearch.map(row => () =>
   agent(researcherPrompt(row), { label: 'research:' + (row.idSuggestion || row.topic).slice(0, 30), phase: 'Research', model: 'sonnet', schema: DOSSIER_SCHEMA })
@@ -165,10 +179,11 @@ if (writable.length) {
   log('Calibration done for ' + Object.keys(calibrated).length + ' entries')
 }
 
-// ---------- Phase 4: sequential writer batches ----------
+// ---------- Phase 4: sequential writer batches (script-emitted files) ----------
 phase('Write')
+const WRITE_SCRIPT = REPO + '/.claude/skills/add/scripts/write-entries.mjs'
 const writeResults = [...collisions]
-const batches = chunk(writable, 15)
+const batches = chunk(writable, 20)
 for (let i = 0; i < batches.length; i++) {
   const batch = batches[i]
   const payload = batch.map(d => ({
@@ -177,14 +192,14 @@ for (let i = 0; i < batches.length; i++) {
     scoreRationale: (calibrated[d.proposal.id] && calibrated[d.proposal.id].rationale) || d.scoreRationale || '',
   }))
   const res = await agent(
-    'You are writer batch ' + (i + 1) + '/' + batches.length + ' for a mass content addition. Repo: ' + REPO + '\n' +
-    'First read ' + AUTHORING + ' - its pre-write checklist is your gate.\n\n' +
-    'For each entry below: verify the dossier internally (every load-bearing fact, especially the date, is supported by its own evidence quotes at the claimed precision; sources are real-shaped per the checklist; Hebrew reads natural - you may polish wording, NEVER facts). An entry that fails and cannot be fixed from its own evidence is skipped with the failing reason - never write a partial entry, never invent anything.\n' +
-    'Then write each passing entry with the Write tool (UTF-8 no BOM, 2-space indent) to ' + REPO + '/content/<events|people|works>/<id>.json by its type. Key order: id, type, title, description, dates, parentId?, importance, categoryIds, tags?, image?, video?, sources - optional keys only when present. Use finalImportance as the importance value. Filename must equal id exactly.\n' +
-    'Use image data from imageCandidates only if it fully satisfies the checklist media rules; when in doubt omit image.\n' +
-    'DO NOT touch content/relations.json - relations are handled centrally later.\n' +
-    'After writing the whole batch run: npm run content:validate (from ' + REPO + '). It must end at 0 errors AND 0 warnings (warnings fail production tests). Fix or revert offending files until green; a reverted entry is status "skipped" with the reason.\n' +
-    'Return per-entry results and the final validate summary line.\n\n' +
+    'You are writer batch ' + (i + 1) + '/' + batches.length + ' for a mass content addition. Repo: ' + REPO + '\n\n' +
+    'TOKEN DISCIPLINE — target <= 6 turns total. Do NOT read authoring.md or any repo file; do NOT run content:validate yourself; do NOT write entity files one by one; do NOT touch content/relations.json (relations are handled centrally later). The digest below plus the write script cover all of that.\n\n' +
+    'Step 1 — verify ALL entries in ONE reasoning pass (no tools). Per entry: (a) every load-bearing fact — the date above all — is supported by the entry\'s OWN evidence quotes at the SAME precision (a day only if a quote states the day); (b) sources are 1-3 real opened URLs (percent-encoded where needed); (c) Hebrew reads natural — polish WORDING only, never facts; title short with gershayim ״ in acronyms; description 1-3 sentences, concrete dated facts then a significance clause; (d) keep image only if the candidate is fully verified (Commons direct file URL + license + Hebrew alt + credit) — when in doubt drop the IMAGE, not the entry. An entry whose facts are not supported by its own evidence is EXCLUDED and reported skipped with the reason — never invent, never guess.\n\n' +
+    'Step 2 — Write ONE payload file into your scratchpad directory (listed in your system prompt), e.g. <scratchpad>/write-batch-' + (i + 1) + '.json, shaped {"entries": [ ...the corrected final entity JSONs, with finalImportance as the importance value... ]}.\n\n' +
+    'Step 3 — run: node "' + WRITE_SCRIPT + '" "<payload path>"\n' +
+    'The script does the mechanics for you: canonical key order, UTF-8/indent, filename=id, category/date/parent-importance/sources pre-checks, then content:validate. Trust its JSON summary.\n\n' +
+    'Step 4 — only if the summary reports skipped entries or a non-green validate: fix the payload (Edit) and re-run with --overwrite for ids already written; revert a hopeless entry via a {"delete":["<id>"]} payload and report it skipped. At most two fix cycles — then report honestly.\n\n' +
+    'Step 5 — StructuredOutput: per-entry results (written/skipped + reason) and the script\'s validate line.\n\n' +
     'Entries:\n' + JSON.stringify(payload, null, 1),
     { label: 'write:batch-' + (i + 1), phase: 'Write', model: 'sonnet', schema: WRITER_SCHEMA }
   )
@@ -213,7 +228,7 @@ if (relCandidates.length) {
 }
 const gates = await agent(
   'Final gates for a mass content addition. In ' + REPO + ' run, in order: (1) npm run content:validate (2) npm test (3) git status --short. Do NOT commit, push, or modify any file. Return the validate summary line (errors/warnings counts), the test summary line (passed/failed counts), and the git status output.',
-  { label: 'final-gates', phase: 'Finalize', model: 'sonnet', effort: 'low', schema: GATES_SCHEMA }
+  { label: 'final-gates', phase: 'Finalize', model: 'haiku', effort: 'low', schema: GATES_SCHEMA }
 )
 log('Done: ' + writtenOk.length + ' written, ' + (writeResults.length - writtenOk.length) + ' skipped at write, ' + problemDossiers.length + ' flagged at research, ' + preSkipped.length + ' skipped at pre-pass')
 

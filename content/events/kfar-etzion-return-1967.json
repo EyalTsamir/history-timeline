@@ -1,0 +1,35 @@
+{
+  "id": "kfar-etzion-return-1967",
+  "type": "event",
+  "title": {
+    "he": "החזרה לכפר עציון"
+  },
+  "description": {
+    "he": "ב-27 בספטמבר 1967 (כ״ב באלול תשכ״ז) חודש היישוב היהודי בכפר עציון, בהובלת ילדי המתיישבים הוותיקים של הקיבוץ שחרב ב-1948, בהצטרפות חברי תנועת בני עקיבא מישראל ומהתפוצות; האירוע היווה את ראשית ההתיישבות היהודית ביהודה ושומרון לאחר מלחמת ששת הימים."
+  },
+  "dates": {
+    "start": "1967-09-27"
+  },
+  "parentId": "settlement-in-territories",
+  "importance": 28,
+  "categoryIds": [
+    "immigration-settlement",
+    "state-politics"
+  ],
+  "sources": [
+    {
+      "title": {
+        "he": "כפר עציון"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%9B%D7%A4%D7%A8_%D7%A2%D7%A6%D7%99%D7%95%D7%9F",
+      "kind": "encyclopedia"
+    },
+    {
+      "title": {
+        "he": "חנן פורת"
+      },
+      "url": "https://he.wikipedia.org/wiki/%D7%97%D7%A0%D7%9F_%D7%A4%D7%95%D7%A8%D7%AA",
+      "kind": "encyclopedia"
+    }
+  ]
+}

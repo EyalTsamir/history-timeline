@@ -65,18 +65,19 @@ applies with the person/work template and rules (see "People and works" below).
 
 Every topic goes through all seven steps, in every mode (single, small batch, large batch).
 
-1. **Research — lean by default.** Start with the Hebrew-Wikipedia REST summary:
-   `https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title>` — a
-   compact extract that usually settles what/when/where/who at a fraction of a full-page
-   fetch. A successful, on-topic response also verifies the corresponding `/wiki/` article
-   URL for citation. Escalate to the full article (or further pages) **only** for facts the
-   extract doesn't settle: exact day precision, actors, outcomes, numbers. **One anchor
-   source suffices** for a notable topic with a solid, uncontested Hebrew-Wikipedia article.
-   Open a second independent page only when the topic is obscure or thinly covered, sources
-   may disagree, or a claim is sensitive/disputed; an institutional page (National Library,
-   Knesset, gov.il, Yad Vashem, IDI, museums, academia) is a welcome second source when you
-   actually confirmed one — never a requirement. Record, for each core fact
-   (what/when/where/who/outcome), the URL that supports it. Never cite a URL you didn't open.
+1. **Research — token-disciplined** (full rules in references/authoring.md, "Research
+   method"). Fetch the Hebrew-Wikipedia REST summary FIRST:
+   `https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title>`. For a
+   well-defined topic it usually settles what/when/where/who — **stop there and author from
+   it** (a correct summary already verifies the `/wiki/` URL for citation, so cite the article
+   without fetching it). Fetch the full `/wiki/` article **once, and only** when a load-bearing
+   fact is still open (exact day, actors, outcome, numbers). **One fetch per source — never
+   the same URL twice, never both the summary and the full page of one article.** One anchor
+   source suffices for a notable topic; a second page only when obscure, contested, or
+   sensitive (an institutional page — NLI, Knesset, gov.il, Yad Vashem, IDI, museums — is a
+   welcome addition, never required). **Do not re-scan the content tree per topic** — the
+   inventory you built at orientation is already in context; consult it, don't `grep`/`cat` it
+   again. Record, for each core fact, the URL that supports it. Never cite a URL you didn't open.
 2. **Dedup** — scan the inventory for: likely id slugs, Hebrew title substrings, and
    same-category events in the same period. The batch itself counts: check earlier topics in
    this invocation too. A duplicate → status `duplicate-of:<id>`, move on.

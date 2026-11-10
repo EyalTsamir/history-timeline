@@ -3,15 +3,20 @@ export const meta = {
   description: 'Mass-add historical people surfaced as relation candidates during the WWII/1948/1950s event batch: dedup check, parallel lean research (reusing recovered event+role context), central calibration, batched writes, relations linking, final gates',
   phases: [
     { title: 'Dedup', detail: 'inventory check + id slugs + category/band hints', model: 'sonnet' },
-    { title: 'Research', detail: 'one lean researcher per person, seeded with known role', model: 'sonnet' },
+    { title: 'Research', detail: 'one researcher per person — web-only, one-fetch, no repo access', model: 'sonnet' },
     { title: 'Calibrate', detail: 'central importance calibration (main model)' },
     { title: 'Write', detail: 'sequential writer batches, validate each', model: 'sonnet' },
     { title: 'Finalize', detail: 'relations pass (now that people exist) + final gates', model: 'sonnet' },
   ],
 }
 
-const PEOPLE = __PEOPLE_JSON__
-const REPO = 'c:/Projects/HistoryTimeLine'
+// Robust args: name-invocation may hand `args` (or args.people) through as a JSON string.
+// Each entry: { name: "<Hebrew>", candidates: [ { eventId, type, noteHe } ] } (candidates optional).
+const rawArgs = typeof args === 'string' ? JSON.parse(args) : (args || {})
+const rawPeople = typeof rawArgs.people === 'string' ? JSON.parse(rawArgs.people) : rawArgs.people
+const PEOPLE = Array.isArray(rawPeople) ? rawPeople : []
+if (!PEOPLE.length) throw new Error('args.people must be a non-empty array of { name, candidates? } objects')
+const REPO = rawArgs.repoRoot || 'c:/Projects/HistoryTimeLine'
 const INV_CMD = 'node "' + REPO + '/.claude/skills/add/scripts/list-events.mjs"'
 const AUTHORING = REPO + '/.claude/skills/add/references/authoring.md'
 const PERSON_CATS = REPO + '/content/taxonomies/person-categories.json'
@@ -100,10 +105,13 @@ phase('Research')
 const researcherPrompt = (row) => {
   const person = byName.get(row.name) || { candidates: [] }
   const eventsList = person.candidates.map(c => '- ' + c.eventId + ' (' + c.type + '): ' + c.noteHe).join('\n')
-  return 'Research the historical PERSON "' + row.name + '" for a curated Hebrew timeline of Israel 1930-2000 and return a JSON dossier via StructuredOutput. This is fact-verification, not summarization. Repo: ' + REPO + '\n\n' +
+  return 'Research the historical PERSON "' + row.name + '" for a curated Hebrew timeline of Israel 1930-2000 and return a JSON dossier via StructuredOutput. This is fact-verification, not summarization.\n\n' +
   'This person was already identified as connected to these curated events (their role is a research LEAD, not a pre-verified fact - confirm it independently):\n' + eventsList + '\n\n' +
-  'Lean method:\n' +
-  '1. Start with the Hebrew-Wikipedia REST summary: https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title> (WebFetch it). A correct on-topic extract also verifies the corresponding /wiki/ article URL for citation. Escalate to the full article or more pages ONLY for facts the extract does not settle (exact birth/death dates, precise role, disambiguation from same-named people).\n' +
+  'TOKEN DISCIPLINE (cost is linear in your turn count — obey strictly):\n' +
+  '- Do NOT touch the repository. No Bash, no Read, no ls/cat/grep, no content:validate. Everything you need is in this prompt. Use ONLY WebFetch/WebSearch.\n' +
+  '- ONE fetch per source. NEVER fetch the same URL twice. NEVER fetch both the REST summary and the full /wiki/ article of the same page.\n\n' +
+  'Method:\n' +
+  '1. WebFetch the Hebrew-Wikipedia REST summary FIRST: https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded article title>. It usually settles birth/death dates and role — STOP THERE and author from it (a correct summary already verifies the /wiki/ URL, so cite the article without fetching it). Only if a load-bearing fact is still open (exact birth/death date, precise role, disambiguation from same-named people) WebFetch the full /wiki/ article ONCE and author from that.\n' +
   '2. One anchor source suffices for a notable person with a solid, uncontested article. Open a second independent page only if the person is obscure or thinly covered, sources may disagree, or the identity is ambiguous (common name). Never cite a URL you did not open.\n' +
   '3. lifespan.end is REQUIRED and must be explicit: an ISO year/month/day if deceased, or null if still alive - NEVER omit it. If a source states or strongly implies death (e.g. "killed in battle", "fell in the fighting" - note some of the leads above literally say this, tying death to the very event/date already in the corpus), use that as the death date at the precision available, but still corroborate via an opened source if possible. If you cannot determine with any confidence whether the person is alive or dead nor find a real source discussing their fate -> status "insufficient-sources" (do NOT invent or guess an end date).\n' +
   '4. If NO real source beyond the bare event mention can be found at all (no independent biographical footprint, not even a stub) -> status "insufficient-sources".\n' +
@@ -194,7 +202,7 @@ if (relCandidates.length) {
 }
 const gates = await agent(
   'Final gates for a mass PEOPLE addition. In ' + REPO + ' run, in order: (1) npm run content:validate (2) npm test (3) git status --short. Do NOT commit, push, or modify any file. Return the validate summary line (errors/warnings counts), the test summary line (passed/failed counts), and the git status output.',
-  { label: 'final-gates', phase: 'Finalize', model: 'sonnet', effort: 'low', schema: GATES_SCHEMA }
+  { label: 'final-gates', phase: 'Finalize', model: 'haiku', effort: 'low', schema: GATES_SCHEMA }
 )
 log('Done: ' + writtenOk.length + ' written, ' + (writeResults.length - writtenOk.length) + ' skipped at write, ' + problemDossiers.length + ' flagged at research, ' + preSkipped.length + ' skipped at dedup')
 

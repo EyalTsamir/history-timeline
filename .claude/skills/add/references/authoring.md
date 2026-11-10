@@ -1,4 +1,33 @@
-# Authoring reference — pre-write checklist, scoring, research handoff
+# Authoring reference — research method, pre-write checklist, scoring, research handoff
+
+## Research method — token-disciplined (read this first)
+
+Measured cost fact: research is ~75% of this pipeline's token bill, and cost is **linear in
+conversation turns** (~3.2k tokens per turn), not in page size — WebFetch returns a small
+extract, so a fetch is cheap but every *extra* turn is not. The whole method below exists to
+keep turns low. Three rules, in priority order:
+
+1. **One fetch per source. Never fetch the same URL twice; never fetch both the summary and
+   the full article of the same page** unless the summary genuinely lacked a specific fact you
+   now need. Start with the Hebrew-Wikipedia REST summary
+   (`https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded title>`). For a
+   well-defined topic (a law, a founding, one dated event, one person's dates+role) the
+   summary usually settles what/when/where/who — **stop there and author from it.** Only when
+   a load-bearing fact is still open (exact day, casualty count, a commander's name, an
+   outcome) fetch the full `/wiki/` article **once**, and author from that instead. A correct
+   summary already verifies the `/wiki/` URL for citation, so you can cite the article without
+   also fetching it.
+2. **One anchor source suffices** for a notable topic with a solid, uncontested article. Open
+   a second independent page only for obscure, thinly-covered, contested, or sensitive claims.
+3. **Do not explore the repository during research** — no `ls`/`cat`/`grep`, no `Read` of
+   `content/` files, no `content:validate`. Everything you need about repo conventions (the
+   category list, your assigned id/band/parent) is handed to you. Dedup and importance
+   calibration are separate phases with their own inventory access; re-deriving them here just
+   burns turns. In inline `/add` (no separate phases) the inventory you built at orientation is
+   already in context — consult that, don't re-scan the tree per topic.
+
+These are token-discipline rules, not quality compromises: the people-vs-events batches showed
+that agents which followed them cost ~2.5× less per item at identical accuracy.
 
 ## Pre-write checklist — a topic is written only when every line passes
 
@@ -182,11 +211,12 @@ Each researcher returns ONLY this JSON (no prose) as its entire final message:
 
 When spawning a researcher (waves of ≤4, general-purpose agents), the prompt must include:
 
-- The lean research method: start from the Hebrew-Wikipedia REST summary
-  (`https://he.wikipedia.org/api/rest_v1/page/summary/<percent-encoded title>`), escalate to
-  full pages only for facts the extract doesn't settle; one anchor source suffices for a
-  notable topic; a second independent page only if the topic is obscure, contested, or
-  thinly covered. Never cite a URL that wasn't opened (API extract counts for the article).
+- The token-disciplined research method verbatim (see "Research method" at the top of this
+  file): one fetch per source, never the same URL twice, never summary+full of the same page,
+  stop at the summary when it settles the facts; one anchor source unless obscure/contested;
+  and **no repository exploration** — the category list and the researcher's assigned
+  id/band/parent are injected into the prompt, so the agent needs no `Read`/`Bash`/`grep` of
+  `content/`. Never cite a URL that wasn't opened (API extract counts for the article).
 - The evidence rule: every load-bearing fact in `proposal` (the date above all) needs a
   matching `evidence` entry with a real quote at the SAME precision as the claim (claim a
   day only if a page states the day). Source disagreements go in `openQuestions`, never
@@ -195,9 +225,11 @@ When spawning a researcher (waves of ≤4, general-purpose agents), the prompt m
   be minimal). `ambiguity` is set when the topic has multiple referents — name them and stop.
 - Hebrew authoring rules: short title with gershayim ״ in acronyms; description 1–3
   sentences, concrete dated facts then a significance clause; natural, precise Hebrew.
-- Repo facts: the category ids with meanings, the date format
-  (`"YYYY"|"YYYY-MM"|"YYYY-MM-DD"` + optional `end`, `approx`), and the inventory rows
-  (id | dates | importance | categories | title) for dedup, relations, and score anchors.
+- Repo facts, injected inline so the researcher never reads the tree: the category ids with
+  meanings and the date format (`"YYYY"|"YYYY-MM"|"YYYY-MM-DD"` + optional `end`, `approx`).
+  Do **not** paste the whole inventory into every researcher (that is ~17k tokens × every
+  agent) — dedup/calibration/relations are central phases that hold the inventory; a
+  researcher only needs its topic plus the pre-assigned id/band/category/parent.
 - `imageCandidates` only from Wikimedia Commons with the license as read on the file's own
   description page (empty list is the normal case under importance 70).
   `relationCandidates.from` only ids that exist in the provided inventory. `importance` is
